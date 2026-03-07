@@ -1,12 +1,18 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 const moods = ["😄", "🙂", "😐", "😟", "😭"];
 
-export default function LoginPage() {
+export default function SectionLogin() {
   return (
     <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center p-5 relative overflow-hidden">
       {/* Background glow */}
