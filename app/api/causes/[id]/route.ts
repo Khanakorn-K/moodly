@@ -48,10 +48,9 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-
   const causeToDelete = await prisma.customCause.findUnique({
     where: { id: id },
   });
@@ -65,7 +64,6 @@ export async function DELETE(
         cause: causeToDelete.name,
       },
     }),
-
     prisma.customCause.delete({
       where: { id: id },
     }),
