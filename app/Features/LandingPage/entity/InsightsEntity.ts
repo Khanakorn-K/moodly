@@ -14,7 +14,7 @@ export class InsightsEntity {
 interface MoodDistributionEntity {
   [key: string]: number;
 }
-interface CausesAnalysisEntity {
+export interface CausesAnalysisEntity {
   [cause: string]: {
     [mood: string]: number;
   };

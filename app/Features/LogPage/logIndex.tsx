@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import dataSourcesLog from "./services/dataSourcesLog";
 import { Button } from "@/components/ui/button";
-import { moods, moodStyles, stadartCauses } from "./types/moodType";
+import { moods, moodStyles, stadartCauses } from "../../share/moodType";
 
 import { Plus, X, Loader2 } from "lucide-react";
 import { apiClient } from "@/lib/api-client";

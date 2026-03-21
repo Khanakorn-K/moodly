@@ -8,12 +8,12 @@ export interface moodsModelResponseResult {
   userId: string;
   mood: string;
   note: string;
-  date: Date;
-  createdAt: Date;
-  updatedAt: Date;
-  causes: Cause[];
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+  causes: CauseModel[];
 }
-interface Cause {
+export interface CauseModel {
   id: string;
   moodLogId: string;
   cause: string;
