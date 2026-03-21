@@ -3,14 +3,7 @@ import { useEffect, useState } from "react";
 import dataSourceLandingPage from "../services/dataSourceLandingPage";
 import { InsightsEntity } from "../entity/InsightsEntity";
 import { moods } from "../../../share/moodType";
-
-const moodColors: Record<number, string> = {
-  1: "#FF4D4D", // Red
-  2: "#FFB347", // Orange
-  3: "#D1D5DB", // Gray (Neutral) - แยกออกจากกลุ่มสีได้ชัดเจนที่สุด
-  4: "#7DE5AD", // Mint Green
-  5: "#00C853", // Vivid Green
-};
+import { moodColors } from "@/app/share/moodColors";
 
 const useLandingPage = () => {
   const { data: session, status } = useSession();

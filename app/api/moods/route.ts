@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/prisma.config";
 
-// GET /api/moods
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -16,7 +15,8 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get("limit") ?? "10");
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
-    const mood = searchParams.get("mood");
+    const moodParam = searchParams.get("mood");
+    const moodValue = moodParam ? parseInt(moodParam) : undefined;
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
@@ -26,9 +26,24 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
     }
 
+    const allUserLogs = await prisma.moodLog.findMany({
+      where: { userId: user.id },
+      include: { causes: true },
+    });
+
+    const emptyLogIds = allUserLogs
+      .filter((log) => log.causes.length === 0)
+      .map((log) => log.id);
+
+    if (emptyLogIds.length > 0) {
+      await prisma.moodLog.deleteMany({
+        where: { id: { in: emptyLogIds } },
+      });
+    }
+
     const where = {
       userId: user.id,
-      ...(mood ? { mood: mood } : {}),
+      ...(moodValue ? { mood: moodValue } : {}),
       ...(startDate || endDate
         ? {
             date: {
@@ -62,7 +77,7 @@ export async function GET(req: NextRequest) {
     );
   }
 }
-// POST /api/moods
+
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -72,8 +87,9 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const { mood, causes, note } = body;
+    const moodInt = parseInt(mood);
 
-    if (!mood || mood < 1 || mood > 5) {
+    if (isNaN(moodInt) || moodInt < 1 || moodInt > 5) {
       return NextResponse.json({ error: "INVALID_MOOD" }, { status: 400 });
     }
 
@@ -88,7 +104,7 @@ export async function POST(req: NextRequest) {
     const moodLog = await prisma.moodLog.create({
       data: {
         userId: user.id,
-        mood,
+        mood: moodInt,
         note: note ?? null,
         causes: {
           create: (causes ?? []).map((cause: string) => ({ cause })),
@@ -97,9 +113,7 @@ export async function POST(req: NextRequest) {
       include: { causes: true },
     });
 
-    // Update streak
     await updateStreak(user.id);
-
     return NextResponse.json(moodLog, { status: 201 });
   } catch (error) {
     return NextResponse.json(
@@ -109,7 +123,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Helper: update streak after logging mood
 async function updateStreak(userId: string) {
   const streak = await prisma.streak.findUnique({ where: { userId } });
   const today = new Date();
@@ -125,8 +138,7 @@ async function updateStreak(userId: string) {
   const lastLog = streak.lastLogDate ? new Date(streak.lastLogDate) : null;
   if (lastLog) lastLog.setHours(0, 0, 0, 0);
 
-  const isToday = lastLog?.getTime() === today.getTime();
-  if (isToday) return; // already logged today
+  if (lastLog?.getTime() === today.getTime()) return;
 
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
@@ -143,25 +155,4 @@ async function updateStreak(userId: string) {
       lastLogDate: today,
     },
   });
-
-  // Unlock achievements
-  const milestones = [
-    { streak: 1, label: "เริ่มต้น", icon: "🌱" },
-    { streak: 7, label: "7 วัน", icon: "🔥" },
-    { streak: 10, label: "10 วัน", icon: "⭐" },
-    { streak: 30, label: "30 วัน", icon: "👑" },
-  ];
-
-  for (const m of milestones) {
-    if (newStreak >= m.streak) {
-      const existing = await prisma.achievement.findFirst({
-        where: { streak: { userId }, label: m.label },
-      });
-      if (!existing) {
-        await prisma.achievement.create({
-          data: { streakId: streak.id, label: m.label, icon: m.icon },
-        });
-      }
-    }
-  }
 }

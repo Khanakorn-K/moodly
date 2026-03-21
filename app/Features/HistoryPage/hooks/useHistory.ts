@@ -16,7 +16,7 @@ export const useHistory = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editItem, setEditItem] = useState<moodsResultEntity | null>();
   const [editNote, setEditNote] = useState("");
-  const [editMood, setEditMood] = useState<string>("3");
+  const [editMood, setEditMood] = useState<number>();
 
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || 10;
@@ -55,11 +55,14 @@ export const useHistory = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     Object.entries(newParams).forEach(([key, value]) => {
-      if (value) params.set(key, value);
-      else params.delete(key);
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
     });
 
-    params.set("page", "1"); // รีเซ็ตหน้า 1 เฉพาะตอนเปลี่ยน Filter
+    params.set("page", "1");
     router.push(`${pathname}?${params.toString()}`);
   };
   useEffect(() => {
@@ -84,11 +87,11 @@ export const useHistory = () => {
         note: editNote,
         mood: editMood,
       });
-    } else {
-      await dataSoruceHistory.createMood({
-        note: editNote,
-        mood: editMood,
-      });
+      // } else {
+      //   await dataSoruceHistory.createMood({
+      //     note: editNote,
+      //     mood: editMood,
+      //   });
     }
     setIsModalOpen(false);
     fetchHistory();
@@ -98,7 +101,7 @@ export const useHistory = () => {
     setEditItem(log);
     setEditNote(log.note);
     const moodData = moods.find((m) => m.label === log.mood);
-    setEditMood(moodData ? String(moodData.value) : "3");
+    setEditMood(moodData ? moodData.value : 0);
     setIsModalOpen(true);
   };
 

@@ -52,8 +52,8 @@ const Chart = ({ data }: ChartProps) => {
     onClick: (_event: ChartEvent, elements: ActiveElement[]) => {
       if (elements.length > 0) {
         const index = elements[0].index;
-        const moodLabel = data[index].label;
-        router.push(`/history?mood=${moodLabel}`);
+        const moodValue = index + 1;
+        router.push(`/history?mood=${moodValue}`);
       }
     },
     plugins: {

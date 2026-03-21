@@ -22,17 +22,17 @@ const dataSourceHistory = {
     return new moodsEntity(response);
   },
 
-  createMood: async (body: {
-    mood: string;
-    note?: string;
-    causes?: string[];
-  }) => {
-    return await apiClient.post("/moods", body);
-  },
+  // createMood: async (body: {
+  //   mood: s;
+  //   note?: string;
+  //   causes?: string[];
+  // }) => {
+  //   return await apiClient.post("/moods", body);
+  // },
 
   updateMood: async (
     id: string,
-    body: { mood?: string; note?: string; causes?: string[] },
+    body: { mood?: number; note?: string; causes?: string[] },
   ) => {
     return await apiClient.patch(`/moods/${id}`, body);
   },

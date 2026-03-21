@@ -4,7 +4,7 @@ import { CausesEntity } from "../entity/causesEntity";
 
 const dataSourcesLog = {
   addMood: async (
-    selectedMood: string,
+    selectedMood: number,
     selectedCauses: string[],
     note: string,
   ) => {

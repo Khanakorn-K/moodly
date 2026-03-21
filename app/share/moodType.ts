@@ -13,40 +13,40 @@ interface MoodStyle {
   btn: string;
 }
 
-type MoodStyles = Record<MoodColor, MoodStyle>;
+// type MoodStyles = Record<MoodColor, MoodStyle>;
 
-export const moodStyles: MoodStyles = {
-  red: {
-    border: "border-red-500",
-    bg: "bg-red-500/10",
-    text: "text-red-400",
-    btn: "from-red-500 to-red-400",
-  },
-  orange: {
-    border: "border-orange-500",
-    bg: "bg-orange-500/10",
-    text: "text-orange-400",
-    btn: "from-orange-500 to-orange-400",
-  },
-  yellow: {
-    border: "border-yellow-500",
-    bg: "bg-yellow-500/10",
-    text: "text-yellow-400",
-    btn: "from-yellow-500 to-yellow-400",
-  },
-  green: {
-    border: "border-green-500",
-    bg: "bg-green-500/10",
-    text: "text-green-400",
-    btn: "from-green-500 to-green-400",
-  },
-  cyan: {
-    border: "border-cyan-500",
-    bg: "bg-cyan-500/10",
-    text: "text-cyan-400",
-    btn: "from-cyan-500 to-cyan-400",
-  },
-};
+// export const moodStyles: MoodStyles = {
+//   red: {
+//     border: "border-red-500",
+//     bg: "bg-red-500/10",
+//     text: "text-red-400",
+//     btn: "from-red-500 to-red-400",
+//   },
+//   orange: {
+//     border: "border-orange-500",
+//     bg: "bg-orange-500/10",
+//     text: "text-orange-400",
+//     btn: "from-orange-500 to-orange-400",
+//   },
+//   yellow: {
+//     border: "border-yellow-500",
+//     bg: "bg-yellow-500/10",
+//     text: "text-yellow-400",
+//     btn: "from-yellow-500 to-yellow-400",
+//   },
+//   green: {
+//     border: "border-green-500",
+//     bg: "bg-green-500/10",
+//     text: "text-green-400",
+//     btn: "from-green-500 to-green-400",
+//   },
+//   cyan: {
+//     border: "border-cyan-500",
+//     bg: "bg-cyan-500/10",
+//     text: "text-cyan-400",
+//     btn: "from-cyan-500 to-cyan-400",
+//   },
+// };
 
 export const moods: MoodType[] = [
   { value: 1, emoji: "😞", label: "แย่มาก", color: "red" },

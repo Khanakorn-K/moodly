@@ -6691,14 +6691,24 @@ export namespace Prisma {
 
   export type AggregateMoodLog = {
     _count: MoodLogCountAggregateOutputType | null
+    _avg: MoodLogAvgAggregateOutputType | null
+    _sum: MoodLogSumAggregateOutputType | null
     _min: MoodLogMinAggregateOutputType | null
     _max: MoodLogMaxAggregateOutputType | null
+  }
+
+  export type MoodLogAvgAggregateOutputType = {
+    mood: number | null
+  }
+
+  export type MoodLogSumAggregateOutputType = {
+    mood: number | null
   }
 
   export type MoodLogMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    mood: string | null
+    mood: number | null
     note: string | null
     date: Date | null
     createdAt: Date | null
@@ -6708,7 +6718,7 @@ export namespace Prisma {
   export type MoodLogMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    mood: string | null
+    mood: number | null
     note: string | null
     date: Date | null
     createdAt: Date | null
@@ -6726,6 +6736,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type MoodLogAvgAggregateInputType = {
+    mood?: true
+  }
+
+  export type MoodLogSumAggregateInputType = {
+    mood?: true
+  }
 
   export type MoodLogMinAggregateInputType = {
     id?: true
@@ -6796,6 +6814,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: MoodLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MoodLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: MoodLogMinAggregateInputType
@@ -6826,6 +6856,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: MoodLogCountAggregateInputType | true
+    _avg?: MoodLogAvgAggregateInputType
+    _sum?: MoodLogSumAggregateInputType
     _min?: MoodLogMinAggregateInputType
     _max?: MoodLogMaxAggregateInputType
   }
@@ -6833,12 +6865,14 @@ export namespace Prisma {
   export type MoodLogGroupByOutputType = {
     id: string
     userId: string
-    mood: string
+    mood: number
     note: string | null
     date: Date
     createdAt: Date
     updatedAt: Date
     _count: MoodLogCountAggregateOutputType | null
+    _avg: MoodLogAvgAggregateOutputType | null
+    _sum: MoodLogSumAggregateOutputType | null
     _min: MoodLogMinAggregateOutputType | null
     _max: MoodLogMaxAggregateOutputType | null
   }
@@ -6909,7 +6943,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      mood: string
+      mood: number
       note: string | null
       date: Date
       createdAt: Date
@@ -7311,7 +7345,7 @@ export namespace Prisma {
   interface MoodLogFieldRefs {
     readonly id: FieldRef<"MoodLog", 'String'>
     readonly userId: FieldRef<"MoodLog", 'String'>
-    readonly mood: FieldRef<"MoodLog", 'String'>
+    readonly mood: FieldRef<"MoodLog", 'Int'>
     readonly note: FieldRef<"MoodLog", 'String'>
     readonly date: FieldRef<"MoodLog", 'DateTime'>
     readonly createdAt: FieldRef<"MoodLog", 'DateTime'>
@@ -12025,7 +12059,7 @@ export namespace Prisma {
     NOT?: MoodLogWhereInput | MoodLogWhereInput[]
     id?: StringFilter<"MoodLog"> | string
     userId?: StringFilter<"MoodLog"> | string
-    mood?: StringFilter<"MoodLog"> | string
+    mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
     date?: DateTimeFilter<"MoodLog"> | Date | string
     createdAt?: DateTimeFilter<"MoodLog"> | Date | string
@@ -12053,7 +12087,7 @@ export namespace Prisma {
     OR?: MoodLogWhereInput[]
     NOT?: MoodLogWhereInput | MoodLogWhereInput[]
     userId?: StringFilter<"MoodLog"> | string
-    mood?: StringFilter<"MoodLog"> | string
+    mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
     date?: DateTimeFilter<"MoodLog"> | Date | string
     createdAt?: DateTimeFilter<"MoodLog"> | Date | string
@@ -12071,8 +12105,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MoodLogCountOrderByAggregateInput
+    _avg?: MoodLogAvgOrderByAggregateInput
     _max?: MoodLogMaxOrderByAggregateInput
     _min?: MoodLogMinOrderByAggregateInput
+    _sum?: MoodLogSumOrderByAggregateInput
   }
 
   export type MoodLogScalarWhereWithAggregatesInput = {
@@ -12081,7 +12117,7 @@ export namespace Prisma {
     NOT?: MoodLogScalarWhereWithAggregatesInput | MoodLogScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MoodLog"> | string
     userId?: StringWithAggregatesFilter<"MoodLog"> | string
-    mood?: StringWithAggregatesFilter<"MoodLog"> | string
+    mood?: IntWithAggregatesFilter<"MoodLog"> | number
     note?: StringNullableWithAggregatesFilter<"MoodLog"> | string | null
     date?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
@@ -12685,7 +12721,7 @@ export namespace Prisma {
 
   export type MoodLogCreateInput = {
     id?: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -12697,7 +12733,7 @@ export namespace Prisma {
   export type MoodLogUncheckedCreateInput = {
     id?: string
     userId: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -12707,7 +12743,7 @@ export namespace Prisma {
 
   export type MoodLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12719,7 +12755,7 @@ export namespace Prisma {
   export type MoodLogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12730,7 +12766,7 @@ export namespace Prisma {
   export type MoodLogCreateManyInput = {
     id?: string
     userId: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -12739,7 +12775,7 @@ export namespace Prisma {
 
   export type MoodLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12749,7 +12785,7 @@ export namespace Prisma {
   export type MoodLogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13423,6 +13459,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type MoodLogAvgOrderByAggregateInput = {
+    mood?: SortOrder
+  }
+
   export type MoodLogMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -13441,6 +13481,10 @@ export namespace Prisma {
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type MoodLogSumOrderByAggregateInput = {
+    mood?: SortOrder
   }
 
   export type MoodLogRelationFilter = {
@@ -14344,7 +14388,7 @@ export namespace Prisma {
 
   export type MoodLogCreateWithoutUserInput = {
     id?: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -14354,7 +14398,7 @@ export namespace Prisma {
 
   export type MoodLogUncheckedCreateWithoutUserInput = {
     id?: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -14531,7 +14575,7 @@ export namespace Prisma {
     NOT?: MoodLogScalarWhereInput | MoodLogScalarWhereInput[]
     id?: StringFilter<"MoodLog"> | string
     userId?: StringFilter<"MoodLog"> | string
-    mood?: StringFilter<"MoodLog"> | string
+    mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
     date?: DateTimeFilter<"MoodLog"> | Date | string
     createdAt?: DateTimeFilter<"MoodLog"> | Date | string
@@ -14944,7 +14988,7 @@ export namespace Prisma {
 
   export type MoodLogCreateWithoutCausesInput = {
     id?: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -14955,7 +14999,7 @@ export namespace Prisma {
   export type MoodLogUncheckedCreateWithoutCausesInput = {
     id?: string
     userId: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -14980,7 +15024,7 @@ export namespace Prisma {
 
   export type MoodLogUpdateWithoutCausesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14991,7 +15035,7 @@ export namespace Prisma {
   export type MoodLogUncheckedUpdateWithoutCausesInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15287,7 +15331,7 @@ export namespace Prisma {
 
   export type MoodLogCreateManyUserInput = {
     id?: string
-    mood: string
+    mood: number
     note?: string | null
     date?: Date | string
     createdAt?: Date | string
@@ -15398,7 +15442,7 @@ export namespace Prisma {
 
   export type MoodLogUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15408,7 +15452,7 @@ export namespace Prisma {
 
   export type MoodLogUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15418,7 +15462,7 @@ export namespace Prisma {
 
   export type MoodLogUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    mood?: StringFieldUpdateOperationsInput | string
+    mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

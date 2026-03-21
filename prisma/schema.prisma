@@ -89,7 +89,7 @@ model Authenticator {
 model MoodLog {
   id     String   @id @default(cuid())
   userId String
-  mood   String
+  mood   Int
   note   String?
   date   DateTime @default(now())
 
