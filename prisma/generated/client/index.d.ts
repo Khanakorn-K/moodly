@@ -38,6 +38,31 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  * 
  */
 export type Authenticator = $Result.DefaultSelection<Prisma.$AuthenticatorPayload>
+/**
+ * Model MoodLog
+ * 
+ */
+export type MoodLog = $Result.DefaultSelection<Prisma.$MoodLogPayload>
+/**
+ * Model MoodLogCause
+ * 
+ */
+export type MoodLogCause = $Result.DefaultSelection<Prisma.$MoodLogCausePayload>
+/**
+ * Model CustomCause
+ * 
+ */
+export type CustomCause = $Result.DefaultSelection<Prisma.$CustomCausePayload>
+/**
+ * Model Streak
+ * 
+ */
+export type Streak = $Result.DefaultSelection<Prisma.$StreakPayload>
+/**
+ * Model Achievement
+ * 
+ */
+export type Achievement = $Result.DefaultSelection<Prisma.$AchievementPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -211,6 +236,56 @@ export class PrismaClient<
     * ```
     */
   get authenticator(): Prisma.AuthenticatorDelegate<ExtArgs>;
+
+  /**
+   * `prisma.moodLog`: Exposes CRUD operations for the **MoodLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MoodLogs
+    * const moodLogs = await prisma.moodLog.findMany()
+    * ```
+    */
+  get moodLog(): Prisma.MoodLogDelegate<ExtArgs>;
+
+  /**
+   * `prisma.moodLogCause`: Exposes CRUD operations for the **MoodLogCause** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MoodLogCauses
+    * const moodLogCauses = await prisma.moodLogCause.findMany()
+    * ```
+    */
+  get moodLogCause(): Prisma.MoodLogCauseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.customCause`: Exposes CRUD operations for the **CustomCause** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CustomCauses
+    * const customCauses = await prisma.customCause.findMany()
+    * ```
+    */
+  get customCause(): Prisma.CustomCauseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.streak`: Exposes CRUD operations for the **Streak** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Streaks
+    * const streaks = await prisma.streak.findMany()
+    * ```
+    */
+  get streak(): Prisma.StreakDelegate<ExtArgs>;
+
+  /**
+   * `prisma.achievement`: Exposes CRUD operations for the **Achievement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Achievements
+    * const achievements = await prisma.achievement.findMany()
+    * ```
+    */
+  get achievement(): Prisma.AchievementDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -656,7 +731,12 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken',
-    Authenticator: 'Authenticator'
+    Authenticator: 'Authenticator',
+    MoodLog: 'MoodLog',
+    MoodLogCause: 'MoodLogCause',
+    CustomCause: 'CustomCause',
+    Streak: 'Streak',
+    Achievement: 'Achievement'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -672,7 +752,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "moodLog" | "moodLogCause" | "customCause" | "streak" | "achievement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1026,6 +1106,356 @@ export namespace Prisma {
           }
         }
       }
+      MoodLog: {
+        payload: Prisma.$MoodLogPayload<ExtArgs>
+        fields: Prisma.MoodLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MoodLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MoodLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>
+          }
+          findFirst: {
+            args: Prisma.MoodLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MoodLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>
+          }
+          findMany: {
+            args: Prisma.MoodLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>[]
+          }
+          create: {
+            args: Prisma.MoodLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>
+          }
+          createMany: {
+            args: Prisma.MoodLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MoodLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>[]
+          }
+          delete: {
+            args: Prisma.MoodLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>
+          }
+          update: {
+            args: Prisma.MoodLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.MoodLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MoodLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MoodLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogPayload>
+          }
+          aggregate: {
+            args: Prisma.MoodLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMoodLog>
+          }
+          groupBy: {
+            args: Prisma.MoodLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MoodLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MoodLogCountArgs<ExtArgs>
+            result: $Utils.Optional<MoodLogCountAggregateOutputType> | number
+          }
+        }
+      }
+      MoodLogCause: {
+        payload: Prisma.$MoodLogCausePayload<ExtArgs>
+        fields: Prisma.MoodLogCauseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MoodLogCauseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MoodLogCauseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
+          }
+          findFirst: {
+            args: Prisma.MoodLogCauseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MoodLogCauseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
+          }
+          findMany: {
+            args: Prisma.MoodLogCauseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>[]
+          }
+          create: {
+            args: Prisma.MoodLogCauseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
+          }
+          createMany: {
+            args: Prisma.MoodLogCauseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MoodLogCauseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>[]
+          }
+          delete: {
+            args: Prisma.MoodLogCauseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
+          }
+          update: {
+            args: Prisma.MoodLogCauseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
+          }
+          deleteMany: {
+            args: Prisma.MoodLogCauseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MoodLogCauseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.MoodLogCauseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
+          }
+          aggregate: {
+            args: Prisma.MoodLogCauseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMoodLogCause>
+          }
+          groupBy: {
+            args: Prisma.MoodLogCauseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MoodLogCauseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MoodLogCauseCountArgs<ExtArgs>
+            result: $Utils.Optional<MoodLogCauseCountAggregateOutputType> | number
+          }
+        }
+      }
+      CustomCause: {
+        payload: Prisma.$CustomCausePayload<ExtArgs>
+        fields: Prisma.CustomCauseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CustomCauseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CustomCauseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>
+          }
+          findFirst: {
+            args: Prisma.CustomCauseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CustomCauseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>
+          }
+          findMany: {
+            args: Prisma.CustomCauseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>[]
+          }
+          create: {
+            args: Prisma.CustomCauseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>
+          }
+          createMany: {
+            args: Prisma.CustomCauseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CustomCauseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>[]
+          }
+          delete: {
+            args: Prisma.CustomCauseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>
+          }
+          update: {
+            args: Prisma.CustomCauseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>
+          }
+          deleteMany: {
+            args: Prisma.CustomCauseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CustomCauseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CustomCauseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomCausePayload>
+          }
+          aggregate: {
+            args: Prisma.CustomCauseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomCause>
+          }
+          groupBy: {
+            args: Prisma.CustomCauseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CustomCauseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CustomCauseCountArgs<ExtArgs>
+            result: $Utils.Optional<CustomCauseCountAggregateOutputType> | number
+          }
+        }
+      }
+      Streak: {
+        payload: Prisma.$StreakPayload<ExtArgs>
+        fields: Prisma.StreakFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StreakFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StreakFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>
+          }
+          findFirst: {
+            args: Prisma.StreakFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StreakFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>
+          }
+          findMany: {
+            args: Prisma.StreakFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>[]
+          }
+          create: {
+            args: Prisma.StreakCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>
+          }
+          createMany: {
+            args: Prisma.StreakCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StreakCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>[]
+          }
+          delete: {
+            args: Prisma.StreakDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>
+          }
+          update: {
+            args: Prisma.StreakUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>
+          }
+          deleteMany: {
+            args: Prisma.StreakDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StreakUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.StreakUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreakPayload>
+          }
+          aggregate: {
+            args: Prisma.StreakAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStreak>
+          }
+          groupBy: {
+            args: Prisma.StreakGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StreakGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StreakCountArgs<ExtArgs>
+            result: $Utils.Optional<StreakCountAggregateOutputType> | number
+          }
+        }
+      }
+      Achievement: {
+        payload: Prisma.$AchievementPayload<ExtArgs>
+        fields: Prisma.AchievementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AchievementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AchievementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>
+          }
+          findFirst: {
+            args: Prisma.AchievementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AchievementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>
+          }
+          findMany: {
+            args: Prisma.AchievementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>[]
+          }
+          create: {
+            args: Prisma.AchievementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>
+          }
+          createMany: {
+            args: Prisma.AchievementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AchievementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>[]
+          }
+          delete: {
+            args: Prisma.AchievementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>
+          }
+          update: {
+            args: Prisma.AchievementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>
+          }
+          deleteMany: {
+            args: Prisma.AchievementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AchievementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AchievementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AchievementPayload>
+          }
+          aggregate: {
+            args: Prisma.AchievementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAchievement>
+          }
+          groupBy: {
+            args: Prisma.AchievementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AchievementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AchievementCountArgs<ExtArgs>
+            result: $Utils.Optional<AchievementCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1190,12 +1620,16 @@ export namespace Prisma {
     accounts: number
     sessions: number
     Authenticator: number
+    moods: number
+    customCauses: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     Authenticator?: boolean | UserCountOutputTypeCountAuthenticatorArgs
+    moods?: boolean | UserCountOutputTypeCountMoodsArgs
+    customCauses?: boolean | UserCountOutputTypeCountCustomCausesArgs
   }
 
   // Custom InputTypes
@@ -1228,6 +1662,82 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAuthenticatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuthenticatorWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMoodsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoodLogWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCustomCausesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomCauseWhereInput
+  }
+
+
+  /**
+   * Count Type MoodLogCountOutputType
+   */
+
+  export type MoodLogCountOutputType = {
+    causes: number
+  }
+
+  export type MoodLogCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    causes?: boolean | MoodLogCountOutputTypeCountCausesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MoodLogCountOutputType without action
+   */
+  export type MoodLogCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCountOutputType
+     */
+    select?: MoodLogCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MoodLogCountOutputType without action
+   */
+  export type MoodLogCountOutputTypeCountCausesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoodLogCauseWhereInput
+  }
+
+
+  /**
+   * Count Type StreakCountOutputType
+   */
+
+  export type StreakCountOutputType = {
+    achievements: number
+  }
+
+  export type StreakCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    achievements?: boolean | StreakCountOutputTypeCountAchievementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StreakCountOutputType without action
+   */
+  export type StreakCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreakCountOutputType
+     */
+    select?: StreakCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StreakCountOutputType without action
+   */
+  export type StreakCountOutputTypeCountAchievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AchievementWhereInput
   }
 
 
@@ -1418,6 +1928,9 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     Authenticator?: boolean | User$AuthenticatorArgs<ExtArgs>
+    moods?: boolean | User$moodsArgs<ExtArgs>
+    streak?: boolean | User$streakArgs<ExtArgs>
+    customCauses?: boolean | User$customCausesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1445,6 +1958,9 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     Authenticator?: boolean | User$AuthenticatorArgs<ExtArgs>
+    moods?: boolean | User$moodsArgs<ExtArgs>
+    streak?: boolean | User$streakArgs<ExtArgs>
+    customCauses?: boolean | User$customCausesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1455,6 +1971,9 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       Authenticator: Prisma.$AuthenticatorPayload<ExtArgs>[]
+      moods: Prisma.$MoodLogPayload<ExtArgs>[]
+      streak: Prisma.$StreakPayload<ExtArgs> | null
+      customCauses: Prisma.$CustomCausePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1831,6 +2350,9 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany"> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany"> | Null>
     Authenticator<T extends User$AuthenticatorArgs<ExtArgs> = {}>(args?: Subset<T, User$AuthenticatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticatorPayload<ExtArgs>, T, "findMany"> | Null>
+    moods<T extends User$moodsArgs<ExtArgs> = {}>(args?: Subset<T, User$moodsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findMany"> | Null>
+    streak<T extends User$streakArgs<ExtArgs> = {}>(args?: Subset<T, User$streakArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    customCauses<T extends User$customCausesArgs<ExtArgs> = {}>(args?: Subset<T, User$customCausesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2238,6 +2760,61 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuthenticatorScalarFieldEnum | AuthenticatorScalarFieldEnum[]
+  }
+
+  /**
+   * User.moods
+   */
+  export type User$moodsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    where?: MoodLogWhereInput
+    orderBy?: MoodLogOrderByWithRelationInput | MoodLogOrderByWithRelationInput[]
+    cursor?: MoodLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MoodLogScalarFieldEnum | MoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * User.streak
+   */
+  export type User$streakArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    where?: StreakWhereInput
+  }
+
+  /**
+   * User.customCauses
+   */
+  export type User$customCausesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    where?: CustomCauseWhereInput
+    orderBy?: CustomCauseOrderByWithRelationInput | CustomCauseOrderByWithRelationInput[]
+    cursor?: CustomCauseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CustomCauseScalarFieldEnum | CustomCauseScalarFieldEnum[]
   }
 
   /**
@@ -6109,6 +6686,4761 @@ export namespace Prisma {
 
 
   /**
+   * Model MoodLog
+   */
+
+  export type AggregateMoodLog = {
+    _count: MoodLogCountAggregateOutputType | null
+    _min: MoodLogMinAggregateOutputType | null
+    _max: MoodLogMaxAggregateOutputType | null
+  }
+
+  export type MoodLogMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mood: string | null
+    note: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MoodLogMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    mood: string | null
+    note: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MoodLogCountAggregateOutputType = {
+    id: number
+    userId: number
+    mood: number
+    note: number
+    date: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MoodLogMinAggregateInputType = {
+    id?: true
+    userId?: true
+    mood?: true
+    note?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MoodLogMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    mood?: true
+    note?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MoodLogCountAggregateInputType = {
+    id?: true
+    userId?: true
+    mood?: true
+    note?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MoodLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MoodLog to aggregate.
+     */
+    where?: MoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogs to fetch.
+     */
+    orderBy?: MoodLogOrderByWithRelationInput | MoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MoodLogs
+    **/
+    _count?: true | MoodLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MoodLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MoodLogMaxAggregateInputType
+  }
+
+  export type GetMoodLogAggregateType<T extends MoodLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateMoodLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMoodLog[P]>
+      : GetScalarType<T[P], AggregateMoodLog[P]>
+  }
+
+
+
+
+  export type MoodLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoodLogWhereInput
+    orderBy?: MoodLogOrderByWithAggregationInput | MoodLogOrderByWithAggregationInput[]
+    by: MoodLogScalarFieldEnum[] | MoodLogScalarFieldEnum
+    having?: MoodLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MoodLogCountAggregateInputType | true
+    _min?: MoodLogMinAggregateInputType
+    _max?: MoodLogMaxAggregateInputType
+  }
+
+  export type MoodLogGroupByOutputType = {
+    id: string
+    userId: string
+    mood: string
+    note: string | null
+    date: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: MoodLogCountAggregateOutputType | null
+    _min: MoodLogMinAggregateOutputType | null
+    _max: MoodLogMaxAggregateOutputType | null
+  }
+
+  type GetMoodLogGroupByPayload<T extends MoodLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MoodLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MoodLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MoodLogGroupByOutputType[P]>
+            : GetScalarType<T[P], MoodLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MoodLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    note?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    causes?: boolean | MoodLog$causesArgs<ExtArgs>
+    _count?: boolean | MoodLogCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodLog"]>
+
+  export type MoodLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    note?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodLog"]>
+
+  export type MoodLogSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    mood?: boolean
+    note?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MoodLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    causes?: boolean | MoodLog$causesArgs<ExtArgs>
+    _count?: boolean | MoodLogCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MoodLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MoodLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MoodLog"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      causes: Prisma.$MoodLogCausePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      mood: string
+      note: string | null
+      date: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["moodLog"]>
+    composites: {}
+  }
+
+  type MoodLogGetPayload<S extends boolean | null | undefined | MoodLogDefaultArgs> = $Result.GetResult<Prisma.$MoodLogPayload, S>
+
+  type MoodLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MoodLogFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MoodLogCountAggregateInputType | true
+    }
+
+  export interface MoodLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MoodLog'], meta: { name: 'MoodLog' } }
+    /**
+     * Find zero or one MoodLog that matches the filter.
+     * @param {MoodLogFindUniqueArgs} args - Arguments to find a MoodLog
+     * @example
+     * // Get one MoodLog
+     * const moodLog = await prisma.moodLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MoodLogFindUniqueArgs>(args: SelectSubset<T, MoodLogFindUniqueArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one MoodLog that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MoodLogFindUniqueOrThrowArgs} args - Arguments to find a MoodLog
+     * @example
+     * // Get one MoodLog
+     * const moodLog = await prisma.moodLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MoodLogFindUniqueOrThrowArgs>(args: SelectSubset<T, MoodLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first MoodLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogFindFirstArgs} args - Arguments to find a MoodLog
+     * @example
+     * // Get one MoodLog
+     * const moodLog = await prisma.moodLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MoodLogFindFirstArgs>(args?: SelectSubset<T, MoodLogFindFirstArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first MoodLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogFindFirstOrThrowArgs} args - Arguments to find a MoodLog
+     * @example
+     * // Get one MoodLog
+     * const moodLog = await prisma.moodLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MoodLogFindFirstOrThrowArgs>(args?: SelectSubset<T, MoodLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more MoodLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MoodLogs
+     * const moodLogs = await prisma.moodLog.findMany()
+     * 
+     * // Get first 10 MoodLogs
+     * const moodLogs = await prisma.moodLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const moodLogWithIdOnly = await prisma.moodLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MoodLogFindManyArgs>(args?: SelectSubset<T, MoodLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a MoodLog.
+     * @param {MoodLogCreateArgs} args - Arguments to create a MoodLog.
+     * @example
+     * // Create one MoodLog
+     * const MoodLog = await prisma.moodLog.create({
+     *   data: {
+     *     // ... data to create a MoodLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends MoodLogCreateArgs>(args: SelectSubset<T, MoodLogCreateArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many MoodLogs.
+     * @param {MoodLogCreateManyArgs} args - Arguments to create many MoodLogs.
+     * @example
+     * // Create many MoodLogs
+     * const moodLog = await prisma.moodLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MoodLogCreateManyArgs>(args?: SelectSubset<T, MoodLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MoodLogs and returns the data saved in the database.
+     * @param {MoodLogCreateManyAndReturnArgs} args - Arguments to create many MoodLogs.
+     * @example
+     * // Create many MoodLogs
+     * const moodLog = await prisma.moodLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MoodLogs and only return the `id`
+     * const moodLogWithIdOnly = await prisma.moodLog.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MoodLogCreateManyAndReturnArgs>(args?: SelectSubset<T, MoodLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a MoodLog.
+     * @param {MoodLogDeleteArgs} args - Arguments to delete one MoodLog.
+     * @example
+     * // Delete one MoodLog
+     * const MoodLog = await prisma.moodLog.delete({
+     *   where: {
+     *     // ... filter to delete one MoodLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MoodLogDeleteArgs>(args: SelectSubset<T, MoodLogDeleteArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one MoodLog.
+     * @param {MoodLogUpdateArgs} args - Arguments to update one MoodLog.
+     * @example
+     * // Update one MoodLog
+     * const moodLog = await prisma.moodLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MoodLogUpdateArgs>(args: SelectSubset<T, MoodLogUpdateArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more MoodLogs.
+     * @param {MoodLogDeleteManyArgs} args - Arguments to filter MoodLogs to delete.
+     * @example
+     * // Delete a few MoodLogs
+     * const { count } = await prisma.moodLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MoodLogDeleteManyArgs>(args?: SelectSubset<T, MoodLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MoodLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MoodLogs
+     * const moodLog = await prisma.moodLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MoodLogUpdateManyArgs>(args: SelectSubset<T, MoodLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MoodLog.
+     * @param {MoodLogUpsertArgs} args - Arguments to update or create a MoodLog.
+     * @example
+     * // Update or create a MoodLog
+     * const moodLog = await prisma.moodLog.upsert({
+     *   create: {
+     *     // ... data to create a MoodLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MoodLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MoodLogUpsertArgs>(args: SelectSubset<T, MoodLogUpsertArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of MoodLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCountArgs} args - Arguments to filter MoodLogs to count.
+     * @example
+     * // Count the number of MoodLogs
+     * const count = await prisma.moodLog.count({
+     *   where: {
+     *     // ... the filter for the MoodLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends MoodLogCountArgs>(
+      args?: Subset<T, MoodLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MoodLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MoodLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MoodLogAggregateArgs>(args: Subset<T, MoodLogAggregateArgs>): Prisma.PrismaPromise<GetMoodLogAggregateType<T>>
+
+    /**
+     * Group by MoodLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MoodLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MoodLogGroupByArgs['orderBy'] }
+        : { orderBy?: MoodLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MoodLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMoodLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MoodLog model
+   */
+  readonly fields: MoodLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MoodLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MoodLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    causes<T extends MoodLog$causesArgs<ExtArgs> = {}>(args?: Subset<T, MoodLog$causesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MoodLog model
+   */ 
+  interface MoodLogFieldRefs {
+    readonly id: FieldRef<"MoodLog", 'String'>
+    readonly userId: FieldRef<"MoodLog", 'String'>
+    readonly mood: FieldRef<"MoodLog", 'String'>
+    readonly note: FieldRef<"MoodLog", 'String'>
+    readonly date: FieldRef<"MoodLog", 'DateTime'>
+    readonly createdAt: FieldRef<"MoodLog", 'DateTime'>
+    readonly updatedAt: FieldRef<"MoodLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MoodLog findUnique
+   */
+  export type MoodLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLog to fetch.
+     */
+    where: MoodLogWhereUniqueInput
+  }
+
+  /**
+   * MoodLog findUniqueOrThrow
+   */
+  export type MoodLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLog to fetch.
+     */
+    where: MoodLogWhereUniqueInput
+  }
+
+  /**
+   * MoodLog findFirst
+   */
+  export type MoodLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLog to fetch.
+     */
+    where?: MoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogs to fetch.
+     */
+    orderBy?: MoodLogOrderByWithRelationInput | MoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MoodLogs.
+     */
+    cursor?: MoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MoodLogs.
+     */
+    distinct?: MoodLogScalarFieldEnum | MoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLog findFirstOrThrow
+   */
+  export type MoodLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLog to fetch.
+     */
+    where?: MoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogs to fetch.
+     */
+    orderBy?: MoodLogOrderByWithRelationInput | MoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MoodLogs.
+     */
+    cursor?: MoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MoodLogs.
+     */
+    distinct?: MoodLogScalarFieldEnum | MoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLog findMany
+   */
+  export type MoodLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLogs to fetch.
+     */
+    where?: MoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogs to fetch.
+     */
+    orderBy?: MoodLogOrderByWithRelationInput | MoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MoodLogs.
+     */
+    cursor?: MoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogs.
+     */
+    skip?: number
+    distinct?: MoodLogScalarFieldEnum | MoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLog create
+   */
+  export type MoodLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MoodLog.
+     */
+    data: XOR<MoodLogCreateInput, MoodLogUncheckedCreateInput>
+  }
+
+  /**
+   * MoodLog createMany
+   */
+  export type MoodLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MoodLogs.
+     */
+    data: MoodLogCreateManyInput | MoodLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MoodLog createManyAndReturn
+   */
+  export type MoodLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many MoodLogs.
+     */
+    data: MoodLogCreateManyInput | MoodLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MoodLog update
+   */
+  export type MoodLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MoodLog.
+     */
+    data: XOR<MoodLogUpdateInput, MoodLogUncheckedUpdateInput>
+    /**
+     * Choose, which MoodLog to update.
+     */
+    where: MoodLogWhereUniqueInput
+  }
+
+  /**
+   * MoodLog updateMany
+   */
+  export type MoodLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MoodLogs.
+     */
+    data: XOR<MoodLogUpdateManyMutationInput, MoodLogUncheckedUpdateManyInput>
+    /**
+     * Filter which MoodLogs to update
+     */
+    where?: MoodLogWhereInput
+  }
+
+  /**
+   * MoodLog upsert
+   */
+  export type MoodLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MoodLog to update in case it exists.
+     */
+    where: MoodLogWhereUniqueInput
+    /**
+     * In case the MoodLog found by the `where` argument doesn't exist, create a new MoodLog with this data.
+     */
+    create: XOR<MoodLogCreateInput, MoodLogUncheckedCreateInput>
+    /**
+     * In case the MoodLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MoodLogUpdateInput, MoodLogUncheckedUpdateInput>
+  }
+
+  /**
+   * MoodLog delete
+   */
+  export type MoodLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+    /**
+     * Filter which MoodLog to delete.
+     */
+    where: MoodLogWhereUniqueInput
+  }
+
+  /**
+   * MoodLog deleteMany
+   */
+  export type MoodLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MoodLogs to delete
+     */
+    where?: MoodLogWhereInput
+  }
+
+  /**
+   * MoodLog.causes
+   */
+  export type MoodLog$causesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    where?: MoodLogCauseWhereInput
+    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
+    cursor?: MoodLogCauseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLog without action
+   */
+  export type MoodLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLog
+     */
+    select?: MoodLogSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MoodLogCause
+   */
+
+  export type AggregateMoodLogCause = {
+    _count: MoodLogCauseCountAggregateOutputType | null
+    _min: MoodLogCauseMinAggregateOutputType | null
+    _max: MoodLogCauseMaxAggregateOutputType | null
+  }
+
+  export type MoodLogCauseMinAggregateOutputType = {
+    id: string | null
+    moodLogId: string | null
+    cause: string | null
+  }
+
+  export type MoodLogCauseMaxAggregateOutputType = {
+    id: string | null
+    moodLogId: string | null
+    cause: string | null
+  }
+
+  export type MoodLogCauseCountAggregateOutputType = {
+    id: number
+    moodLogId: number
+    cause: number
+    _all: number
+  }
+
+
+  export type MoodLogCauseMinAggregateInputType = {
+    id?: true
+    moodLogId?: true
+    cause?: true
+  }
+
+  export type MoodLogCauseMaxAggregateInputType = {
+    id?: true
+    moodLogId?: true
+    cause?: true
+  }
+
+  export type MoodLogCauseCountAggregateInputType = {
+    id?: true
+    moodLogId?: true
+    cause?: true
+    _all?: true
+  }
+
+  export type MoodLogCauseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MoodLogCause to aggregate.
+     */
+    where?: MoodLogCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogCauses to fetch.
+     */
+    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MoodLogCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogCauses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MoodLogCauses
+    **/
+    _count?: true | MoodLogCauseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MoodLogCauseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MoodLogCauseMaxAggregateInputType
+  }
+
+  export type GetMoodLogCauseAggregateType<T extends MoodLogCauseAggregateArgs> = {
+        [P in keyof T & keyof AggregateMoodLogCause]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMoodLogCause[P]>
+      : GetScalarType<T[P], AggregateMoodLogCause[P]>
+  }
+
+
+
+
+  export type MoodLogCauseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MoodLogCauseWhereInput
+    orderBy?: MoodLogCauseOrderByWithAggregationInput | MoodLogCauseOrderByWithAggregationInput[]
+    by: MoodLogCauseScalarFieldEnum[] | MoodLogCauseScalarFieldEnum
+    having?: MoodLogCauseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MoodLogCauseCountAggregateInputType | true
+    _min?: MoodLogCauseMinAggregateInputType
+    _max?: MoodLogCauseMaxAggregateInputType
+  }
+
+  export type MoodLogCauseGroupByOutputType = {
+    id: string
+    moodLogId: string
+    cause: string
+    _count: MoodLogCauseCountAggregateOutputType | null
+    _min: MoodLogCauseMinAggregateOutputType | null
+    _max: MoodLogCauseMaxAggregateOutputType | null
+  }
+
+  type GetMoodLogCauseGroupByPayload<T extends MoodLogCauseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MoodLogCauseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MoodLogCauseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MoodLogCauseGroupByOutputType[P]>
+            : GetScalarType<T[P], MoodLogCauseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MoodLogCauseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    moodLogId?: boolean
+    cause?: boolean
+    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodLogCause"]>
+
+  export type MoodLogCauseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    moodLogId?: boolean
+    cause?: boolean
+    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["moodLogCause"]>
+
+  export type MoodLogCauseSelectScalar = {
+    id?: boolean
+    moodLogId?: boolean
+    cause?: boolean
+  }
+
+  export type MoodLogCauseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
+  }
+  export type MoodLogCauseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
+  }
+
+  export type $MoodLogCausePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MoodLogCause"
+    objects: {
+      moodLog: Prisma.$MoodLogPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      moodLogId: string
+      cause: string
+    }, ExtArgs["result"]["moodLogCause"]>
+    composites: {}
+  }
+
+  type MoodLogCauseGetPayload<S extends boolean | null | undefined | MoodLogCauseDefaultArgs> = $Result.GetResult<Prisma.$MoodLogCausePayload, S>
+
+  type MoodLogCauseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MoodLogCauseFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MoodLogCauseCountAggregateInputType | true
+    }
+
+  export interface MoodLogCauseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MoodLogCause'], meta: { name: 'MoodLogCause' } }
+    /**
+     * Find zero or one MoodLogCause that matches the filter.
+     * @param {MoodLogCauseFindUniqueArgs} args - Arguments to find a MoodLogCause
+     * @example
+     * // Get one MoodLogCause
+     * const moodLogCause = await prisma.moodLogCause.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MoodLogCauseFindUniqueArgs>(args: SelectSubset<T, MoodLogCauseFindUniqueArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one MoodLogCause that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MoodLogCauseFindUniqueOrThrowArgs} args - Arguments to find a MoodLogCause
+     * @example
+     * // Get one MoodLogCause
+     * const moodLogCause = await prisma.moodLogCause.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MoodLogCauseFindUniqueOrThrowArgs>(args: SelectSubset<T, MoodLogCauseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first MoodLogCause that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseFindFirstArgs} args - Arguments to find a MoodLogCause
+     * @example
+     * // Get one MoodLogCause
+     * const moodLogCause = await prisma.moodLogCause.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MoodLogCauseFindFirstArgs>(args?: SelectSubset<T, MoodLogCauseFindFirstArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first MoodLogCause that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseFindFirstOrThrowArgs} args - Arguments to find a MoodLogCause
+     * @example
+     * // Get one MoodLogCause
+     * const moodLogCause = await prisma.moodLogCause.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MoodLogCauseFindFirstOrThrowArgs>(args?: SelectSubset<T, MoodLogCauseFindFirstOrThrowArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more MoodLogCauses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MoodLogCauses
+     * const moodLogCauses = await prisma.moodLogCause.findMany()
+     * 
+     * // Get first 10 MoodLogCauses
+     * const moodLogCauses = await prisma.moodLogCause.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const moodLogCauseWithIdOnly = await prisma.moodLogCause.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MoodLogCauseFindManyArgs>(args?: SelectSubset<T, MoodLogCauseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a MoodLogCause.
+     * @param {MoodLogCauseCreateArgs} args - Arguments to create a MoodLogCause.
+     * @example
+     * // Create one MoodLogCause
+     * const MoodLogCause = await prisma.moodLogCause.create({
+     *   data: {
+     *     // ... data to create a MoodLogCause
+     *   }
+     * })
+     * 
+     */
+    create<T extends MoodLogCauseCreateArgs>(args: SelectSubset<T, MoodLogCauseCreateArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many MoodLogCauses.
+     * @param {MoodLogCauseCreateManyArgs} args - Arguments to create many MoodLogCauses.
+     * @example
+     * // Create many MoodLogCauses
+     * const moodLogCause = await prisma.moodLogCause.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MoodLogCauseCreateManyArgs>(args?: SelectSubset<T, MoodLogCauseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MoodLogCauses and returns the data saved in the database.
+     * @param {MoodLogCauseCreateManyAndReturnArgs} args - Arguments to create many MoodLogCauses.
+     * @example
+     * // Create many MoodLogCauses
+     * const moodLogCause = await prisma.moodLogCause.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MoodLogCauses and only return the `id`
+     * const moodLogCauseWithIdOnly = await prisma.moodLogCause.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MoodLogCauseCreateManyAndReturnArgs>(args?: SelectSubset<T, MoodLogCauseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a MoodLogCause.
+     * @param {MoodLogCauseDeleteArgs} args - Arguments to delete one MoodLogCause.
+     * @example
+     * // Delete one MoodLogCause
+     * const MoodLogCause = await prisma.moodLogCause.delete({
+     *   where: {
+     *     // ... filter to delete one MoodLogCause
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MoodLogCauseDeleteArgs>(args: SelectSubset<T, MoodLogCauseDeleteArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one MoodLogCause.
+     * @param {MoodLogCauseUpdateArgs} args - Arguments to update one MoodLogCause.
+     * @example
+     * // Update one MoodLogCause
+     * const moodLogCause = await prisma.moodLogCause.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MoodLogCauseUpdateArgs>(args: SelectSubset<T, MoodLogCauseUpdateArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more MoodLogCauses.
+     * @param {MoodLogCauseDeleteManyArgs} args - Arguments to filter MoodLogCauses to delete.
+     * @example
+     * // Delete a few MoodLogCauses
+     * const { count } = await prisma.moodLogCause.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MoodLogCauseDeleteManyArgs>(args?: SelectSubset<T, MoodLogCauseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MoodLogCauses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MoodLogCauses
+     * const moodLogCause = await prisma.moodLogCause.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MoodLogCauseUpdateManyArgs>(args: SelectSubset<T, MoodLogCauseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MoodLogCause.
+     * @param {MoodLogCauseUpsertArgs} args - Arguments to update or create a MoodLogCause.
+     * @example
+     * // Update or create a MoodLogCause
+     * const moodLogCause = await prisma.moodLogCause.upsert({
+     *   create: {
+     *     // ... data to create a MoodLogCause
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MoodLogCause we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MoodLogCauseUpsertArgs>(args: SelectSubset<T, MoodLogCauseUpsertArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of MoodLogCauses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseCountArgs} args - Arguments to filter MoodLogCauses to count.
+     * @example
+     * // Count the number of MoodLogCauses
+     * const count = await prisma.moodLogCause.count({
+     *   where: {
+     *     // ... the filter for the MoodLogCauses we want to count
+     *   }
+     * })
+    **/
+    count<T extends MoodLogCauseCountArgs>(
+      args?: Subset<T, MoodLogCauseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MoodLogCauseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MoodLogCause.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MoodLogCauseAggregateArgs>(args: Subset<T, MoodLogCauseAggregateArgs>): Prisma.PrismaPromise<GetMoodLogCauseAggregateType<T>>
+
+    /**
+     * Group by MoodLogCause.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MoodLogCauseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MoodLogCauseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MoodLogCauseGroupByArgs['orderBy'] }
+        : { orderBy?: MoodLogCauseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MoodLogCauseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMoodLogCauseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MoodLogCause model
+   */
+  readonly fields: MoodLogCauseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MoodLogCause.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MoodLogCauseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    moodLog<T extends MoodLogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MoodLogDefaultArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MoodLogCause model
+   */ 
+  interface MoodLogCauseFieldRefs {
+    readonly id: FieldRef<"MoodLogCause", 'String'>
+    readonly moodLogId: FieldRef<"MoodLogCause", 'String'>
+    readonly cause: FieldRef<"MoodLogCause", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MoodLogCause findUnique
+   */
+  export type MoodLogCauseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLogCause to fetch.
+     */
+    where: MoodLogCauseWhereUniqueInput
+  }
+
+  /**
+   * MoodLogCause findUniqueOrThrow
+   */
+  export type MoodLogCauseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLogCause to fetch.
+     */
+    where: MoodLogCauseWhereUniqueInput
+  }
+
+  /**
+   * MoodLogCause findFirst
+   */
+  export type MoodLogCauseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLogCause to fetch.
+     */
+    where?: MoodLogCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogCauses to fetch.
+     */
+    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MoodLogCauses.
+     */
+    cursor?: MoodLogCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogCauses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MoodLogCauses.
+     */
+    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLogCause findFirstOrThrow
+   */
+  export type MoodLogCauseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLogCause to fetch.
+     */
+    where?: MoodLogCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogCauses to fetch.
+     */
+    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MoodLogCauses.
+     */
+    cursor?: MoodLogCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogCauses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MoodLogCauses.
+     */
+    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLogCause findMany
+   */
+  export type MoodLogCauseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which MoodLogCauses to fetch.
+     */
+    where?: MoodLogCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MoodLogCauses to fetch.
+     */
+    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MoodLogCauses.
+     */
+    cursor?: MoodLogCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MoodLogCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MoodLogCauses.
+     */
+    skip?: number
+    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
+  }
+
+  /**
+   * MoodLogCause create
+   */
+  export type MoodLogCauseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MoodLogCause.
+     */
+    data: XOR<MoodLogCauseCreateInput, MoodLogCauseUncheckedCreateInput>
+  }
+
+  /**
+   * MoodLogCause createMany
+   */
+  export type MoodLogCauseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MoodLogCauses.
+     */
+    data: MoodLogCauseCreateManyInput | MoodLogCauseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MoodLogCause createManyAndReturn
+   */
+  export type MoodLogCauseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many MoodLogCauses.
+     */
+    data: MoodLogCauseCreateManyInput | MoodLogCauseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MoodLogCause update
+   */
+  export type MoodLogCauseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MoodLogCause.
+     */
+    data: XOR<MoodLogCauseUpdateInput, MoodLogCauseUncheckedUpdateInput>
+    /**
+     * Choose, which MoodLogCause to update.
+     */
+    where: MoodLogCauseWhereUniqueInput
+  }
+
+  /**
+   * MoodLogCause updateMany
+   */
+  export type MoodLogCauseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MoodLogCauses.
+     */
+    data: XOR<MoodLogCauseUpdateManyMutationInput, MoodLogCauseUncheckedUpdateManyInput>
+    /**
+     * Filter which MoodLogCauses to update
+     */
+    where?: MoodLogCauseWhereInput
+  }
+
+  /**
+   * MoodLogCause upsert
+   */
+  export type MoodLogCauseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MoodLogCause to update in case it exists.
+     */
+    where: MoodLogCauseWhereUniqueInput
+    /**
+     * In case the MoodLogCause found by the `where` argument doesn't exist, create a new MoodLogCause with this data.
+     */
+    create: XOR<MoodLogCauseCreateInput, MoodLogCauseUncheckedCreateInput>
+    /**
+     * In case the MoodLogCause was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MoodLogCauseUpdateInput, MoodLogCauseUncheckedUpdateInput>
+  }
+
+  /**
+   * MoodLogCause delete
+   */
+  export type MoodLogCauseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+    /**
+     * Filter which MoodLogCause to delete.
+     */
+    where: MoodLogCauseWhereUniqueInput
+  }
+
+  /**
+   * MoodLogCause deleteMany
+   */
+  export type MoodLogCauseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MoodLogCauses to delete
+     */
+    where?: MoodLogCauseWhereInput
+  }
+
+  /**
+   * MoodLogCause without action
+   */
+  export type MoodLogCauseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoodLogCause
+     */
+    select?: MoodLogCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoodLogCauseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CustomCause
+   */
+
+  export type AggregateCustomCause = {
+    _count: CustomCauseCountAggregateOutputType | null
+    _min: CustomCauseMinAggregateOutputType | null
+    _max: CustomCauseMaxAggregateOutputType | null
+  }
+
+  export type CustomCauseMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    createdAt: Date | null
+  }
+
+  export type CustomCauseMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    createdAt: Date | null
+  }
+
+  export type CustomCauseCountAggregateOutputType = {
+    id: number
+    userId: number
+    name: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CustomCauseMinAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    createdAt?: true
+  }
+
+  export type CustomCauseMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    createdAt?: true
+  }
+
+  export type CustomCauseCountAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CustomCauseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomCause to aggregate.
+     */
+    where?: CustomCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomCauses to fetch.
+     */
+    orderBy?: CustomCauseOrderByWithRelationInput | CustomCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CustomCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomCauses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CustomCauses
+    **/
+    _count?: true | CustomCauseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CustomCauseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CustomCauseMaxAggregateInputType
+  }
+
+  export type GetCustomCauseAggregateType<T extends CustomCauseAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomCause]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomCause[P]>
+      : GetScalarType<T[P], AggregateCustomCause[P]>
+  }
+
+
+
+
+  export type CustomCauseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomCauseWhereInput
+    orderBy?: CustomCauseOrderByWithAggregationInput | CustomCauseOrderByWithAggregationInput[]
+    by: CustomCauseScalarFieldEnum[] | CustomCauseScalarFieldEnum
+    having?: CustomCauseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CustomCauseCountAggregateInputType | true
+    _min?: CustomCauseMinAggregateInputType
+    _max?: CustomCauseMaxAggregateInputType
+  }
+
+  export type CustomCauseGroupByOutputType = {
+    id: string
+    userId: string
+    name: string
+    createdAt: Date
+    _count: CustomCauseCountAggregateOutputType | null
+    _min: CustomCauseMinAggregateOutputType | null
+    _max: CustomCauseMaxAggregateOutputType | null
+  }
+
+  type GetCustomCauseGroupByPayload<T extends CustomCauseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CustomCauseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CustomCauseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CustomCauseGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomCauseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CustomCauseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customCause"]>
+
+  export type CustomCauseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customCause"]>
+
+  export type CustomCauseSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    createdAt?: boolean
+  }
+
+  export type CustomCauseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CustomCauseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CustomCausePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CustomCause"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      name: string
+      createdAt: Date
+    }, ExtArgs["result"]["customCause"]>
+    composites: {}
+  }
+
+  type CustomCauseGetPayload<S extends boolean | null | undefined | CustomCauseDefaultArgs> = $Result.GetResult<Prisma.$CustomCausePayload, S>
+
+  type CustomCauseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CustomCauseFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CustomCauseCountAggregateInputType | true
+    }
+
+  export interface CustomCauseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomCause'], meta: { name: 'CustomCause' } }
+    /**
+     * Find zero or one CustomCause that matches the filter.
+     * @param {CustomCauseFindUniqueArgs} args - Arguments to find a CustomCause
+     * @example
+     * // Get one CustomCause
+     * const customCause = await prisma.customCause.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CustomCauseFindUniqueArgs>(args: SelectSubset<T, CustomCauseFindUniqueArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one CustomCause that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CustomCauseFindUniqueOrThrowArgs} args - Arguments to find a CustomCause
+     * @example
+     * // Get one CustomCause
+     * const customCause = await prisma.customCause.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CustomCauseFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomCauseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first CustomCause that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseFindFirstArgs} args - Arguments to find a CustomCause
+     * @example
+     * // Get one CustomCause
+     * const customCause = await prisma.customCause.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CustomCauseFindFirstArgs>(args?: SelectSubset<T, CustomCauseFindFirstArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first CustomCause that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseFindFirstOrThrowArgs} args - Arguments to find a CustomCause
+     * @example
+     * // Get one CustomCause
+     * const customCause = await prisma.customCause.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CustomCauseFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomCauseFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more CustomCauses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CustomCauses
+     * const customCauses = await prisma.customCause.findMany()
+     * 
+     * // Get first 10 CustomCauses
+     * const customCauses = await prisma.customCause.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customCauseWithIdOnly = await prisma.customCause.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CustomCauseFindManyArgs>(args?: SelectSubset<T, CustomCauseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a CustomCause.
+     * @param {CustomCauseCreateArgs} args - Arguments to create a CustomCause.
+     * @example
+     * // Create one CustomCause
+     * const CustomCause = await prisma.customCause.create({
+     *   data: {
+     *     // ... data to create a CustomCause
+     *   }
+     * })
+     * 
+     */
+    create<T extends CustomCauseCreateArgs>(args: SelectSubset<T, CustomCauseCreateArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many CustomCauses.
+     * @param {CustomCauseCreateManyArgs} args - Arguments to create many CustomCauses.
+     * @example
+     * // Create many CustomCauses
+     * const customCause = await prisma.customCause.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CustomCauseCreateManyArgs>(args?: SelectSubset<T, CustomCauseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CustomCauses and returns the data saved in the database.
+     * @param {CustomCauseCreateManyAndReturnArgs} args - Arguments to create many CustomCauses.
+     * @example
+     * // Create many CustomCauses
+     * const customCause = await prisma.customCause.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CustomCauses and only return the `id`
+     * const customCauseWithIdOnly = await prisma.customCause.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CustomCauseCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomCauseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a CustomCause.
+     * @param {CustomCauseDeleteArgs} args - Arguments to delete one CustomCause.
+     * @example
+     * // Delete one CustomCause
+     * const CustomCause = await prisma.customCause.delete({
+     *   where: {
+     *     // ... filter to delete one CustomCause
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CustomCauseDeleteArgs>(args: SelectSubset<T, CustomCauseDeleteArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one CustomCause.
+     * @param {CustomCauseUpdateArgs} args - Arguments to update one CustomCause.
+     * @example
+     * // Update one CustomCause
+     * const customCause = await prisma.customCause.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CustomCauseUpdateArgs>(args: SelectSubset<T, CustomCauseUpdateArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more CustomCauses.
+     * @param {CustomCauseDeleteManyArgs} args - Arguments to filter CustomCauses to delete.
+     * @example
+     * // Delete a few CustomCauses
+     * const { count } = await prisma.customCause.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CustomCauseDeleteManyArgs>(args?: SelectSubset<T, CustomCauseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomCauses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CustomCauses
+     * const customCause = await prisma.customCause.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CustomCauseUpdateManyArgs>(args: SelectSubset<T, CustomCauseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CustomCause.
+     * @param {CustomCauseUpsertArgs} args - Arguments to update or create a CustomCause.
+     * @example
+     * // Update or create a CustomCause
+     * const customCause = await prisma.customCause.upsert({
+     *   create: {
+     *     // ... data to create a CustomCause
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CustomCause we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CustomCauseUpsertArgs>(args: SelectSubset<T, CustomCauseUpsertArgs<ExtArgs>>): Prisma__CustomCauseClient<$Result.GetResult<Prisma.$CustomCausePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of CustomCauses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseCountArgs} args - Arguments to filter CustomCauses to count.
+     * @example
+     * // Count the number of CustomCauses
+     * const count = await prisma.customCause.count({
+     *   where: {
+     *     // ... the filter for the CustomCauses we want to count
+     *   }
+     * })
+    **/
+    count<T extends CustomCauseCountArgs>(
+      args?: Subset<T, CustomCauseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CustomCauseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CustomCause.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CustomCauseAggregateArgs>(args: Subset<T, CustomCauseAggregateArgs>): Prisma.PrismaPromise<GetCustomCauseAggregateType<T>>
+
+    /**
+     * Group by CustomCause.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomCauseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CustomCauseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CustomCauseGroupByArgs['orderBy'] }
+        : { orderBy?: CustomCauseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CustomCauseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomCauseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CustomCause model
+   */
+  readonly fields: CustomCauseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CustomCause.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CustomCauseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CustomCause model
+   */ 
+  interface CustomCauseFieldRefs {
+    readonly id: FieldRef<"CustomCause", 'String'>
+    readonly userId: FieldRef<"CustomCause", 'String'>
+    readonly name: FieldRef<"CustomCause", 'String'>
+    readonly createdAt: FieldRef<"CustomCause", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CustomCause findUnique
+   */
+  export type CustomCauseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomCause to fetch.
+     */
+    where: CustomCauseWhereUniqueInput
+  }
+
+  /**
+   * CustomCause findUniqueOrThrow
+   */
+  export type CustomCauseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomCause to fetch.
+     */
+    where: CustomCauseWhereUniqueInput
+  }
+
+  /**
+   * CustomCause findFirst
+   */
+  export type CustomCauseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomCause to fetch.
+     */
+    where?: CustomCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomCauses to fetch.
+     */
+    orderBy?: CustomCauseOrderByWithRelationInput | CustomCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomCauses.
+     */
+    cursor?: CustomCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomCauses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomCauses.
+     */
+    distinct?: CustomCauseScalarFieldEnum | CustomCauseScalarFieldEnum[]
+  }
+
+  /**
+   * CustomCause findFirstOrThrow
+   */
+  export type CustomCauseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomCause to fetch.
+     */
+    where?: CustomCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomCauses to fetch.
+     */
+    orderBy?: CustomCauseOrderByWithRelationInput | CustomCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomCauses.
+     */
+    cursor?: CustomCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomCauses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomCauses.
+     */
+    distinct?: CustomCauseScalarFieldEnum | CustomCauseScalarFieldEnum[]
+  }
+
+  /**
+   * CustomCause findMany
+   */
+  export type CustomCauseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomCauses to fetch.
+     */
+    where?: CustomCauseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomCauses to fetch.
+     */
+    orderBy?: CustomCauseOrderByWithRelationInput | CustomCauseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CustomCauses.
+     */
+    cursor?: CustomCauseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomCauses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomCauses.
+     */
+    skip?: number
+    distinct?: CustomCauseScalarFieldEnum | CustomCauseScalarFieldEnum[]
+  }
+
+  /**
+   * CustomCause create
+   */
+  export type CustomCauseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CustomCause.
+     */
+    data: XOR<CustomCauseCreateInput, CustomCauseUncheckedCreateInput>
+  }
+
+  /**
+   * CustomCause createMany
+   */
+  export type CustomCauseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CustomCauses.
+     */
+    data: CustomCauseCreateManyInput | CustomCauseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CustomCause createManyAndReturn
+   */
+  export type CustomCauseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many CustomCauses.
+     */
+    data: CustomCauseCreateManyInput | CustomCauseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomCause update
+   */
+  export type CustomCauseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CustomCause.
+     */
+    data: XOR<CustomCauseUpdateInput, CustomCauseUncheckedUpdateInput>
+    /**
+     * Choose, which CustomCause to update.
+     */
+    where: CustomCauseWhereUniqueInput
+  }
+
+  /**
+   * CustomCause updateMany
+   */
+  export type CustomCauseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CustomCauses.
+     */
+    data: XOR<CustomCauseUpdateManyMutationInput, CustomCauseUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomCauses to update
+     */
+    where?: CustomCauseWhereInput
+  }
+
+  /**
+   * CustomCause upsert
+   */
+  export type CustomCauseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CustomCause to update in case it exists.
+     */
+    where: CustomCauseWhereUniqueInput
+    /**
+     * In case the CustomCause found by the `where` argument doesn't exist, create a new CustomCause with this data.
+     */
+    create: XOR<CustomCauseCreateInput, CustomCauseUncheckedCreateInput>
+    /**
+     * In case the CustomCause was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CustomCauseUpdateInput, CustomCauseUncheckedUpdateInput>
+  }
+
+  /**
+   * CustomCause delete
+   */
+  export type CustomCauseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+    /**
+     * Filter which CustomCause to delete.
+     */
+    where: CustomCauseWhereUniqueInput
+  }
+
+  /**
+   * CustomCause deleteMany
+   */
+  export type CustomCauseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomCauses to delete
+     */
+    where?: CustomCauseWhereInput
+  }
+
+  /**
+   * CustomCause without action
+   */
+  export type CustomCauseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomCause
+     */
+    select?: CustomCauseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomCauseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Streak
+   */
+
+  export type AggregateStreak = {
+    _count: StreakCountAggregateOutputType | null
+    _avg: StreakAvgAggregateOutputType | null
+    _sum: StreakSumAggregateOutputType | null
+    _min: StreakMinAggregateOutputType | null
+    _max: StreakMaxAggregateOutputType | null
+  }
+
+  export type StreakAvgAggregateOutputType = {
+    currentStreak: number | null
+    longestStreak: number | null
+  }
+
+  export type StreakSumAggregateOutputType = {
+    currentStreak: number | null
+    longestStreak: number | null
+  }
+
+  export type StreakMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    currentStreak: number | null
+    longestStreak: number | null
+    lastLogDate: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StreakMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    currentStreak: number | null
+    longestStreak: number | null
+    lastLogDate: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StreakCountAggregateOutputType = {
+    id: number
+    userId: number
+    currentStreak: number
+    longestStreak: number
+    lastLogDate: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StreakAvgAggregateInputType = {
+    currentStreak?: true
+    longestStreak?: true
+  }
+
+  export type StreakSumAggregateInputType = {
+    currentStreak?: true
+    longestStreak?: true
+  }
+
+  export type StreakMinAggregateInputType = {
+    id?: true
+    userId?: true
+    currentStreak?: true
+    longestStreak?: true
+    lastLogDate?: true
+    updatedAt?: true
+  }
+
+  export type StreakMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    currentStreak?: true
+    longestStreak?: true
+    lastLogDate?: true
+    updatedAt?: true
+  }
+
+  export type StreakCountAggregateInputType = {
+    id?: true
+    userId?: true
+    currentStreak?: true
+    longestStreak?: true
+    lastLogDate?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StreakAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Streak to aggregate.
+     */
+    where?: StreakWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streaks to fetch.
+     */
+    orderBy?: StreakOrderByWithRelationInput | StreakOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StreakWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streaks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streaks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Streaks
+    **/
+    _count?: true | StreakCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StreakAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StreakSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StreakMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StreakMaxAggregateInputType
+  }
+
+  export type GetStreakAggregateType<T extends StreakAggregateArgs> = {
+        [P in keyof T & keyof AggregateStreak]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStreak[P]>
+      : GetScalarType<T[P], AggregateStreak[P]>
+  }
+
+
+
+
+  export type StreakGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StreakWhereInput
+    orderBy?: StreakOrderByWithAggregationInput | StreakOrderByWithAggregationInput[]
+    by: StreakScalarFieldEnum[] | StreakScalarFieldEnum
+    having?: StreakScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StreakCountAggregateInputType | true
+    _avg?: StreakAvgAggregateInputType
+    _sum?: StreakSumAggregateInputType
+    _min?: StreakMinAggregateInputType
+    _max?: StreakMaxAggregateInputType
+  }
+
+  export type StreakGroupByOutputType = {
+    id: string
+    userId: string
+    currentStreak: number
+    longestStreak: number
+    lastLogDate: Date | null
+    updatedAt: Date
+    _count: StreakCountAggregateOutputType | null
+    _avg: StreakAvgAggregateOutputType | null
+    _sum: StreakSumAggregateOutputType | null
+    _min: StreakMinAggregateOutputType | null
+    _max: StreakMaxAggregateOutputType | null
+  }
+
+  type GetStreakGroupByPayload<T extends StreakGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StreakGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StreakGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StreakGroupByOutputType[P]>
+            : GetScalarType<T[P], StreakGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StreakSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastLogDate?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    achievements?: boolean | Streak$achievementsArgs<ExtArgs>
+    _count?: boolean | StreakCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["streak"]>
+
+  export type StreakSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastLogDate?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["streak"]>
+
+  export type StreakSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastLogDate?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StreakInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    achievements?: boolean | Streak$achievementsArgs<ExtArgs>
+    _count?: boolean | StreakCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StreakIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $StreakPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Streak"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      achievements: Prisma.$AchievementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      currentStreak: number
+      longestStreak: number
+      lastLogDate: Date | null
+      updatedAt: Date
+    }, ExtArgs["result"]["streak"]>
+    composites: {}
+  }
+
+  type StreakGetPayload<S extends boolean | null | undefined | StreakDefaultArgs> = $Result.GetResult<Prisma.$StreakPayload, S>
+
+  type StreakCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StreakFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StreakCountAggregateInputType | true
+    }
+
+  export interface StreakDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Streak'], meta: { name: 'Streak' } }
+    /**
+     * Find zero or one Streak that matches the filter.
+     * @param {StreakFindUniqueArgs} args - Arguments to find a Streak
+     * @example
+     * // Get one Streak
+     * const streak = await prisma.streak.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StreakFindUniqueArgs>(args: SelectSubset<T, StreakFindUniqueArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Streak that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {StreakFindUniqueOrThrowArgs} args - Arguments to find a Streak
+     * @example
+     * // Get one Streak
+     * const streak = await prisma.streak.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StreakFindUniqueOrThrowArgs>(args: SelectSubset<T, StreakFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Streak that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakFindFirstArgs} args - Arguments to find a Streak
+     * @example
+     * // Get one Streak
+     * const streak = await prisma.streak.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StreakFindFirstArgs>(args?: SelectSubset<T, StreakFindFirstArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Streak that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakFindFirstOrThrowArgs} args - Arguments to find a Streak
+     * @example
+     * // Get one Streak
+     * const streak = await prisma.streak.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StreakFindFirstOrThrowArgs>(args?: SelectSubset<T, StreakFindFirstOrThrowArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Streaks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Streaks
+     * const streaks = await prisma.streak.findMany()
+     * 
+     * // Get first 10 Streaks
+     * const streaks = await prisma.streak.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const streakWithIdOnly = await prisma.streak.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StreakFindManyArgs>(args?: SelectSubset<T, StreakFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Streak.
+     * @param {StreakCreateArgs} args - Arguments to create a Streak.
+     * @example
+     * // Create one Streak
+     * const Streak = await prisma.streak.create({
+     *   data: {
+     *     // ... data to create a Streak
+     *   }
+     * })
+     * 
+     */
+    create<T extends StreakCreateArgs>(args: SelectSubset<T, StreakCreateArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Streaks.
+     * @param {StreakCreateManyArgs} args - Arguments to create many Streaks.
+     * @example
+     * // Create many Streaks
+     * const streak = await prisma.streak.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StreakCreateManyArgs>(args?: SelectSubset<T, StreakCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Streaks and returns the data saved in the database.
+     * @param {StreakCreateManyAndReturnArgs} args - Arguments to create many Streaks.
+     * @example
+     * // Create many Streaks
+     * const streak = await prisma.streak.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Streaks and only return the `id`
+     * const streakWithIdOnly = await prisma.streak.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StreakCreateManyAndReturnArgs>(args?: SelectSubset<T, StreakCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Streak.
+     * @param {StreakDeleteArgs} args - Arguments to delete one Streak.
+     * @example
+     * // Delete one Streak
+     * const Streak = await prisma.streak.delete({
+     *   where: {
+     *     // ... filter to delete one Streak
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StreakDeleteArgs>(args: SelectSubset<T, StreakDeleteArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Streak.
+     * @param {StreakUpdateArgs} args - Arguments to update one Streak.
+     * @example
+     * // Update one Streak
+     * const streak = await prisma.streak.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StreakUpdateArgs>(args: SelectSubset<T, StreakUpdateArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Streaks.
+     * @param {StreakDeleteManyArgs} args - Arguments to filter Streaks to delete.
+     * @example
+     * // Delete a few Streaks
+     * const { count } = await prisma.streak.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StreakDeleteManyArgs>(args?: SelectSubset<T, StreakDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Streaks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Streaks
+     * const streak = await prisma.streak.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StreakUpdateManyArgs>(args: SelectSubset<T, StreakUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Streak.
+     * @param {StreakUpsertArgs} args - Arguments to update or create a Streak.
+     * @example
+     * // Update or create a Streak
+     * const streak = await prisma.streak.upsert({
+     *   create: {
+     *     // ... data to create a Streak
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Streak we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StreakUpsertArgs>(args: SelectSubset<T, StreakUpsertArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Streaks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakCountArgs} args - Arguments to filter Streaks to count.
+     * @example
+     * // Count the number of Streaks
+     * const count = await prisma.streak.count({
+     *   where: {
+     *     // ... the filter for the Streaks we want to count
+     *   }
+     * })
+    **/
+    count<T extends StreakCountArgs>(
+      args?: Subset<T, StreakCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StreakCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Streak.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StreakAggregateArgs>(args: Subset<T, StreakAggregateArgs>): Prisma.PrismaPromise<GetStreakAggregateType<T>>
+
+    /**
+     * Group by Streak.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreakGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StreakGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StreakGroupByArgs['orderBy'] }
+        : { orderBy?: StreakGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StreakGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStreakGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Streak model
+   */
+  readonly fields: StreakFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Streak.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StreakClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    achievements<T extends Streak$achievementsArgs<ExtArgs> = {}>(args?: Subset<T, Streak$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Streak model
+   */ 
+  interface StreakFieldRefs {
+    readonly id: FieldRef<"Streak", 'String'>
+    readonly userId: FieldRef<"Streak", 'String'>
+    readonly currentStreak: FieldRef<"Streak", 'Int'>
+    readonly longestStreak: FieldRef<"Streak", 'Int'>
+    readonly lastLogDate: FieldRef<"Streak", 'DateTime'>
+    readonly updatedAt: FieldRef<"Streak", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Streak findUnique
+   */
+  export type StreakFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * Filter, which Streak to fetch.
+     */
+    where: StreakWhereUniqueInput
+  }
+
+  /**
+   * Streak findUniqueOrThrow
+   */
+  export type StreakFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * Filter, which Streak to fetch.
+     */
+    where: StreakWhereUniqueInput
+  }
+
+  /**
+   * Streak findFirst
+   */
+  export type StreakFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * Filter, which Streak to fetch.
+     */
+    where?: StreakWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streaks to fetch.
+     */
+    orderBy?: StreakOrderByWithRelationInput | StreakOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Streaks.
+     */
+    cursor?: StreakWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streaks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streaks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Streaks.
+     */
+    distinct?: StreakScalarFieldEnum | StreakScalarFieldEnum[]
+  }
+
+  /**
+   * Streak findFirstOrThrow
+   */
+  export type StreakFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * Filter, which Streak to fetch.
+     */
+    where?: StreakWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streaks to fetch.
+     */
+    orderBy?: StreakOrderByWithRelationInput | StreakOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Streaks.
+     */
+    cursor?: StreakWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streaks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streaks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Streaks.
+     */
+    distinct?: StreakScalarFieldEnum | StreakScalarFieldEnum[]
+  }
+
+  /**
+   * Streak findMany
+   */
+  export type StreakFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * Filter, which Streaks to fetch.
+     */
+    where?: StreakWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Streaks to fetch.
+     */
+    orderBy?: StreakOrderByWithRelationInput | StreakOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Streaks.
+     */
+    cursor?: StreakWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Streaks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Streaks.
+     */
+    skip?: number
+    distinct?: StreakScalarFieldEnum | StreakScalarFieldEnum[]
+  }
+
+  /**
+   * Streak create
+   */
+  export type StreakCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Streak.
+     */
+    data: XOR<StreakCreateInput, StreakUncheckedCreateInput>
+  }
+
+  /**
+   * Streak createMany
+   */
+  export type StreakCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Streaks.
+     */
+    data: StreakCreateManyInput | StreakCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Streak createManyAndReturn
+   */
+  export type StreakCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Streaks.
+     */
+    data: StreakCreateManyInput | StreakCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Streak update
+   */
+  export type StreakUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Streak.
+     */
+    data: XOR<StreakUpdateInput, StreakUncheckedUpdateInput>
+    /**
+     * Choose, which Streak to update.
+     */
+    where: StreakWhereUniqueInput
+  }
+
+  /**
+   * Streak updateMany
+   */
+  export type StreakUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Streaks.
+     */
+    data: XOR<StreakUpdateManyMutationInput, StreakUncheckedUpdateManyInput>
+    /**
+     * Filter which Streaks to update
+     */
+    where?: StreakWhereInput
+  }
+
+  /**
+   * Streak upsert
+   */
+  export type StreakUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Streak to update in case it exists.
+     */
+    where: StreakWhereUniqueInput
+    /**
+     * In case the Streak found by the `where` argument doesn't exist, create a new Streak with this data.
+     */
+    create: XOR<StreakCreateInput, StreakUncheckedCreateInput>
+    /**
+     * In case the Streak was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StreakUpdateInput, StreakUncheckedUpdateInput>
+  }
+
+  /**
+   * Streak delete
+   */
+  export type StreakDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+    /**
+     * Filter which Streak to delete.
+     */
+    where: StreakWhereUniqueInput
+  }
+
+  /**
+   * Streak deleteMany
+   */
+  export type StreakDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Streaks to delete
+     */
+    where?: StreakWhereInput
+  }
+
+  /**
+   * Streak.achievements
+   */
+  export type Streak$achievementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    where?: AchievementWhereInput
+    orderBy?: AchievementOrderByWithRelationInput | AchievementOrderByWithRelationInput[]
+    cursor?: AchievementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AchievementScalarFieldEnum | AchievementScalarFieldEnum[]
+  }
+
+  /**
+   * Streak without action
+   */
+  export type StreakDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Streak
+     */
+    select?: StreakSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreakInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Achievement
+   */
+
+  export type AggregateAchievement = {
+    _count: AchievementCountAggregateOutputType | null
+    _min: AchievementMinAggregateOutputType | null
+    _max: AchievementMaxAggregateOutputType | null
+  }
+
+  export type AchievementMinAggregateOutputType = {
+    id: string | null
+    streakId: string | null
+    label: string | null
+    icon: string | null
+    unlockedAt: Date | null
+  }
+
+  export type AchievementMaxAggregateOutputType = {
+    id: string | null
+    streakId: string | null
+    label: string | null
+    icon: string | null
+    unlockedAt: Date | null
+  }
+
+  export type AchievementCountAggregateOutputType = {
+    id: number
+    streakId: number
+    label: number
+    icon: number
+    unlockedAt: number
+    _all: number
+  }
+
+
+  export type AchievementMinAggregateInputType = {
+    id?: true
+    streakId?: true
+    label?: true
+    icon?: true
+    unlockedAt?: true
+  }
+
+  export type AchievementMaxAggregateInputType = {
+    id?: true
+    streakId?: true
+    label?: true
+    icon?: true
+    unlockedAt?: true
+  }
+
+  export type AchievementCountAggregateInputType = {
+    id?: true
+    streakId?: true
+    label?: true
+    icon?: true
+    unlockedAt?: true
+    _all?: true
+  }
+
+  export type AchievementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Achievement to aggregate.
+     */
+    where?: AchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Achievements to fetch.
+     */
+    orderBy?: AchievementOrderByWithRelationInput | AchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Achievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Achievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Achievements
+    **/
+    _count?: true | AchievementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AchievementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AchievementMaxAggregateInputType
+  }
+
+  export type GetAchievementAggregateType<T extends AchievementAggregateArgs> = {
+        [P in keyof T & keyof AggregateAchievement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAchievement[P]>
+      : GetScalarType<T[P], AggregateAchievement[P]>
+  }
+
+
+
+
+  export type AchievementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AchievementWhereInput
+    orderBy?: AchievementOrderByWithAggregationInput | AchievementOrderByWithAggregationInput[]
+    by: AchievementScalarFieldEnum[] | AchievementScalarFieldEnum
+    having?: AchievementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AchievementCountAggregateInputType | true
+    _min?: AchievementMinAggregateInputType
+    _max?: AchievementMaxAggregateInputType
+  }
+
+  export type AchievementGroupByOutputType = {
+    id: string
+    streakId: string
+    label: string
+    icon: string
+    unlockedAt: Date
+    _count: AchievementCountAggregateOutputType | null
+    _min: AchievementMinAggregateOutputType | null
+    _max: AchievementMaxAggregateOutputType | null
+  }
+
+  type GetAchievementGroupByPayload<T extends AchievementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AchievementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AchievementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AchievementGroupByOutputType[P]>
+            : GetScalarType<T[P], AchievementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AchievementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    streakId?: boolean
+    label?: boolean
+    icon?: boolean
+    unlockedAt?: boolean
+    streak?: boolean | StreakDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["achievement"]>
+
+  export type AchievementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    streakId?: boolean
+    label?: boolean
+    icon?: boolean
+    unlockedAt?: boolean
+    streak?: boolean | StreakDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["achievement"]>
+
+  export type AchievementSelectScalar = {
+    id?: boolean
+    streakId?: boolean
+    label?: boolean
+    icon?: boolean
+    unlockedAt?: boolean
+  }
+
+  export type AchievementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    streak?: boolean | StreakDefaultArgs<ExtArgs>
+  }
+  export type AchievementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    streak?: boolean | StreakDefaultArgs<ExtArgs>
+  }
+
+  export type $AchievementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Achievement"
+    objects: {
+      streak: Prisma.$StreakPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      streakId: string
+      label: string
+      icon: string
+      unlockedAt: Date
+    }, ExtArgs["result"]["achievement"]>
+    composites: {}
+  }
+
+  type AchievementGetPayload<S extends boolean | null | undefined | AchievementDefaultArgs> = $Result.GetResult<Prisma.$AchievementPayload, S>
+
+  type AchievementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AchievementFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AchievementCountAggregateInputType | true
+    }
+
+  export interface AchievementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Achievement'], meta: { name: 'Achievement' } }
+    /**
+     * Find zero or one Achievement that matches the filter.
+     * @param {AchievementFindUniqueArgs} args - Arguments to find a Achievement
+     * @example
+     * // Get one Achievement
+     * const achievement = await prisma.achievement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AchievementFindUniqueArgs>(args: SelectSubset<T, AchievementFindUniqueArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Achievement that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AchievementFindUniqueOrThrowArgs} args - Arguments to find a Achievement
+     * @example
+     * // Get one Achievement
+     * const achievement = await prisma.achievement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AchievementFindUniqueOrThrowArgs>(args: SelectSubset<T, AchievementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Achievement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementFindFirstArgs} args - Arguments to find a Achievement
+     * @example
+     * // Get one Achievement
+     * const achievement = await prisma.achievement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AchievementFindFirstArgs>(args?: SelectSubset<T, AchievementFindFirstArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Achievement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementFindFirstOrThrowArgs} args - Arguments to find a Achievement
+     * @example
+     * // Get one Achievement
+     * const achievement = await prisma.achievement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AchievementFindFirstOrThrowArgs>(args?: SelectSubset<T, AchievementFindFirstOrThrowArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Achievements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Achievements
+     * const achievements = await prisma.achievement.findMany()
+     * 
+     * // Get first 10 Achievements
+     * const achievements = await prisma.achievement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const achievementWithIdOnly = await prisma.achievement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AchievementFindManyArgs>(args?: SelectSubset<T, AchievementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Achievement.
+     * @param {AchievementCreateArgs} args - Arguments to create a Achievement.
+     * @example
+     * // Create one Achievement
+     * const Achievement = await prisma.achievement.create({
+     *   data: {
+     *     // ... data to create a Achievement
+     *   }
+     * })
+     * 
+     */
+    create<T extends AchievementCreateArgs>(args: SelectSubset<T, AchievementCreateArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Achievements.
+     * @param {AchievementCreateManyArgs} args - Arguments to create many Achievements.
+     * @example
+     * // Create many Achievements
+     * const achievement = await prisma.achievement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AchievementCreateManyArgs>(args?: SelectSubset<T, AchievementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Achievements and returns the data saved in the database.
+     * @param {AchievementCreateManyAndReturnArgs} args - Arguments to create many Achievements.
+     * @example
+     * // Create many Achievements
+     * const achievement = await prisma.achievement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Achievements and only return the `id`
+     * const achievementWithIdOnly = await prisma.achievement.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AchievementCreateManyAndReturnArgs>(args?: SelectSubset<T, AchievementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Achievement.
+     * @param {AchievementDeleteArgs} args - Arguments to delete one Achievement.
+     * @example
+     * // Delete one Achievement
+     * const Achievement = await prisma.achievement.delete({
+     *   where: {
+     *     // ... filter to delete one Achievement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AchievementDeleteArgs>(args: SelectSubset<T, AchievementDeleteArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Achievement.
+     * @param {AchievementUpdateArgs} args - Arguments to update one Achievement.
+     * @example
+     * // Update one Achievement
+     * const achievement = await prisma.achievement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AchievementUpdateArgs>(args: SelectSubset<T, AchievementUpdateArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Achievements.
+     * @param {AchievementDeleteManyArgs} args - Arguments to filter Achievements to delete.
+     * @example
+     * // Delete a few Achievements
+     * const { count } = await prisma.achievement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AchievementDeleteManyArgs>(args?: SelectSubset<T, AchievementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Achievements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Achievements
+     * const achievement = await prisma.achievement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AchievementUpdateManyArgs>(args: SelectSubset<T, AchievementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Achievement.
+     * @param {AchievementUpsertArgs} args - Arguments to update or create a Achievement.
+     * @example
+     * // Update or create a Achievement
+     * const achievement = await prisma.achievement.upsert({
+     *   create: {
+     *     // ... data to create a Achievement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Achievement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AchievementUpsertArgs>(args: SelectSubset<T, AchievementUpsertArgs<ExtArgs>>): Prisma__AchievementClient<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Achievements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementCountArgs} args - Arguments to filter Achievements to count.
+     * @example
+     * // Count the number of Achievements
+     * const count = await prisma.achievement.count({
+     *   where: {
+     *     // ... the filter for the Achievements we want to count
+     *   }
+     * })
+    **/
+    count<T extends AchievementCountArgs>(
+      args?: Subset<T, AchievementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AchievementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Achievement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AchievementAggregateArgs>(args: Subset<T, AchievementAggregateArgs>): Prisma.PrismaPromise<GetAchievementAggregateType<T>>
+
+    /**
+     * Group by Achievement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AchievementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AchievementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AchievementGroupByArgs['orderBy'] }
+        : { orderBy?: AchievementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AchievementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAchievementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Achievement model
+   */
+  readonly fields: AchievementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Achievement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AchievementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    streak<T extends StreakDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StreakDefaultArgs<ExtArgs>>): Prisma__StreakClient<$Result.GetResult<Prisma.$StreakPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Achievement model
+   */ 
+  interface AchievementFieldRefs {
+    readonly id: FieldRef<"Achievement", 'String'>
+    readonly streakId: FieldRef<"Achievement", 'String'>
+    readonly label: FieldRef<"Achievement", 'String'>
+    readonly icon: FieldRef<"Achievement", 'String'>
+    readonly unlockedAt: FieldRef<"Achievement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Achievement findUnique
+   */
+  export type AchievementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which Achievement to fetch.
+     */
+    where: AchievementWhereUniqueInput
+  }
+
+  /**
+   * Achievement findUniqueOrThrow
+   */
+  export type AchievementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which Achievement to fetch.
+     */
+    where: AchievementWhereUniqueInput
+  }
+
+  /**
+   * Achievement findFirst
+   */
+  export type AchievementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which Achievement to fetch.
+     */
+    where?: AchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Achievements to fetch.
+     */
+    orderBy?: AchievementOrderByWithRelationInput | AchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Achievements.
+     */
+    cursor?: AchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Achievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Achievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Achievements.
+     */
+    distinct?: AchievementScalarFieldEnum | AchievementScalarFieldEnum[]
+  }
+
+  /**
+   * Achievement findFirstOrThrow
+   */
+  export type AchievementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which Achievement to fetch.
+     */
+    where?: AchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Achievements to fetch.
+     */
+    orderBy?: AchievementOrderByWithRelationInput | AchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Achievements.
+     */
+    cursor?: AchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Achievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Achievements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Achievements.
+     */
+    distinct?: AchievementScalarFieldEnum | AchievementScalarFieldEnum[]
+  }
+
+  /**
+   * Achievement findMany
+   */
+  export type AchievementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * Filter, which Achievements to fetch.
+     */
+    where?: AchievementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Achievements to fetch.
+     */
+    orderBy?: AchievementOrderByWithRelationInput | AchievementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Achievements.
+     */
+    cursor?: AchievementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Achievements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Achievements.
+     */
+    skip?: number
+    distinct?: AchievementScalarFieldEnum | AchievementScalarFieldEnum[]
+  }
+
+  /**
+   * Achievement create
+   */
+  export type AchievementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Achievement.
+     */
+    data: XOR<AchievementCreateInput, AchievementUncheckedCreateInput>
+  }
+
+  /**
+   * Achievement createMany
+   */
+  export type AchievementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Achievements.
+     */
+    data: AchievementCreateManyInput | AchievementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Achievement createManyAndReturn
+   */
+  export type AchievementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Achievements.
+     */
+    data: AchievementCreateManyInput | AchievementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Achievement update
+   */
+  export type AchievementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Achievement.
+     */
+    data: XOR<AchievementUpdateInput, AchievementUncheckedUpdateInput>
+    /**
+     * Choose, which Achievement to update.
+     */
+    where: AchievementWhereUniqueInput
+  }
+
+  /**
+   * Achievement updateMany
+   */
+  export type AchievementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Achievements.
+     */
+    data: XOR<AchievementUpdateManyMutationInput, AchievementUncheckedUpdateManyInput>
+    /**
+     * Filter which Achievements to update
+     */
+    where?: AchievementWhereInput
+  }
+
+  /**
+   * Achievement upsert
+   */
+  export type AchievementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Achievement to update in case it exists.
+     */
+    where: AchievementWhereUniqueInput
+    /**
+     * In case the Achievement found by the `where` argument doesn't exist, create a new Achievement with this data.
+     */
+    create: XOR<AchievementCreateInput, AchievementUncheckedCreateInput>
+    /**
+     * In case the Achievement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AchievementUpdateInput, AchievementUncheckedUpdateInput>
+  }
+
+  /**
+   * Achievement delete
+   */
+  export type AchievementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+    /**
+     * Filter which Achievement to delete.
+     */
+    where: AchievementWhereUniqueInput
+  }
+
+  /**
+   * Achievement deleteMany
+   */
+  export type AchievementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Achievements to delete
+     */
+    where?: AchievementWhereInput
+  }
+
+  /**
+   * Achievement without action
+   */
+  export type AchievementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achievement
+     */
+    select?: AchievementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6186,6 +11518,61 @@ export namespace Prisma {
   };
 
   export type AuthenticatorScalarFieldEnum = (typeof AuthenticatorScalarFieldEnum)[keyof typeof AuthenticatorScalarFieldEnum]
+
+
+  export const MoodLogScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    mood: 'mood',
+    note: 'note',
+    date: 'date',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MoodLogScalarFieldEnum = (typeof MoodLogScalarFieldEnum)[keyof typeof MoodLogScalarFieldEnum]
+
+
+  export const MoodLogCauseScalarFieldEnum: {
+    id: 'id',
+    moodLogId: 'moodLogId',
+    cause: 'cause'
+  };
+
+  export type MoodLogCauseScalarFieldEnum = (typeof MoodLogCauseScalarFieldEnum)[keyof typeof MoodLogCauseScalarFieldEnum]
+
+
+  export const CustomCauseScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    name: 'name',
+    createdAt: 'createdAt'
+  };
+
+  export type CustomCauseScalarFieldEnum = (typeof CustomCauseScalarFieldEnum)[keyof typeof CustomCauseScalarFieldEnum]
+
+
+  export const StreakScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    currentStreak: 'currentStreak',
+    longestStreak: 'longestStreak',
+    lastLogDate: 'lastLogDate',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StreakScalarFieldEnum = (typeof StreakScalarFieldEnum)[keyof typeof StreakScalarFieldEnum]
+
+
+  export const AchievementScalarFieldEnum: {
+    id: 'id',
+    streakId: 'streakId',
+    label: 'label',
+    icon: 'icon',
+    unlockedAt: 'unlockedAt'
+  };
+
+  export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6297,6 +11684,9 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     Authenticator?: AuthenticatorListRelationFilter
+    moods?: MoodLogListRelationFilter
+    streak?: XOR<StreakNullableRelationFilter, StreakWhereInput> | null
+    customCauses?: CustomCauseListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6310,6 +11700,9 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     Authenticator?: AuthenticatorOrderByRelationAggregateInput
+    moods?: MoodLogOrderByRelationAggregateInput
+    streak?: StreakOrderByWithRelationInput
+    customCauses?: CustomCauseOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6326,6 +11719,9 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     Authenticator?: AuthenticatorListRelationFilter
+    moods?: MoodLogListRelationFilter
+    streak?: XOR<StreakNullableRelationFilter, StreakWhereInput> | null
+    customCauses?: CustomCauseListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6623,6 +12019,292 @@ export namespace Prisma {
     transports?: StringNullableWithAggregatesFilter<"Authenticator"> | string | null
   }
 
+  export type MoodLogWhereInput = {
+    AND?: MoodLogWhereInput | MoodLogWhereInput[]
+    OR?: MoodLogWhereInput[]
+    NOT?: MoodLogWhereInput | MoodLogWhereInput[]
+    id?: StringFilter<"MoodLog"> | string
+    userId?: StringFilter<"MoodLog"> | string
+    mood?: StringFilter<"MoodLog"> | string
+    note?: StringNullableFilter<"MoodLog"> | string | null
+    date?: DateTimeFilter<"MoodLog"> | Date | string
+    createdAt?: DateTimeFilter<"MoodLog"> | Date | string
+    updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    causes?: MoodLogCauseListRelationFilter
+  }
+
+  export type MoodLogOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mood?: SortOrder
+    note?: SortOrderInput | SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    causes?: MoodLogCauseOrderByRelationAggregateInput
+  }
+
+  export type MoodLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_date?: MoodLogUserIdDateCompoundUniqueInput
+    AND?: MoodLogWhereInput | MoodLogWhereInput[]
+    OR?: MoodLogWhereInput[]
+    NOT?: MoodLogWhereInput | MoodLogWhereInput[]
+    userId?: StringFilter<"MoodLog"> | string
+    mood?: StringFilter<"MoodLog"> | string
+    note?: StringNullableFilter<"MoodLog"> | string | null
+    date?: DateTimeFilter<"MoodLog"> | Date | string
+    createdAt?: DateTimeFilter<"MoodLog"> | Date | string
+    updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    causes?: MoodLogCauseListRelationFilter
+  }, "id" | "userId_date">
+
+  export type MoodLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mood?: SortOrder
+    note?: SortOrderInput | SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MoodLogCountOrderByAggregateInput
+    _max?: MoodLogMaxOrderByAggregateInput
+    _min?: MoodLogMinOrderByAggregateInput
+  }
+
+  export type MoodLogScalarWhereWithAggregatesInput = {
+    AND?: MoodLogScalarWhereWithAggregatesInput | MoodLogScalarWhereWithAggregatesInput[]
+    OR?: MoodLogScalarWhereWithAggregatesInput[]
+    NOT?: MoodLogScalarWhereWithAggregatesInput | MoodLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MoodLog"> | string
+    userId?: StringWithAggregatesFilter<"MoodLog"> | string
+    mood?: StringWithAggregatesFilter<"MoodLog"> | string
+    note?: StringNullableWithAggregatesFilter<"MoodLog"> | string | null
+    date?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
+  }
+
+  export type MoodLogCauseWhereInput = {
+    AND?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
+    OR?: MoodLogCauseWhereInput[]
+    NOT?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
+    id?: StringFilter<"MoodLogCause"> | string
+    moodLogId?: StringFilter<"MoodLogCause"> | string
+    cause?: StringFilter<"MoodLogCause"> | string
+    moodLog?: XOR<MoodLogRelationFilter, MoodLogWhereInput>
+  }
+
+  export type MoodLogCauseOrderByWithRelationInput = {
+    id?: SortOrder
+    moodLogId?: SortOrder
+    cause?: SortOrder
+    moodLog?: MoodLogOrderByWithRelationInput
+  }
+
+  export type MoodLogCauseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
+    OR?: MoodLogCauseWhereInput[]
+    NOT?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
+    moodLogId?: StringFilter<"MoodLogCause"> | string
+    cause?: StringFilter<"MoodLogCause"> | string
+    moodLog?: XOR<MoodLogRelationFilter, MoodLogWhereInput>
+  }, "id">
+
+  export type MoodLogCauseOrderByWithAggregationInput = {
+    id?: SortOrder
+    moodLogId?: SortOrder
+    cause?: SortOrder
+    _count?: MoodLogCauseCountOrderByAggregateInput
+    _max?: MoodLogCauseMaxOrderByAggregateInput
+    _min?: MoodLogCauseMinOrderByAggregateInput
+  }
+
+  export type MoodLogCauseScalarWhereWithAggregatesInput = {
+    AND?: MoodLogCauseScalarWhereWithAggregatesInput | MoodLogCauseScalarWhereWithAggregatesInput[]
+    OR?: MoodLogCauseScalarWhereWithAggregatesInput[]
+    NOT?: MoodLogCauseScalarWhereWithAggregatesInput | MoodLogCauseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MoodLogCause"> | string
+    moodLogId?: StringWithAggregatesFilter<"MoodLogCause"> | string
+    cause?: StringWithAggregatesFilter<"MoodLogCause"> | string
+  }
+
+  export type CustomCauseWhereInput = {
+    AND?: CustomCauseWhereInput | CustomCauseWhereInput[]
+    OR?: CustomCauseWhereInput[]
+    NOT?: CustomCauseWhereInput | CustomCauseWhereInput[]
+    id?: StringFilter<"CustomCause"> | string
+    userId?: StringFilter<"CustomCause"> | string
+    name?: StringFilter<"CustomCause"> | string
+    createdAt?: DateTimeFilter<"CustomCause"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type CustomCauseOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CustomCauseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_name?: CustomCauseUserIdNameCompoundUniqueInput
+    AND?: CustomCauseWhereInput | CustomCauseWhereInput[]
+    OR?: CustomCauseWhereInput[]
+    NOT?: CustomCauseWhereInput | CustomCauseWhereInput[]
+    userId?: StringFilter<"CustomCause"> | string
+    name?: StringFilter<"CustomCause"> | string
+    createdAt?: DateTimeFilter<"CustomCause"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "userId_name">
+
+  export type CustomCauseOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    _count?: CustomCauseCountOrderByAggregateInput
+    _max?: CustomCauseMaxOrderByAggregateInput
+    _min?: CustomCauseMinOrderByAggregateInput
+  }
+
+  export type CustomCauseScalarWhereWithAggregatesInput = {
+    AND?: CustomCauseScalarWhereWithAggregatesInput | CustomCauseScalarWhereWithAggregatesInput[]
+    OR?: CustomCauseScalarWhereWithAggregatesInput[]
+    NOT?: CustomCauseScalarWhereWithAggregatesInput | CustomCauseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CustomCause"> | string
+    userId?: StringWithAggregatesFilter<"CustomCause"> | string
+    name?: StringWithAggregatesFilter<"CustomCause"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"CustomCause"> | Date | string
+  }
+
+  export type StreakWhereInput = {
+    AND?: StreakWhereInput | StreakWhereInput[]
+    OR?: StreakWhereInput[]
+    NOT?: StreakWhereInput | StreakWhereInput[]
+    id?: StringFilter<"Streak"> | string
+    userId?: StringFilter<"Streak"> | string
+    currentStreak?: IntFilter<"Streak"> | number
+    longestStreak?: IntFilter<"Streak"> | number
+    lastLogDate?: DateTimeNullableFilter<"Streak"> | Date | string | null
+    updatedAt?: DateTimeFilter<"Streak"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    achievements?: AchievementListRelationFilter
+  }
+
+  export type StreakOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastLogDate?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    achievements?: AchievementOrderByRelationAggregateInput
+  }
+
+  export type StreakWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: StreakWhereInput | StreakWhereInput[]
+    OR?: StreakWhereInput[]
+    NOT?: StreakWhereInput | StreakWhereInput[]
+    currentStreak?: IntFilter<"Streak"> | number
+    longestStreak?: IntFilter<"Streak"> | number
+    lastLogDate?: DateTimeNullableFilter<"Streak"> | Date | string | null
+    updatedAt?: DateTimeFilter<"Streak"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    achievements?: AchievementListRelationFilter
+  }, "id" | "userId">
+
+  export type StreakOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastLogDate?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: StreakCountOrderByAggregateInput
+    _avg?: StreakAvgOrderByAggregateInput
+    _max?: StreakMaxOrderByAggregateInput
+    _min?: StreakMinOrderByAggregateInput
+    _sum?: StreakSumOrderByAggregateInput
+  }
+
+  export type StreakScalarWhereWithAggregatesInput = {
+    AND?: StreakScalarWhereWithAggregatesInput | StreakScalarWhereWithAggregatesInput[]
+    OR?: StreakScalarWhereWithAggregatesInput[]
+    NOT?: StreakScalarWhereWithAggregatesInput | StreakScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Streak"> | string
+    userId?: StringWithAggregatesFilter<"Streak"> | string
+    currentStreak?: IntWithAggregatesFilter<"Streak"> | number
+    longestStreak?: IntWithAggregatesFilter<"Streak"> | number
+    lastLogDate?: DateTimeNullableWithAggregatesFilter<"Streak"> | Date | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"Streak"> | Date | string
+  }
+
+  export type AchievementWhereInput = {
+    AND?: AchievementWhereInput | AchievementWhereInput[]
+    OR?: AchievementWhereInput[]
+    NOT?: AchievementWhereInput | AchievementWhereInput[]
+    id?: StringFilter<"Achievement"> | string
+    streakId?: StringFilter<"Achievement"> | string
+    label?: StringFilter<"Achievement"> | string
+    icon?: StringFilter<"Achievement"> | string
+    unlockedAt?: DateTimeFilter<"Achievement"> | Date | string
+    streak?: XOR<StreakRelationFilter, StreakWhereInput>
+  }
+
+  export type AchievementOrderByWithRelationInput = {
+    id?: SortOrder
+    streakId?: SortOrder
+    label?: SortOrder
+    icon?: SortOrder
+    unlockedAt?: SortOrder
+    streak?: StreakOrderByWithRelationInput
+  }
+
+  export type AchievementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    streakId_label?: AchievementStreakIdLabelCompoundUniqueInput
+    AND?: AchievementWhereInput | AchievementWhereInput[]
+    OR?: AchievementWhereInput[]
+    NOT?: AchievementWhereInput | AchievementWhereInput[]
+    streakId?: StringFilter<"Achievement"> | string
+    label?: StringFilter<"Achievement"> | string
+    icon?: StringFilter<"Achievement"> | string
+    unlockedAt?: DateTimeFilter<"Achievement"> | Date | string
+    streak?: XOR<StreakRelationFilter, StreakWhereInput>
+  }, "id" | "streakId_label">
+
+  export type AchievementOrderByWithAggregationInput = {
+    id?: SortOrder
+    streakId?: SortOrder
+    label?: SortOrder
+    icon?: SortOrder
+    unlockedAt?: SortOrder
+    _count?: AchievementCountOrderByAggregateInput
+    _max?: AchievementMaxOrderByAggregateInput
+    _min?: AchievementMinOrderByAggregateInput
+  }
+
+  export type AchievementScalarWhereWithAggregatesInput = {
+    AND?: AchievementScalarWhereWithAggregatesInput | AchievementScalarWhereWithAggregatesInput[]
+    OR?: AchievementScalarWhereWithAggregatesInput[]
+    NOT?: AchievementScalarWhereWithAggregatesInput | AchievementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Achievement"> | string
+    streakId?: StringWithAggregatesFilter<"Achievement"> | string
+    label?: StringWithAggregatesFilter<"Achievement"> | string
+    icon?: StringWithAggregatesFilter<"Achievement"> | string
+    unlockedAt?: DateTimeWithAggregatesFilter<"Achievement"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -6634,6 +12316,9 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    moods?: MoodLogCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6647,6 +12332,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    moods?: MoodLogUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6660,6 +12348,9 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6673,6 +12364,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6989,6 +12683,289 @@ export namespace Prisma {
     transports?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type MoodLogCreateInput = {
+    id?: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMoodsInput
+    causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
+  }
+
+  export type MoodLogUncheckedCreateInput = {
+    id?: string
+    userId: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
+  }
+
+  export type MoodLogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMoodsNestedInput
+    causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
+  }
+
+  export type MoodLogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
+  }
+
+  export type MoodLogCreateManyInput = {
+    id?: string
+    userId: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MoodLogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodLogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodLogCauseCreateInput = {
+    id?: string
+    cause: string
+    moodLog: MoodLogCreateNestedOneWithoutCausesInput
+  }
+
+  export type MoodLogCauseUncheckedCreateInput = {
+    id?: string
+    moodLogId: string
+    cause: string
+  }
+
+  export type MoodLogCauseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+    moodLog?: MoodLogUpdateOneRequiredWithoutCausesNestedInput
+  }
+
+  export type MoodLogCauseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    moodLogId?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MoodLogCauseCreateManyInput = {
+    id?: string
+    moodLogId: string
+    cause: string
+  }
+
+  export type MoodLogCauseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MoodLogCauseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    moodLogId?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CustomCauseCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutCustomCausesInput
+  }
+
+  export type CustomCauseUncheckedCreateInput = {
+    id?: string
+    userId: string
+    name: string
+    createdAt?: Date | string
+  }
+
+  export type CustomCauseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCustomCausesNestedInput
+  }
+
+  export type CustomCauseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomCauseCreateManyInput = {
+    id?: string
+    userId: string
+    name: string
+    createdAt?: Date | string
+  }
+
+  export type CustomCauseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomCauseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreakCreateInput = {
+    id?: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStreakInput
+    achievements?: AchievementCreateNestedManyWithoutStreakInput
+  }
+
+  export type StreakUncheckedCreateInput = {
+    id?: string
+    userId: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+    achievements?: AchievementUncheckedCreateNestedManyWithoutStreakInput
+  }
+
+  export type StreakUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStreakNestedInput
+    achievements?: AchievementUpdateManyWithoutStreakNestedInput
+  }
+
+  export type StreakUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achievements?: AchievementUncheckedUpdateManyWithoutStreakNestedInput
+  }
+
+  export type StreakCreateManyInput = {
+    id?: string
+    userId: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+  }
+
+  export type StreakUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreakUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AchievementCreateInput = {
+    id?: string
+    label: string
+    icon: string
+    unlockedAt?: Date | string
+    streak: StreakCreateNestedOneWithoutAchievementsInput
+  }
+
+  export type AchievementUncheckedCreateInput = {
+    id?: string
+    streakId: string
+    label: string
+    icon: string
+    unlockedAt?: Date | string
+  }
+
+  export type AchievementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    streak?: StreakUpdateOneRequiredWithoutAchievementsNestedInput
+  }
+
+  export type AchievementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    streakId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AchievementCreateManyInput = {
+    id?: string
+    streakId: string
+    label: string
+    icon: string
+    unlockedAt?: Date | string
+  }
+
+  export type AchievementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AchievementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    streakId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7059,6 +13036,23 @@ export namespace Prisma {
     none?: AuthenticatorWhereInput
   }
 
+  export type MoodLogListRelationFilter = {
+    every?: MoodLogWhereInput
+    some?: MoodLogWhereInput
+    none?: MoodLogWhereInput
+  }
+
+  export type StreakNullableRelationFilter = {
+    is?: StreakWhereInput | null
+    isNot?: StreakWhereInput | null
+  }
+
+  export type CustomCauseListRelationFilter = {
+    every?: CustomCauseWhereInput
+    some?: CustomCauseWhereInput
+    none?: CustomCauseWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -7073,6 +13067,14 @@ export namespace Prisma {
   }
 
   export type AuthenticatorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MoodLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CustomCauseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7396,6 +13398,181 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type MoodLogCauseListRelationFilter = {
+    every?: MoodLogCauseWhereInput
+    some?: MoodLogCauseWhereInput
+    none?: MoodLogCauseWhereInput
+  }
+
+  export type MoodLogCauseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MoodLogUserIdDateCompoundUniqueInput = {
+    userId: string
+    date: Date | string
+  }
+
+  export type MoodLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mood?: SortOrder
+    note?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MoodLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mood?: SortOrder
+    note?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MoodLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    mood?: SortOrder
+    note?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MoodLogRelationFilter = {
+    is?: MoodLogWhereInput
+    isNot?: MoodLogWhereInput
+  }
+
+  export type MoodLogCauseCountOrderByAggregateInput = {
+    id?: SortOrder
+    moodLogId?: SortOrder
+    cause?: SortOrder
+  }
+
+  export type MoodLogCauseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    moodLogId?: SortOrder
+    cause?: SortOrder
+  }
+
+  export type MoodLogCauseMinOrderByAggregateInput = {
+    id?: SortOrder
+    moodLogId?: SortOrder
+    cause?: SortOrder
+  }
+
+  export type CustomCauseUserIdNameCompoundUniqueInput = {
+    userId: string
+    name: string
+  }
+
+  export type CustomCauseCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CustomCauseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CustomCauseMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AchievementListRelationFilter = {
+    every?: AchievementWhereInput
+    some?: AchievementWhereInput
+    none?: AchievementWhereInput
+  }
+
+  export type AchievementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StreakCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastLogDate?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreakAvgOrderByAggregateInput = {
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+  }
+
+  export type StreakMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastLogDate?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreakMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastLogDate?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreakSumOrderByAggregateInput = {
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+  }
+
+  export type StreakRelationFilter = {
+    is?: StreakWhereInput
+    isNot?: StreakWhereInput
+  }
+
+  export type AchievementStreakIdLabelCompoundUniqueInput = {
+    streakId: string
+    label: string
+  }
+
+  export type AchievementCountOrderByAggregateInput = {
+    id?: SortOrder
+    streakId?: SortOrder
+    label?: SortOrder
+    icon?: SortOrder
+    unlockedAt?: SortOrder
+  }
+
+  export type AchievementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    streakId?: SortOrder
+    label?: SortOrder
+    icon?: SortOrder
+    unlockedAt?: SortOrder
+  }
+
+  export type AchievementMinOrderByAggregateInput = {
+    id?: SortOrder
+    streakId?: SortOrder
+    label?: SortOrder
+    icon?: SortOrder
+    unlockedAt?: SortOrder
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7417,6 +13594,26 @@ export namespace Prisma {
     connect?: AuthenticatorWhereUniqueInput | AuthenticatorWhereUniqueInput[]
   }
 
+  export type MoodLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<MoodLogCreateWithoutUserInput, MoodLogUncheckedCreateWithoutUserInput> | MoodLogCreateWithoutUserInput[] | MoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodLogCreateOrConnectWithoutUserInput | MoodLogCreateOrConnectWithoutUserInput[]
+    createMany?: MoodLogCreateManyUserInputEnvelope
+    connect?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+  }
+
+  export type StreakCreateNestedOneWithoutUserInput = {
+    create?: XOR<StreakCreateWithoutUserInput, StreakUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreakCreateOrConnectWithoutUserInput
+    connect?: StreakWhereUniqueInput
+  }
+
+  export type CustomCauseCreateNestedManyWithoutUserInput = {
+    create?: XOR<CustomCauseCreateWithoutUserInput, CustomCauseUncheckedCreateWithoutUserInput> | CustomCauseCreateWithoutUserInput[] | CustomCauseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomCauseCreateOrConnectWithoutUserInput | CustomCauseCreateOrConnectWithoutUserInput[]
+    createMany?: CustomCauseCreateManyUserInputEnvelope
+    connect?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7436,6 +13633,26 @@ export namespace Prisma {
     connectOrCreate?: AuthenticatorCreateOrConnectWithoutUserInput | AuthenticatorCreateOrConnectWithoutUserInput[]
     createMany?: AuthenticatorCreateManyUserInputEnvelope
     connect?: AuthenticatorWhereUniqueInput | AuthenticatorWhereUniqueInput[]
+  }
+
+  export type MoodLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MoodLogCreateWithoutUserInput, MoodLogUncheckedCreateWithoutUserInput> | MoodLogCreateWithoutUserInput[] | MoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodLogCreateOrConnectWithoutUserInput | MoodLogCreateOrConnectWithoutUserInput[]
+    createMany?: MoodLogCreateManyUserInputEnvelope
+    connect?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+  }
+
+  export type StreakUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<StreakCreateWithoutUserInput, StreakUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreakCreateOrConnectWithoutUserInput
+    connect?: StreakWhereUniqueInput
+  }
+
+  export type CustomCauseUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CustomCauseCreateWithoutUserInput, CustomCauseUncheckedCreateWithoutUserInput> | CustomCauseCreateWithoutUserInput[] | CustomCauseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomCauseCreateOrConnectWithoutUserInput | CustomCauseCreateOrConnectWithoutUserInput[]
+    createMany?: CustomCauseCreateManyUserInputEnvelope
+    connect?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7496,6 +13713,44 @@ export namespace Prisma {
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
   }
 
+  export type MoodLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MoodLogCreateWithoutUserInput, MoodLogUncheckedCreateWithoutUserInput> | MoodLogCreateWithoutUserInput[] | MoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodLogCreateOrConnectWithoutUserInput | MoodLogCreateOrConnectWithoutUserInput[]
+    upsert?: MoodLogUpsertWithWhereUniqueWithoutUserInput | MoodLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MoodLogCreateManyUserInputEnvelope
+    set?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    disconnect?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    delete?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    connect?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    update?: MoodLogUpdateWithWhereUniqueWithoutUserInput | MoodLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MoodLogUpdateManyWithWhereWithoutUserInput | MoodLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MoodLogScalarWhereInput | MoodLogScalarWhereInput[]
+  }
+
+  export type StreakUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StreakCreateWithoutUserInput, StreakUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreakCreateOrConnectWithoutUserInput
+    upsert?: StreakUpsertWithoutUserInput
+    disconnect?: StreakWhereInput | boolean
+    delete?: StreakWhereInput | boolean
+    connect?: StreakWhereUniqueInput
+    update?: XOR<XOR<StreakUpdateToOneWithWhereWithoutUserInput, StreakUpdateWithoutUserInput>, StreakUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CustomCauseUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CustomCauseCreateWithoutUserInput, CustomCauseUncheckedCreateWithoutUserInput> | CustomCauseCreateWithoutUserInput[] | CustomCauseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomCauseCreateOrConnectWithoutUserInput | CustomCauseCreateOrConnectWithoutUserInput[]
+    upsert?: CustomCauseUpsertWithWhereUniqueWithoutUserInput | CustomCauseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CustomCauseCreateManyUserInputEnvelope
+    set?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    disconnect?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    delete?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    connect?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    update?: CustomCauseUpdateWithWhereUniqueWithoutUserInput | CustomCauseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CustomCauseUpdateManyWithWhereWithoutUserInput | CustomCauseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CustomCauseScalarWhereInput | CustomCauseScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7536,6 +13791,44 @@ export namespace Prisma {
     update?: AuthenticatorUpdateWithWhereUniqueWithoutUserInput | AuthenticatorUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AuthenticatorUpdateManyWithWhereWithoutUserInput | AuthenticatorUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
+  }
+
+  export type MoodLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MoodLogCreateWithoutUserInput, MoodLogUncheckedCreateWithoutUserInput> | MoodLogCreateWithoutUserInput[] | MoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MoodLogCreateOrConnectWithoutUserInput | MoodLogCreateOrConnectWithoutUserInput[]
+    upsert?: MoodLogUpsertWithWhereUniqueWithoutUserInput | MoodLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MoodLogCreateManyUserInputEnvelope
+    set?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    disconnect?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    delete?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    connect?: MoodLogWhereUniqueInput | MoodLogWhereUniqueInput[]
+    update?: MoodLogUpdateWithWhereUniqueWithoutUserInput | MoodLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MoodLogUpdateManyWithWhereWithoutUserInput | MoodLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MoodLogScalarWhereInput | MoodLogScalarWhereInput[]
+  }
+
+  export type StreakUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StreakCreateWithoutUserInput, StreakUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreakCreateOrConnectWithoutUserInput
+    upsert?: StreakUpsertWithoutUserInput
+    disconnect?: StreakWhereInput | boolean
+    delete?: StreakWhereInput | boolean
+    connect?: StreakWhereUniqueInput
+    update?: XOR<XOR<StreakUpdateToOneWithWhereWithoutUserInput, StreakUpdateWithoutUserInput>, StreakUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CustomCauseUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CustomCauseCreateWithoutUserInput, CustomCauseUncheckedCreateWithoutUserInput> | CustomCauseCreateWithoutUserInput[] | CustomCauseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomCauseCreateOrConnectWithoutUserInput | CustomCauseCreateOrConnectWithoutUserInput[]
+    upsert?: CustomCauseUpsertWithWhereUniqueWithoutUserInput | CustomCauseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CustomCauseCreateManyUserInputEnvelope
+    set?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    disconnect?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    delete?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    connect?: CustomCauseWhereUniqueInput | CustomCauseWhereUniqueInput[]
+    update?: CustomCauseUpdateWithWhereUniqueWithoutUserInput | CustomCauseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CustomCauseUpdateManyWithWhereWithoutUserInput | CustomCauseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CustomCauseScalarWhereInput | CustomCauseScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -7598,6 +13891,160 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAuthenticatorInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuthenticatorInput, UserUpdateWithoutAuthenticatorInput>, UserUncheckedUpdateWithoutAuthenticatorInput>
+  }
+
+  export type UserCreateNestedOneWithoutMoodsInput = {
+    create?: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMoodsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MoodLogCauseCreateNestedManyWithoutMoodLogInput = {
+    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
+    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
+    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
+    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+  }
+
+  export type MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput = {
+    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
+    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
+    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
+    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutMoodsNestedInput = {
+    create?: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMoodsInput
+    upsert?: UserUpsertWithoutMoodsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMoodsInput, UserUpdateWithoutMoodsInput>, UserUncheckedUpdateWithoutMoodsInput>
+  }
+
+  export type MoodLogCauseUpdateManyWithoutMoodLogNestedInput = {
+    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
+    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
+    upsert?: MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput[]
+    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
+    set?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    disconnect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    delete?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    update?: MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput[]
+    updateMany?: MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput | MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput[]
+    deleteMany?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
+  }
+
+  export type MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput = {
+    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
+    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
+    upsert?: MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput[]
+    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
+    set?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    disconnect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    delete?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+    update?: MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput[]
+    updateMany?: MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput | MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput[]
+    deleteMany?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
+  }
+
+  export type MoodLogCreateNestedOneWithoutCausesInput = {
+    create?: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
+    connectOrCreate?: MoodLogCreateOrConnectWithoutCausesInput
+    connect?: MoodLogWhereUniqueInput
+  }
+
+  export type MoodLogUpdateOneRequiredWithoutCausesNestedInput = {
+    create?: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
+    connectOrCreate?: MoodLogCreateOrConnectWithoutCausesInput
+    upsert?: MoodLogUpsertWithoutCausesInput
+    connect?: MoodLogWhereUniqueInput
+    update?: XOR<XOR<MoodLogUpdateToOneWithWhereWithoutCausesInput, MoodLogUpdateWithoutCausesInput>, MoodLogUncheckedUpdateWithoutCausesInput>
+  }
+
+  export type UserCreateNestedOneWithoutCustomCausesInput = {
+    create?: XOR<UserCreateWithoutCustomCausesInput, UserUncheckedCreateWithoutCustomCausesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCustomCausesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCustomCausesNestedInput = {
+    create?: XOR<UserCreateWithoutCustomCausesInput, UserUncheckedCreateWithoutCustomCausesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCustomCausesInput
+    upsert?: UserUpsertWithoutCustomCausesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCustomCausesInput, UserUpdateWithoutCustomCausesInput>, UserUncheckedUpdateWithoutCustomCausesInput>
+  }
+
+  export type UserCreateNestedOneWithoutStreakInput = {
+    create?: XOR<UserCreateWithoutStreakInput, UserUncheckedCreateWithoutStreakInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreakInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AchievementCreateNestedManyWithoutStreakInput = {
+    create?: XOR<AchievementCreateWithoutStreakInput, AchievementUncheckedCreateWithoutStreakInput> | AchievementCreateWithoutStreakInput[] | AchievementUncheckedCreateWithoutStreakInput[]
+    connectOrCreate?: AchievementCreateOrConnectWithoutStreakInput | AchievementCreateOrConnectWithoutStreakInput[]
+    createMany?: AchievementCreateManyStreakInputEnvelope
+    connect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+  }
+
+  export type AchievementUncheckedCreateNestedManyWithoutStreakInput = {
+    create?: XOR<AchievementCreateWithoutStreakInput, AchievementUncheckedCreateWithoutStreakInput> | AchievementCreateWithoutStreakInput[] | AchievementUncheckedCreateWithoutStreakInput[]
+    connectOrCreate?: AchievementCreateOrConnectWithoutStreakInput | AchievementCreateOrConnectWithoutStreakInput[]
+    createMany?: AchievementCreateManyStreakInputEnvelope
+    connect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutStreakNestedInput = {
+    create?: XOR<UserCreateWithoutStreakInput, UserUncheckedCreateWithoutStreakInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreakInput
+    upsert?: UserUpsertWithoutStreakInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreakInput, UserUpdateWithoutStreakInput>, UserUncheckedUpdateWithoutStreakInput>
+  }
+
+  export type AchievementUpdateManyWithoutStreakNestedInput = {
+    create?: XOR<AchievementCreateWithoutStreakInput, AchievementUncheckedCreateWithoutStreakInput> | AchievementCreateWithoutStreakInput[] | AchievementUncheckedCreateWithoutStreakInput[]
+    connectOrCreate?: AchievementCreateOrConnectWithoutStreakInput | AchievementCreateOrConnectWithoutStreakInput[]
+    upsert?: AchievementUpsertWithWhereUniqueWithoutStreakInput | AchievementUpsertWithWhereUniqueWithoutStreakInput[]
+    createMany?: AchievementCreateManyStreakInputEnvelope
+    set?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    disconnect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    delete?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    connect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    update?: AchievementUpdateWithWhereUniqueWithoutStreakInput | AchievementUpdateWithWhereUniqueWithoutStreakInput[]
+    updateMany?: AchievementUpdateManyWithWhereWithoutStreakInput | AchievementUpdateManyWithWhereWithoutStreakInput[]
+    deleteMany?: AchievementScalarWhereInput | AchievementScalarWhereInput[]
+  }
+
+  export type AchievementUncheckedUpdateManyWithoutStreakNestedInput = {
+    create?: XOR<AchievementCreateWithoutStreakInput, AchievementUncheckedCreateWithoutStreakInput> | AchievementCreateWithoutStreakInput[] | AchievementUncheckedCreateWithoutStreakInput[]
+    connectOrCreate?: AchievementCreateOrConnectWithoutStreakInput | AchievementCreateOrConnectWithoutStreakInput[]
+    upsert?: AchievementUpsertWithWhereUniqueWithoutStreakInput | AchievementUpsertWithWhereUniqueWithoutStreakInput[]
+    createMany?: AchievementCreateManyStreakInputEnvelope
+    set?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    disconnect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    delete?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    connect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+    update?: AchievementUpdateWithWhereUniqueWithoutStreakInput | AchievementUpdateWithWhereUniqueWithoutStreakInput[]
+    updateMany?: AchievementUpdateManyWithWhereWithoutStreakInput | AchievementUpdateManyWithWhereWithoutStreakInput[]
+    deleteMany?: AchievementScalarWhereInput | AchievementScalarWhereInput[]
+  }
+
+  export type StreakCreateNestedOneWithoutAchievementsInput = {
+    create?: XOR<StreakCreateWithoutAchievementsInput, StreakUncheckedCreateWithoutAchievementsInput>
+    connectOrCreate?: StreakCreateOrConnectWithoutAchievementsInput
+    connect?: StreakWhereUniqueInput
+  }
+
+  export type StreakUpdateOneRequiredWithoutAchievementsNestedInput = {
+    create?: XOR<StreakCreateWithoutAchievementsInput, StreakUncheckedCreateWithoutAchievementsInput>
+    connectOrCreate?: StreakCreateOrConnectWithoutAchievementsInput
+    upsert?: StreakUpsertWithoutAchievementsInput
+    connect?: StreakWhereUniqueInput
+    update?: XOR<XOR<StreakUpdateToOneWithWhereWithoutAchievementsInput, StreakUpdateWithoutAchievementsInput>, StreakUncheckedUpdateWithoutAchievementsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7895,6 +14342,81 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MoodLogCreateWithoutUserInput = {
+    id?: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
+  }
+
+  export type MoodLogUncheckedCreateWithoutUserInput = {
+    id?: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
+  }
+
+  export type MoodLogCreateOrConnectWithoutUserInput = {
+    where: MoodLogWhereUniqueInput
+    create: XOR<MoodLogCreateWithoutUserInput, MoodLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type MoodLogCreateManyUserInputEnvelope = {
+    data: MoodLogCreateManyUserInput | MoodLogCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StreakCreateWithoutUserInput = {
+    id?: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+    achievements?: AchievementCreateNestedManyWithoutStreakInput
+  }
+
+  export type StreakUncheckedCreateWithoutUserInput = {
+    id?: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+    achievements?: AchievementUncheckedCreateNestedManyWithoutStreakInput
+  }
+
+  export type StreakCreateOrConnectWithoutUserInput = {
+    where: StreakWhereUniqueInput
+    create: XOR<StreakCreateWithoutUserInput, StreakUncheckedCreateWithoutUserInput>
+  }
+
+  export type CustomCauseCreateWithoutUserInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+  }
+
+  export type CustomCauseUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+  }
+
+  export type CustomCauseCreateOrConnectWithoutUserInput = {
+    where: CustomCauseWhereUniqueInput
+    create: XOR<CustomCauseCreateWithoutUserInput, CustomCauseUncheckedCreateWithoutUserInput>
+  }
+
+  export type CustomCauseCreateManyUserInputEnvelope = {
+    data: CustomCauseCreateManyUserInput | CustomCauseCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -7987,6 +14509,90 @@ export namespace Prisma {
     transports?: StringNullableFilter<"Authenticator"> | string | null
   }
 
+  export type MoodLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: MoodLogWhereUniqueInput
+    update: XOR<MoodLogUpdateWithoutUserInput, MoodLogUncheckedUpdateWithoutUserInput>
+    create: XOR<MoodLogCreateWithoutUserInput, MoodLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type MoodLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: MoodLogWhereUniqueInput
+    data: XOR<MoodLogUpdateWithoutUserInput, MoodLogUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MoodLogUpdateManyWithWhereWithoutUserInput = {
+    where: MoodLogScalarWhereInput
+    data: XOR<MoodLogUpdateManyMutationInput, MoodLogUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MoodLogScalarWhereInput = {
+    AND?: MoodLogScalarWhereInput | MoodLogScalarWhereInput[]
+    OR?: MoodLogScalarWhereInput[]
+    NOT?: MoodLogScalarWhereInput | MoodLogScalarWhereInput[]
+    id?: StringFilter<"MoodLog"> | string
+    userId?: StringFilter<"MoodLog"> | string
+    mood?: StringFilter<"MoodLog"> | string
+    note?: StringNullableFilter<"MoodLog"> | string | null
+    date?: DateTimeFilter<"MoodLog"> | Date | string
+    createdAt?: DateTimeFilter<"MoodLog"> | Date | string
+    updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
+  }
+
+  export type StreakUpsertWithoutUserInput = {
+    update: XOR<StreakUpdateWithoutUserInput, StreakUncheckedUpdateWithoutUserInput>
+    create: XOR<StreakCreateWithoutUserInput, StreakUncheckedCreateWithoutUserInput>
+    where?: StreakWhereInput
+  }
+
+  export type StreakUpdateToOneWithWhereWithoutUserInput = {
+    where?: StreakWhereInput
+    data: XOR<StreakUpdateWithoutUserInput, StreakUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StreakUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achievements?: AchievementUpdateManyWithoutStreakNestedInput
+  }
+
+  export type StreakUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achievements?: AchievementUncheckedUpdateManyWithoutStreakNestedInput
+  }
+
+  export type CustomCauseUpsertWithWhereUniqueWithoutUserInput = {
+    where: CustomCauseWhereUniqueInput
+    update: XOR<CustomCauseUpdateWithoutUserInput, CustomCauseUncheckedUpdateWithoutUserInput>
+    create: XOR<CustomCauseCreateWithoutUserInput, CustomCauseUncheckedCreateWithoutUserInput>
+  }
+
+  export type CustomCauseUpdateWithWhereUniqueWithoutUserInput = {
+    where: CustomCauseWhereUniqueInput
+    data: XOR<CustomCauseUpdateWithoutUserInput, CustomCauseUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CustomCauseUpdateManyWithWhereWithoutUserInput = {
+    where: CustomCauseScalarWhereInput
+    data: XOR<CustomCauseUpdateManyMutationInput, CustomCauseUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CustomCauseScalarWhereInput = {
+    AND?: CustomCauseScalarWhereInput | CustomCauseScalarWhereInput[]
+    OR?: CustomCauseScalarWhereInput[]
+    NOT?: CustomCauseScalarWhereInput | CustomCauseScalarWhereInput[]
+    id?: StringFilter<"CustomCause"> | string
+    userId?: StringFilter<"CustomCause"> | string
+    name?: StringFilter<"CustomCause"> | string
+    createdAt?: DateTimeFilter<"CustomCause"> | Date | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -7997,6 +14603,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    moods?: MoodLogCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -8009,6 +14618,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    moods?: MoodLogUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -8037,6 +14649,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -8049,6 +14664,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -8061,6 +14679,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    moods?: MoodLogCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -8073,6 +14694,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    moods?: MoodLogUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -8101,6 +14725,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -8113,6 +14740,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAuthenticatorInput = {
@@ -8125,6 +14755,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    moods?: MoodLogCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAuthenticatorInput = {
@@ -8137,6 +14770,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    moods?: MoodLogUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAuthenticatorInput = {
@@ -8165,6 +14801,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthenticatorInput = {
@@ -8177,6 +14816,441 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutMoodsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMoodsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+    customCauses?: CustomCauseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMoodsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
+  }
+
+  export type MoodLogCauseCreateWithoutMoodLogInput = {
+    id?: string
+    cause: string
+  }
+
+  export type MoodLogCauseUncheckedCreateWithoutMoodLogInput = {
+    id?: string
+    cause: string
+  }
+
+  export type MoodLogCauseCreateOrConnectWithoutMoodLogInput = {
+    where: MoodLogCauseWhereUniqueInput
+    create: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput>
+  }
+
+  export type MoodLogCauseCreateManyMoodLogInputEnvelope = {
+    data: MoodLogCauseCreateManyMoodLogInput | MoodLogCauseCreateManyMoodLogInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutMoodsInput = {
+    update: XOR<UserUpdateWithoutMoodsInput, UserUncheckedUpdateWithoutMoodsInput>
+    create: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMoodsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMoodsInput, UserUncheckedUpdateWithoutMoodsInput>
+  }
+
+  export type UserUpdateWithoutMoodsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMoodsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+    customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput = {
+    where: MoodLogCauseWhereUniqueInput
+    update: XOR<MoodLogCauseUpdateWithoutMoodLogInput, MoodLogCauseUncheckedUpdateWithoutMoodLogInput>
+    create: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput>
+  }
+
+  export type MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput = {
+    where: MoodLogCauseWhereUniqueInput
+    data: XOR<MoodLogCauseUpdateWithoutMoodLogInput, MoodLogCauseUncheckedUpdateWithoutMoodLogInput>
+  }
+
+  export type MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput = {
+    where: MoodLogCauseScalarWhereInput
+    data: XOR<MoodLogCauseUpdateManyMutationInput, MoodLogCauseUncheckedUpdateManyWithoutMoodLogInput>
+  }
+
+  export type MoodLogCauseScalarWhereInput = {
+    AND?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
+    OR?: MoodLogCauseScalarWhereInput[]
+    NOT?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
+    id?: StringFilter<"MoodLogCause"> | string
+    moodLogId?: StringFilter<"MoodLogCause"> | string
+    cause?: StringFilter<"MoodLogCause"> | string
+  }
+
+  export type MoodLogCreateWithoutCausesInput = {
+    id?: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMoodsInput
+  }
+
+  export type MoodLogUncheckedCreateWithoutCausesInput = {
+    id?: string
+    userId: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MoodLogCreateOrConnectWithoutCausesInput = {
+    where: MoodLogWhereUniqueInput
+    create: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
+  }
+
+  export type MoodLogUpsertWithoutCausesInput = {
+    update: XOR<MoodLogUpdateWithoutCausesInput, MoodLogUncheckedUpdateWithoutCausesInput>
+    create: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
+    where?: MoodLogWhereInput
+  }
+
+  export type MoodLogUpdateToOneWithWhereWithoutCausesInput = {
+    where?: MoodLogWhereInput
+    data: XOR<MoodLogUpdateWithoutCausesInput, MoodLogUncheckedUpdateWithoutCausesInput>
+  }
+
+  export type MoodLogUpdateWithoutCausesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMoodsNestedInput
+  }
+
+  export type MoodLogUncheckedUpdateWithoutCausesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutCustomCausesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    moods?: MoodLogCreateNestedManyWithoutUserInput
+    streak?: StreakCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCustomCausesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    moods?: MoodLogUncheckedCreateNestedManyWithoutUserInput
+    streak?: StreakUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCustomCausesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCustomCausesInput, UserUncheckedCreateWithoutCustomCausesInput>
+  }
+
+  export type UserUpsertWithoutCustomCausesInput = {
+    update: XOR<UserUpdateWithoutCustomCausesInput, UserUncheckedUpdateWithoutCustomCausesInput>
+    create: XOR<UserCreateWithoutCustomCausesInput, UserUncheckedCreateWithoutCustomCausesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCustomCausesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCustomCausesInput, UserUncheckedUpdateWithoutCustomCausesInput>
+  }
+
+  export type UserUpdateWithoutCustomCausesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUpdateManyWithoutUserNestedInput
+    streak?: StreakUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCustomCausesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUncheckedUpdateManyWithoutUserNestedInput
+    streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutStreakInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    moods?: MoodLogCreateNestedManyWithoutUserInput
+    customCauses?: CustomCauseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStreakInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    moods?: MoodLogUncheckedCreateNestedManyWithoutUserInput
+    customCauses?: CustomCauseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStreakInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStreakInput, UserUncheckedCreateWithoutStreakInput>
+  }
+
+  export type AchievementCreateWithoutStreakInput = {
+    id?: string
+    label: string
+    icon: string
+    unlockedAt?: Date | string
+  }
+
+  export type AchievementUncheckedCreateWithoutStreakInput = {
+    id?: string
+    label: string
+    icon: string
+    unlockedAt?: Date | string
+  }
+
+  export type AchievementCreateOrConnectWithoutStreakInput = {
+    where: AchievementWhereUniqueInput
+    create: XOR<AchievementCreateWithoutStreakInput, AchievementUncheckedCreateWithoutStreakInput>
+  }
+
+  export type AchievementCreateManyStreakInputEnvelope = {
+    data: AchievementCreateManyStreakInput | AchievementCreateManyStreakInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutStreakInput = {
+    update: XOR<UserUpdateWithoutStreakInput, UserUncheckedUpdateWithoutStreakInput>
+    create: XOR<UserCreateWithoutStreakInput, UserUncheckedCreateWithoutStreakInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStreakInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStreakInput, UserUncheckedUpdateWithoutStreakInput>
+  }
+
+  export type UserUpdateWithoutStreakInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUpdateManyWithoutUserNestedInput
+    customCauses?: CustomCauseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStreakInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    moods?: MoodLogUncheckedUpdateManyWithoutUserNestedInput
+    customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AchievementUpsertWithWhereUniqueWithoutStreakInput = {
+    where: AchievementWhereUniqueInput
+    update: XOR<AchievementUpdateWithoutStreakInput, AchievementUncheckedUpdateWithoutStreakInput>
+    create: XOR<AchievementCreateWithoutStreakInput, AchievementUncheckedCreateWithoutStreakInput>
+  }
+
+  export type AchievementUpdateWithWhereUniqueWithoutStreakInput = {
+    where: AchievementWhereUniqueInput
+    data: XOR<AchievementUpdateWithoutStreakInput, AchievementUncheckedUpdateWithoutStreakInput>
+  }
+
+  export type AchievementUpdateManyWithWhereWithoutStreakInput = {
+    where: AchievementScalarWhereInput
+    data: XOR<AchievementUpdateManyMutationInput, AchievementUncheckedUpdateManyWithoutStreakInput>
+  }
+
+  export type AchievementScalarWhereInput = {
+    AND?: AchievementScalarWhereInput | AchievementScalarWhereInput[]
+    OR?: AchievementScalarWhereInput[]
+    NOT?: AchievementScalarWhereInput | AchievementScalarWhereInput[]
+    id?: StringFilter<"Achievement"> | string
+    streakId?: StringFilter<"Achievement"> | string
+    label?: StringFilter<"Achievement"> | string
+    icon?: StringFilter<"Achievement"> | string
+    unlockedAt?: DateTimeFilter<"Achievement"> | Date | string
+  }
+
+  export type StreakCreateWithoutAchievementsInput = {
+    id?: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStreakInput
+  }
+
+  export type StreakUncheckedCreateWithoutAchievementsInput = {
+    id?: string
+    userId: string
+    currentStreak?: number
+    longestStreak?: number
+    lastLogDate?: Date | string | null
+    updatedAt?: Date | string
+  }
+
+  export type StreakCreateOrConnectWithoutAchievementsInput = {
+    where: StreakWhereUniqueInput
+    create: XOR<StreakCreateWithoutAchievementsInput, StreakUncheckedCreateWithoutAchievementsInput>
+  }
+
+  export type StreakUpsertWithoutAchievementsInput = {
+    update: XOR<StreakUpdateWithoutAchievementsInput, StreakUncheckedUpdateWithoutAchievementsInput>
+    create: XOR<StreakCreateWithoutAchievementsInput, StreakUncheckedCreateWithoutAchievementsInput>
+    where?: StreakWhereInput
+  }
+
+  export type StreakUpdateToOneWithWhereWithoutAchievementsInput = {
+    where?: StreakWhereInput
+    data: XOR<StreakUpdateWithoutAchievementsInput, StreakUncheckedUpdateWithoutAchievementsInput>
+  }
+
+  export type StreakUpdateWithoutAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStreakNestedInput
+  }
+
+  export type StreakUncheckedUpdateWithoutAchievementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastLogDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateManyUserInput = {
@@ -8209,6 +15283,21 @@ export namespace Prisma {
     credentialDeviceType: string
     credentialBackedUp: boolean
     transports?: string | null
+  }
+
+  export type MoodLogCreateManyUserInput = {
+    id?: string
+    mood: string
+    note?: string | null
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomCauseCreateManyUserInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -8307,6 +15396,101 @@ export namespace Prisma {
     transports?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type MoodLogUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
+  }
+
+  export type MoodLogUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
+  }
+
+  export type MoodLogUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mood?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomCauseUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomCauseUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomCauseUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MoodLogCauseCreateManyMoodLogInput = {
+    id?: string
+    cause: string
+  }
+
+  export type MoodLogCauseUpdateWithoutMoodLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MoodLogCauseUncheckedUpdateWithoutMoodLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MoodLogCauseUncheckedUpdateManyWithoutMoodLogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cause?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AchievementCreateManyStreakInput = {
+    id?: string
+    label: string
+    icon: string
+    unlockedAt?: Date | string
+  }
+
+  export type AchievementUpdateWithoutStreakInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AchievementUncheckedUpdateWithoutStreakInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AchievementUncheckedUpdateManyWithoutStreakInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -8316,6 +15500,14 @@ export namespace Prisma {
      * @deprecated Use UserCountOutputTypeDefaultArgs instead
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MoodLogCountOutputTypeDefaultArgs instead
+     */
+    export type MoodLogCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MoodLogCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StreakCountOutputTypeDefaultArgs instead
+     */
+    export type StreakCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StreakCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -8336,6 +15528,26 @@ export namespace Prisma {
      * @deprecated Use AuthenticatorDefaultArgs instead
      */
     export type AuthenticatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AuthenticatorDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MoodLogDefaultArgs instead
+     */
+    export type MoodLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MoodLogDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MoodLogCauseDefaultArgs instead
+     */
+    export type MoodLogCauseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MoodLogCauseDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use CustomCauseDefaultArgs instead
+     */
+    export type CustomCauseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CustomCauseDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StreakDefaultArgs instead
+     */
+    export type StreakArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StreakDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AchievementDefaultArgs instead
+     */
+    export type AchievementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AchievementDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

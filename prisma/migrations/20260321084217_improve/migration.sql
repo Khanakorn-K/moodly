@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "MoodLog" ALTER COLUMN "mood" SET DATA TYPE TEXT;

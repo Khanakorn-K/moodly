@@ -1,7 +1,8 @@
 import React from "react";
+import LandingPageIndex from "./Features/LandingPage/LandingPageIndex";
 
 const page = () => {
-  return <div>page</div>;
+  return <LandingPageIndex/>
 };
 
 export default page;

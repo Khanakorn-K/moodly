@@ -173,6 +173,46 @@ exports.Prisma.AuthenticatorScalarFieldEnum = {
   transports: 'transports'
 };
 
+exports.Prisma.MoodLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mood: 'mood',
+  note: 'note',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MoodLogCauseScalarFieldEnum = {
+  id: 'id',
+  moodLogId: 'moodLogId',
+  cause: 'cause'
+};
+
+exports.Prisma.CustomCauseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.StreakScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  currentStreak: 'currentStreak',
+  longestStreak: 'longestStreak',
+  lastLogDate: 'lastLogDate',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AchievementScalarFieldEnum = {
+  id: 'id',
+  streakId: 'streakId',
+  label: 'label',
+  icon: 'icon',
+  unlockedAt: 'unlockedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -194,7 +234,12 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Authenticator: 'Authenticator'
+  Authenticator: 'Authenticator',
+  MoodLog: 'MoodLog',
+  MoodLogCause: 'MoodLogCause',
+  CustomCause: 'CustomCause',
+  Streak: 'Streak',
+  Achievement: 'Achievement'
 };
 
 /**
