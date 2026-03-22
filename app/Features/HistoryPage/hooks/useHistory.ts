@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import dataSoruceHistory from "../services/dataSoruceHistory";
 import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
 import { moods } from "../../../share/moodType";
+import { CausesEntity } from "@/app/share/entities/causesEntity";
 
 export const useHistory = () => {
   const { status } = useSession();
@@ -17,6 +18,8 @@ export const useHistory = () => {
   const [editItem, setEditItem] = useState<moodsResultEntity | null>();
   const [editNote, setEditNote] = useState("");
   const [editMood, setEditMood] = useState<number>();
+  const [myCustomCauses, setMyCustomCauses] = useState<CausesEntity[]>([]);
+  const [selectedCauses, setSelectedCauses] = useState<string[]>([]);
 
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || 10;
@@ -51,6 +54,17 @@ export const useHistory = () => {
       setIsLoading(false);
     }
   };
+
+  const fetchMyCauses = async () => {
+    if (status !== "authenticated") return;
+    try {
+      const entity = await dataSoruceHistory.getMyCauses();
+      setMyCustomCauses(entity);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleFilterChange = (newParams: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -65,11 +79,16 @@ export const useHistory = () => {
     params.set("page", "1");
     router.push(`${pathname}?${params.toString()}`);
   };
+
   useEffect(() => {
     if (!searchParams.get("page") || !searchParams.get("limit")) {
       updateQueryParams({ page: "1", limit: "10" });
     }
   }, []);
+
+  useEffect(() => {
+    fetchMyCauses();
+  }, [status]);
 
   useEffect(() => {
     fetchHistory();
@@ -82,19 +101,22 @@ export const useHistory = () => {
   };
 
   const handleSave = async () => {
-    if (editItem) {
-      await dataSoruceHistory.updateMood(editItem.id, {
-        note: editNote,
-        mood: editMood,
-      });
-      // } else {
-      //   await dataSoruceHistory.createMood({
-      //     note: editNote,
-      //     mood: editMood,
-      //   });
-    }
+    if (!editItem || editMood === undefined) return;
+
+    await dataSoruceHistory.updateMood(editItem.id, {
+      note: editNote,
+      mood: editMood,
+      causes: selectedCauses,
+    });
+
     setIsModalOpen(false);
     fetchHistory();
+  };
+
+  const toggleCause = (name: string) => {
+    setSelectedCauses((prev) =>
+      prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
+    );
   };
 
   const openEditModal = (log: moodsResultEntity) => {
@@ -102,6 +124,7 @@ export const useHistory = () => {
     setEditNote(log.note);
     const moodData = moods.find((m) => m.label === log.mood);
     setEditMood(moodData ? moodData.value : 0);
+    setSelectedCauses(log.causes ? log.causes.map((c: any) => c.cause) : []);
     setIsModalOpen(true);
   };
 
@@ -128,6 +151,10 @@ export const useHistory = () => {
     openEditModal,
     router,
     pathname,
+    toggleCause,
     handleFilterChange,
+    myCustomCauses,
+    selectedCauses,
+    setSelectedCauses,
   };
 };

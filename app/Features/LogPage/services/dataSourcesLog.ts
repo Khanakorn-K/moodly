@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/api-client";
-import { CausesResponseModel } from "../models/causesResponseModel";
-import { CausesEntity } from "../entity/causesEntity";
+import { CausesResponseModel } from "../../../share/models/causesResponseModel";
+import { CausesEntity } from "../../../share/entities/causesEntity";
 
 const dataSourcesLog = {
   addMood: async (

@@ -31,7 +31,6 @@ export async function GET(
 
     return NextResponse.json(moodLog, { status: 200 });
   } catch (error) {
-    console.error("GET Error:", error);
     return NextResponse.json(
       { error: "INTERNAL_SERVER_ERROR" },
       { status: 500 },
@@ -39,7 +38,7 @@ export async function GET(
   }
 }
 
-export async function PATCH(
+export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
@@ -68,13 +67,19 @@ export async function PATCH(
 
     const updated = await prisma.moodLog.update({
       where: { id },
-      data: { mood: mood, causes: causes, note: note },
+      data: {
+        mood: mood,
+        note: note,
+        causes: {
+          deleteMany: {},
+          create: causes?.map((c: string) => ({ cause: c })) || [],
+        },
+      },
       include: { causes: true },
     });
 
     return NextResponse.json(updated, { status: 200 });
   } catch (error) {
-    console.error("PATCH Error:", error);
     return NextResponse.json(
       { error: "INTERNAL_SERVER_ERROR" },
       { status: 500 },
@@ -110,7 +115,6 @@ export async function DELETE(
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("DELETE Error:", error);
     return NextResponse.json(
       { error: "INTERNAL_SERVER_ERROR" },
       { status: 500 },

@@ -15,7 +15,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { useHistory } from "./hooks/useHistory";
-import { moods } from "@/app/share/moodType";
+import { moods, stadartCauses } from "@/app/share/moodType";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/share/moodColors";
 
@@ -42,7 +42,15 @@ export default function HistoryIndex() {
     router,
     handleFilterChange,
     pathname,
+    myCustomCauses,
+    selectedCauses,
+    toggleCause,
   } = useHistory();
+
+  const allCauses = [
+    ...stadartCauses.map((c) => ({ name: c.label })),
+    ...myCustomCauses.map((c) => ({ name: c.name })),
+  ];
 
   if (isLoading && !data) {
     return (
@@ -55,7 +63,6 @@ export default function HistoryIndex() {
   return (
     <div className="min-h-screen bg-[#0A0A0F] px-4 py-24 pb-24 relative">
       <div className="max-w-2xl mx-auto space-y-6">
-        {/* Header Section */}
         <div className="flex justify-between items-end">
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight font-outfit">
@@ -75,7 +82,6 @@ export default function HistoryIndex() {
           </Button>
         </div>
 
-        {/* Filter Section */}
         <div className="bg-[#16161E] border border-white/5 rounded-3xl p-5 space-y-5 shadow-xl">
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-[10px] text-white/30 uppercase tracking-wider">
@@ -148,7 +154,6 @@ export default function HistoryIndex() {
           </div>
         </div>
 
-        {/* Mood Logs List */}
         <div className="space-y-3">
           {data?.data.map((log) => {
             const moodConfig =
@@ -166,7 +171,6 @@ export default function HistoryIndex() {
                 className="bg-[#16161E] border-white/5 overflow-hidden hover:border-white/10 transition-colors"
               >
                 <CardContent className="p-4 flex gap-4">
-                  {/* Visual Mood Circle */}
                   <div
                     className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
                     style={{
@@ -182,7 +186,6 @@ export default function HistoryIndex() {
                     </span>
                   </div>
 
-                  {/* Content Area */}
                   <div className="flex-1 space-y-2">
                     <div className="flex justify-between items-start">
                       <div>
@@ -212,7 +215,6 @@ export default function HistoryIndex() {
                       </div>
                     </div>
 
-                    {/* Causes Tags */}
                     {log.causes && log.causes.length > 0 && (
                       <div className="flex flex-wrap gap-1.5">
                         {log.causes.map((c) => (
@@ -228,7 +230,6 @@ export default function HistoryIndex() {
                       </div>
                     )}
 
-                    {/* Personal Note */}
                     {log.note && (
                       <div className="flex items-start gap-1.5 p-2 rounded-xl bg-black/20 border border-white/5">
                         <MessageSquare
@@ -247,7 +248,6 @@ export default function HistoryIndex() {
           })}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-4 pt-4">
             <Button
@@ -275,7 +275,6 @@ export default function HistoryIndex() {
         )}
       </div>
 
-      {/* Edit Modal (Keeping your existing logic) */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
           <div className="bg-[#1E1E2E] border border-white/10 p-6 rounded-3xl w-full max-w-sm space-y-5 shadow-2xl">
@@ -314,6 +313,21 @@ export default function HistoryIndex() {
                 );
               })}
             </div>
+            <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto">
+              {allCauses.map((c, index) => {
+                const isActive = selectedCauses.includes(c.name);
+                return (
+                  <Button
+                    key={index}
+                    onClick={() => toggleCause(c.name)}
+                    className={`px-4 py-2 h-auto rounded-full border text-xs font-medium transition-all duration-300
+                  ${isActive ? "bg-white text-black border-white shadow-lg shadow-white/5" : "border-white/[0.08] text-white/40 bg-transparent hover:border-white/20 hover:text-white/70"}`}
+                  >
+                    {c.name}
+                  </Button>
+                );
+              })}
+            </div>
             <textarea
               className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-sm text-white h-28 resize-none focus:outline-none focus:ring-1 focus:ring-white/20"
               value={editNote}
@@ -322,7 +336,8 @@ export default function HistoryIndex() {
             />
             <Button
               onClick={handleSave}
-              className="w-full bg-white hover:bg-white/90 text-black font-bold rounded-2xl h-12 shadow-lg"
+              disabled={!editMood || selectedCauses.length === 0}
+              className="w-full bg-white hover:bg-white/90 text-black font-bold rounded-2xl h-12 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {editItem ? "บันทึกการเปลี่ยนแปลง" : "เพิ่มข้อมูลใหม่"}
             </Button>

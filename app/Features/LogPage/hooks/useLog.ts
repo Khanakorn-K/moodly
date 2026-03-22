@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dataSourcesLog from "../services/dataSourcesLog";
 import { moods } from "../../../share/moodType";
-import { CausesEntity } from "../entity/causesEntity";
+import { CausesEntity } from "../../../share/entities/causesEntity";
 
 export const useLog = () => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
