@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Outfit, Kanit } from "next/font/google";
-import { AuthProvider } from "@/components/ui/providers";
 import Navbar from "@/components/ui/NavBar";
+import AuthProvider from "@/components/ui/providers";
 
 export const metadata: Metadata = {
   title: "Moodly",
