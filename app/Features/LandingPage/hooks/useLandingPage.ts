@@ -71,6 +71,7 @@ const useLandingPage = () => {
       color: moodColors[moodItem.value] || "#118AB2",
       actualCount: count,
       causes: relatedCauses,
+      date: date,
     };
   });
 

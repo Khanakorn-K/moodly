@@ -21,6 +21,7 @@ interface ChartProps {
     color: string;
     actualCount: number;
     causes: string[];
+    date?: Date;
   }[];
 }
 
@@ -53,7 +54,23 @@ const Chart = ({ data }: ChartProps) => {
       if (elements.length > 0) {
         const index = elements[0].index;
         const moodValue = index + 1;
-        router.push(`/history?mood=${moodValue}`);
+
+        // 💡 ดึง Date จากข้อมูลแท่งแรก (เพราะทุกแท่งมี Date เดียวกันจากการเลือกในปฏิทิน)
+        const selectedDate = data[0]?.date;
+
+        let url = `/history?mood=${moodValue}`;
+
+        if (selectedDate) {
+          const dateString = new Date(
+            selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000,
+          )
+            .toISOString()
+            .split("T")[0];
+
+          url += `&startDate=${dateString}&endDate=${dateString}`;
+        }
+
+        router.push(url);
       }
     },
     plugins: {
