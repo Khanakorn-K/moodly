@@ -14,6 +14,7 @@ import {
   AlertDialogTrigger,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
+import { thaiDate } from "@/utils/thaiDate";
 
 export default function LogIndex() {
   const {
@@ -41,11 +42,7 @@ export default function LogIndex() {
     ...myCustomCauses.map((c) => ({ name: c.name })),
   ];
 
-  const today = new Date().toLocaleDateString("th-TH", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
+  const today = thaiDate();
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center px-4 py-20 pb-32 font-kanit">

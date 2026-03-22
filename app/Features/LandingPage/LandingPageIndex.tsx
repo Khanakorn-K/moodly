@@ -9,6 +9,7 @@ import Link from "next/link";
 import Chart from "./components/Chart";
 import useLandingPage from "./hooks/useLandingPage";
 import Causes from "./components/Causes";
+import { Calendar } from "@/components/ui/calendar";
 
 export default function LandingPageIndex() {
   const {
@@ -18,6 +19,8 @@ export default function LandingPageIndex() {
     greeting,
     data,
     moodChartData,
+    date,
+    setDate,
     topCausesList,
   } = useLandingPage();
 
@@ -73,7 +76,12 @@ export default function LandingPageIndex() {
           <Card className="bg-[#161622] border-white/5 rounded-3xl md:col-span-1 shadow-lg h-full flex flex-col">
             <CardHeader className="pb-3 flex flex-row items-center justify-between">
               <CardTitle className="text-sm font-bold text-white/90">
-                ภาพรวมอารมณ์
+                ภาพรวมอารมณ์{" "}
+                {date?.toLocaleDateString("th-TH", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               </CardTitle>
               <Link href="/history">
                 <ChevronRight size={16} className="text-[#FFD166]" />
@@ -81,6 +89,13 @@ export default function LandingPageIndex() {
             </CardHeader>
             <CardContent className="flex-1 flex flex-col justify-between">
               <Chart data={moodChartData} />
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                className="w-full bg-transparent text-white border-none p-0"
+                captionLayout="dropdown"
+              />
               <div>
                 <Separator className="bg-white/5 my-4" />
                 <div className="flex items-center gap-3">

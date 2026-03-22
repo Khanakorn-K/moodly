@@ -9,6 +9,7 @@ const useLandingPage = () => {
   const { data: session, status } = useSession();
   const [data, setData] = useState<InsightsEntity | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [date, setDate] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +19,9 @@ const useLandingPage = () => {
         return;
       }
       try {
-        const entity = await dataSourceLandingPage.getLandingData();
+        const entity = await dataSourceLandingPage.getInsights(
+          date?.toISOString(),
+        );
         setData(entity);
       } catch (error) {
         console.error(error);
@@ -27,7 +30,7 @@ const useLandingPage = () => {
       }
     }
     fetchData();
-  }, [status, session]);
+  }, [status, session, date]);
 
   const firstName = session?.user?.name?.split(" ")[0] ?? "มาสเตอร์";
   const hour = new Date().getHours();
@@ -111,6 +114,8 @@ const useLandingPage = () => {
     data,
     moodChartData,
     topCausesList,
+    date,
+    setDate,
   };
 };
 
