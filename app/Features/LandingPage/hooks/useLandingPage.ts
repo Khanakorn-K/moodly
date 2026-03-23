@@ -9,18 +9,19 @@ const useLandingPage = () => {
   const { data: session, status } = useSession();
   const [data, setData] = useState<InsightsEntity | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
     async function fetchData() {
-      if (status === "loading") return;
+      if (status === "loading" || !date) return;
 
       setData(null);
       setIsLoading(true);
 
       try {
         const entity = await dataSourceLandingPage.getInsights(
-          date?.toISOString(),
+          date.toISOString(),
         );
         setData(entity);
       } catch (error) {
@@ -29,8 +30,9 @@ const useLandingPage = () => {
         setIsLoading(false);
       }
     }
+
     fetchData();
-  }, [status, session, date]);
+  }, [status, date]);
 
   const firstName = session?.user?.name?.split(" ")[0] ?? "มาสเตอร์";
   const hour = new Date().getHours();

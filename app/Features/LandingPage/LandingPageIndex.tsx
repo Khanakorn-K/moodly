@@ -156,7 +156,7 @@ function MoodOverviewCard({ isLoading, date, setDate, moodChartData }: any) {
       <CardContent className="flex-1 flex flex-col justify-between">
         <div className="space-y-6">
           {isLoading ? (
-            <DynamicSkeleton width="100%" height="180px"/>
+            <DynamicSkeleton width="100%" height="180px" />
           ) : (
             <Chart data={moodChartData} />
           )}
@@ -164,7 +164,13 @@ function MoodOverviewCard({ isLoading, date, setDate, moodChartData }: any) {
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={(newDate) => {
+              if (!newDate || newDate.getTime() === date?.getTime()) {
+                return;
+              }
+
+              setDate(newDate);
+            }}
             className="w-full bg-transparent text-white border-none p-0"
             captionLayout="dropdown"
           />

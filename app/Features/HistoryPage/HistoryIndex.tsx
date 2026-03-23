@@ -18,11 +18,13 @@ import { useHistory } from "./hooks/useHistory";
 import { moods, stadartCauses } from "@/app/share/moodType";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/share/moodColors";
+import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
 
 export default function HistoryIndex() {
   const {
-    data,
-    isLoading,
+    moodList,
+    isInitialLoading,
+    isListLoading,
     isModalOpen,
     setIsModalOpen,
     editNote,
@@ -52,7 +54,7 @@ export default function HistoryIndex() {
     ...myCustomCauses.map((c) => ({ name: c.name })),
   ];
 
-  if (isLoading && !data) {
+  if (isInitialLoading) {
     return (
       <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center text-white/40">
         กำลังโหลดประวัติ... มาสเตอร์
@@ -69,7 +71,7 @@ export default function HistoryIndex() {
               ประวัติอารมณ์
             </h1>
             <p className="text-sm text-white/40">
-              บันทึกทั้งหมด {data?.total ?? 0} ครั้ง
+              บันทึกทั้งหมด {moodList?.total ?? 0} ครั้ง
             </p>
           </div>
           <Button
@@ -155,97 +157,131 @@ export default function HistoryIndex() {
         </div>
 
         <div className="space-y-3">
-          {data?.data.map((log) => {
-            const moodConfig =
-              moods.find(
-                (m) =>
-                  String(m.value) === String(log.mood) || m.label === log.mood,
-              ) || moods[2];
-
-            const themeColor =
-              moodColors[Number(moodConfig.value)] || "#D1D5DB";
-
-            return (
-              <Card
-                key={log.id}
-                className="bg-[#16161E] border-white/5 overflow-hidden hover:border-white/10 transition-colors"
-              >
-                <CardContent className="p-4 flex gap-4">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{
-                      backgroundColor: `${themeColor}15`,
-                      border: `1px solid ${themeColor}30`,
-                    }}
-                  >
-                    <span
-                      className="text-lg font-bold"
-                      style={{ color: themeColor }}
-                    >
-                      {moodConfig.value}
-                    </span>
+          {isListLoading ? (
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <Card
+                  key={i}
+                  className="bg-[#16161E]/50 border-white/5 rounded-2xl p-4"
+                >
+                  <div className="flex gap-4">
+                    <DynamicSkeleton width="w-12" height="h-12" rounded="2xl" />
+                    <div className="flex-1 space-y-3">
+                      <div className="flex justify-between">
+                        <DynamicSkeleton width="w-1/3" height="h-4" />
+                        <DynamicSkeleton width="w-12" height="h-4" />
+                      </div>
+                      <DynamicSkeleton width="w-full" height="h-3" />
+                    </div>
                   </div>
+                </Card>
+              ))}
+            </div>
+          ) : moodList?.data && moodList.data.length > 0 ? (
+            moodList.data.map((log) => {
+              const moodConfig =
+                moods.find(
+                  (m) =>
+                    String(m.value) === String(log.mood) ||
+                    m.label === log.mood,
+                ) || moods[2];
+              const themeColor =
+                moodColors[Number(moodConfig.value)] || "#D1D5DB";
 
-                  <div className="flex-1 space-y-2">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h5 className="text-sm font-semibold text-white flex items-center gap-2">
-                          {moodConfig.label} {moodConfig.emoji}
-                        </h5>
-                        <p className="text-[10px] text-white/30">
-                          {new Intl.DateTimeFormat("th-TH", {
-                            dateStyle: "medium",
-                            timeStyle: "short",
-                          }).format(new Date(log.date))}
-                        </p>
-                      </div>
-                      <div className="flex gap-3">
-                        <button
-                          onClick={() => openEditModal(log)}
-                          className="text-white/30 hover:text-white transition-colors"
-                        >
-                          <Edit2 size={14} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(log.id)}
-                          className="text-white/30 hover:text-[#EF476F] transition-colors"
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
+              return (
+                <Card
+                  key={log.id}
+                  className="group bg-[#16161E] border-white/5 overflow-hidden hover:border-[#FFD166]/20 transition-all duration-300 rounded-2xl"
+                >
+                  <CardContent className="p-4 flex gap-4">
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 relative"
+                      style={{
+                        backgroundColor: `${themeColor}15`,
+                        border: `1px solid ${themeColor}30`,
+                      }}
+                    >
+                      <span
+                        className="text-lg font-bold relative z-10"
+                        style={{ color: themeColor }}
+                      >
+                        {moodConfig.emoji}
+                      </span>
                     </div>
 
-                    {log.causes && log.causes.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5">
-                        {log.causes.map((c) => (
-                          <Badge
-                            key={c.id}
-                            variant="outline"
-                            className="text-[9px] border-none bg-white/5"
-                            style={{ color: `${themeColor}CC` }}
+                    <div className="flex-1 space-y-2">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h5 className="text-sm font-bold text-white flex items-center gap-2">
+                            {moodConfig.label}
+                            <span className="text-[10px] text-white/20 font-normal">
+                              Level {moodConfig.value}
+                            </span>
+                          </h5>
+                          <p className="text-[10px] text-white/30 font-medium">
+                            {new Intl.DateTimeFormat("th-TH", {
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            }).format(new Date(log.date))}
+                          </p>
+                        </div>
+                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button
+                            onClick={() => openEditModal(log)}
+                            className="p-1.5 text-white/20 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           >
-                            {c.cause}
-                          </Badge>
-                        ))}
+                            <Edit2 size={14} />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(log.id)}
+                            className="p-1.5 text-white/20 hover:text-[#EF476F] hover:bg-[#EF476F]/10 rounded-lg transition-colors"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
                       </div>
-                    )}
 
-                    {log.note && (
-                      <div className="flex items-start gap-1.5 p-2 rounded-xl bg-black/20 border border-white/5">
-                        <MessageSquare
-                          size={12}
-                          className="text-white/20 mt-0.5"
-                        />
-                        <p className="text-[11px] text-white/60 leading-relaxed">
-                          {log.note}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+                      {log.causes && log.causes.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {log.causes.map((c) => (
+                            <Badge
+                              key={c.id}
+                              variant="outline"
+                              className="text-[9px] border-none bg-white/5 px-2 py-0"
+                              style={{ color: `${themeColor}CC` }}
+                            >
+                              # {c.cause}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+
+                      {log.note && (
+                        <div className="flex items-start gap-2 p-2.5 rounded-xl bg-black/40 border border-white/5">
+                          <MessageSquare
+                            size={12}
+                            className="text-white/20 mt-0.5"
+                          />
+                          <p className="text-[11px] text-white/60 leading-relaxed italic">
+                            {log.note}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })
+          ) : (
+            <div className="py-20 text-center space-y-3 bg-[#16161E]/30 rounded-3xl border border-dashed border-white/5">
+              <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mx-auto">
+                <Filter size={20} className="text-white/20" />
+              </div>
+              <p className="text-sm text-white/40">
+                ไม่พบประวัติอารมณ์ในช่วงที่คุณค้นหาครับ มาสเตอร์
+              </p>
+            </div>
+          )}
         </div>
 
         {totalPages > 1 && (
@@ -302,11 +338,7 @@ export default function HistoryIndex() {
                           }
                         : {}
                     }
-                    className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all ${
-                      !isSelected
-                        ? "bg-white/5 text-white/30"
-                        : "font-black shadow-lg"
-                    }`}
+                    className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all ${!isSelected ? "bg-white/5 text-white/30" : "font-black shadow-lg"}`}
                   >
                     {m.value}
                   </button>

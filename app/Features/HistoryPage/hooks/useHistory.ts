@@ -3,8 +3,8 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import dataSoruceHistory from "../services/dataSoruceHistory";
 import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
-import { moods } from "../../../share/moodType";
 import { CausesEntity } from "@/app/share/entities/causesEntity";
+import { moods } from "@/app/share/moodType";
 
 export const useHistory = () => {
   const { status } = useSession();
@@ -12,8 +12,9 @@ export const useHistory = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [data, setData] = useState<moodsEntity | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [moodList, setMoodList] = useState<moodsEntity | null>(null);
+  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
+  const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editItem, setEditItem] = useState<moodsResultEntity | null>();
   const [editNote, setEditNote] = useState("");
@@ -36,9 +37,15 @@ export const useHistory = () => {
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const fetchHistory = async () => {
+  const fetchHistory = async (isInitial: boolean = false) => {
     if (status !== "authenticated") return;
-    setIsLoading(true);
+
+    if (isInitial) {
+      setIsInitialLoading(true);
+    } else {
+      setIsListLoading(true);
+    }
+
     try {
       const entity = await dataSoruceHistory.getMoods(
         page,
@@ -47,11 +54,12 @@ export const useHistory = () => {
         startDate,
         endDate,
       );
-      setData(entity);
+      setMoodList(entity);
     } catch (error) {
       console.error(error);
     } finally {
-      setIsLoading(false);
+      setIsInitialLoading(false);
+      setIsListLoading(false);
     }
   };
 
@@ -67,15 +75,10 @@ export const useHistory = () => {
 
   const handleFilterChange = (newParams: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString());
-
     Object.entries(newParams).forEach(([key, value]) => {
-      if (value) {
-        params.set(key, value);
-      } else {
-        params.delete(key);
-      }
+      if (value) params.set(key, value);
+      else params.delete(key);
     });
-
     params.set("page", "1");
     router.push(`${pathname}?${params.toString()}`);
   };
@@ -91,7 +94,8 @@ export const useHistory = () => {
   }, [status]);
 
   useEffect(() => {
-    fetchHistory();
+    const isFirstLoad = !moodList;
+    fetchHistory(isFirstLoad);
   }, [page, status, mood, startDate, endDate]);
 
   const handleDelete = async (id: string) => {
@@ -102,13 +106,11 @@ export const useHistory = () => {
 
   const handleSave = async () => {
     if (!editItem || editMood === undefined) return;
-
     await dataSoruceHistory.updateMood(editItem.id, {
       note: editNote,
       mood: editMood,
       causes: selectedCauses,
     });
-
     setIsModalOpen(false);
     fetchHistory();
   };
@@ -118,19 +120,23 @@ export const useHistory = () => {
       prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
     );
   };
-
   const openEditModal = (log: moodsResultEntity) => {
     setEditItem(log);
     setEditNote(log.note);
-    const moodData = moods.find((m) => m.label === log.mood);
-    setEditMood(moodData ? moodData.value : 0);
+    const moodConfig = moods.find(
+      (m: any) => String(m.value) === String(log.mood) || m.label === log.mood,
+    );
+
+    setEditMood(moodConfig ? Number(moodConfig.value) : 0);
+
     setSelectedCauses(log.causes ? log.causes.map((c: any) => c.cause) : []);
     setIsModalOpen(true);
   };
 
   return {
-    data,
-    isLoading,
+    moodList,
+    isInitialLoading,
+    isListLoading,
     isModalOpen,
     setIsModalOpen,
     editNote,
@@ -143,7 +149,7 @@ export const useHistory = () => {
     mood,
     startDate,
     endDate,
-    totalPages: data?.total ? Math.ceil(data.total / limit) : 1,
+    totalPages: moodList?.total ? Math.ceil(moodList.total / limit) : 1,
     updateQueryParams,
     handlePageChange: (p: number) => updateQueryParams({ page: String(p) }),
     handleDelete,
