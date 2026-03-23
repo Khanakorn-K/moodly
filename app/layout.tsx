@@ -7,6 +7,11 @@ import AuthProvider from "@/components/ui/providers";
 export const metadata: Metadata = {
   title: "Moodly",
   description: "khanakorn kositkhongchana 2026",
+  icons: {
+    icon: ["/Logo.png"],
+    shortcut: "/Logo.png",
+    apple: "/Logo.png",
+  },
 };
 
 const outfit = Outfit({
