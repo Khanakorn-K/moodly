@@ -204,9 +204,14 @@ export default function LogIndex() {
 
         <Button
           onClick={handleSubmit}
-          disabled={!selectedMood || isSubmitting || submitted}
+          disabled={
+            !selectedMood ||
+            selectedCauses.length === 0 ||
+            isSubmitting ||
+            submitted
+          }
           className={`group w-full py-7 h-auto rounded-[1.8rem] text-[15px] font-bold transition-all duration-500 relative overflow-hidden
-            ${submitted ? "bg-green-500 text-white" : selectedMood ? "bg-white text-black hover:scale-[1.02] active:scale-[0.98]" : "bg-white/[0.05] text-white/20 cursor-not-allowed"}`}
+    ${submitted ? "bg-green-500 text-white" : selectedMood && selectedCauses.length > 0 ? "bg-white text-black hover:scale-[1.02] active:scale-[0.98]" : "bg-white/[0.05] text-white/20 cursor-not-allowed"}`}
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             {submitted ? (
@@ -217,6 +222,8 @@ export default function LogIndex() {
               </>
             ) : !selectedMood ? (
               "เลือกอารมณ์ของคุณก่อน"
+            ) : selectedCauses.length === 0 ? (
+              "เลือกสาเหตุอย่างน้อย 1 อย่าง"
             ) : (
               "บันทึกอารมณ์วันนี้"
             )}
