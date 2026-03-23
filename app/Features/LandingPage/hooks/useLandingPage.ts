@@ -8,16 +8,16 @@ import { moodColors } from "@/app/share/moodColors";
 const useLandingPage = () => {
   const { data: session, status } = useSession();
   const [data, setData] = useState<InsightsEntity | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
     async function fetchData() {
       if (status === "loading") return;
-      if (status === "unauthenticated") {
-        setIsLoading(false);
-        return;
-      }
+
+      setData(null);
+      setIsLoading(true);
+
       try {
         const entity = await dataSourceLandingPage.getInsights(
           date?.toISOString(),
