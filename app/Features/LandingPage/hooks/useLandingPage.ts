@@ -20,9 +20,8 @@ const useLandingPage = () => {
       setIsLoading(true);
 
       try {
-        const entity = await dataSourceLandingPage.getInsights(
-          date.toISOString(),
-        );
+        const dateString = date?.toLocaleDateString("en-CA");
+        const entity = await dataSourceLandingPage.getInsights(dateString);
         setData(entity);
       } catch (error) {
         console.error(error);
