@@ -1,0 +1,27 @@
+name: Code Quality Check
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  code-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: latest
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm prisma generate
+
+      - run: pnpm run lint
