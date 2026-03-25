@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import dataSourceLandingPage from "../services/dataSourceLandingPage";
 import { InsightsEntity } from "../entity/InsightsEntity";
-import { moods } from "../../../share/moodType";
+import { standartMoods } from "../../../share/moodType";
 import { moodColors } from "@/app/share/moodColors";
 
 const useLandingPage = () => {
@@ -41,8 +41,8 @@ const useLandingPage = () => {
   const normalizedDist: Record<string, number> = {};
 
   Object.entries(data?.moodDistribution ?? {}).forEach(([k, v]) => {
-    const moodConfig = moods.find(
-      (m) => m.label === k || m.value.toString() === k,
+    const moodConfig = standartMoods.find(
+      (standartMoods) => standartMoods.label === k || standartMoods.value.toString() === k,
     );
     const key = moodConfig ? moodConfig.value.toString() : k;
     normalizedDist[key] = (normalizedDist[key] || 0) + (v as number);
@@ -50,20 +50,20 @@ const useLandingPage = () => {
 
   const maxCount = Math.max(...Object.values(normalizedDist), 1);
 
-  const moodChartData = moods.map((moodItem) => {
+  const moodChartData = standartMoods.map((moodItem) => {
     const levelStr = moodItem.value.toString();
     const count = normalizedDist[levelStr] ?? 0;
 
     const relatedCauses = data?.causesAnalysis
       ? Object.entries(data.causesAnalysis)
-          .map(([causeName, moodCounts]) => {
-            const moodCount = (moodCounts[levelStr] ||
-              moodCounts[moodItem.label] ||
-              0) as number;
-            return { name: causeName, count: moodCount };
-          })
-          .filter((item) => item.count > 0)
-          .map((item) => `${item.name} x${item.count}`)
+        .map(([causeName, moodCounts]) => {
+          const moodCount = (moodCounts[levelStr] ||
+            moodCounts[moodItem.label] ||
+            0) as number;
+          return { name: causeName, count: moodCount };
+        })
+        .filter((item) => item.count > 0)
+        .map((item) => `${item.name} x${item.count}`)
       : [];
 
     return {
@@ -83,7 +83,7 @@ const useLandingPage = () => {
         0,
       );
 
-      const moodBreakdown = moods
+      const moodBreakdown = standartMoods
         .map((m) => {
           const count = (moodsAnal[m.value.toString()] ||
             moodsAnal[m.label] ||

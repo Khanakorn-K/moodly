@@ -26,7 +26,7 @@ const dataSourceHistory = {
 
   updateMood: async (
     id: string,
-    body: { mood: number; note?: string; causes: string[] },
+    body: { mood: number; note?: string; causes?: string[] },
   ) => {
     return await apiClient.put(`/moods/${id}`, body);
   },

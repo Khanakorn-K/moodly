@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import dataSoruceHistory from "../services/dataSoruceHistory";
 import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
 import { CausesEntity } from "@/app/share/entities/causesEntity";
-import { moods } from "@/app/share/moodType";
+import { standartMoods } from "@/app/share/moodType";
 
 export const useHistory = () => {
   const { status } = useSession();
@@ -103,7 +103,43 @@ export const useHistory = () => {
     await dataSoruceHistory.deleteMood(id);
     fetchHistory();
   };
+  const handleDragEnd = async (event: any) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
 
+    const logId = String(active.id);
+    const newMoodValue = Number(over.id);
+
+    const previousMoodList = moodList;
+
+    setMoodList((prev: any) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        data: prev.data.map((item: any) =>
+          String(item.id) === logId ? { ...item, mood: newMoodValue } : item,
+        ),
+      };
+    });
+
+    try {
+      const originalLog = previousMoodList?.data.find(
+        (item) => String(item.id) === logId,
+      );
+
+      await dataSoruceHistory.updateMood(logId, {
+        mood: newMoodValue,
+        note: originalLog?.note || "",
+        causes: originalLog?.causes?.map((c: any) => c.cause) || [],
+      });
+
+      await fetchHistory();
+    } catch (error) {
+      console.error("อัปเดตพลาดครับ:", error);
+      setMoodList(previousMoodList);
+      alert("การเชื่อมต่อขัดข้อง!");
+    }
+  };
   const handleSave = async () => {
     if (!editItem || editMood === undefined) return;
     await dataSoruceHistory.updateMood(editItem.id, {
@@ -123,7 +159,7 @@ export const useHistory = () => {
   const openEditModal = (log: moodsResultEntity) => {
     setEditItem(log);
     setEditNote(log.note);
-    const moodConfig = moods.find(
+    const moodConfig = standartMoods.find(
       (m: any) => String(m.value) === String(log.mood) || m.label === log.mood,
     );
 
@@ -162,5 +198,6 @@ export const useHistory = () => {
     myCustomCauses,
     selectedCauses,
     setSelectedCauses,
+    handleDragEnd,
   };
 };

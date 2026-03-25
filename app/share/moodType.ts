@@ -48,7 +48,7 @@ interface MoodStyle {
 //   },
 // };
 
-export const moods: MoodType[] = [
+export const standartMoods: MoodType[] = [
   { value: 1, emoji: "😞", label: "แย่มาก", color: "red" },
   { value: 2, emoji: "😕", label: "แย่", color: "orange" },
   { value: 3, emoji: "😐", label: "ปานกลาง", color: "yellow" },

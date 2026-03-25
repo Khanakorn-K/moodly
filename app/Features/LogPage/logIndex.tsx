@@ -1,7 +1,7 @@
 "use client";
 
 import { useLog } from "./hooks/useLog";
-import { moods, stadartCauses } from "../../share/moodType";
+import { standartMoods, stadartCauses } from "../../share/moodType";
 import { moodColors } from "@/app/share/moodColors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -73,26 +73,26 @@ export default function LogIndex() {
             ระดับอารมณ์
           </p>
           <div className="flex gap-2.5">
-            {moods.map((m) => {
-              const isActive = selectedMood === m.value;
+            {standartMoods.map((standartMoods) => {
+              const isActive = selectedMood === standartMoods.value;
               return (
                 <Button
-                  key={m.value}
-                  onClick={() => setSelectedMood(m.value)}
-                  style={{ borderColor: isActive ? moodColors[m.value] : "" }}
+                  key={standartMoods.value}
+                  onClick={() => setSelectedMood(standartMoods.value)}
+                  style={{ borderColor: isActive ? moodColors[standartMoods.value] : "" }}
                   className={`flex-1 flex flex-col items-center gap-2 py-4 h-auto rounded-[1.5rem] border transition-all duration-300
                     ${isActive ? "bg-white/[0.05] -translate-y-2 shadow-lg" : "border-white/[0.05] bg-transparent opacity-50 hover:opacity-100"}`}
                 >
                   <span
                     className={`text-3xl transition-transform duration-500 ${isActive ? "scale-110 rotate-6" : ""}`}
                   >
-                    {m.emoji}
+                    {standartMoods.emoji}
                   </span>
                   <span
                     className={`text-[10px] font-bold ${isActive ? "" : "text-white/40"}`}
-                    style={{ color: isActive ? moodColors[m.value] : "" }}
+                    style={{ color: isActive ? moodColors[standartMoods.value] : "" }}
                   >
-                    {m.label}
+                    {standartMoods.label}
                   </span>
                 </Button>
               );

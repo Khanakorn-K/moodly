@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dataSourcesLog from "../services/dataSourcesLog";
-import { moods } from "../../../share/moodType";
+import { standartMoods } from "../../../share/moodType";
 import { CausesEntity } from "../../../share/entities/causesEntity";
 
 export const useLog = () => {
@@ -15,7 +15,7 @@ export const useLog = () => {
   const [newCauseName, setNewCauseName] = useState("");
   const [isAddingCause, setIsAddingCause] = useState(false);
 
-  const activeMood = moods.find((m) => m.value === selectedMood);
+  const activeMood = standartMoods.find((standartMoods) => standartMoods.value === selectedMood);
 
   const fetchmyCustomCauses = async () => {
     try {
