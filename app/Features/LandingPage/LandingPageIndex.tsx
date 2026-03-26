@@ -12,6 +12,7 @@ import Causes from "./components/Causes";
 import { Calendar } from "@/components/ui/calendar";
 import { toThaiDate } from "@/utils/thaiDate";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
+import { InsightsEntity } from "./entity/InsightsEntity";
 
 export default function LandingPageIndex() {
   const {
@@ -24,6 +25,8 @@ export default function LandingPageIndex() {
     date,
     setDate,
     topCausesList,
+    calculateAverageMood,
+    calculateMoodColor,
   } = useLandingPage();
 
   const isDataLoading = status === "loading" || isLoading;
@@ -48,6 +51,9 @@ export default function LandingPageIndex() {
             date={date}
             setDate={setDate}
             moodChartData={moodChartData}
+            data={data}
+            calculateAverageMood={calculateAverageMood}
+            calculateMoodColor={calculateMoodColor}
           />
 
           <div className="md:col-span-2 h-full">
@@ -138,7 +144,32 @@ function TotalLogsCard({
   );
 }
 
-function MoodOverviewCard({ isLoading, date, setDate, moodChartData }: any) {
+interface MoodOverviewCardProps {
+  isLoading: boolean;
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
+  moodChartData: {
+    label: string;
+    heightPercentage: number;
+    color: string;
+    actualCount: number;
+    causes: string[];
+    date: Date | undefined;
+  }[];
+  data: InsightsEntity | null;
+  calculateAverageMood: (insightData: InsightsEntity | null) => number;
+  calculateMoodColor: (value: number | null) => string;
+}
+
+function MoodOverviewCard({
+  isLoading,
+  date,
+  setDate,
+  moodChartData,
+  data,
+  calculateAverageMood,
+  calculateMoodColor,
+}: MoodOverviewCardProps) {
   return (
     <Card className="bg-[#161622] border-white/5 rounded-3xl md:col-span-1 shadow-lg h-full flex flex-col">
       <CardHeader className="pb-3 flex flex-row items-center justify-between">
@@ -168,22 +199,29 @@ function MoodOverviewCard({ isLoading, date, setDate, moodChartData }: any) {
               if (!newDate || newDate.getTime() === date?.getTime()) {
                 return;
               }
-
               setDate(newDate);
             }}
             className="w-full bg-transparent text-white border-none p-0"
-            captionLayout="dropdown"
           />
-        </div>
-        <div>
-          <Separator className="bg-white/5 my-4" />
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#06D6A0]/10 flex items-center justify-center">
-              <TrendingUp size={16} className="text-[#06D6A0]" />
-            </div>
-            <p className="text-[11px] font-medium text-[#06D6A0]">
-              อัปเดตล่าสุดวันนี้
-            </p>
+
+          <div className="flex items-center justify-between bg-white/5 p-4 rounded-2xl border border-white/5">
+            <span className="text-sm font-bold text-white/90">
+              {isLoading ? (
+                <DynamicSkeleton width="150px" height="16px" />
+              ) : (
+                date && `ค่าเฉลี่ยอารมณ์ของคุณใน ${toThaiDate(date)}`
+              )}
+            </span>
+            <span
+              className="text-xl font-black italic"
+              style={{
+                color: calculateMoodColor(
+                  Math.round(calculateAverageMood(data)),
+                ),
+              }}
+            >
+              {isLoading ? "..." : calculateAverageMood(data)}
+            </span>
           </div>
         </div>
       </CardContent>

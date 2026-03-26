@@ -9,7 +9,6 @@ const useLandingPage = () => {
   const { data: session, status } = useSession();
   const [data, setData] = useState<InsightsEntity | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const useLandingPage = () => {
       setIsLoading(true);
 
       try {
-        const dateString = date?.toLocaleDateString("en-CA");
+        const dateString = date.toLocaleDateString("en-CA");
         const entity = await dataSourceLandingPage.getInsights(dateString);
         setData(entity);
       } catch (error) {
@@ -42,7 +41,7 @@ const useLandingPage = () => {
 
   Object.entries(data?.moodDistribution ?? {}).forEach(([k, v]) => {
     const moodConfig = standartMoods.find(
-      (standartMoods) => standartMoods.label === k || standartMoods.value.toString() === k,
+      (m) => m.label === k || m.value.toString() === k,
     );
     const key = moodConfig ? moodConfig.value.toString() : k;
     normalizedDist[key] = (normalizedDist[key] || 0) + (v as number);
@@ -56,14 +55,14 @@ const useLandingPage = () => {
 
     const relatedCauses = data?.causesAnalysis
       ? Object.entries(data.causesAnalysis)
-        .map(([causeName, moodCounts]) => {
-          const moodCount = (moodCounts[levelStr] ||
-            moodCounts[moodItem.label] ||
-            0) as number;
-          return { name: causeName, count: moodCount };
-        })
-        .filter((item) => item.count > 0)
-        .map((item) => `${item.name} x${item.count}`)
+          .map(([causeName, moodCounts]) => {
+            const moodCount = (moodCounts[levelStr] ||
+              moodCounts[moodItem.label] ||
+              0) as number;
+            return { name: causeName, count: moodCount };
+          })
+          .filter((item) => item.count > 0)
+          .map((item) => `${item.name} x${item.count}`)
       : [];
 
     return {
@@ -108,6 +107,32 @@ const useLandingPage = () => {
     },
   );
 
+  const calculateAverageMood = (insightData: InsightsEntity | null): number => {
+    if (!insightData || !insightData.moodDistribution) return 0;
+
+    let totalPoints = 0;
+    let totalLogs = 0;
+
+    Object.entries(insightData.moodDistribution).forEach(([key, count]) => {
+      const moodConfig = standartMoods.find(
+        (m) => m.label === key || m.value.toString() === key,
+      );
+      if (moodConfig) {
+        totalPoints += moodConfig.value * (count as number);
+        totalLogs += count as number;
+      }
+    });
+
+    if (totalLogs === 0) return 0;
+
+    const average = totalPoints / totalLogs;
+    return Number(average.toFixed(1));
+  };
+
+  const calculateMoodColor = (value: number | null): string => {
+    return moodColors[value ?? 1] || "#D1D5DB";
+  };
+
   return {
     status,
     isLoading,
@@ -118,6 +143,8 @@ const useLandingPage = () => {
     topCausesList,
     date,
     setDate,
+    calculateAverageMood,
+    calculateMoodColor,
   };
 };
 

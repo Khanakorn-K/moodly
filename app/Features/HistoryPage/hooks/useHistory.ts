@@ -133,7 +133,7 @@ export const useHistory = () => {
         causes: originalLog?.causes?.map((c: any) => c.cause) || [],
       });
 
-      await fetchHistory();
+      // await fetchHistory();
     } catch (error) {
       console.error("อัปเดตพลาดครับ:", error);
       setMoodList(previousMoodList);
