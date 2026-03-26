@@ -87,11 +87,11 @@ model Authenticator {
 // ===========================
 
 model MoodLog {
-  id     String   @id @default(cuid())
+  id     String  @id @default(cuid())
   userId String
   mood   Int
   note   String?
-  date   DateTime @default(now())
+  date   String
 
   user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   causes MoodLogCause[]

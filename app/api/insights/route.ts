@@ -21,17 +21,24 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const startDateParam = searchParams.get("startDate");
 
-    let dateFilter = {};
+    // ใช้ any เพื่อ bypass ขีดแดงกรณีที่ DB เป็น String แต่เราจะกรองช่วงเวลาครับ
+    let dateFilter: any = {};
 
     if (startDateParam) {
       const targetDate = new Date(startDateParam);
-      const startOfDay = new Date(targetDate.setHours(0, 0, 0, 0));
-      const endOfDay = new Date(targetDate.setHours(23, 59, 59, 999));
+
+      // แปลงเป็น ISO String เพื่อให้เปรียบเทียบกับ String ใน DB ได้ครับมาสเตอร์
+      const startISO = new Date(
+        new Date(targetDate).setHours(0, 0, 0, 0),
+      ).toISOString();
+      const endISO = new Date(
+        new Date(targetDate).setHours(23, 59, 59, 999),
+      ).toISOString();
 
       dateFilter = {
         date: {
-          gte: startOfDay,
-          lte: endOfDay,
+          gte: startISO,
+          lte: endISO,
         },
       };
     }
@@ -40,6 +47,7 @@ export async function GET(req: NextRequest) {
       where: {
         userId: user.id,
         ...dateFilter,
+        // เพิ่มเงื่อนไขให้แน่ใจว่ามี causes เพื่อไม่ให้ data เพี้ยนครับ
         causes: { some: {} },
       },
       include: { causes: true },
@@ -47,7 +55,8 @@ export async function GET(req: NextRequest) {
 
     const moodDistribution = logs.reduce(
       (acc, log) => {
-        acc[log.mood] = (acc[log.mood] || 0) + 1;
+        const moodKey = String(log.mood);
+        acc[moodKey] = (acc[moodKey] || 0) + 1;
         return acc;
       },
       {} as Record<string, number>,
@@ -58,13 +67,14 @@ export async function GET(req: NextRequest) {
     logs.forEach((log) => {
       log.causes.forEach((causeRecord) => {
         const cause = causeRecord.cause;
-        const mood = log.mood;
+        const moodKey = String(log.mood);
 
         if (!causesAnalysis[cause]) {
           causesAnalysis[cause] = {};
         }
 
-        causesAnalysis[cause][mood] = (causesAnalysis[cause][mood] || 0) + 1;
+        causesAnalysis[cause][moodKey] =
+          (causesAnalysis[cause][moodKey] || 0) + 1;
       });
     });
 
@@ -77,6 +87,7 @@ export async function GET(req: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
+    console.error("INSIGHTS_GET_ERROR:", error);
     return NextResponse.json(
       { error: "INTERNAL_SERVER_ERROR" },
       { status: 500 },

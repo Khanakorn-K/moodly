@@ -41,17 +41,25 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const where = {
+    const where: any = {
       userId: user.id,
       ...(moodValue ? { mood: moodValue } : {}),
       ...(startDate || endDate
         ? {
             date: {
               ...(startDate
-                ? { gte: new Date(new Date(startDate).setHours(0, 0, 0, 0)) }
+                ? {
+                    gte: new Date(
+                      new Date(startDate).setHours(0, 0, 0, 0),
+                    ).toISOString(),
+                  }
                 : {}),
               ...(endDate
-                ? { lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)) }
+                ? {
+                    lte: new Date(
+                      new Date(endDate).setHours(23, 59, 59, 999),
+                    ).toISOString(),
+                  }
                 : {}),
             },
           }
@@ -101,11 +109,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
     }
 
+    const thailandTime = new Date(new Date().getTime() + 7 * 60 * 60 * 1000);
+
     const moodLog = await prisma.moodLog.create({
       data: {
         userId: user.id,
         mood: moodInt,
         note: note ?? null,
+        date: thailandTime.toISOString(),
         causes: {
           create: (causes ?? []).map((cause: string) => ({ cause })),
         },
@@ -113,7 +124,7 @@ export async function POST(req: NextRequest) {
       include: { causes: true },
     });
 
-    await updateStreak(user.id);
+    await updateStreak(user.id, thailandTime);
     return NextResponse.json(moodLog, { status: 201 });
   } catch (error) {
     return NextResponse.json(
@@ -123,9 +134,9 @@ export async function POST(req: NextRequest) {
   }
 }
 
-async function updateStreak(userId: string) {
+async function updateStreak(userId: string, currentLocalTime: Date) {
   const streak = await prisma.streak.findUnique({ where: { userId } });
-  const today = new Date();
+  const today = new Date(currentLocalTime);
   today.setHours(0, 0, 0, 0);
 
   if (!streak) {

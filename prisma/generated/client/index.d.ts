@@ -6710,7 +6710,7 @@ export namespace Prisma {
     userId: string | null
     mood: number | null
     note: string | null
-    date: Date | null
+    date: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6720,7 +6720,7 @@ export namespace Prisma {
     userId: string | null
     mood: number | null
     note: string | null
-    date: Date | null
+    date: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6867,7 +6867,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note: string | null
-    date: Date
+    date: string
     createdAt: Date
     updatedAt: Date
     _count: MoodLogCountAggregateOutputType | null
@@ -6945,7 +6945,7 @@ export namespace Prisma {
       userId: string
       mood: number
       note: string | null
-      date: Date
+      date: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["moodLog"]>
@@ -7347,7 +7347,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"MoodLog", 'String'>
     readonly mood: FieldRef<"MoodLog", 'Int'>
     readonly note: FieldRef<"MoodLog", 'String'>
-    readonly date: FieldRef<"MoodLog", 'DateTime'>
+    readonly date: FieldRef<"MoodLog", 'String'>
     readonly createdAt: FieldRef<"MoodLog", 'DateTime'>
     readonly updatedAt: FieldRef<"MoodLog", 'DateTime'>
   }
@@ -12061,7 +12061,7 @@ export namespace Prisma {
     userId?: StringFilter<"MoodLog"> | string
     mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
-    date?: DateTimeFilter<"MoodLog"> | Date | string
+    date?: StringFilter<"MoodLog"> | string
     createdAt?: DateTimeFilter<"MoodLog"> | Date | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -12089,7 +12089,7 @@ export namespace Prisma {
     userId?: StringFilter<"MoodLog"> | string
     mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
-    date?: DateTimeFilter<"MoodLog"> | Date | string
+    date?: StringFilter<"MoodLog"> | string
     createdAt?: DateTimeFilter<"MoodLog"> | Date | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -12119,7 +12119,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"MoodLog"> | string
     mood?: IntWithAggregatesFilter<"MoodLog"> | number
     note?: StringNullableWithAggregatesFilter<"MoodLog"> | string | null
-    date?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
+    date?: StringWithAggregatesFilter<"MoodLog"> | string
     createdAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
   }
@@ -12723,7 +12723,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutMoodsInput
@@ -12735,7 +12735,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
@@ -12745,7 +12745,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMoodsNestedInput
@@ -12757,7 +12757,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
@@ -12768,7 +12768,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12777,7 +12777,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12787,7 +12787,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13446,7 +13446,7 @@ export namespace Prisma {
 
   export type MoodLogUserIdDateCompoundUniqueInput = {
     userId: string
-    date: Date | string
+    date: string
   }
 
   export type MoodLogCountOrderByAggregateInput = {
@@ -14390,7 +14390,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
@@ -14400,7 +14400,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
@@ -14577,7 +14577,7 @@ export namespace Prisma {
     userId?: StringFilter<"MoodLog"> | string
     mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
-    date?: DateTimeFilter<"MoodLog"> | Date | string
+    date?: StringFilter<"MoodLog"> | string
     createdAt?: DateTimeFilter<"MoodLog"> | Date | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
   }
@@ -14990,7 +14990,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutMoodsInput
@@ -15001,7 +15001,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15026,7 +15026,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMoodsNestedInput
@@ -15037,7 +15037,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15333,7 +15333,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date?: Date | string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15444,7 +15444,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
@@ -15454,7 +15454,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
@@ -15464,7 +15464,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

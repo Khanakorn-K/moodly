@@ -6,6 +6,7 @@ import React from "react";
 import { moodsEntity } from "../entity/moodsEntity";
 import { moodColors } from "@/app/share/moodColors";
 import { standartMoods } from "@/app/share/moodType";
+import { toThaiDate } from "@/utils/thaiDate";
 
 interface MoodHistoryListProps {
   isListLoading: boolean;
@@ -83,10 +84,7 @@ const MoodHistoryList = ({
                         </span>
                       </h5>
                       <p className="text-[10px] text-white/30 font-medium">
-                        {new Intl.DateTimeFormat("th-TH", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        }).format(new Date(log.date))}
+                        {toThaiDate(log.date)}
                       </p>
                     </div>
                     <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
