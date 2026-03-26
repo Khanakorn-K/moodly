@@ -7,7 +7,7 @@ import { CausesEntity } from "../../../share/entities/causesEntity";
 
 export const useLog = () => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
-  const [selectedCauses, setSelectedCauses] = useState<string[]>([]);
+  const [selectedCause, setSelectedCause] = useState<string | null>(null);
   const [note, setNote] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -15,7 +15,7 @@ export const useLog = () => {
   const [newCauseName, setNewCauseName] = useState("");
   const [isAddingCause, setIsAddingCause] = useState(false);
 
-  const activeMood = standartMoods.find((standartMoods) => standartMoods.value === selectedMood);
+  const activeMood = standartMoods.find((m) => m.value === selectedMood);
 
   const fetchmyCustomCauses = async () => {
     try {
@@ -49,10 +49,8 @@ export const useLog = () => {
       const targetCause = myCustomCauses.find((c) => c.id === id);
       await dataSourcesLog.deleteMyCauses(id);
       setMyCustomCauses((prev) => prev.filter((c) => c.id !== id));
-      if (targetCause) {
-        setSelectedCauses((prev) =>
-          prev.filter((name) => name !== targetCause.name),
-        );
+      if (targetCause && selectedCause === targetCause.name) {
+        setSelectedCause(null);
       }
     } catch (err) {
       console.error(err);
@@ -60,21 +58,19 @@ export const useLog = () => {
   };
 
   const toggleCause = (name: string) => {
-    setSelectedCauses((prev) =>
-      prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
-    );
+    setSelectedCause((prev) => (prev === name ? null : name));
   };
 
   const handleSubmit = async () => {
-    if (!selectedMood) return;
+    if (!selectedMood || !selectedCause) return;
     setIsSubmitting(true);
     try {
-      await dataSourcesLog.addMood(selectedMood, selectedCauses, note);
+      await dataSourcesLog.addMood(selectedMood, [selectedCause], note);
       setSubmitted(true);
       setTimeout(() => {
         setSubmitted(false);
         setSelectedMood(null);
-        setSelectedCauses([]);
+        setSelectedCause(null);
         setNote("");
       }, 2000);
     } catch (error) {
@@ -87,7 +83,7 @@ export const useLog = () => {
   return {
     selectedMood,
     setSelectedMood,
-    selectedCauses,
+    selectedCause,
     note,
     setNote,
     isSubmitting,

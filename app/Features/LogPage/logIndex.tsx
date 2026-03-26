@@ -20,7 +20,7 @@ export default function LogIndex() {
   const {
     selectedMood,
     setSelectedMood,
-    selectedCauses,
+    selectedCause,
     note,
     setNote,
     isSubmitting,
@@ -73,26 +73,26 @@ export default function LogIndex() {
             ระดับอารมณ์
           </p>
           <div className="flex gap-2.5">
-            {standartMoods.map((standartMoods) => {
-              const isActive = selectedMood === standartMoods.value;
+            {standartMoods.map((m) => {
+              const isActive = selectedMood === m.value;
               return (
                 <Button
-                  key={standartMoods.value}
-                  onClick={() => setSelectedMood(standartMoods.value)}
-                  style={{ borderColor: isActive ? moodColors[standartMoods.value] : "" }}
+                  key={m.value}
+                  onClick={() => setSelectedMood(m.value)}
+                  style={{ borderColor: isActive ? moodColors[m.value] : "" }}
                   className={`flex-1 flex flex-col items-center gap-2 py-4 h-auto rounded-[1.5rem] border transition-all duration-300
                     ${isActive ? "bg-white/[0.05] -translate-y-2 shadow-lg" : "border-white/[0.05] bg-transparent opacity-50 hover:opacity-100"}`}
                 >
                   <span
                     className={`text-3xl transition-transform duration-500 ${isActive ? "scale-110 rotate-6" : ""}`}
                   >
-                    {standartMoods.emoji}
+                    {m.emoji}
                   </span>
                   <span
                     className={`text-[10px] font-bold ${isActive ? "" : "text-white/40"}`}
-                    style={{ color: isActive ? moodColors[standartMoods.value] : "" }}
+                    style={{ color: isActive ? moodColors[m.value] : "" }}
                   >
-                    {standartMoods.label}
+                    {m.label}
                   </span>
                 </Button>
               );
@@ -103,7 +103,7 @@ export default function LogIndex() {
         <section className="mb-10">
           <div className="flex justify-between items-center mb-5">
             <p className="text-[11px] uppercase tracking-widest text-white/30 font-semibold ml-1">
-              สาเหตุที่ทำให้รู้สึกแบบนี้
+              สาเหตุหลักที่ทำให้รู้สึกแบบนี้
             </p>
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -171,7 +171,7 @@ export default function LogIndex() {
           </div>
           <div className="flex flex-wrap gap-2.5">
             {allCauses.map((c, index) => {
-              const isActive = selectedCauses.includes(c.name);
+              const isActive = selectedCause === c.name;
               return (
                 <Button
                   key={index}
@@ -205,13 +205,10 @@ export default function LogIndex() {
         <Button
           onClick={handleSubmit}
           disabled={
-            !selectedMood ||
-            selectedCauses.length === 0 ||
-            isSubmitting ||
-            submitted
+            !selectedMood || !selectedCause || isSubmitting || submitted
           }
           className={`group w-full py-7 h-auto rounded-[1.8rem] text-[15px] font-bold transition-all duration-500 relative overflow-hidden
-    ${submitted ? "bg-green-500 text-white" : selectedMood && selectedCauses.length > 0 ? "bg-white text-black hover:scale-[1.02] active:scale-[0.98]" : "bg-white/[0.05] text-white/20 cursor-not-allowed"}`}
+    ${submitted ? "bg-green-500 text-white" : selectedMood && selectedCause ? "bg-white text-black hover:scale-[1.02] active:scale-[0.98]" : "bg-white/[0.05] text-white/20 cursor-not-allowed"}`}
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             {submitted ? (
@@ -222,8 +219,8 @@ export default function LogIndex() {
               </>
             ) : !selectedMood ? (
               "เลือกอารมณ์ของคุณก่อน"
-            ) : selectedCauses.length === 0 ? (
-              "เลือกสาเหตุอย่างน้อย 1 อย่าง"
+            ) : !selectedCause ? (
+              "เลือกสาเหตุ 1 อย่าง"
             ) : (
               "บันทึกอารมณ์วันนี้"
             )}
