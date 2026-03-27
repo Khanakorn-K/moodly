@@ -199,7 +199,9 @@ function MoodOverviewCard({
               if (!newDate || newDate.getTime() === date?.getTime()) {
                 return;
               }
-              setDate(newDate);
+              const selectedDate = new Date(newDate);
+              selectedDate.setHours(0, 0, 0, 0);
+              setDate(selectedDate);
             }}
             className="w-full bg-transparent text-white border-none p-0"
           />

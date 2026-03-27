@@ -6,7 +6,7 @@ const dataSourceLandingPage = {
   getInsights: async (singleDate?: string): Promise<InsightsEntity> => {
     const response = await apiClient.get<InsightsModel>("/insights", {
       params: {
-        ...(singleDate ? { startDate: singleDate } : {}), // 💡 ถ้ามีค่าค่อยส่งไป ถ้าไม่มีก็ปล่อยว่าง
+        ...(singleDate ? { startDate: singleDate } : {}), 
       },
     });
     return new InsightsEntity(response);
