@@ -21,13 +21,10 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const startDateParam = searchParams.get("startDate");
 
-    // ใช้ any เพื่อ bypass ขีดแดงกรณีที่ DB เป็น String แต่เราจะกรองช่วงเวลาครับ
     let dateFilter: any = {};
 
     if (startDateParam) {
       const targetDate = new Date(startDateParam);
-
-      // แปลงเป็น ISO String เพื่อให้เปรียบเทียบกับ String ใน DB ได้ครับมาสเตอร์
       const startISO = new Date(
         new Date(targetDate).setHours(0, 0, 0, 0),
       ).toISOString();
@@ -36,7 +33,8 @@ export async function GET(req: NextRequest) {
       ).toISOString();
 
       dateFilter = {
-        date: {
+        createdAt: {
+          // แก้จาก createAt เป็น createdAt ตามที่ Error แจ้งครับ
           gte: startISO,
           lte: endISO,
         },
@@ -47,8 +45,6 @@ export async function GET(req: NextRequest) {
       where: {
         userId: user.id,
         ...dateFilter,
-        // เพิ่มเงื่อนไขให้แน่ใจว่ามี causes เพื่อไม่ให้ data เพี้ยนครับ
-        causes: { some: {} },
       },
       include: { causes: true },
     });

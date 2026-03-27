@@ -5,15 +5,38 @@ export function thaiDate(): string {
     month: "long",
   });
 }
-export function toThaiDate(date: Date | string): string {
-  const inputDate = typeof date === "string" ? new Date(date) : date;
+export function toThaiDate(date: Date | string | null | undefined): string {
+  if (!date) return "ไม่ระบุวันที่";
 
-  if (isNaN(inputDate.getTime())) return "วันที่ไม่ถูกต้อง";
+  let inputDate: Date;
+
+  if (typeof date === "string") {
+    const formattedDate = date.includes("T") ? date : date.replace(" ", "T");
+    inputDate = new Date(formattedDate);
+  } else {
+    inputDate = date as Date;
+  }
+
+  if (
+    !inputDate ||
+    typeof inputDate.getTime !== "function" ||
+    isNaN(inputDate.getTime())
+  ) {
+    return "วันที่ไม่ถูกต้อง";
+  }
 
   return inputDate.toLocaleDateString("th-TH", {
     weekday: "long",
     day: "numeric",
     month: "long",
-    year: "numeric", // เพิ่มปี พ.ศ. ให้สมบูรณ์ครับมาสเตอร์
+    year: "numeric",
   });
 }
+
+export const getThailandTime = (): string => {
+  const now = new Date();
+  const thailandOffset = 7 * 60 * 60 * 1000;
+  const thailandTime = new Date(now.getTime() + thailandOffset);
+
+  return thailandTime.toISOString();
+};

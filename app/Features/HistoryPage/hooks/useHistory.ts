@@ -152,10 +152,9 @@ export const useHistory = () => {
   };
 
   const toggleCause = (name: string) => {
-    setSelectedCauses((prev) =>
-      prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
-    );
+    setSelectedCauses([name]);
   };
+  
   const openEditModal = (log: moodsResultEntity) => {
     setEditItem(log);
     setEditNote(log.note);

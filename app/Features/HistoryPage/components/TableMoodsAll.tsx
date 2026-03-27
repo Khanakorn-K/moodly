@@ -154,7 +154,7 @@ const DraggableCard = ({ moodList, themeColor, emoji }: any) => {
             <div className="flex items-center gap-2">
               <span className="text-xs">{emoji}</span>
               <span className="text-[10px] text-white/20 font-black uppercase tracking-wider">
-                {toThaiDate(moodList.date)}
+                {toThaiDate(moodList.createdAt)}
               </span>
             </div>
             <p className="text-[11px] text-white/60 leading-relaxed line-clamp-3 italic">
@@ -182,7 +182,7 @@ const DraggableCard = ({ moodList, themeColor, emoji }: any) => {
               <MessageSquare size={10} className="text-white/20" />
             </div>
             <span className="text-[9px] text-white/20 font-bold">
-              {toThaiDate(moodList.date)}
+              {toThaiDate(moodList.createdAt)}
             </span>
           </div>
         </div>

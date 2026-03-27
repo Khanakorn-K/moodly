@@ -91,17 +91,14 @@ model MoodLog {
   userId String
   mood   Int
   note   String?
-  date   String
 
   user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   causes MoodLogCause[]
 
-  createdAt DateTime @default(now())
+  createdAt String
   updatedAt DateTime @updatedAt
 
-  @@unique([userId, date])
   @@index([userId])
-  @@index([userId, date])
 }
 
 model MoodLogCause {
@@ -115,10 +112,10 @@ model MoodLogCause {
 }
 
 model CustomCause {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   userId    String
   name      String
-  createdAt DateTime @default(now())
+  createdAt String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

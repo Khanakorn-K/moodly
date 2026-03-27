@@ -6,47 +6,31 @@ import { prisma } from "@/prisma.config";
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.email) {
+    if (!session?.user?.email)
       return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
-    }
 
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get("page") ?? "1");
     const limit = parseInt(searchParams.get("limit") ?? "10");
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
-    const moodParam = searchParams.get("mood");
-    const moodValue = moodParam ? parseInt(moodParam) : undefined;
+    const moodValue = searchParams.get("mood")
+      ? parseInt(searchParams.get("mood")!)
+      : undefined;
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
-
-    if (!user) {
+    if (!user)
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
-    }
-
-    const allUserLogs = await prisma.moodLog.findMany({
-      where: { userId: user.id },
-      include: { causes: true },
-    });
-
-    const emptyLogIds = allUserLogs
-      .filter((log) => log.causes.length === 0)
-      .map((log) => log.id);
-
-    if (emptyLogIds.length > 0) {
-      await prisma.moodLog.deleteMany({
-        where: { id: { in: emptyLogIds } },
-      });
-    }
 
     const where: any = {
       userId: user.id,
+      causes: { some: {} },
       ...(moodValue ? { mood: moodValue } : {}),
       ...(startDate || endDate
         ? {
-            date: {
+            createdAt: {
               ...(startDate
                 ? {
                     gte: new Date(
@@ -70,7 +54,7 @@ export async function GET(req: NextRequest) {
       prisma.moodLog.findMany({
         where,
         include: { causes: true },
-        orderBy: { date: "desc" },
+        orderBy: { createdAt: "desc" },
         skip: (page - 1) * limit,
         take: limit,
       }),
@@ -89,42 +73,28 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.email) {
+    if (!session?.user?.email)
       return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
-    }
 
-    const body = await req.json();
-    const { mood, causes, note } = body;
-    const moodInt = parseInt(mood);
-
-    if (isNaN(moodInt) || moodInt < 1 || moodInt > 5) {
-      return NextResponse.json({ error: "INVALID_MOOD" }, { status: 400 });
-    }
-
+    const { mood, causes, note, createdAt } = await req.json();
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
-
-    if (!user) {
+    if (!user)
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
-    }
-
-    const thailandTime = new Date(new Date().getTime() + 7 * 60 * 60 * 1000);
 
     const moodLog = await prisma.moodLog.create({
       data: {
         userId: user.id,
-        mood: moodInt,
+        mood: parseInt(mood),
         note: note ?? null,
-        date: thailandTime.toISOString(),
-        causes: {
-          create: (causes ?? []).map((cause: string) => ({ cause })),
-        },
+        createdAt: createdAt, // ใช้ค่าที่ส่งมาจาก getThailandTime() ของมาสเตอร์
+        causes: { create: (causes ?? []).map((cause: string) => ({ cause })) },
       },
       include: { causes: true },
     });
 
-    await updateStreak(user.id, thailandTime);
+    await updateStreak(user.id, createdAt);
     return NextResponse.json(moodLog, { status: 201 });
   } catch (error) {
     return NextResponse.json(
@@ -134,11 +104,11 @@ export async function POST(req: NextRequest) {
   }
 }
 
-async function updateStreak(userId: string, currentLocalTime: Date) {
-  const streak = await prisma.streak.findUnique({ where: { userId } });
+async function updateStreak(userId: string, currentLocalTime: string) {
   const today = new Date(currentLocalTime);
   today.setHours(0, 0, 0, 0);
 
+  const streak = await prisma.streak.findUnique({ where: { userId } });
   if (!streak) {
     await prisma.streak.create({
       data: { userId, currentStreak: 1, longestStreak: 1, lastLogDate: today },
@@ -148,7 +118,6 @@ async function updateStreak(userId: string, currentLocalTime: Date) {
 
   const lastLog = streak.lastLogDate ? new Date(streak.lastLogDate) : null;
   if (lastLog) lastLog.setHours(0, 0, 0, 0);
-
   if (lastLog?.getTime() === today.getTime()) return;
 
   const yesterday = new Date(today);
@@ -156,13 +125,11 @@ async function updateStreak(userId: string, currentLocalTime: Date) {
   const isYesterday = lastLog?.getTime() === yesterday.getTime();
 
   const newStreak = isYesterday ? streak.currentStreak + 1 : 1;
-  const newLongest = Math.max(newStreak, streak.longestStreak);
-
   await prisma.streak.update({
     where: { userId },
     data: {
       currentStreak: newStreak,
-      longestStreak: newLongest,
+      longestStreak: Math.max(newStreak, streak.longestStreak),
       lastLogDate: today,
     },
   });

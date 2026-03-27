@@ -84,7 +84,7 @@ const MoodHistoryList = ({
                         </span>
                       </h5>
                       <p className="text-[10px] text-white/30 font-medium">
-                        {toThaiDate(log.date)}
+                        {toThaiDate(log.createdAt)}
                       </p>
                     </div>
                     <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

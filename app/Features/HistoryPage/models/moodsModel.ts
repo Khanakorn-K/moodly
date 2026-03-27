@@ -8,7 +8,6 @@ export interface moodsModelResponseResult {
   userId: string;
   mood: string;
   note: string;
-  date: string;
   createdAt: string;
   updatedAt: string;
   causes: CauseModel[];

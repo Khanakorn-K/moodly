@@ -1,6 +1,7 @@
 import { apiClient } from "@/lib/api-client";
 import { CausesResponseModel } from "../../../share/models/causesResponseModel";
 import { CausesEntity } from "../../../share/entities/causesEntity";
+import { getThailandTime } from "@/utils/thaiDate";
 
 const dataSourcesLog = {
   addMood: async (
@@ -8,15 +9,19 @@ const dataSourcesLog = {
     selectedCauses: string[],
     note: string,
   ) => {
+    const createdAt = getThailandTime();
+
     return apiClient.post("/moods", {
       mood: selectedMood,
       causes: selectedCauses,
       note: note,
+      createdAt: createdAt,
     });
   },
 
   addCauses: async (name: string) => {
-    return apiClient.post("/causes", { name });
+    const createdAt = getThailandTime();
+    return apiClient.post("/causes", { name, createdAt });
   },
 
   getMyCauses: async (): Promise<CausesEntity[]> => {

@@ -6710,8 +6710,7 @@ export namespace Prisma {
     userId: string | null
     mood: number | null
     note: string | null
-    date: string | null
-    createdAt: Date | null
+    createdAt: string | null
     updatedAt: Date | null
   }
 
@@ -6720,8 +6719,7 @@ export namespace Prisma {
     userId: string | null
     mood: number | null
     note: string | null
-    date: string | null
-    createdAt: Date | null
+    createdAt: string | null
     updatedAt: Date | null
   }
 
@@ -6730,7 +6728,6 @@ export namespace Prisma {
     userId: number
     mood: number
     note: number
-    date: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6750,7 +6747,6 @@ export namespace Prisma {
     userId?: true
     mood?: true
     note?: true
-    date?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6760,7 +6756,6 @@ export namespace Prisma {
     userId?: true
     mood?: true
     note?: true
-    date?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6770,7 +6765,6 @@ export namespace Prisma {
     userId?: true
     mood?: true
     note?: true
-    date?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6867,8 +6861,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note: string | null
-    date: string
-    createdAt: Date
+    createdAt: string
     updatedAt: Date
     _count: MoodLogCountAggregateOutputType | null
     _avg: MoodLogAvgAggregateOutputType | null
@@ -6896,7 +6889,6 @@ export namespace Prisma {
     userId?: boolean
     mood?: boolean
     note?: boolean
-    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6909,7 +6901,6 @@ export namespace Prisma {
     userId?: boolean
     mood?: boolean
     note?: boolean
-    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6920,7 +6911,6 @@ export namespace Prisma {
     userId?: boolean
     mood?: boolean
     note?: boolean
-    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -6945,8 +6935,7 @@ export namespace Prisma {
       userId: string
       mood: number
       note: string | null
-      date: string
-      createdAt: Date
+      createdAt: string
       updatedAt: Date
     }, ExtArgs["result"]["moodLog"]>
     composites: {}
@@ -7347,8 +7336,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"MoodLog", 'String'>
     readonly mood: FieldRef<"MoodLog", 'Int'>
     readonly note: FieldRef<"MoodLog", 'String'>
-    readonly date: FieldRef<"MoodLog", 'String'>
-    readonly createdAt: FieldRef<"MoodLog", 'DateTime'>
+    readonly createdAt: FieldRef<"MoodLog", 'String'>
     readonly updatedAt: FieldRef<"MoodLog", 'DateTime'>
   }
     
@@ -8625,14 +8613,14 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     name: string | null
-    createdAt: Date | null
+    createdAt: string | null
   }
 
   export type CustomCauseMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     name: string | null
-    createdAt: Date | null
+    createdAt: string | null
   }
 
   export type CustomCauseCountAggregateOutputType = {
@@ -8742,7 +8730,7 @@ export namespace Prisma {
     id: string
     userId: string
     name: string
-    createdAt: Date
+    createdAt: string
     _count: CustomCauseCountAggregateOutputType | null
     _min: CustomCauseMinAggregateOutputType | null
     _max: CustomCauseMaxAggregateOutputType | null
@@ -8801,7 +8789,7 @@ export namespace Prisma {
       id: string
       userId: string
       name: string
-      createdAt: Date
+      createdAt: string
     }, ExtArgs["result"]["customCause"]>
     composites: {}
   }
@@ -9199,7 +9187,7 @@ export namespace Prisma {
     readonly id: FieldRef<"CustomCause", 'String'>
     readonly userId: FieldRef<"CustomCause", 'String'>
     readonly name: FieldRef<"CustomCause", 'String'>
-    readonly createdAt: FieldRef<"CustomCause", 'DateTime'>
+    readonly createdAt: FieldRef<"CustomCause", 'String'>
   }
     
 
@@ -11559,7 +11547,6 @@ export namespace Prisma {
     userId: 'userId',
     mood: 'mood',
     note: 'note',
-    date: 'date',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12061,8 +12048,7 @@ export namespace Prisma {
     userId?: StringFilter<"MoodLog"> | string
     mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
-    date?: StringFilter<"MoodLog"> | string
-    createdAt?: DateTimeFilter<"MoodLog"> | Date | string
+    createdAt?: StringFilter<"MoodLog"> | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
     causes?: MoodLogCauseListRelationFilter
@@ -12073,7 +12059,6 @@ export namespace Prisma {
     userId?: SortOrder
     mood?: SortOrder
     note?: SortOrderInput | SortOrder
-    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -12082,26 +12067,23 @@ export namespace Prisma {
 
   export type MoodLogWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId_date?: MoodLogUserIdDateCompoundUniqueInput
     AND?: MoodLogWhereInput | MoodLogWhereInput[]
     OR?: MoodLogWhereInput[]
     NOT?: MoodLogWhereInput | MoodLogWhereInput[]
     userId?: StringFilter<"MoodLog"> | string
     mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
-    date?: StringFilter<"MoodLog"> | string
-    createdAt?: DateTimeFilter<"MoodLog"> | Date | string
+    createdAt?: StringFilter<"MoodLog"> | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
     causes?: MoodLogCauseListRelationFilter
-  }, "id" | "userId_date">
+  }, "id">
 
   export type MoodLogOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     mood?: SortOrder
     note?: SortOrderInput | SortOrder
-    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MoodLogCountOrderByAggregateInput
@@ -12119,8 +12101,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"MoodLog"> | string
     mood?: IntWithAggregatesFilter<"MoodLog"> | number
     note?: StringNullableWithAggregatesFilter<"MoodLog"> | string | null
-    date?: StringWithAggregatesFilter<"MoodLog"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
+    createdAt?: StringWithAggregatesFilter<"MoodLog"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
   }
 
@@ -12176,7 +12157,7 @@ export namespace Prisma {
     id?: StringFilter<"CustomCause"> | string
     userId?: StringFilter<"CustomCause"> | string
     name?: StringFilter<"CustomCause"> | string
-    createdAt?: DateTimeFilter<"CustomCause"> | Date | string
+    createdAt?: StringFilter<"CustomCause"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -12196,7 +12177,7 @@ export namespace Prisma {
     NOT?: CustomCauseWhereInput | CustomCauseWhereInput[]
     userId?: StringFilter<"CustomCause"> | string
     name?: StringFilter<"CustomCause"> | string
-    createdAt?: DateTimeFilter<"CustomCause"> | Date | string
+    createdAt?: StringFilter<"CustomCause"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "userId_name">
 
@@ -12217,7 +12198,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"CustomCause"> | string
     userId?: StringWithAggregatesFilter<"CustomCause"> | string
     name?: StringWithAggregatesFilter<"CustomCause"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"CustomCause"> | Date | string
+    createdAt?: StringWithAggregatesFilter<"CustomCause"> | string
   }
 
   export type StreakWhereInput = {
@@ -12723,8 +12704,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutMoodsInput
     causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
@@ -12735,8 +12715,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
     causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
   }
@@ -12745,8 +12724,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMoodsNestedInput
     causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
@@ -12757,8 +12735,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
   }
@@ -12768,8 +12745,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
   }
 
@@ -12777,8 +12753,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12787,8 +12762,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12836,7 +12810,7 @@ export namespace Prisma {
   export type CustomCauseCreateInput = {
     id?: string
     name: string
-    createdAt?: Date | string
+    createdAt: string
     user: UserCreateNestedOneWithoutCustomCausesInput
   }
 
@@ -12844,13 +12818,13 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    createdAt?: Date | string
+    createdAt: string
   }
 
   export type CustomCauseUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutCustomCausesNestedInput
   }
 
@@ -12858,27 +12832,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomCauseCreateManyInput = {
     id?: string
     userId: string
     name: string
-    createdAt?: Date | string
+    createdAt: string
   }
 
   export type CustomCauseUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomCauseUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
   }
 
   export type StreakCreateInput = {
@@ -13444,17 +13418,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type MoodLogUserIdDateCompoundUniqueInput = {
-    userId: string
-    date: string
-  }
-
   export type MoodLogCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     mood?: SortOrder
     note?: SortOrder
-    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13468,7 +13436,6 @@ export namespace Prisma {
     userId?: SortOrder
     mood?: SortOrder
     note?: SortOrder
-    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13478,7 +13445,6 @@ export namespace Prisma {
     userId?: SortOrder
     mood?: SortOrder
     note?: SortOrder
-    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14390,8 +14356,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
     causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
   }
@@ -14400,8 +14365,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
     causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
   }
@@ -14442,13 +14406,13 @@ export namespace Prisma {
   export type CustomCauseCreateWithoutUserInput = {
     id?: string
     name: string
-    createdAt?: Date | string
+    createdAt: string
   }
 
   export type CustomCauseUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    createdAt?: Date | string
+    createdAt: string
   }
 
   export type CustomCauseCreateOrConnectWithoutUserInput = {
@@ -14577,8 +14541,7 @@ export namespace Prisma {
     userId?: StringFilter<"MoodLog"> | string
     mood?: IntFilter<"MoodLog"> | number
     note?: StringNullableFilter<"MoodLog"> | string | null
-    date?: StringFilter<"MoodLog"> | string
-    createdAt?: DateTimeFilter<"MoodLog"> | Date | string
+    createdAt?: StringFilter<"MoodLog"> | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
   }
 
@@ -14634,7 +14597,7 @@ export namespace Prisma {
     id?: StringFilter<"CustomCause"> | string
     userId?: StringFilter<"CustomCause"> | string
     name?: StringFilter<"CustomCause"> | string
-    createdAt?: DateTimeFilter<"CustomCause"> | Date | string
+    createdAt?: StringFilter<"CustomCause"> | string
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -14990,8 +14953,7 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutMoodsInput
   }
@@ -15001,8 +14963,7 @@ export namespace Prisma {
     userId: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
   }
 
@@ -15026,8 +14987,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMoodsNestedInput
   }
@@ -15037,8 +14997,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15333,15 +15292,14 @@ export namespace Prisma {
     id?: string
     mood: number
     note?: string | null
-    date: string
-    createdAt?: Date | string
+    createdAt: string
     updatedAt?: Date | string
   }
 
   export type CustomCauseCreateManyUserInput = {
     id?: string
     name: string
-    createdAt?: Date | string
+    createdAt: string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -15444,8 +15402,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
   }
@@ -15454,8 +15411,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
   }
@@ -15464,27 +15420,26 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     mood?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CustomCauseUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomCauseUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
   }
 
   export type CustomCauseUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: StringFieldUpdateOperationsInput | string
   }
 
   export type MoodLogCauseCreateManyMoodLogInput = {

@@ -118,10 +118,11 @@ export default function HistoryIndex() {
             <div className="flex flex-wrap gap-2">
               <Button
                 onClick={() => handleFilterChange({ mood: null })}
-                className={`px-6 py-2 h-11 rounded-2xl text-[11px] font-bold transition-all border ${!mood
-                  ? "bg-[#FFD166] text-black border-[#FFD166] shadow-lg shadow-[#FFD166]/10"
-                  : "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
-                  }`}
+                className={`px-6 py-2 h-11 rounded-2xl text-[11px] font-bold transition-all border ${
+                  !mood
+                    ? "bg-[#FFD166] text-black border-[#FFD166] shadow-lg shadow-[#FFD166]/10"
+                    : "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
+                }`}
               >
                 All Moods
               </Button>
@@ -137,16 +138,17 @@ export default function HistoryIndex() {
                     style={
                       isActive
                         ? {
-                          backgroundColor: mColor,
-                          borderColor: mColor,
-                          color: "#000",
-                        }
+                            backgroundColor: mColor,
+                            borderColor: mColor,
+                            color: "#000",
+                          }
                         : {}
                     }
-                    className={`px-5 py-2 h-11 rounded-2xl text-[11px] font-bold border transition-all ${!isActive
-                      ? "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
-                      : "shadow-lg"
-                      }`}
+                    className={`px-5 py-2 h-11 rounded-2xl text-[11px] font-bold border transition-all ${
+                      !isActive
+                        ? "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
+                        : "shadow-lg"
+                    }`}
                   >
                     {standartMoods.emoji} {standartMoods.label}
                   </Button>
@@ -226,7 +228,6 @@ export default function HistoryIndex() {
                 <X size={20} />
               </button>
             </div>
-
             <div className="grid grid-cols-5 gap-3">
               {standartMoods.map((standartMoods) => {
                 const isSelected = editMood === standartMoods.value;
@@ -240,44 +241,45 @@ export default function HistoryIndex() {
                         ? { backgroundColor: mColor, color: "#000" }
                         : {}
                     }
-                    className={`aspect-square rounded-2xl flex items-center justify-center text-lg transition-all transform active:scale-95 ${!isSelected
-                      ? "bg-white/5 text-white/20 hover:bg-white/10"
-                      : "font-black shadow-xl scale-110"
-                      }`}
+                    className={`aspect-square rounded-2xl flex items-center justify-center text-lg transition-all transform active:scale-95 ${
+                      !isSelected
+                        ? "bg-white/5 text-white/20 hover:bg-white/10"
+                        : "font-black shadow-xl scale-110"
+                    }`}
                   >
                     {standartMoods.emoji}
                   </button>
                 );
               })}
             </div>
-
             <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
               {allCauses.map((c, index) => {
                 const isActive = selectedCauses.includes(c.name);
+
                 return (
                   <Button
                     key={index}
-                    onClick={() => toggleCause(c.name)}
+                    onClick={() => {
+                      toggleCause(c.name);
+                    }}
                     className={`px-4 py-2 h-auto rounded-xl border text-[10px] font-bold uppercase tracking-wider transition-all duration-300
-                    ${isActive ? "bg-white text-black border-white shadow-xl" : "border-white/5 text-white/30 bg-white/5 hover:border-white/20 hover:text-white"}`}
+        ${isActive ? "bg-white text-black border-white shadow-xl" : "border-white/5 text-white/30 bg-white/5 hover:border-white/20 hover:text-white"}`}
                   >
                     {c.name}
                   </Button>
                 );
               })}
             </div>
-
             <textarea
               className="w-full bg-black/40 border border-white/5 rounded-[2rem] p-5 text-sm text-white h-36 resize-none focus:outline-none focus:ring-2 focus:ring-white/10 placeholder:text-white/10"
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
               placeholder="What's on your mind, master?"
             />
-
             <Button
               onClick={handleSave}
-              disabled={!editMood || selectedCauses.length === 0}
-              className="w-full bg-[#FFD166] hover:bg-[#FFD166]/90 text-black font-black uppercase tracking-widest rounded-2xl h-14 shadow-2xl disabled:opacity-20 disabled:cursor-not-allowed transition-all transform active:scale-[0.98]"
+              disabled={!editMood || selectedCauses.length !== 1}
+              className="..."
             >
               {editItem ? "Confirm Changes" : "Create Entry"}
             </Button>

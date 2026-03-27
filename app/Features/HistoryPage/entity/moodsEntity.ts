@@ -19,18 +19,16 @@ export class moodsResultEntity {
   userId: string;
   mood: string;
   note: string;
-  date: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   causes: CauseEntity[];
   constructor(data: moodsModelResponseResult) {
     this.id = data.id;
     this.userId = data.userId;
     this.mood = data.mood;
     this.note = data.note ?? "";
-    this.date = new Date(data.date);
-    this.createdAt = new Date(data.createdAt);
-    this.updatedAt = new Date(data.updatedAt);
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
     this.causes = (data.causes ?? []).map((c: any) => new CauseEntity(c));
   }
 }

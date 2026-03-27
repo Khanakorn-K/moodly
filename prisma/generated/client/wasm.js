@@ -178,7 +178,6 @@ exports.Prisma.MoodLogScalarFieldEnum = {
   userId: 'userId',
   mood: 'mood',
   note: 'note',
-  date: 'date',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

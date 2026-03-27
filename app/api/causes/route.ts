@@ -13,7 +13,7 @@ export async function GET() {
   });
 
   const causes = await prisma.customCause.findMany({
-    where: { userId: user?.id }, // 💡 ดึงเฉพาะ id ของ User คนที่ Login เท่านั้น
+    where: { userId: user?.id },
     orderBy: { createdAt: "desc" },
   });
 
@@ -33,12 +33,12 @@ export async function POST(req: NextRequest) {
     if (!user)
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
 
-    const { name } = await req.json();
+    const { name, createAt } = await req.json();
     if (!name)
       return NextResponse.json({ error: "MISSING_NAME" }, { status: 400 });
 
     const newCause = await prisma.customCause.create({
-      data: { name, userId: user.id },
+      data: { name, userId: user.id, createdAt: createAt },
     });
 
     return NextResponse.json(newCause, { status: 201 });
