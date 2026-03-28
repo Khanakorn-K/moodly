@@ -124,7 +124,7 @@ export default function HistoryIndex() {
                     : "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
                 }`}
               >
-                All Moods
+                ทั้งหมด
               </Button>
               {standartMoods.map((standartMoods) => {
                 const isActive = mood === String(standartMoods.value);

@@ -16,10 +16,11 @@ import {
   MessageSquare,
   Link as LinkIcon,
 } from "lucide-react";
-import { standartMoods } from "@/app/share/moodType";
+import { MoodType, standartMoods } from "@/app/share/moodType";
 import { moodColors } from "@/app/share/moodColors";
-import { moodsEntity } from "../entity/moodsEntity";
+import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
 import { toThaiDate } from "@/utils/thaiDate";
+import { CausesEntity } from "@/app/share/entities/causesEntity";
 
 interface TableMoodsAllProps {
   moodList: moodsEntity | null;
@@ -56,7 +57,7 @@ const TableMoodsAll = ({
             <Column
               key={standartMoods.value}
               column={standartMoods}
-              moods={filteredData}
+              moodsList={filteredData}
               isLoading={isListLoading}
             />
           );
@@ -66,7 +67,13 @@ const TableMoodsAll = ({
   );
 };
 
-const Column = ({ column, moods, isLoading }: any) => {
+interface columnProps {
+  column: MoodType;
+  moodsList: moodsResultEntity[];
+  isLoading: boolean;
+}
+
+const Column = ({ column, moodsList, isLoading }: columnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id: String(column.value) });
   const themeColor =
     moodColors[column.value as keyof typeof moodColors] || "#white";
@@ -80,7 +87,7 @@ const Column = ({ column, moods, isLoading }: any) => {
             {column.label}
           </h3>
           <span className="text-[10px] px-2 py-0.5 rounded-lg bg-white/5 text-white/20 font-bold">
-            {moods.length}
+            {moodsList.length}
           </span>
         </div>
         <div className="flex gap-1">
@@ -96,16 +103,16 @@ const Column = ({ column, moods, isLoading }: any) => {
           isOver ? "bg-white/[0.04] border-white/5 shadow-2xl" : "bg-black/20"
         }`}
       >
-        {moods.map((moodList: any) => (
+        {moodsList.map((mood: moodsResultEntity) => (
           <DraggableCard
-            key={moodList.id}
-            moodList={moodList}
+            key={mood.id}
+            moodList={mood}
             themeColor={themeColor}
             emoji={column.emoji}
           />
         ))}
 
-        {!isLoading && moods.length === 0 && (
+        {!isLoading && moodsList.length === 0 && (
           <div className="h-32 border border-dashed border-white/5 rounded-[1.5rem] flex items-center justify-center">
             <span className="text-[10px] text-white/10 font-black uppercase tracking-widest">
               Empty Space
@@ -117,7 +124,13 @@ const Column = ({ column, moods, isLoading }: any) => {
   );
 };
 
-const DraggableCard = ({ moodList, themeColor, emoji }: any) => {
+interface draggableCardProps {
+  moodList: moodsResultEntity;
+  themeColor: string;
+  emoji: string;
+}
+
+const DraggableCard = ({ moodList, themeColor, emoji }: draggableCardProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: String(moodList.id),
@@ -158,19 +171,19 @@ const DraggableCard = ({ moodList, themeColor, emoji }: any) => {
               </span>
             </div>
             <p className="text-[11px] text-white/60 leading-relaxed line-clamp-3 italic">
-              {moodList.note || "No additional notes..."}
+              {moodList.note || ""}
             </p>
           </div>
         </div>
 
         {moodList.causes && moodList.causes.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
-            {moodList.causes.map((c: any) => (
+            {moodList.causes.map((causes) => (
               <span
-                key={c.id}
+                key={causes.id}
                 className="px-2.5 py-1 rounded-lg text-[9px] font-bold bg-white/5 text-white/30 border border-white/5 uppercase tracking-tighter"
               >
-                # {c.cause}
+                # {causes.cause}
               </span>
             ))}
           </div>

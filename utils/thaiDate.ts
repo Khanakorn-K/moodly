@@ -34,9 +34,5 @@ export function toThaiDate(date: Date | string | null | undefined): string {
 }
 
 export const getThailandTime = (): string => {
-  const now = new Date();
-  const thailandOffset = 7 * 60 * 60 * 1000;
-  const thailandTime = new Date(now.getTime() + thailandOffset);
-
-  return thailandTime.toISOString();
+  return new Date().toISOString();
 };

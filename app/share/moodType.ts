@@ -1,4 +1,4 @@
-interface MoodType {
+export interface MoodType {
   value: number;
   emoji: string;
   label: string;

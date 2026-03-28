@@ -10,7 +10,7 @@ const dataSourcesLog = {
     note: string,
   ) => {
     const createdAt = getThailandTime();
-
+    console.log("createdAt ==", createdAt);
     return apiClient.post("/moods", {
       mood: selectedMood,
       causes: selectedCauses,
@@ -21,6 +21,7 @@ const dataSourcesLog = {
 
   addCauses: async (name: string) => {
     const createdAt = getThailandTime();
+
     return apiClient.post("/causes", { name, createdAt });
   },
 

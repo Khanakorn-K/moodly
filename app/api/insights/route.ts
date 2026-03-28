@@ -24,19 +24,13 @@ export async function GET(req: NextRequest) {
     let dateFilter: any = {};
 
     if (startDateParam) {
-      const targetDate = new Date(startDateParam);
-      const startISO = new Date(
-        new Date(targetDate).setHours(0, 0, 0, 0),
-      ).toISOString();
-      const endISO = new Date(
-        new Date(targetDate).setHours(23, 59, 59, 999),
-      ).toISOString();
+      const start = new Date(`${startDateParam}T00:00:00+07:00`);
+      const end = new Date(`${startDateParam}T23:59:59+07:00`);
 
       dateFilter = {
         createdAt: {
-          // แก้จาก createAt เป็น createdAt ตามที่ Error แจ้งครับ
-          gte: startISO,
-          lte: endISO,
+          gte: start.toISOString(),
+          lte: end.toISOString(),
         },
       };
     }
