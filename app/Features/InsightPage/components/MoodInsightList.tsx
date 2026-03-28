@@ -6,21 +6,21 @@ import React from "react";
 import { moodsEntity } from "../entity/moodsEntity";
 import { moodColors } from "@/app/share/moodColors";
 import { standartMoods } from "@/app/share/moodType";
-import { toThaiDate } from "@/utils/thaiDate";
+import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
 
-interface MoodHistoryListProps {
+interface MoodInsightListProps {
   isListLoading: boolean;
   moodList: moodsEntity | null;
   openEditModal: (log: any) => void;
   handleDelete: (id: string) => void;
 }
 
-const MoodHistoryList = ({
+const MoodInsightList = ({
   isListLoading,
   moodList,
   openEditModal,
   handleDelete,
-}: MoodHistoryListProps) => {
+}: MoodInsightListProps) => {
   return (
     <div className="space-y-3">
       {isListLoading ? (
@@ -84,7 +84,7 @@ const MoodHistoryList = ({
                         </span>
                       </h5>
                       <p className="text-[10px] text-white/30 font-medium">
-                        {toThaiDate(log.createdAt)}
+                        {convertDateToThaiDateFormat(log.createdAt)}
                       </p>
                     </div>
                     <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -106,9 +106,9 @@ const MoodHistoryList = ({
                   {/* ส่วนการแสดง Tag สาเหตุ */}
                   {log.causes && log.causes.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
-                      {log.causes.map((c: any) => (
+                      {log.causes.map((c, index) => (
                         <Badge
-                          key={c.id}
+                          key={index}
                           variant="outline"
                           className="text-[9px] border-none bg-white/5 px-2 py-0"
                           style={{ color: `${themeColor}CC` }}
@@ -149,4 +149,4 @@ const MoodHistoryList = ({
   );
 };
 
-export default MoodHistoryList;
+export default MoodInsightList;

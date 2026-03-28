@@ -1,10 +1,10 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/cors/lib/api-client";
 import { moodsModelResponse } from "../models/moodsModel";
 import { moodsEntity } from "../entity/moodsEntity";
 import { CausesEntity } from "../../../share/entities/causesEntity";
 import { CausesResponseModel } from "../../../share/models/causesResponseModel";
 
-const dataSourceHistory = {
+const dataSourceInsights = {
   getMoods: async (
     page: number = 1,
     limit: number = 10,
@@ -41,4 +41,4 @@ const dataSourceHistory = {
   },
 };
 
-export default dataSourceHistory;
+export default dataSourceInsights;

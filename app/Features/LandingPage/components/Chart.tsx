@@ -58,7 +58,7 @@ const Chart = ({ data }: ChartProps) => {
         // 💡 ดึง Date จากข้อมูลแท่งแรก (เพราะทุกแท่งมี Date เดียวกันจากการเลือกในปฏิทิน)
         const selectedDate = data[0]?.date;
 
-        let url = `/history?mood=${moodValue}`;
+        let url = `/insight?mood=${moodValue}`;
 
         if (selectedDate) {
           const dateString = new Date(

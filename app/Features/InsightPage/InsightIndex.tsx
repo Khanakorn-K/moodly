@@ -13,15 +13,15 @@ import {
   Filter,
   RotateCcw,
 } from "lucide-react";
-import { useHistory } from "./hooks/useHistory";
 import { standartMoods, stadartCauses } from "@/app/share/moodType";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/share/moodColors";
-import MoodHistoryList from "./components/MoodHistoryList";
+import MoodInsightList from "./components/MoodInsightList";
 import TablestandartMoodsAll from "./components/TableMoodsAll";
 import TableMoodsAll from "./components/TableMoodsAll";
+import { useInsight } from "./hooks/useInsight";
 
-export default function HistoryIndex() {
+export default function InsightIndex() {
   const {
     moodList,
     isInitialLoading,
@@ -49,7 +49,7 @@ export default function HistoryIndex() {
     myCustomCauses,
     selectedCauses,
     toggleCause,
-  } = useHistory();
+  } = useInsight();
 
   const allCauses = [
     ...stadartCauses.map((c) => ({ name: c.label })),
@@ -70,7 +70,7 @@ export default function HistoryIndex() {
         <div className="flex justify-between items-end px-2">
           <div className="space-y-1">
             <h1 className="text-3xl font-black text-white tracking-tight font-outfit uppercase">
-              Mood History
+              Mood Insight
             </h1>
             <p className="text-xs text-white/20 font-bold tracking-[0.2em] uppercase">
               Total {moodList?.total ?? 0} Records
@@ -82,14 +82,14 @@ export default function HistoryIndex() {
             onClick={() => router.push(pathname)}
             className="text-white/30 hover:text-white hover:bg-white/5 text-[10px] font-bold uppercase tracking-wider"
           >
-            <RotateCcw size={14} className="mr-2" /> Reset Filters
+            <RotateCcw size={14} className="mr-2" /> ล้างค่า
           </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#16161E]/50 border border-white/5 rounded-[2.5rem] p-6 shadow-2xl backdrop-blur-md">
           <div className="lg:col-span-4 space-y-3">
             <div className="flex items-center gap-2 text-[10px] text-white/20 uppercase font-black tracking-widest ml-1">
-              <Calendar size={12} className="text-[#FFD166]" /> Date Range
+              <Calendar size={12} className="text-[#FFD166]" /> เลือกวัน
             </div>
             <div className="flex gap-3">
               <Input
@@ -98,7 +98,7 @@ export default function HistoryIndex() {
                 onChange={(e) =>
                   handleFilterChange({ startDate: e.target.value })
                 }
-                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-[#FFD166]/30"
+                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-[#FFD166]/30 [color-scheme:dark]"
               />
               <Input
                 type="date"
@@ -106,7 +106,7 @@ export default function HistoryIndex() {
                 onChange={(e) =>
                   handleFilterChange({ endDate: e.target.value })
                 }
-                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-[#FFD166]/30"
+                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-[#FFD166]/30 [color-scheme:dark]"
               />
             </div>
           </div>
@@ -166,7 +166,7 @@ export default function HistoryIndex() {
               isListLoading={isListLoading}
             />
           ) : (
-            <MoodHistoryList
+            <MoodInsightList
               moodList={moodList}
               isListLoading={isListLoading}
               openEditModal={openEditModal}
@@ -215,10 +215,10 @@ export default function HistoryIndex() {
             <div className="flex justify-between items-center">
               <div className="space-y-1">
                 <h3 className="text-xl font-black text-white uppercase tracking-tight">
-                  {editItem ? "Edit Record" : "New Record"}
+                  {editItem ? "ปรับปรุง" : ""}
                 </h3>
                 <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest">
-                  Update your status มาสเตอร์
+                  ปรับปรุงสถานะ
                 </p>
               </div>
               <button

@@ -8,10 +8,6 @@ generator client {
   output   = "./generated/client"
 }
 
-// ===========================
-// Auth (NextAuth)
-// ===========================
-
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -82,33 +78,16 @@ model Authenticator {
   @@id([userId, credentialID])
 }
 
-// ===========================
-// Mood Log
-// ===========================
-
 model MoodLog {
-  id     String  @id @default(cuid())
-  userId String
-  mood   Int
-  note   String?
-
-  user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  causes MoodLogCause[]
-
+  id        String   @id @default(cuid())
+  userId    String
+  mood      Int
+  note      String?
   createdAt String
   updatedAt DateTime @updatedAt
 
-  @@index([userId])
-}
-
-model MoodLogCause {
-  id        String @id @default(cuid())
-  moodLogId String
-  cause     String
-
-  moodLog MoodLog @relation(fields: [moodLogId], references: [id], onDelete: Cascade)
-
-  @@index([moodLogId])
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  causes String[]
 }
 
 model CustomCause {
@@ -122,10 +101,6 @@ model CustomCause {
   @@unique([userId, name])
   @@index([userId])
 }
-
-// ===========================
-// Streak
-// ===========================
 
 model Streak {
   id            String    @id @default(cuid())

@@ -19,7 +19,7 @@ import {
 import { MoodType, standartMoods } from "@/app/share/moodType";
 import { moodColors } from "@/app/share/moodColors";
 import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
-import { toThaiDate } from "@/utils/thaiDate";
+import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
 import { CausesEntity } from "@/app/share/entities/causesEntity";
 
 interface TableMoodsAllProps {
@@ -167,7 +167,7 @@ const DraggableCard = ({ moodList, themeColor, emoji }: draggableCardProps) => {
             <div className="flex items-center gap-2">
               <span className="text-xs">{emoji}</span>
               <span className="text-[10px] text-white/20 font-black uppercase tracking-wider">
-                {toThaiDate(moodList.createdAt)}
+                {convertDateToThaiDateFormat(moodList.createdAt)}
               </span>
             </div>
             <p className="text-[11px] text-white/60 leading-relaxed line-clamp-3 italic">
@@ -195,7 +195,7 @@ const DraggableCard = ({ moodList, themeColor, emoji }: draggableCardProps) => {
               <MessageSquare size={10} className="text-white/20" />
             </div>
             <span className="text-[9px] text-white/20 font-bold">
-              {toThaiDate(moodList.createdAt)}
+              {convertDateToThaiDateFormat(moodList.createdAt)}
             </span>
           </div>
         </div>

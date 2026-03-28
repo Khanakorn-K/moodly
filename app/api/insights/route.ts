@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/cors/lib/auth";
 import { prisma } from "@/prisma.config";
 
 export async function GET(req: NextRequest) {
@@ -18,19 +18,22 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
     }
 
-    const { searchParams } = new URL(req.url);
-    const startDateParam = searchParams.get("startDate");
+    const selectedDate = req.nextUrl.searchParams.get("selectedDate");
 
     let dateFilter: any = {};
 
-    if (startDateParam) {
-      const start = new Date(`${startDateParam}T00:00:00+07:00`);
-      const end = new Date(`${startDateParam}T23:59:59+07:00`);
+    if (selectedDate) {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(selectedDate)) {
+        return NextResponse.json(
+          { error: "INVALID_DATE_FORMAT" },
+          { status: 400 },
+        );
+      }
 
       dateFilter = {
         createdAt: {
-          gte: start.toISOString(),
-          lte: end.toISOString(),
+          startsWith: selectedDate,
         },
       };
     }
@@ -40,7 +43,6 @@ export async function GET(req: NextRequest) {
         userId: user.id,
         ...dateFilter,
       },
-      include: { causes: true },
     });
 
     const moodDistribution = logs.reduce(
@@ -55,17 +57,20 @@ export async function GET(req: NextRequest) {
     const causesAnalysis: Record<string, Record<string, number>> = {};
 
     logs.forEach((log) => {
-      log.causes.forEach((causeRecord) => {
-        const cause = causeRecord.cause;
-        const moodKey = String(log.mood);
+      if (log.causes && Array.isArray(log.causes)) {
+        log.causes.forEach((cause) => {
+          if (!cause) return;
 
-        if (!causesAnalysis[cause]) {
-          causesAnalysis[cause] = {};
-        }
+          const moodKey = String(log.mood);
 
-        causesAnalysis[cause][moodKey] =
-          (causesAnalysis[cause][moodKey] || 0) + 1;
-      });
+          if (!causesAnalysis[cause]) {
+            causesAnalysis[cause] = {};
+          }
+
+          causesAnalysis[cause][moodKey] =
+            (causesAnalysis[cause][moodKey] || 0) + 1;
+        });
+      }
     });
 
     return NextResponse.json(

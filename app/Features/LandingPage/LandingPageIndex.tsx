@@ -10,7 +10,7 @@ import Chart from "./components/Chart";
 import useLandingPage from "./hooks/useLandingPage";
 import Causes from "./components/Causes";
 import { Calendar } from "@/components/ui/calendar";
-import { toThaiDate } from "@/utils/thaiDate";
+import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
 import { InsightsEntity } from "./entity/InsightsEntity";
 
@@ -177,10 +177,10 @@ function MoodOverviewCard({
           {isLoading ? (
             <DynamicSkeleton width="150px" height="16px" />
           ) : (
-            `ภาพรวมอารมณ์ ${date ? toThaiDate(date) : ""}`
+            `ภาพรวมอารมณ์ ${date ? convertDateToThaiDateFormat(date) : ""}`
           )}
         </CardTitle>
-        <Link href="/history">
+        <Link href="/insight">
           <ChevronRight size={16} className="text-[#FFD166]" />
         </Link>
       </CardHeader>
@@ -211,7 +211,8 @@ function MoodOverviewCard({
               {isLoading ? (
                 <DynamicSkeleton width="150px" height="16px" />
               ) : (
-                date && `ค่าเฉลี่ยอารมณ์ของคุณใน ${toThaiDate(date)}`
+                date &&
+                `ค่าเฉลี่ยอารมณ์ของคุณใน ${convertDateToThaiDateFormat(date)}`
               )}
             </span>
             <span

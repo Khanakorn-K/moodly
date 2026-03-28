@@ -4,6 +4,7 @@ import dataSourceLandingPage from "../services/dataSourceLandingPage";
 import { InsightsEntity } from "../entity/InsightsEntity";
 import { standartMoods } from "../../../share/moodType";
 import { moodColors } from "@/app/share/moodColors";
+import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
 
 const useLandingPage = () => {
   const { data: session, status } = useSession();
@@ -19,11 +20,7 @@ const useLandingPage = () => {
       setIsLoading(true);
 
       try {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        const dateString = `${year}-${month}-${day}`;
-
+        const dateString = convertDateToYYMMDD(date); // ผลลัพธ์: "2026-05-07"
         const entity = await dataSourceLandingPage.getInsights(dateString);
         setData(entity);
       } catch (error) {

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import HistoryIndex from "../Features/HistoryPage/HistoryIndex";
+import InsightIndex from "../Features/InsightPage/InsightIndex";
 
 const page = () => {
   return (
@@ -10,7 +10,7 @@ const page = () => {
         </div>
       }
     >
-      <HistoryIndex />
+      <InsightIndex />
     </Suspense>
   );
 };

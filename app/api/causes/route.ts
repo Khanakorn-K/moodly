@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/cors/lib/auth";
 import { prisma } from "@/prisma.config";
 
 export async function GET() {
@@ -33,12 +33,12 @@ export async function POST(req: NextRequest) {
     if (!user)
       return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
 
-    const { name, createAt } = await req.json();
+    const { name, createdAt } = await req.json();
     if (!name)
       return NextResponse.json({ error: "MISSING_NAME" }, { status: 400 });
 
     const newCause = await prisma.customCause.create({
-      data: { name, userId: user.id, createdAt: createAt },
+      data: { name, userId: user.id, createdAt: createdAt },
     });
 
     return NextResponse.json(newCause, { status: 201 });

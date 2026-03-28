@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import dataSoruceHistory from "../services/dataSoruceHistory";
+import dataSourceInsights from "../services/dataSourceInsights";
 import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
 import { CausesEntity } from "@/app/share/entities/causesEntity";
 import { standartMoods } from "@/app/share/moodType";
 
-export const useHistory = () => {
+export const useInsight = () => {
   const { status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -37,7 +37,7 @@ export const useHistory = () => {
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const fetchHistory = async (isInitial: boolean = false) => {
+  const fetchInsight = async (isInitial: boolean = false) => {
     if (status !== "authenticated") return;
 
     if (isInitial) {
@@ -47,7 +47,7 @@ export const useHistory = () => {
     }
 
     try {
-      const entity = await dataSoruceHistory.getMoods(
+      const entity = await dataSourceInsights.getMoods(
         page,
         limit,
         mood,
@@ -66,7 +66,7 @@ export const useHistory = () => {
   const fetchMyCauses = async () => {
     if (status !== "authenticated") return;
     try {
-      const entity = await dataSoruceHistory.getMyCauses();
+      const entity = await dataSourceInsights.getMyCauses();
       setMyCustomCauses(entity);
     } catch (error) {
       console.error(error);
@@ -95,13 +95,13 @@ export const useHistory = () => {
 
   useEffect(() => {
     const isFirstLoad = !moodList;
-    fetchHistory(isFirstLoad);
+    fetchInsight(isFirstLoad);
   }, [page, status, mood, startDate, endDate]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("ต้องการลบบันทึกนี้ใช่หรือไม่?")) return;
-    await dataSoruceHistory.deleteMood(id);
-    fetchHistory();
+    await dataSourceInsights.deleteMood(id);
+    fetchInsight();
   };
   const handleDragEnd = async (event: any) => {
     const { active, over } = event;
@@ -127,13 +127,13 @@ export const useHistory = () => {
         (item) => String(item.id) === logId,
       );
 
-      await dataSoruceHistory.updateMood(logId, {
+      await dataSourceInsights.updateMood(logId, {
         mood: newMoodValue,
         note: originalLog?.note || "",
         causes: originalLog?.causes?.map((c: any) => c.cause) || [],
       });
 
-      // await fetchHistory();
+      // await fetchInsight();
     } catch (error) {
       console.error("อัปเดตพลาดครับ:", error);
       setMoodList(previousMoodList);
@@ -142,19 +142,19 @@ export const useHistory = () => {
   };
   const handleSave = async () => {
     if (!editItem || editMood === undefined) return;
-    await dataSoruceHistory.updateMood(editItem.id, {
+    await dataSourceInsights.updateMood(editItem.id, {
       note: editNote,
       mood: editMood,
       causes: selectedCauses,
     });
     setIsModalOpen(false);
-    fetchHistory();
+    fetchInsight();
   };
 
   const toggleCause = (name: string) => {
     setSelectedCauses([name]);
   };
-  
+
   const openEditModal = (log: moodsResultEntity) => {
     setEditItem(log);
     setEditNote(log.note);

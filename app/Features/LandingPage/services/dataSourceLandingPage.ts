@@ -1,12 +1,12 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/cors/lib/api-client";
 import { InsightsModel } from "../models/InsightsModel";
 import { InsightsEntity } from "../entity/InsightsEntity";
 
 const dataSourceLandingPage = {
-  getInsights: async (singleDate?: string): Promise<InsightsEntity> => {
+  getInsights: async (selectedDate?: string): Promise<InsightsEntity> => {
     const response = await apiClient.get<InsightsModel>("/insights", {
       params: {
-        ...(singleDate ? { startDate: singleDate } : {}), 
+        ...(selectedDate ? { selectedDate: selectedDate } : {}),
       },
     });
     return new InsightsEntity(response);

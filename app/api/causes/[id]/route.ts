@@ -1,6 +1,8 @@
+// ไฟล์จัดการ Custom Causes (PATCH, DELETE)
+
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/cors/lib/auth";
 import { prisma } from "@/prisma.config";
 
 export async function PATCH(
@@ -50,24 +52,54 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const { id } = await params;
-  const causeToDelete = await prisma.customCause.findUnique({
-    where: { id: id },
-  });
+  try {
+    const { id } = await params;
+    const session = await getServerSession(authOptions);
 
-  if (!causeToDelete)
-    return NextResponse.json({ error: "ไม่เจอข้อมูล" }, { status: 404 });
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
+    }
 
-  await prisma.$transaction([
-    prisma.moodLogCause.deleteMany({
-      where: {
-        cause: causeToDelete.name,
-      },
-    }),
-    prisma.customCause.delete({
-      where: { id: id },
-    }),
-  ]);
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
 
-  return NextResponse.json({ message: "ลบเรียบร้อยทั้งระบบ" });
+    if (!user) {
+      return NextResponse.json({ error: "USER_NOT_FOUND" }, { status: 404 });
+    }
+
+    const causeToDelete = await prisma.customCause.findUnique({
+      where: { id },
+    });
+
+    if (!causeToDelete || causeToDelete.userId !== user.id) {
+      return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
+    }
+
+    await prisma.$transaction([
+      prisma.moodLog.deleteMany({
+        //user และ causes ต้องใช้สองเงื่อนไขไม่งั้นถ้า user สองคนตั้ง causes ชื่อเหมือนกันเด๊ะ จะโดนลบทั้งสองเลบต้องส่ง userid เจ้าของที่จะลบมาเพื่อหาด้วย
+        where: {
+          userId: user.id,
+          causes: {
+            has: causeToDelete.name,
+          },
+        },
+      }),
+      prisma.customCause.delete({
+        where: { id },
+      }),
+    ]);
+
+    return NextResponse.json(
+      { message: "ลบสาเหตุและประวัติที่เกี่ยวข้องเรียบร้อย" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("DELETE_CAUSE_ERROR:", error);
+    return NextResponse.json(
+      { error: "INTERNAL_SERVER_ERROR" },
+      { status: 500 },
+    );
+  }
 }

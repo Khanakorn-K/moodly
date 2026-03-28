@@ -179,13 +179,8 @@ exports.Prisma.MoodLogScalarFieldEnum = {
   mood: 'mood',
   note: 'note',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MoodLogCauseScalarFieldEnum = {
-  id: 'id',
-  moodLogId: 'moodLogId',
-  cause: 'cause'
+  updatedAt: 'updatedAt',
+  causes: 'causes'
 };
 
 exports.Prisma.CustomCauseScalarFieldEnum = {
@@ -235,7 +230,6 @@ exports.Prisma.ModelName = {
   VerificationToken: 'VerificationToken',
   Authenticator: 'Authenticator',
   MoodLog: 'MoodLog',
-  MoodLogCause: 'MoodLogCause',
   CustomCause: 'CustomCause',
   Streak: 'Streak',
   Achievement: 'Achievement'

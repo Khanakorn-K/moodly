@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "MoodLog" ALTER COLUMN "causes" SET NOT NULL,
+ALTER COLUMN "causes" SET DATA TYPE TEXT;

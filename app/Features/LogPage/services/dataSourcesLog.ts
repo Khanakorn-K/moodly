@@ -1,7 +1,7 @@
-import { apiClient } from "@/lib/api-client";
+import { apiClient } from "@/cors/lib/api-client";
 import { CausesResponseModel } from "../../../share/models/causesResponseModel";
 import { CausesEntity } from "../../../share/entities/causesEntity";
-import { getThailandTime } from "@/utils/thaiDate";
+import { convertDateToISO } from "@/cors/utils/thaiDate";
 
 const dataSourcesLog = {
   addMood: async (
@@ -9,8 +9,8 @@ const dataSourcesLog = {
     selectedCauses: string[],
     note: string,
   ) => {
-    const createdAt = getThailandTime();
-    console.log("createdAt ==", createdAt);
+    const date = new Date();
+    const createdAt = convertDateToISO(date);
     return apiClient.post("/moods", {
       mood: selectedMood,
       causes: selectedCauses,
@@ -20,9 +20,10 @@ const dataSourcesLog = {
   },
 
   addCauses: async (name: string) => {
-    const createdAt = getThailandTime();
+    const date = new Date();
+    const createdAt = convertDateToISO(date);
 
-    return apiClient.post("/causes", { name, createdAt });
+    return apiClient.post("/causes", { name: name, createdAt: createdAt });
   },
 
   getMyCauses: async (): Promise<CausesEntity[]> => {

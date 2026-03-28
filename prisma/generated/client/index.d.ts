@@ -44,11 +44,6 @@ export type Authenticator = $Result.DefaultSelection<Prisma.$AuthenticatorPayloa
  */
 export type MoodLog = $Result.DefaultSelection<Prisma.$MoodLogPayload>
 /**
- * Model MoodLogCause
- * 
- */
-export type MoodLogCause = $Result.DefaultSelection<Prisma.$MoodLogCausePayload>
-/**
  * Model CustomCause
  * 
  */
@@ -246,16 +241,6 @@ export class PrismaClient<
     * ```
     */
   get moodLog(): Prisma.MoodLogDelegate<ExtArgs>;
-
-  /**
-   * `prisma.moodLogCause`: Exposes CRUD operations for the **MoodLogCause** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MoodLogCauses
-    * const moodLogCauses = await prisma.moodLogCause.findMany()
-    * ```
-    */
-  get moodLogCause(): Prisma.MoodLogCauseDelegate<ExtArgs>;
 
   /**
    * `prisma.customCause`: Exposes CRUD operations for the **CustomCause** model.
@@ -733,7 +718,6 @@ export namespace Prisma {
     VerificationToken: 'VerificationToken',
     Authenticator: 'Authenticator',
     MoodLog: 'MoodLog',
-    MoodLogCause: 'MoodLogCause',
     CustomCause: 'CustomCause',
     Streak: 'Streak',
     Achievement: 'Achievement'
@@ -752,7 +736,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "moodLog" | "moodLogCause" | "customCause" | "streak" | "achievement"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator" | "moodLog" | "customCause" | "streak" | "achievement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1173,76 +1157,6 @@ export namespace Prisma {
           count: {
             args: Prisma.MoodLogCountArgs<ExtArgs>
             result: $Utils.Optional<MoodLogCountAggregateOutputType> | number
-          }
-        }
-      }
-      MoodLogCause: {
-        payload: Prisma.$MoodLogCausePayload<ExtArgs>
-        fields: Prisma.MoodLogCauseFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.MoodLogCauseFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.MoodLogCauseFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
-          }
-          findFirst: {
-            args: Prisma.MoodLogCauseFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.MoodLogCauseFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
-          }
-          findMany: {
-            args: Prisma.MoodLogCauseFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>[]
-          }
-          create: {
-            args: Prisma.MoodLogCauseCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
-          }
-          createMany: {
-            args: Prisma.MoodLogCauseCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.MoodLogCauseCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>[]
-          }
-          delete: {
-            args: Prisma.MoodLogCauseDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
-          }
-          update: {
-            args: Prisma.MoodLogCauseUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
-          }
-          deleteMany: {
-            args: Prisma.MoodLogCauseDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.MoodLogCauseUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.MoodLogCauseUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MoodLogCausePayload>
-          }
-          aggregate: {
-            args: Prisma.MoodLogCauseAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMoodLogCause>
-          }
-          groupBy: {
-            args: Prisma.MoodLogCauseGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MoodLogCauseGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.MoodLogCauseCountArgs<ExtArgs>
-            result: $Utils.Optional<MoodLogCauseCountAggregateOutputType> | number
           }
         }
       }
@@ -1676,37 +1590,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCustomCausesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CustomCauseWhereInput
-  }
-
-
-  /**
-   * Count Type MoodLogCountOutputType
-   */
-
-  export type MoodLogCountOutputType = {
-    causes: number
-  }
-
-  export type MoodLogCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    causes?: boolean | MoodLogCountOutputTypeCountCausesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * MoodLogCountOutputType without action
-   */
-  export type MoodLogCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCountOutputType
-     */
-    select?: MoodLogCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * MoodLogCountOutputType without action
-   */
-  export type MoodLogCountOutputTypeCountCausesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MoodLogCauseWhereInput
   }
 
 
@@ -6730,6 +6613,7 @@ export namespace Prisma {
     note: number
     createdAt: number
     updatedAt: number
+    causes: number
     _all: number
   }
 
@@ -6767,6 +6651,7 @@ export namespace Prisma {
     note?: true
     createdAt?: true
     updatedAt?: true
+    causes?: true
     _all?: true
   }
 
@@ -6863,6 +6748,7 @@ export namespace Prisma {
     note: string | null
     createdAt: string
     updatedAt: Date
+    causes: string[]
     _count: MoodLogCountAggregateOutputType | null
     _avg: MoodLogAvgAggregateOutputType | null
     _sum: MoodLogSumAggregateOutputType | null
@@ -6891,9 +6777,8 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    causes?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    causes?: boolean | MoodLog$causesArgs<ExtArgs>
-    _count?: boolean | MoodLogCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["moodLog"]>
 
   export type MoodLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6903,6 +6788,7 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    causes?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["moodLog"]>
 
@@ -6913,12 +6799,11 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    causes?: boolean
   }
 
   export type MoodLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    causes?: boolean | MoodLog$causesArgs<ExtArgs>
-    _count?: boolean | MoodLogCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MoodLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6928,7 +6813,6 @@ export namespace Prisma {
     name: "MoodLog"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      causes: Prisma.$MoodLogCausePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6937,6 +6821,7 @@ export namespace Prisma {
       note: string | null
       createdAt: string
       updatedAt: Date
+      causes: string[]
     }, ExtArgs["result"]["moodLog"]>
     composites: {}
   }
@@ -7302,7 +7187,6 @@ export namespace Prisma {
   export interface Prisma__MoodLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    causes<T extends MoodLog$causesArgs<ExtArgs> = {}>(args?: Subset<T, MoodLog$causesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7338,6 +7222,7 @@ export namespace Prisma {
     readonly note: FieldRef<"MoodLog", 'String'>
     readonly createdAt: FieldRef<"MoodLog", 'String'>
     readonly updatedAt: FieldRef<"MoodLog", 'DateTime'>
+    readonly causes: FieldRef<"MoodLog", 'String[]'>
   }
     
 
@@ -7656,26 +7541,6 @@ export namespace Prisma {
   }
 
   /**
-   * MoodLog.causes
-   */
-  export type MoodLog$causesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    where?: MoodLogCauseWhereInput
-    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
-    cursor?: MoodLogCauseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
-  }
-
-  /**
    * MoodLog without action
    */
   export type MoodLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7687,915 +7552,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MoodLogInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model MoodLogCause
-   */
-
-  export type AggregateMoodLogCause = {
-    _count: MoodLogCauseCountAggregateOutputType | null
-    _min: MoodLogCauseMinAggregateOutputType | null
-    _max: MoodLogCauseMaxAggregateOutputType | null
-  }
-
-  export type MoodLogCauseMinAggregateOutputType = {
-    id: string | null
-    moodLogId: string | null
-    cause: string | null
-  }
-
-  export type MoodLogCauseMaxAggregateOutputType = {
-    id: string | null
-    moodLogId: string | null
-    cause: string | null
-  }
-
-  export type MoodLogCauseCountAggregateOutputType = {
-    id: number
-    moodLogId: number
-    cause: number
-    _all: number
-  }
-
-
-  export type MoodLogCauseMinAggregateInputType = {
-    id?: true
-    moodLogId?: true
-    cause?: true
-  }
-
-  export type MoodLogCauseMaxAggregateInputType = {
-    id?: true
-    moodLogId?: true
-    cause?: true
-  }
-
-  export type MoodLogCauseCountAggregateInputType = {
-    id?: true
-    moodLogId?: true
-    cause?: true
-    _all?: true
-  }
-
-  export type MoodLogCauseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MoodLogCause to aggregate.
-     */
-    where?: MoodLogCauseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MoodLogCauses to fetch.
-     */
-    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MoodLogCauseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MoodLogCauses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MoodLogCauses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MoodLogCauses
-    **/
-    _count?: true | MoodLogCauseCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MoodLogCauseMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MoodLogCauseMaxAggregateInputType
-  }
-
-  export type GetMoodLogCauseAggregateType<T extends MoodLogCauseAggregateArgs> = {
-        [P in keyof T & keyof AggregateMoodLogCause]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMoodLogCause[P]>
-      : GetScalarType<T[P], AggregateMoodLogCause[P]>
-  }
-
-
-
-
-  export type MoodLogCauseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MoodLogCauseWhereInput
-    orderBy?: MoodLogCauseOrderByWithAggregationInput | MoodLogCauseOrderByWithAggregationInput[]
-    by: MoodLogCauseScalarFieldEnum[] | MoodLogCauseScalarFieldEnum
-    having?: MoodLogCauseScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MoodLogCauseCountAggregateInputType | true
-    _min?: MoodLogCauseMinAggregateInputType
-    _max?: MoodLogCauseMaxAggregateInputType
-  }
-
-  export type MoodLogCauseGroupByOutputType = {
-    id: string
-    moodLogId: string
-    cause: string
-    _count: MoodLogCauseCountAggregateOutputType | null
-    _min: MoodLogCauseMinAggregateOutputType | null
-    _max: MoodLogCauseMaxAggregateOutputType | null
-  }
-
-  type GetMoodLogCauseGroupByPayload<T extends MoodLogCauseGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MoodLogCauseGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MoodLogCauseGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MoodLogCauseGroupByOutputType[P]>
-            : GetScalarType<T[P], MoodLogCauseGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MoodLogCauseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    moodLogId?: boolean
-    cause?: boolean
-    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["moodLogCause"]>
-
-  export type MoodLogCauseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    moodLogId?: boolean
-    cause?: boolean
-    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["moodLogCause"]>
-
-  export type MoodLogCauseSelectScalar = {
-    id?: boolean
-    moodLogId?: boolean
-    cause?: boolean
-  }
-
-  export type MoodLogCauseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
-  }
-  export type MoodLogCauseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    moodLog?: boolean | MoodLogDefaultArgs<ExtArgs>
-  }
-
-  export type $MoodLogCausePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MoodLogCause"
-    objects: {
-      moodLog: Prisma.$MoodLogPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      moodLogId: string
-      cause: string
-    }, ExtArgs["result"]["moodLogCause"]>
-    composites: {}
-  }
-
-  type MoodLogCauseGetPayload<S extends boolean | null | undefined | MoodLogCauseDefaultArgs> = $Result.GetResult<Prisma.$MoodLogCausePayload, S>
-
-  type MoodLogCauseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<MoodLogCauseFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: MoodLogCauseCountAggregateInputType | true
-    }
-
-  export interface MoodLogCauseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MoodLogCause'], meta: { name: 'MoodLogCause' } }
-    /**
-     * Find zero or one MoodLogCause that matches the filter.
-     * @param {MoodLogCauseFindUniqueArgs} args - Arguments to find a MoodLogCause
-     * @example
-     * // Get one MoodLogCause
-     * const moodLogCause = await prisma.moodLogCause.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MoodLogCauseFindUniqueArgs>(args: SelectSubset<T, MoodLogCauseFindUniqueArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one MoodLogCause that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {MoodLogCauseFindUniqueOrThrowArgs} args - Arguments to find a MoodLogCause
-     * @example
-     * // Get one MoodLogCause
-     * const moodLogCause = await prisma.moodLogCause.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MoodLogCauseFindUniqueOrThrowArgs>(args: SelectSubset<T, MoodLogCauseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first MoodLogCause that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseFindFirstArgs} args - Arguments to find a MoodLogCause
-     * @example
-     * // Get one MoodLogCause
-     * const moodLogCause = await prisma.moodLogCause.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MoodLogCauseFindFirstArgs>(args?: SelectSubset<T, MoodLogCauseFindFirstArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first MoodLogCause that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseFindFirstOrThrowArgs} args - Arguments to find a MoodLogCause
-     * @example
-     * // Get one MoodLogCause
-     * const moodLogCause = await prisma.moodLogCause.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MoodLogCauseFindFirstOrThrowArgs>(args?: SelectSubset<T, MoodLogCauseFindFirstOrThrowArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more MoodLogCauses that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MoodLogCauses
-     * const moodLogCauses = await prisma.moodLogCause.findMany()
-     * 
-     * // Get first 10 MoodLogCauses
-     * const moodLogCauses = await prisma.moodLogCause.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const moodLogCauseWithIdOnly = await prisma.moodLogCause.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MoodLogCauseFindManyArgs>(args?: SelectSubset<T, MoodLogCauseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a MoodLogCause.
-     * @param {MoodLogCauseCreateArgs} args - Arguments to create a MoodLogCause.
-     * @example
-     * // Create one MoodLogCause
-     * const MoodLogCause = await prisma.moodLogCause.create({
-     *   data: {
-     *     // ... data to create a MoodLogCause
-     *   }
-     * })
-     * 
-     */
-    create<T extends MoodLogCauseCreateArgs>(args: SelectSubset<T, MoodLogCauseCreateArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many MoodLogCauses.
-     * @param {MoodLogCauseCreateManyArgs} args - Arguments to create many MoodLogCauses.
-     * @example
-     * // Create many MoodLogCauses
-     * const moodLogCause = await prisma.moodLogCause.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MoodLogCauseCreateManyArgs>(args?: SelectSubset<T, MoodLogCauseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MoodLogCauses and returns the data saved in the database.
-     * @param {MoodLogCauseCreateManyAndReturnArgs} args - Arguments to create many MoodLogCauses.
-     * @example
-     * // Create many MoodLogCauses
-     * const moodLogCause = await prisma.moodLogCause.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MoodLogCauses and only return the `id`
-     * const moodLogCauseWithIdOnly = await prisma.moodLogCause.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MoodLogCauseCreateManyAndReturnArgs>(args?: SelectSubset<T, MoodLogCauseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a MoodLogCause.
-     * @param {MoodLogCauseDeleteArgs} args - Arguments to delete one MoodLogCause.
-     * @example
-     * // Delete one MoodLogCause
-     * const MoodLogCause = await prisma.moodLogCause.delete({
-     *   where: {
-     *     // ... filter to delete one MoodLogCause
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MoodLogCauseDeleteArgs>(args: SelectSubset<T, MoodLogCauseDeleteArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one MoodLogCause.
-     * @param {MoodLogCauseUpdateArgs} args - Arguments to update one MoodLogCause.
-     * @example
-     * // Update one MoodLogCause
-     * const moodLogCause = await prisma.moodLogCause.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MoodLogCauseUpdateArgs>(args: SelectSubset<T, MoodLogCauseUpdateArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more MoodLogCauses.
-     * @param {MoodLogCauseDeleteManyArgs} args - Arguments to filter MoodLogCauses to delete.
-     * @example
-     * // Delete a few MoodLogCauses
-     * const { count } = await prisma.moodLogCause.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MoodLogCauseDeleteManyArgs>(args?: SelectSubset<T, MoodLogCauseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MoodLogCauses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MoodLogCauses
-     * const moodLogCause = await prisma.moodLogCause.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MoodLogCauseUpdateManyArgs>(args: SelectSubset<T, MoodLogCauseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one MoodLogCause.
-     * @param {MoodLogCauseUpsertArgs} args - Arguments to update or create a MoodLogCause.
-     * @example
-     * // Update or create a MoodLogCause
-     * const moodLogCause = await prisma.moodLogCause.upsert({
-     *   create: {
-     *     // ... data to create a MoodLogCause
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MoodLogCause we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MoodLogCauseUpsertArgs>(args: SelectSubset<T, MoodLogCauseUpsertArgs<ExtArgs>>): Prisma__MoodLogCauseClient<$Result.GetResult<Prisma.$MoodLogCausePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-
-    /**
-     * Count the number of MoodLogCauses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseCountArgs} args - Arguments to filter MoodLogCauses to count.
-     * @example
-     * // Count the number of MoodLogCauses
-     * const count = await prisma.moodLogCause.count({
-     *   where: {
-     *     // ... the filter for the MoodLogCauses we want to count
-     *   }
-     * })
-    **/
-    count<T extends MoodLogCauseCountArgs>(
-      args?: Subset<T, MoodLogCauseCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MoodLogCauseCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MoodLogCause.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MoodLogCauseAggregateArgs>(args: Subset<T, MoodLogCauseAggregateArgs>): Prisma.PrismaPromise<GetMoodLogCauseAggregateType<T>>
-
-    /**
-     * Group by MoodLogCause.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MoodLogCauseGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MoodLogCauseGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MoodLogCauseGroupByArgs['orderBy'] }
-        : { orderBy?: MoodLogCauseGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MoodLogCauseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMoodLogCauseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MoodLogCause model
-   */
-  readonly fields: MoodLogCauseFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MoodLogCause.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MoodLogCauseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    moodLog<T extends MoodLogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MoodLogDefaultArgs<ExtArgs>>): Prisma__MoodLogClient<$Result.GetResult<Prisma.$MoodLogPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MoodLogCause model
-   */ 
-  interface MoodLogCauseFieldRefs {
-    readonly id: FieldRef<"MoodLogCause", 'String'>
-    readonly moodLogId: FieldRef<"MoodLogCause", 'String'>
-    readonly cause: FieldRef<"MoodLogCause", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MoodLogCause findUnique
-   */
-  export type MoodLogCauseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * Filter, which MoodLogCause to fetch.
-     */
-    where: MoodLogCauseWhereUniqueInput
-  }
-
-  /**
-   * MoodLogCause findUniqueOrThrow
-   */
-  export type MoodLogCauseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * Filter, which MoodLogCause to fetch.
-     */
-    where: MoodLogCauseWhereUniqueInput
-  }
-
-  /**
-   * MoodLogCause findFirst
-   */
-  export type MoodLogCauseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * Filter, which MoodLogCause to fetch.
-     */
-    where?: MoodLogCauseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MoodLogCauses to fetch.
-     */
-    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MoodLogCauses.
-     */
-    cursor?: MoodLogCauseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MoodLogCauses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MoodLogCauses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MoodLogCauses.
-     */
-    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
-  }
-
-  /**
-   * MoodLogCause findFirstOrThrow
-   */
-  export type MoodLogCauseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * Filter, which MoodLogCause to fetch.
-     */
-    where?: MoodLogCauseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MoodLogCauses to fetch.
-     */
-    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MoodLogCauses.
-     */
-    cursor?: MoodLogCauseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MoodLogCauses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MoodLogCauses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MoodLogCauses.
-     */
-    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
-  }
-
-  /**
-   * MoodLogCause findMany
-   */
-  export type MoodLogCauseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * Filter, which MoodLogCauses to fetch.
-     */
-    where?: MoodLogCauseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MoodLogCauses to fetch.
-     */
-    orderBy?: MoodLogCauseOrderByWithRelationInput | MoodLogCauseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MoodLogCauses.
-     */
-    cursor?: MoodLogCauseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MoodLogCauses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MoodLogCauses.
-     */
-    skip?: number
-    distinct?: MoodLogCauseScalarFieldEnum | MoodLogCauseScalarFieldEnum[]
-  }
-
-  /**
-   * MoodLogCause create
-   */
-  export type MoodLogCauseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MoodLogCause.
-     */
-    data: XOR<MoodLogCauseCreateInput, MoodLogCauseUncheckedCreateInput>
-  }
-
-  /**
-   * MoodLogCause createMany
-   */
-  export type MoodLogCauseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MoodLogCauses.
-     */
-    data: MoodLogCauseCreateManyInput | MoodLogCauseCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MoodLogCause createManyAndReturn
-   */
-  export type MoodLogCauseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many MoodLogCauses.
-     */
-    data: MoodLogCauseCreateManyInput | MoodLogCauseCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MoodLogCause update
-   */
-  export type MoodLogCauseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MoodLogCause.
-     */
-    data: XOR<MoodLogCauseUpdateInput, MoodLogCauseUncheckedUpdateInput>
-    /**
-     * Choose, which MoodLogCause to update.
-     */
-    where: MoodLogCauseWhereUniqueInput
-  }
-
-  /**
-   * MoodLogCause updateMany
-   */
-  export type MoodLogCauseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MoodLogCauses.
-     */
-    data: XOR<MoodLogCauseUpdateManyMutationInput, MoodLogCauseUncheckedUpdateManyInput>
-    /**
-     * Filter which MoodLogCauses to update
-     */
-    where?: MoodLogCauseWhereInput
-  }
-
-  /**
-   * MoodLogCause upsert
-   */
-  export type MoodLogCauseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MoodLogCause to update in case it exists.
-     */
-    where: MoodLogCauseWhereUniqueInput
-    /**
-     * In case the MoodLogCause found by the `where` argument doesn't exist, create a new MoodLogCause with this data.
-     */
-    create: XOR<MoodLogCauseCreateInput, MoodLogCauseUncheckedCreateInput>
-    /**
-     * In case the MoodLogCause was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MoodLogCauseUpdateInput, MoodLogCauseUncheckedUpdateInput>
-  }
-
-  /**
-   * MoodLogCause delete
-   */
-  export type MoodLogCauseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
-    /**
-     * Filter which MoodLogCause to delete.
-     */
-    where: MoodLogCauseWhereUniqueInput
-  }
-
-  /**
-   * MoodLogCause deleteMany
-   */
-  export type MoodLogCauseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MoodLogCauses to delete
-     */
-    where?: MoodLogCauseWhereInput
-  }
-
-  /**
-   * MoodLogCause without action
-   */
-  export type MoodLogCauseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MoodLogCause
-     */
-    select?: MoodLogCauseSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MoodLogCauseInclude<ExtArgs> | null
   }
 
 
@@ -11548,19 +10504,11 @@ export namespace Prisma {
     mood: 'mood',
     note: 'note',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    causes: 'causes'
   };
 
   export type MoodLogScalarFieldEnum = (typeof MoodLogScalarFieldEnum)[keyof typeof MoodLogScalarFieldEnum]
-
-
-  export const MoodLogCauseScalarFieldEnum: {
-    id: 'id',
-    moodLogId: 'moodLogId',
-    cause: 'cause'
-  };
-
-  export type MoodLogCauseScalarFieldEnum = (typeof MoodLogCauseScalarFieldEnum)[keyof typeof MoodLogCauseScalarFieldEnum]
 
 
   export const CustomCauseScalarFieldEnum: {
@@ -12050,8 +10998,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"MoodLog"> | string | null
     createdAt?: StringFilter<"MoodLog"> | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
+    causes?: StringNullableListFilter<"MoodLog">
     user?: XOR<UserRelationFilter, UserWhereInput>
-    causes?: MoodLogCauseListRelationFilter
   }
 
   export type MoodLogOrderByWithRelationInput = {
@@ -12061,8 +11009,8 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    causes?: SortOrder
     user?: UserOrderByWithRelationInput
-    causes?: MoodLogCauseOrderByRelationAggregateInput
   }
 
   export type MoodLogWhereUniqueInput = Prisma.AtLeast<{
@@ -12075,8 +11023,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"MoodLog"> | string | null
     createdAt?: StringFilter<"MoodLog"> | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
+    causes?: StringNullableListFilter<"MoodLog">
     user?: XOR<UserRelationFilter, UserWhereInput>
-    causes?: MoodLogCauseListRelationFilter
   }, "id">
 
   export type MoodLogOrderByWithAggregationInput = {
@@ -12086,6 +11034,7 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    causes?: SortOrder
     _count?: MoodLogCountOrderByAggregateInput
     _avg?: MoodLogAvgOrderByAggregateInput
     _max?: MoodLogMaxOrderByAggregateInput
@@ -12103,51 +11052,7 @@ export namespace Prisma {
     note?: StringNullableWithAggregatesFilter<"MoodLog"> | string | null
     createdAt?: StringWithAggregatesFilter<"MoodLog"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"MoodLog"> | Date | string
-  }
-
-  export type MoodLogCauseWhereInput = {
-    AND?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
-    OR?: MoodLogCauseWhereInput[]
-    NOT?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
-    id?: StringFilter<"MoodLogCause"> | string
-    moodLogId?: StringFilter<"MoodLogCause"> | string
-    cause?: StringFilter<"MoodLogCause"> | string
-    moodLog?: XOR<MoodLogRelationFilter, MoodLogWhereInput>
-  }
-
-  export type MoodLogCauseOrderByWithRelationInput = {
-    id?: SortOrder
-    moodLogId?: SortOrder
-    cause?: SortOrder
-    moodLog?: MoodLogOrderByWithRelationInput
-  }
-
-  export type MoodLogCauseWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
-    OR?: MoodLogCauseWhereInput[]
-    NOT?: MoodLogCauseWhereInput | MoodLogCauseWhereInput[]
-    moodLogId?: StringFilter<"MoodLogCause"> | string
-    cause?: StringFilter<"MoodLogCause"> | string
-    moodLog?: XOR<MoodLogRelationFilter, MoodLogWhereInput>
-  }, "id">
-
-  export type MoodLogCauseOrderByWithAggregationInput = {
-    id?: SortOrder
-    moodLogId?: SortOrder
-    cause?: SortOrder
-    _count?: MoodLogCauseCountOrderByAggregateInput
-    _max?: MoodLogCauseMaxOrderByAggregateInput
-    _min?: MoodLogCauseMinOrderByAggregateInput
-  }
-
-  export type MoodLogCauseScalarWhereWithAggregatesInput = {
-    AND?: MoodLogCauseScalarWhereWithAggregatesInput | MoodLogCauseScalarWhereWithAggregatesInput[]
-    OR?: MoodLogCauseScalarWhereWithAggregatesInput[]
-    NOT?: MoodLogCauseScalarWhereWithAggregatesInput | MoodLogCauseScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MoodLogCause"> | string
-    moodLogId?: StringWithAggregatesFilter<"MoodLogCause"> | string
-    cause?: StringWithAggregatesFilter<"MoodLogCause"> | string
+    causes?: StringNullableListFilter<"MoodLog">
   }
 
   export type CustomCauseWhereInput = {
@@ -12706,8 +11611,8 @@ export namespace Prisma {
     note?: string | null
     createdAt: string
     updatedAt?: Date | string
+    causes?: MoodLogCreatecausesInput | string[]
     user: UserCreateNestedOneWithoutMoodsInput
-    causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
   }
 
   export type MoodLogUncheckedCreateInput = {
@@ -12717,7 +11622,7 @@ export namespace Prisma {
     note?: string | null
     createdAt: string
     updatedAt?: Date | string
-    causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
+    causes?: MoodLogCreatecausesInput | string[]
   }
 
   export type MoodLogUpdateInput = {
@@ -12726,8 +11631,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    causes?: MoodLogUpdatecausesInput | string[]
     user?: UserUpdateOneRequiredWithoutMoodsNestedInput
-    causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
   }
 
   export type MoodLogUncheckedUpdateInput = {
@@ -12737,7 +11642,7 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
+    causes?: MoodLogUpdatecausesInput | string[]
   }
 
   export type MoodLogCreateManyInput = {
@@ -12747,6 +11652,7 @@ export namespace Prisma {
     note?: string | null
     createdAt: string
     updatedAt?: Date | string
+    causes?: MoodLogCreatecausesInput | string[]
   }
 
   export type MoodLogUpdateManyMutationInput = {
@@ -12755,6 +11661,7 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    causes?: MoodLogUpdatecausesInput | string[]
   }
 
   export type MoodLogUncheckedUpdateManyInput = {
@@ -12764,47 +11671,7 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MoodLogCauseCreateInput = {
-    id?: string
-    cause: string
-    moodLog: MoodLogCreateNestedOneWithoutCausesInput
-  }
-
-  export type MoodLogCauseUncheckedCreateInput = {
-    id?: string
-    moodLogId: string
-    cause: string
-  }
-
-  export type MoodLogCauseUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
-    moodLog?: MoodLogUpdateOneRequiredWithoutCausesNestedInput
-  }
-
-  export type MoodLogCauseUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moodLogId?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MoodLogCauseCreateManyInput = {
-    id?: string
-    moodLogId: string
-    cause: string
-  }
-
-  export type MoodLogCauseUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MoodLogCauseUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    moodLogId?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
+    causes?: MoodLogUpdatecausesInput | string[]
   }
 
   export type CustomCauseCreateInput = {
@@ -13408,14 +12275,12 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type MoodLogCauseListRelationFilter = {
-    every?: MoodLogCauseWhereInput
-    some?: MoodLogCauseWhereInput
-    none?: MoodLogCauseWhereInput
-  }
-
-  export type MoodLogCauseOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type MoodLogCountOrderByAggregateInput = {
@@ -13425,6 +12290,7 @@ export namespace Prisma {
     note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    causes?: SortOrder
   }
 
   export type MoodLogAvgOrderByAggregateInput = {
@@ -13451,29 +12317,6 @@ export namespace Prisma {
 
   export type MoodLogSumOrderByAggregateInput = {
     mood?: SortOrder
-  }
-
-  export type MoodLogRelationFilter = {
-    is?: MoodLogWhereInput
-    isNot?: MoodLogWhereInput
-  }
-
-  export type MoodLogCauseCountOrderByAggregateInput = {
-    id?: SortOrder
-    moodLogId?: SortOrder
-    cause?: SortOrder
-  }
-
-  export type MoodLogCauseMaxOrderByAggregateInput = {
-    id?: SortOrder
-    moodLogId?: SortOrder
-    cause?: SortOrder
-  }
-
-  export type MoodLogCauseMinOrderByAggregateInput = {
-    id?: SortOrder
-    moodLogId?: SortOrder
-    cause?: SortOrder
   }
 
   export type CustomCauseUserIdNameCompoundUniqueInput = {
@@ -13903,24 +12746,19 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuthenticatorInput, UserUpdateWithoutAuthenticatorInput>, UserUncheckedUpdateWithoutAuthenticatorInput>
   }
 
+  export type MoodLogCreatecausesInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutMoodsInput = {
     create?: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
     connectOrCreate?: UserCreateOrConnectWithoutMoodsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type MoodLogCauseCreateNestedManyWithoutMoodLogInput = {
-    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
-    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
-    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
-    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-  }
-
-  export type MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput = {
-    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
-    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
-    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
-    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
+  export type MoodLogUpdatecausesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutMoodsNestedInput = {
@@ -13929,48 +12767,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutMoodsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMoodsInput, UserUpdateWithoutMoodsInput>, UserUncheckedUpdateWithoutMoodsInput>
-  }
-
-  export type MoodLogCauseUpdateManyWithoutMoodLogNestedInput = {
-    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
-    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
-    upsert?: MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput[]
-    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
-    set?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    disconnect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    delete?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    update?: MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput[]
-    updateMany?: MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput | MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput[]
-    deleteMany?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
-  }
-
-  export type MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput = {
-    create?: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput> | MoodLogCauseCreateWithoutMoodLogInput[] | MoodLogCauseUncheckedCreateWithoutMoodLogInput[]
-    connectOrCreate?: MoodLogCauseCreateOrConnectWithoutMoodLogInput | MoodLogCauseCreateOrConnectWithoutMoodLogInput[]
-    upsert?: MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput[]
-    createMany?: MoodLogCauseCreateManyMoodLogInputEnvelope
-    set?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    disconnect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    delete?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    connect?: MoodLogCauseWhereUniqueInput | MoodLogCauseWhereUniqueInput[]
-    update?: MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput | MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput[]
-    updateMany?: MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput | MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput[]
-    deleteMany?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
-  }
-
-  export type MoodLogCreateNestedOneWithoutCausesInput = {
-    create?: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
-    connectOrCreate?: MoodLogCreateOrConnectWithoutCausesInput
-    connect?: MoodLogWhereUniqueInput
-  }
-
-  export type MoodLogUpdateOneRequiredWithoutCausesNestedInput = {
-    create?: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
-    connectOrCreate?: MoodLogCreateOrConnectWithoutCausesInput
-    upsert?: MoodLogUpsertWithoutCausesInput
-    connect?: MoodLogWhereUniqueInput
-    update?: XOR<XOR<MoodLogUpdateToOneWithWhereWithoutCausesInput, MoodLogUpdateWithoutCausesInput>, MoodLogUncheckedUpdateWithoutCausesInput>
   }
 
   export type UserCreateNestedOneWithoutCustomCausesInput = {
@@ -14358,7 +13154,7 @@ export namespace Prisma {
     note?: string | null
     createdAt: string
     updatedAt?: Date | string
-    causes?: MoodLogCauseCreateNestedManyWithoutMoodLogInput
+    causes?: MoodLogCreatecausesInput | string[]
   }
 
   export type MoodLogUncheckedCreateWithoutUserInput = {
@@ -14367,7 +13163,7 @@ export namespace Prisma {
     note?: string | null
     createdAt: string
     updatedAt?: Date | string
-    causes?: MoodLogCauseUncheckedCreateNestedManyWithoutMoodLogInput
+    causes?: MoodLogCreatecausesInput | string[]
   }
 
   export type MoodLogCreateOrConnectWithoutUserInput = {
@@ -14543,6 +13339,7 @@ export namespace Prisma {
     note?: StringNullableFilter<"MoodLog"> | string | null
     createdAt?: StringFilter<"MoodLog"> | string
     updatedAt?: DateTimeFilter<"MoodLog"> | Date | string
+    causes?: StringNullableListFilter<"MoodLog">
   }
 
   export type StreakUpsertWithoutUserInput = {
@@ -14863,26 +13660,6 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
   }
 
-  export type MoodLogCauseCreateWithoutMoodLogInput = {
-    id?: string
-    cause: string
-  }
-
-  export type MoodLogCauseUncheckedCreateWithoutMoodLogInput = {
-    id?: string
-    cause: string
-  }
-
-  export type MoodLogCauseCreateOrConnectWithoutMoodLogInput = {
-    where: MoodLogCauseWhereUniqueInput
-    create: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput>
-  }
-
-  export type MoodLogCauseCreateManyMoodLogInputEnvelope = {
-    data: MoodLogCauseCreateManyMoodLogInput | MoodLogCauseCreateManyMoodLogInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserUpsertWithoutMoodsInput = {
     update: XOR<UserUpdateWithoutMoodsInput, UserUncheckedUpdateWithoutMoodsInput>
     create: XOR<UserCreateWithoutMoodsInput, UserUncheckedCreateWithoutMoodsInput>
@@ -14922,83 +13699,6 @@ export namespace Prisma {
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     streak?: StreakUncheckedUpdateOneWithoutUserNestedInput
     customCauses?: CustomCauseUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type MoodLogCauseUpsertWithWhereUniqueWithoutMoodLogInput = {
-    where: MoodLogCauseWhereUniqueInput
-    update: XOR<MoodLogCauseUpdateWithoutMoodLogInput, MoodLogCauseUncheckedUpdateWithoutMoodLogInput>
-    create: XOR<MoodLogCauseCreateWithoutMoodLogInput, MoodLogCauseUncheckedCreateWithoutMoodLogInput>
-  }
-
-  export type MoodLogCauseUpdateWithWhereUniqueWithoutMoodLogInput = {
-    where: MoodLogCauseWhereUniqueInput
-    data: XOR<MoodLogCauseUpdateWithoutMoodLogInput, MoodLogCauseUncheckedUpdateWithoutMoodLogInput>
-  }
-
-  export type MoodLogCauseUpdateManyWithWhereWithoutMoodLogInput = {
-    where: MoodLogCauseScalarWhereInput
-    data: XOR<MoodLogCauseUpdateManyMutationInput, MoodLogCauseUncheckedUpdateManyWithoutMoodLogInput>
-  }
-
-  export type MoodLogCauseScalarWhereInput = {
-    AND?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
-    OR?: MoodLogCauseScalarWhereInput[]
-    NOT?: MoodLogCauseScalarWhereInput | MoodLogCauseScalarWhereInput[]
-    id?: StringFilter<"MoodLogCause"> | string
-    moodLogId?: StringFilter<"MoodLogCause"> | string
-    cause?: StringFilter<"MoodLogCause"> | string
-  }
-
-  export type MoodLogCreateWithoutCausesInput = {
-    id?: string
-    mood: number
-    note?: string | null
-    createdAt: string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutMoodsInput
-  }
-
-  export type MoodLogUncheckedCreateWithoutCausesInput = {
-    id?: string
-    userId: string
-    mood: number
-    note?: string | null
-    createdAt: string
-    updatedAt?: Date | string
-  }
-
-  export type MoodLogCreateOrConnectWithoutCausesInput = {
-    where: MoodLogWhereUniqueInput
-    create: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
-  }
-
-  export type MoodLogUpsertWithoutCausesInput = {
-    update: XOR<MoodLogUpdateWithoutCausesInput, MoodLogUncheckedUpdateWithoutCausesInput>
-    create: XOR<MoodLogCreateWithoutCausesInput, MoodLogUncheckedCreateWithoutCausesInput>
-    where?: MoodLogWhereInput
-  }
-
-  export type MoodLogUpdateToOneWithWhereWithoutCausesInput = {
-    where?: MoodLogWhereInput
-    data: XOR<MoodLogUpdateWithoutCausesInput, MoodLogUncheckedUpdateWithoutCausesInput>
-  }
-
-  export type MoodLogUpdateWithoutCausesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mood?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMoodsNestedInput
-  }
-
-  export type MoodLogUncheckedUpdateWithoutCausesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    mood?: IntFieldUpdateOperationsInput | number
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutCustomCausesInput = {
@@ -15294,6 +13994,7 @@ export namespace Prisma {
     note?: string | null
     createdAt: string
     updatedAt?: Date | string
+    causes?: MoodLogCreatecausesInput | string[]
   }
 
   export type CustomCauseCreateManyUserInput = {
@@ -15404,7 +14105,7 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    causes?: MoodLogCauseUpdateManyWithoutMoodLogNestedInput
+    causes?: MoodLogUpdatecausesInput | string[]
   }
 
   export type MoodLogUncheckedUpdateWithoutUserInput = {
@@ -15413,7 +14114,7 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    causes?: MoodLogCauseUncheckedUpdateManyWithoutMoodLogNestedInput
+    causes?: MoodLogUpdatecausesInput | string[]
   }
 
   export type MoodLogUncheckedUpdateManyWithoutUserInput = {
@@ -15422,6 +14123,7 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    causes?: MoodLogUpdatecausesInput | string[]
   }
 
   export type CustomCauseUpdateWithoutUserInput = {
@@ -15440,26 +14142,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MoodLogCauseCreateManyMoodLogInput = {
-    id?: string
-    cause: string
-  }
-
-  export type MoodLogCauseUpdateWithoutMoodLogInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MoodLogCauseUncheckedUpdateWithoutMoodLogInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MoodLogCauseUncheckedUpdateManyWithoutMoodLogInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    cause?: StringFieldUpdateOperationsInput | string
   }
 
   export type AchievementCreateManyStreakInput = {
@@ -15500,10 +14182,6 @@ export namespace Prisma {
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use MoodLogCountOutputTypeDefaultArgs instead
-     */
-    export type MoodLogCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MoodLogCountOutputTypeDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use StreakCountOutputTypeDefaultArgs instead
      */
     export type StreakCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StreakCountOutputTypeDefaultArgs<ExtArgs>
@@ -15531,10 +14209,6 @@ export namespace Prisma {
      * @deprecated Use MoodLogDefaultArgs instead
      */
     export type MoodLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MoodLogDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use MoodLogCauseDefaultArgs instead
-     */
-    export type MoodLogCauseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MoodLogCauseDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CustomCauseDefaultArgs instead
      */

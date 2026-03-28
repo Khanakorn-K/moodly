@@ -25,7 +25,7 @@ import Image from "next/image";
 const navItems = [
   { href: "/", icon: Home, label: "หน้าแรก" },
   { href: "/log", icon: PenLine, label: "บันทึก" },
-  { href: "/history", icon: BarChart2, label: "History" },
+  { href: "/insight", icon: BarChart2, label: "ข้อมูลเชิงลึก" },
   // { href: "/suggestions", icon: Lightbulb, label: "แนะนำ" },
   // { href: "/streak", icon: Flame, label: "Streak" },
 ];

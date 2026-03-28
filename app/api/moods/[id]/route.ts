@@ -1,6 +1,8 @@
+// ไฟล์จัดการ Mood Logs (GET, PUT, DELETE)
+
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/cors/lib/auth";
 import { prisma } from "@/prisma.config";
 
 export async function GET(
@@ -22,7 +24,7 @@ export async function GET(
 
     const moodLog = await prisma.moodLog.findUnique({
       where: { id },
-      include: { causes: true },
+      // เอา include causes ออกไปได้เลย
     });
 
     if (!moodLog || moodLog.userId !== user.id) {
@@ -70,12 +72,8 @@ export async function PUT(
       data: {
         mood: mood,
         note: note,
-        causes: {
-          deleteMany: {},
-          create: causes?.map((c: string) => ({ cause: c })) || [],
-        },
+        causes: causes || [], // โยน Array เช่น ["WORK", "HEALTH"] เข้าไปตรงๆ ได้เลย
       },
-      include: { causes: true },
     });
 
     return NextResponse.json(updated, { status: 200 });
