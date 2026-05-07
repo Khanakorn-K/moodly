@@ -130,7 +130,7 @@ export const useInsight = () => {
       await dataSourceInsights.updateMood(logId, {
         mood: newMoodValue,
         note: originalLog?.note || "",
-        causes: originalLog?.causes?.map((c: any) => c.cause) || [],
+        causes: originalLog?.causes || [],
       });
 
       // await fetchInsight();
@@ -164,7 +164,7 @@ export const useInsight = () => {
 
     setEditMood(moodConfig ? Number(moodConfig.value) : 0);
 
-    setSelectedCauses(log.causes ? log.causes.map((c: any) => c.cause) : []);
+    setSelectedCauses(log.causes || []);
     setIsModalOpen(true);
   };
 

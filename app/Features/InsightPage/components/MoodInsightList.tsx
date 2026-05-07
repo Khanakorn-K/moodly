@@ -113,7 +113,7 @@ const MoodInsightList = ({
                           className="text-[9px] border-none bg-white/5 px-2 py-0"
                           style={{ color: `${themeColor}CC` }}
                         >
-                          # {c.cause}
+                          {/* # {cause}asda */}
                         </Badge>
                       ))}
                     </div>

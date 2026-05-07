@@ -17,7 +17,6 @@ import { standartMoods, stadartCauses } from "@/app/share/moodType";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/share/moodColors";
 import MoodInsightList from "./components/MoodInsightList";
-import TablestandartMoodsAll from "./components/TableMoodsAll";
 import TableMoodsAll from "./components/TableMoodsAll";
 import { useInsight } from "./hooks/useInsight";
 
@@ -175,7 +174,7 @@ export default function InsightIndex() {
           )}
         </div>
 
-        {totalPages > 1 && (
+        {/* {totalPages > 1 && (
           <div className="flex items-center justify-center gap-6 pt-10">
             <Button
               variant="outline"
@@ -206,7 +205,7 @@ export default function InsightIndex() {
               <ChevronRight size={20} />
             </Button>
           </div>
-        )}
+        )} */}
       </div>
 
       {isModalOpen && (
@@ -274,7 +273,7 @@ export default function InsightIndex() {
               className="w-full bg-black/40 border border-white/5 rounded-[2rem] p-5 text-sm text-white h-36 resize-none focus:outline-none focus:ring-2 focus:ring-white/10 placeholder:text-white/10"
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
-              placeholder="What's on your mind, master?"
+              placeholder="What's on your mind"
             />
             <Button
               onClick={handleSave}

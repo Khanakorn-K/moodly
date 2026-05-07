@@ -178,12 +178,14 @@ const DraggableCard = ({ moodList, themeColor, emoji }: draggableCardProps) => {
 
         {moodList.causes && moodList.causes.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
-            {moodList.causes.map((causes) => (
+            {/* เปลี่ยนจาก (causes, index) เป็น (cause, index) */}
+            {moodList.causes.map((cause, index) => (
               <span
-                key={causes.id}
+                key={index}
                 className="px-2.5 py-1 rounded-lg text-[9px] font-bold bg-white/5 text-white/30 border border-white/5 uppercase tracking-tighter"
               >
-                # {causes.cause}
+                {/* แสดงผลตัวแปร cause ที่เป็น string ได้เลย ไม่ต้อง .cause */}#{" "}
+                {cause}
               </span>
             ))}
           </div>

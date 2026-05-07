@@ -10,10 +10,10 @@ export interface moodsModelResponseResult {
   note: string;
   createdAt: string;
   updatedAt: string;
-  causes: CauseModel[];
+  causes: string[];
 }
-export interface CauseModel {
-  id: string;
-  moodLogId: string;
-  cause: string;
-}
+// export interface CauseModel {
+//   id: string;
+//   moodLogId: string;
+//   cause: string;
+// }

@@ -5,7 +5,16 @@ export function convertDateToISO(date: Date): string {
   return date.toISOString();
 }
 /**
- * แปลงออบเจกต์ Date ให้อยู่ในรูปแบบ YYYY-MM-DD 
+ * แปลงออบเจกต์ Date ให้อยู่ในรูปแบบ ISO มาตราฐาน database   // บวกเวลาเพิ่มไป 7 ชั่วโมง (ตามโซนไทย) ก่อนแปลงเป็น ISO
+ */
+export function convertDateToLocalISO(date: Date): string {
+  const tzOffset = date.getTimezoneOffset() * 60000; // หน่วยเป็นมิลลิวินาที
+  const localISOTime = new Date(date.getTime() - tzOffset).toISOString();
+
+  return localISOTime;
+}
+/**
+ * แปลงออบเจกต์ Date ให้อยู่ในรูปแบบ YYYY-MM-DD
  */
 export function convertDateToYYMMDD(date: Date): string {
   const year = date.getFullYear();
