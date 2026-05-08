@@ -33,7 +33,7 @@ const useLandingPage = () => {
     fetchData();
   }, [status, date]);
 
-  const firstName = session?.user?.name?.split(" ")[0] ?? "มาสเตอร์";
+  const firstName = session?.user?.name?.split(" ")[0] ?? "";
   const hour = new Date().getHours();
   const greeting =
     hour < 12 ? "อรุณสวัสดิ์" : hour < 18 ? "สวัสดีตอนบ่าย" : "สวัสดีตอนเย็น";

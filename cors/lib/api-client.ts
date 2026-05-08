@@ -1,3 +1,5 @@
+import { handleAppError } from "../utils/errorHandler";
+
 type RequestConfig = RequestInit & {
   params?: Record<string, string>;
 };
@@ -29,8 +31,8 @@ async function fetchWrapper<T>(
     const error = await response
       .json()
       .catch(() => ({ message: "An error occurred" }));
-    console.log("response error : ", error);
-    throw new Error(error.message || response.statusText);
+    const msgError = handleAppError(error);
+    throw msgError;
   }
 
   return response.json();

@@ -20,7 +20,6 @@ import { MoodType, standartMoods } from "@/app/share/moodType";
 import { moodColors } from "@/app/share/moodColors";
 import { moodsEntity, moodsResultEntity } from "../entity/moodsEntity";
 import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
-import { CausesEntity } from "@/app/share/entities/causesEntity";
 
 interface TableMoodsAllProps {
   moodList: moodsEntity | null;

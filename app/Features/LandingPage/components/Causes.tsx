@@ -38,7 +38,7 @@ const Causes = ({ topCausesList = [] }: { topCausesList: any[] }) => {
 
         {topCausesList.length === 0 && (
           <p className="text-xs text-white/40 text-center py-4">
-            ยังไม่มีข้อมูลครับ มาสเตอร์
+            ยังไม่มีข้อมูล
           </p>
         )}
       </CardContent>

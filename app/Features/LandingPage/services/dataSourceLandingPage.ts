@@ -9,6 +9,7 @@ const dataSourceLandingPage = {
         ...(selectedDate ? { selectedDate: selectedDate } : {}),
       },
     });
+    // inspectResponse(response,"/insights")
     return new InsightsEntity(response);
   },
 };
