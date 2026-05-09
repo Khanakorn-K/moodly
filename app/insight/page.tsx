@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import InsightIndex from "../Features/InsightPage/InsightIndex";
+import InsightView from "../Features/Insight/InsightView";
 
 const page = () => {
   return (
@@ -10,7 +10,7 @@ const page = () => {
         </div>
       }
     >
-      <InsightIndex />
+      <InsightView />
     </Suspense>
   );
 };

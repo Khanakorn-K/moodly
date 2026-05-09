@@ -1,8 +1,8 @@
 import React from "react";
-import LandingPageIndex from "./Features/LandingPage/LandingPageIndex";
+import LandingPageView from "./Features/Landing/LandingPageView";
 
 const page = () => {
-  return <LandingPageIndex/>
+  return <LandingPageView/>
 };
 
 export default page;

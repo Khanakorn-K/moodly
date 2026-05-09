@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { LoginIndex } from "../Features/LoginPage/loginIndex";
+import { LoginView } from "../../cors/components/Login/loginView";
 
 const Page = () => {
   return (
@@ -10,7 +10,7 @@ const Page = () => {
         </div>
       }
     >
-      <LoginIndex />
+      <LoginView />
     </Suspense>
   );
 };

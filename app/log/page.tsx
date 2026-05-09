@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import LogIndex from "../Features/LogPage/logIndex";
+import LogView from "../Features/Log/presentation/logView";
 
 const page = () => {
   return (
@@ -10,7 +10,7 @@ const page = () => {
         </div>
       }
     >
-      <LogIndex />
+      <LogView />
     </Suspense>
   );
 };
