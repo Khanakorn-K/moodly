@@ -2,7 +2,7 @@ import { apiClient } from "@/cors/lib/api-client";
 import { moodsLogModelResponse } from "./models/moodsLogModelResponse";
 import { CausesEntity } from "../../../share/entities/causesEntity";
 import { CausesResponseModel } from "../../../share/models/causesResponseModel";
-import { insightEntity } from "../domain/entity/InsightEntity";
+import { InsightEntity } from "../domain/entity/InsightEntity";
 
 const dataSourceInsights = {
   getMoods: async (
@@ -11,7 +11,7 @@ const dataSourceInsights = {
     mood?: string,
     startDate?: string,
     endDate?: string,
-  ): Promise<insightEntity> => {
+  ): Promise<InsightEntity> => {
     const response = await apiClient.get<moodsLogModelResponse>("/moods", {
       params: {
         page: page.toString(),
@@ -21,7 +21,7 @@ const dataSourceInsights = {
         ...(endDate ? { endDate } : {}),
       },
     });
-    return new insightEntity(response);
+    return new InsightEntity(response);
   },
 
   updateMood: async (

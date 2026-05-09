@@ -1,16 +1,19 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import dataSourceLandingPage from "../services/dataSourceLandingPage";
-import { LandingEntity } from "../domain/entity/LandingEntity";
-import { standartMoods } from "../../../share/moodType";
+
 import { moodColors } from "@/app/share/moodColors";
 import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
+import { LandingEntity } from "../../domain/entity/LandingEntity";
+import { standartMoods } from "@/app/share/moodType";
+import { makeGetLandingUseCase } from "../../DependenciesInjection";
+import { handleAppError } from "@/cors/utils/errorHandler";
 
 const useLandingPage = () => {
   const { data: session, status } = useSession();
   const [data, setData] = useState<LandingEntity | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [messageError, setMessageError] = useState<string>("");
 
   useEffect(() => {
     async function fetchData() {
@@ -20,11 +23,13 @@ const useLandingPage = () => {
       setIsLoading(true);
 
       try {
-        const dateString = convertDateToYYMMDD(date); // ผลลัพธ์: "2026-05-07"
-        const entity = await dataSourceLandingPage.getInsights(dateString);
+        const dateString = convertDateToYYMMDD(date);
+        const entity =
+          await makeGetLandingUseCase.getInsightsUseCase(dateString);
         setData(entity);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        setMessageError(error.message);
+        handleAppError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -108,28 +113,6 @@ const useLandingPage = () => {
     },
   );
 
-  const calculateAverageMood = (insightData: LandingEntity | null): number => {
-    if (!insightData || !insightData.moodDistribution) return 0;
-
-    let totalPoints = 0;
-    let totalLogs = 0;
-
-    Object.entries(insightData.moodDistribution).forEach(([key, count]) => {
-      const moodConfig = standartMoods.find(
-        (m) => m.label === key || m.value.toString() === key,
-      );
-      if (moodConfig) {
-        totalPoints += moodConfig.value * (count as number);
-        totalLogs += count as number;
-      }
-    });
-
-    if (totalLogs === 0) return 0;
-
-    const average = totalPoints / totalLogs;
-    return Number(average.toFixed(1));
-  };
-
   const calculateMoodColor = (value: number | null): string => {
     return moodColors[value ?? 1] || "#D1D5DB";
   };
@@ -144,7 +127,7 @@ const useLandingPage = () => {
     topCausesList,
     date,
     setDate,
-    calculateAverageMood,
+    averageMood: data?.averageMood ?? 0,
     calculateMoodColor,
   };
 };

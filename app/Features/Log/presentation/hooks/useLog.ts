@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { standartMoods } from "../../../../share/moodType";
 import { CausesEntity } from "../../../../share/entities/causesEntity";
-import { moodLogUseCase } from "../../DependenciesInjection";
+import { makeGetLogUseCase } from "../../DependenciesInjection";
+
 export const useLog = () => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
   const [selectedCause, setSelectedCause] = useState<string | null>(null);
@@ -13,13 +14,13 @@ export const useLog = () => {
   const [myCustomCauses, setMyCustomCauses] = useState<CausesEntity[]>([]);
   const [newCauseName, setNewCauseName] = useState("");
   const [isAddingCause, setIsAddingCause] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const activeMood = standartMoods.find((m) => m.value === selectedMood);
 
   const fetchmyCustomCauses = async () => {
     try {
-      // 2. เปลี่ยนมาเรียกใช้งานผ่าน Use Case แทน
-      const data = await moodLogUseCase.getMyCausesUseCase();
+      const data = await makeGetLogUseCase.getMyCausesUseCase();
       setMyCustomCauses(Array.isArray(data) ? data : []);
     } catch (err) {
       setMyCustomCauses([]);
@@ -31,15 +32,14 @@ export const useLog = () => {
   }, []);
 
   const handleAddCustomCause = async () => {
-    if (!newCauseName.trim()) return;
     setIsAddingCause(true);
+    setErrorMessage(null);
     try {
-      // 2. เปลี่ยนมาเรียกใช้งานผ่าน Use Case แทน
-      await moodLogUseCase.addCauseUseCase(newCauseName);
+      await makeGetLogUseCase.addCauseUseCase(newCauseName);
       setNewCauseName("");
       await fetchmyCustomCauses();
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setErrorMessage(err.message);
     } finally {
       setIsAddingCause(false);
     }
@@ -48,8 +48,7 @@ export const useLog = () => {
   const handleDeleteCustomCause = async (id: string) => {
     try {
       const targetCause = myCustomCauses.find((c) => c.id === id);
-      // 2. เปลี่ยนมาเรียกใช้งานผ่าน Use Case แทน
-      await moodLogUseCase.deleteCauseUseCase(id);
+      await makeGetLogUseCase.deleteCauseUseCase(id);
       setMyCustomCauses((prev) => prev.filter((c) => c.id !== id));
       if (targetCause && selectedCause === targetCause.name) {
         setSelectedCause(null);
@@ -64,23 +63,21 @@ export const useLog = () => {
   };
 
   const handleSubmit = async () => {
-    if (!selectedMood || !selectedCause) return;
     setIsSubmitting(true);
+    setErrorMessage(null);
     try {
-      // 2. เปลี่ยนมาเรียกใช้งานผ่าน Use Case แทน และส่ง Parameter ให้ตรงกับที่ Use Case ต้องการ
-      await moodLogUseCase.addMoodLogUseCase(selectedMood, [selectedCause], note);
-
+      await makeGetLogUseCase.addMoodLogUseCase(
+        selectedMood,
+        selectedCause,
+        note,
+      );
       setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        setSelectedMood(null);
-        setSelectedCause(null);
-        setNote("");
-      }, 2000);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      setErrorMessage(error.message);
     } finally {
-      setIsSubmitting(false);
+      setSubmitted(false);
+      setSelectedMood(null);
+      setSelectedCause(null);
     }
   };
 
@@ -97,6 +94,7 @@ export const useLog = () => {
     setNewCauseName,
     isAddingCause,
     activeMood,
+    errorMessage,
     handleAddCustomCause,
     handleDeleteCustomCause,
     toggleCause,

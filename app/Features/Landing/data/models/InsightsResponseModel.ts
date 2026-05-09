@@ -1,4 +1,4 @@
-export interface InsightsModel {
+export interface InsightsResponseModel {
   totalLogs: number;
   moodDistribution: MoodDistributionModel;
   causesAnalysis: CausesAnalysisModel;

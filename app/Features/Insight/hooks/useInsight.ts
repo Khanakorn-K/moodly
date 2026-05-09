@@ -4,7 +4,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import dataSourceInsights from "../services/dataSourceInsights";
 import { CausesEntity } from "@/app/share/entities/causesEntity";
 import { standartMoods } from "@/app/share/moodType";
-import { insightEntity, moodsResultEntity } from "../domain/entity/InsightEntity";
+import {
+  InsightEntity,
+  MoodsResultEntity,
+} from "../domain/entity/InsightEntity";
 
 export const useInsight = () => {
   const { status } = useSession();
@@ -12,11 +15,11 @@ export const useInsight = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [insightList, setInsightList] = useState<insightEntity | null>(null);
+  const [insightList, setInsightList] = useState<InsightEntity | null>(null);
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
   const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editItem, setEditItem] = useState<moodsResultEntity | null>();
+  const [editItem, setEditItem] = useState<MoodsResultEntity | null>();
   const [editNote, setEditNote] = useState("");
   const [editMood, setEditMood] = useState<number>();
   const [myCustomCauses, setMyCustomCauses] = useState<CausesEntity[]>([]);
@@ -155,7 +158,7 @@ export const useInsight = () => {
     setSelectedCauses([name]);
   };
 
-  const openEditModal = (log: moodsResultEntity) => {
+  const openEditModal = (log: MoodsResultEntity) => {
     setEditItem(log);
     setEditNote(log.note);
     const moodConfig = standartMoods.find(

@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { TrendingUp, PenLine, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Chart from "./components/Chart";
 import useLandingPage from "./hooks/useLandingPage";
-import Causes from "./components/Causes";
 import { Calendar } from "@/components/ui/calendar";
 import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
-import { LandingEntity } from "./domain/entity/LandingEntity";
+import Causes from "../components/Causes";
+import { LandingEntity } from "../domain/entity/LandingEntity";
+import Chart from "../components/Chart";
 
 export default function LandingPageView() {
   const {
@@ -25,7 +25,7 @@ export default function LandingPageView() {
     date,
     setDate,
     topCausesList,
-    calculateAverageMood,
+    averageMood,
     calculateMoodColor,
   } = useLandingPage();
 
@@ -52,7 +52,7 @@ export default function LandingPageView() {
             setDate={setDate}
             moodChartData={moodChartData}
             data={data}
-            calculateAverageMood={calculateAverageMood}
+            averageMood={averageMood}
             calculateMoodColor={calculateMoodColor}
           />
 
@@ -157,7 +157,7 @@ interface MoodOverviewCardProps {
     date: Date | undefined;
   }[];
   data: LandingEntity | null;
-  calculateAverageMood: (insightData: LandingEntity | null) => number;
+  averageMood: number;
   calculateMoodColor: (value: number | null) => string;
 }
 
@@ -167,7 +167,7 @@ function MoodOverviewCard({
   setDate,
   moodChartData,
   data,
-  calculateAverageMood,
+  averageMood,
   calculateMoodColor,
 }: MoodOverviewCardProps) {
   return (
@@ -218,12 +218,10 @@ function MoodOverviewCard({
             <span
               className="text-xl font-black italic"
               style={{
-                color: calculateMoodColor(
-                  Math.round(calculateAverageMood(data)),
-                ),
+                color: calculateMoodColor(Math.round(averageMood)),
               }}
             >
-              {isLoading ? "..." : calculateAverageMood(data)}
+              {isLoading ? "..." : averageMood}
             </span>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { LogRepositoryImpl } from "./data/repositories/LogRepositoryImpl.ts";
-import { makeLogUseCase } from "./domain/useCase/LogUseCase";
+import { getLogUseCase } from "./domain/useCase/getLogUseCase";
+
 const dataSource = LogRepositoryImpl;
-export const moodLogUseCase = makeLogUseCase(dataSource);
+export const makeGetLogUseCase = getLogUseCase(dataSource);
