@@ -29,20 +29,8 @@ export async function GET(req: NextRequest) {
       ...(startDate || endDate
         ? {
             createdAt: {
-              ...(startDate
-                ? {
-                    gte: new Date(
-                      new Date(startDate).setHours(0, 0, 0, 0),
-                    ).toISOString(),
-                  }
-                : {}),
-              ...(endDate
-                ? {
-                    lte: new Date(
-                      new Date(endDate).setHours(23, 59, 59, 999),
-                    ).toISOString(),
-                  }
-                : {}),
+              ...(startDate ? { gte: `${startDate}T00:00:00.000Z` } : {}),
+              ...(endDate ? { lte: `${endDate}T23:59:59.999Z` } : {}),
             },
           }
         : {}),

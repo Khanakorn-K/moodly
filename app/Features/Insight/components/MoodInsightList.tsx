@@ -6,11 +6,11 @@ import React from "react";
 import { moodColors } from "@/app/share/moodColors";
 import { standartMoods } from "@/app/share/moodType";
 import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
-import { insightEntity } from "../domain/entity/InsightEntity";
+import { InsightEntity } from "../domain/entity/InsightEntity";
 
 interface MoodInsightListProps {
   isListLoading: boolean;
-  insightList: insightEntity | null;
+  insightList: InsightEntity | null;
   openEditModal: (log: any) => void;
   handleDelete: (id: string) => void;
 }

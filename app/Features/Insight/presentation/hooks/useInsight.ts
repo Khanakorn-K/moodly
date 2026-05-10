@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import dataSourceInsights from "../services/dataSourceInsights";
 import { CausesEntity } from "@/app/share/entities/causesEntity";
 import { standartMoods } from "@/app/share/moodType";
 import {
   InsightEntity,
   MoodsResultEntity,
-} from "../domain/entity/InsightEntity";
+} from "../../domain/entity/InsightEntity";
+import { insightUseCase } from "../../DependenciesInjection";
+import { handleAppError } from "@/cors/utils/errorHandler";
+import { inspectResponse } from "@/cors/utils/debugResponse";
 
 export const useInsight = () => {
   const { status } = useSession();
@@ -42,15 +44,9 @@ export const useInsight = () => {
 
   const fetchInsight = async (isInitial: boolean = false) => {
     if (status !== "authenticated") return;
-
-    if (isInitial) {
-      setIsInitialLoading(true);
-    } else {
-      setIsListLoading(true);
-    }
-
+    isInitial ? setIsInitialLoading(true) : setIsListLoading(true);
     try {
-      const entity = await dataSourceInsights.getMoods(
+      const entity = await insightUseCase.getMoods(
         page,
         limit,
         mood,
@@ -58,8 +54,9 @@ export const useInsight = () => {
         endDate,
       );
       setInsightList(entity);
-    } catch (error) {
-      console.error(error);
+      inspectResponse(entity, "insight");
+    } catch (error: any) {
+      handleAppError(error.message);
     } finally {
       setIsInitialLoading(false);
       setIsListLoading(false);
@@ -69,7 +66,7 @@ export const useInsight = () => {
   const fetchMyCauses = async () => {
     if (status !== "authenticated") return;
     try {
-      const entity = await dataSourceInsights.getMyCauses();
+      const entity = await insightUseCase.getMyCauses();
       setMyCustomCauses(entity);
     } catch (error) {
       console.error(error);
@@ -77,13 +74,7 @@ export const useInsight = () => {
   };
 
   const handleFilterChange = (newParams: Record<string, string | null>) => {
-    const params = new URLSearchParams(searchParams.toString());
-    Object.entries(newParams).forEach(([key, value]) => {
-      if (value) params.set(key, value);
-      else params.delete(key);
-    });
-    params.set("page", "1");
-    router.push(`${pathname}?${params.toString()}`);
+    updateQueryParams({ ...newParams, page: "1" });
   };
 
   useEffect(() => {
@@ -97,22 +88,21 @@ export const useInsight = () => {
   }, [status]);
 
   useEffect(() => {
-    const isFirstLoad = !insightList;
-    fetchInsight(isFirstLoad);
+    fetchInsight(!insightList);
   }, [page, status, mood, startDate, endDate]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("ต้องการลบบันทึกนี้ใช่หรือไม่?")) return;
-    await dataSourceInsights.deleteMood(id);
+    await insightUseCase.deleteMood(id);
     fetchInsight();
   };
+
   const handleDragEnd = async (event: any) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
     const logId = String(active.id);
     const newMoodValue = Number(over.id);
-
     const previousinsightList = insightList;
 
     setInsightList((prev: any) => {
@@ -129,34 +119,31 @@ export const useInsight = () => {
       const originalLog = previousinsightList?.data.find(
         (item) => String(item.id) === logId,
       );
-
-      await dataSourceInsights.updateMood(logId, {
-        mood: newMoodValue,
-        note: originalLog?.note || "",
-        causes: originalLog?.causes || [],
-      });
-
-      // await fetchInsight();
+      await insightUseCase.updateMood(
+        logId,
+        newMoodValue,
+        originalLog?.note || "",
+        originalLog?.causes || [],
+      );
     } catch (error) {
-      console.error("อัปเดตพลาดครับ:", error);
       setInsightList(previousinsightList);
       alert("การเชื่อมต่อขัดข้อง!");
     }
   };
+
   const handleSave = async () => {
     if (!editItem || editMood === undefined) return;
-    await dataSourceInsights.updateMood(editItem.id, {
-      note: editNote,
-      mood: editMood,
-      causes: selectedCauses,
-    });
+    await insightUseCase.updateMood(
+      editItem.id,
+      editMood,
+      editNote,
+      selectedCauses,
+    );
     setIsModalOpen(false);
     fetchInsight();
   };
 
-  const toggleCause = (name: string) => {
-    setSelectedCauses([name]);
-  };
+  const toggleCause = (name: string) => setSelectedCauses([name]);
 
   const openEditModal = (log: MoodsResultEntity) => {
     setEditItem(log);
@@ -164,9 +151,7 @@ export const useInsight = () => {
     const moodConfig = standartMoods.find(
       (m: any) => String(m.value) === String(log.mood) || m.label === log.mood,
     );
-
     setEditMood(moodConfig ? Number(moodConfig.value) : 0);
-
     setSelectedCauses(log.causes || []);
     setIsModalOpen(true);
   };

@@ -1,9 +1,9 @@
 export interface moodsLogModelResponse {
-  data: moodsLogModelResponseResult[];
+  data: moodsLogResponseModel[];
   total: number;
   page: number;
 }
-export interface moodsLogModelResponseResult {
+export interface moodsLogResponseModel {
   id: string;
   userId: string;
   mood: string;

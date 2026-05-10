@@ -1,14 +1,8 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Calendar,
-  ChevronLeft,
-  ChevronRight,
-  MessageSquare,
-  Trash2,
-  Edit2,
   X,
   Filter,
   RotateCcw,
@@ -16,9 +10,10 @@ import {
 import { standartMoods, stadartCauses } from "@/app/share/moodType";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/share/moodColors";
-import MoodInsightList from "./components/MoodInsightList";
-import TableMoodsAll from "./components/TableMoodsAll";
+
 import { useInsight } from "./hooks/useInsight";
+import MoodInsightList from "../components/MoodInsightList";
+import TableMoodsAll from "../components/TableMoodsAll";
 
 export default function InsightView() {
   const {

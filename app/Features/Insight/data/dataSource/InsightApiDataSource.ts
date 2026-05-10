@@ -1,17 +1,15 @@
 import { apiClient } from "@/cors/lib/api-client";
-import { moodsLogModelResponse } from "./models/moodsLogModelResponse";
-import { CausesEntity } from "../../../share/entities/causesEntity";
-import { CausesResponseModel } from "../../../share/models/causesResponseModel";
-import { InsightEntity } from "../domain/entity/InsightEntity";
+import { moodsLogModelResponse } from "../models/moodsLogResponseModel";
+import { CausesResponseModel } from "../models/causesResponseModel";
 
-const dataSourceInsights = {
+const InsightApiDataSource = {
   getMoods: async (
     page: number = 1,
     limit: number = 10,
     mood?: string,
     startDate?: string,
     endDate?: string,
-  ): Promise<InsightEntity> => {
+  ): Promise<moodsLogModelResponse> => {
     const response = await apiClient.get<moodsLogModelResponse>("/moods", {
       params: {
         page: page.toString(),
@@ -21,7 +19,7 @@ const dataSourceInsights = {
         ...(endDate ? { endDate } : {}),
       },
     });
-    return new InsightEntity(response);
+    return response;
   },
 
   updateMood: async (
@@ -35,10 +33,9 @@ const dataSourceInsights = {
     return await apiClient.delete(`/moods/${id}`);
   },
 
-  getMyCauses: async (): Promise<CausesEntity[]> => {
-    const response = await apiClient.get<CausesResponseModel[]>("/causes");
-    return response.map((item) => new CausesEntity(item));
+  getMyCauses: async (): Promise<CausesResponseModel[]> => {
+    return await apiClient.get<CausesResponseModel[]>("/causes");
   },
 };
 
-export default dataSourceInsights;
+export default InsightApiDataSource;

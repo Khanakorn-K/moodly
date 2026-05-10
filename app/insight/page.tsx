@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import InsightView from "../Features/Insight/InsightView";
+import InsightView from "../Features/Insight/presentation/InsightView";
 
 const page = () => {
   return (

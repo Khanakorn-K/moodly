@@ -19,10 +19,13 @@ import {
 import { MoodType, standartMoods } from "@/app/share/moodType";
 import { moodColors } from "@/app/share/moodColors";
 import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
-import { insightEntity, moodsResultEntity } from "../domain/entity/InsightEntity";
+import {
+  InsightEntity,
+  MoodsResultEntity,
+} from "../domain/entity/InsightEntity";
 
 interface TableMoodsAllProps {
-  insightList: insightEntity | null;
+  insightList: InsightEntity | null;
   isListLoading: boolean;
   handleDragEnd: (event: any) => void;
 }
@@ -68,7 +71,7 @@ const TableMoodsAll = ({
 
 interface columnProps {
   column: MoodType;
-  moodsList: moodsResultEntity[];
+  moodsList: MoodsResultEntity[];
   isLoading: boolean;
 }
 
@@ -102,7 +105,7 @@ const Column = ({ column, moodsList, isLoading }: columnProps) => {
           isOver ? "bg-white/[0.04] border-white/5 shadow-2xl" : "bg-black/20"
         }`}
       >
-        {moodsList.map((mood: moodsResultEntity) => (
+        {moodsList.map((mood: MoodsResultEntity) => (
           <DraggableCard
             key={mood.id}
             insightList={mood}
@@ -124,12 +127,16 @@ const Column = ({ column, moodsList, isLoading }: columnProps) => {
 };
 
 interface draggableCardProps {
-  insightList: moodsResultEntity;
+  insightList: MoodsResultEntity;
   themeColor: string;
   emoji: string;
 }
 
-const DraggableCard = ({ insightList, themeColor, emoji }: draggableCardProps) => {
+const DraggableCard = ({
+  insightList,
+  themeColor,
+  emoji,
+}: draggableCardProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: String(insightList.id),
@@ -167,6 +174,7 @@ const DraggableCard = ({ insightList, themeColor, emoji }: draggableCardProps) =
               <span className="text-xs">{emoji}</span>
               <span className="text-[10px] text-white/20 font-black uppercase tracking-wider">
                 {convertDateToThaiDateFormat(insightList.createdAt)}
+                {/* {insightList.createdAt} */}
               </span>
             </div>
             <p className="text-[11px] text-white/60 leading-relaxed line-clamp-3 italic">
