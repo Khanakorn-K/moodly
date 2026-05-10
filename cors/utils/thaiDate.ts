@@ -46,17 +46,14 @@ export function convertDateToThaiDateFormat(
   let inputDate: Date;
 
   if (typeof date === "string") {
-    const formattedDate = date.includes("T") ? date : date.replace(" ", "T");
-    inputDate = new Date(formattedDate);
+    // ตัดเอาแค่ YYYY-MM-DD เพื่อไม่ให้โดน Timezone (เขตเวลา) ปัดเศษเวลาจนข้ามวัน
+    const dateOnly = date.split("T")[0];
+    inputDate = new Date(dateOnly);
   } else {
-    inputDate = date as Date;
+    inputDate = date;
   }
 
-  if (
-    !inputDate ||
-    typeof inputDate.getTime !== "function" ||
-    isNaN(inputDate.getTime())
-  ) {
+  if (isNaN(inputDate.getTime())) {
     return "วันที่ไม่ถูกต้อง";
   }
 
@@ -65,5 +62,6 @@ export function convertDateToThaiDateFormat(
     day: "numeric",
     month: "long",
     year: "numeric",
+    // ไม่ต้องระบุ timeZone เพื่อให้อิงตามวันที่ที่เรา Set ไว้ตรงๆ
   });
 }

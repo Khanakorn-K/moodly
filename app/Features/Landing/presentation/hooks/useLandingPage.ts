@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 import { moodColors } from "@/app/share/moodColors";
 import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
-import { LandingEntity } from "../../domain/entity/LandingEntity";
+import type { LandingEntity } from "../../domain/entities/LandingEntity";
 import { standartMoods } from "@/app/share/moodType";
-import { makeGetLandingUseCase } from "../../DependenciesInjection";
+import { landingUseCases } from "../../dependencyInjection";
 import { handleAppError } from "@/cors/utils/errorHandler";
 
 const useLandingPage = () => {
@@ -13,7 +13,6 @@ const useLandingPage = () => {
   const [data, setData] = useState<LandingEntity | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [messageError, setMessageError] = useState<string>("");
 
   useEffect(() => {
     async function fetchData() {
@@ -24,12 +23,14 @@ const useLandingPage = () => {
 
       try {
         const dateString = convertDateToYYMMDD(date);
-        const entity =
-          await makeGetLandingUseCase.getInsightsUseCase(dateString);
+        const entity = await landingUseCases.getInsights({
+          selectedDate: dateString,
+        });
         setData(entity);
-      } catch (error: any) {
-        setMessageError(error.message);
-        handleAppError(error.message);
+      } catch (error) {
+        handleAppError(
+          error instanceof Error ? error.message : "ไม่สามารถโหลดข้อมูลได้",
+        );
       } finally {
         setIsLoading(false);
       }
