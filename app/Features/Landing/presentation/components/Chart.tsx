@@ -10,7 +10,7 @@ import {
   ChartEvent,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
+import { convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 

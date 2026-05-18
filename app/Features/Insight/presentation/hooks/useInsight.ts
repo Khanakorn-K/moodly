@@ -2,10 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { standartMoods } from "@/app/share/moodType";
-import { handleAppError } from "@/cors/utils/errorHandler";
-import { inspectResponse } from "@/cors/utils/debugResponse";
-import type { CauseEntity } from "../../domain/entities/CauseEntity";
+import { standartMoods } from "@/app/shared/moodType";
+import { handleAppError } from "@/cores/utils/errorHandler";
+import { inspectResponse } from "@/cores/utils/debugResponse";
+import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import type {
   MoodLogEntity,
   MoodLogPageEntity,

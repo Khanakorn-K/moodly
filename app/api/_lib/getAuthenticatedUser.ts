@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/cors/lib/auth";
+import { authOptions } from "@/cores/lib/auth";
 import { prisma } from "@/prisma.config";
 
 export async function getAuthenticatedUser() {

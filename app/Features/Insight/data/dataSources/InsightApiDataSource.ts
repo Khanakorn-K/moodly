@@ -1,5 +1,5 @@
-import { apiClient } from "@/cors/lib/api-client";
-import type { CauseResponseModel } from "../models/CauseResponseModel";
+import { apiClient } from "@/cores/lib/api-client";
+import type { CauseResponseModel } from "@/app/shared/models/CauseResponseModel";
 import type { MoodLogsResponseModel } from "../models/MoodLogsResponseModel";
 import type { UpdateMoodLogRequestModel } from "../models/UpdateMoodLogRequestModel";
 

@@ -1,4 +1,4 @@
-import type { CauseEntity } from "../../domain/entities/CauseEntity";
+import type { CauseEntity } from "../entities/CauseEntity";
 import type { CauseResponseModel } from "../models/CauseResponseModel";
 
 export const CauseMapper = {

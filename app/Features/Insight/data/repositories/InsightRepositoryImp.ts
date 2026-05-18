@@ -1,8 +1,8 @@
-import type { CauseEntity } from "../../domain/entities/CauseEntity";
+import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import type { MoodLogPageEntity } from "../../domain/entities/MoodLogEntity";
 import type { IInsightRepository } from "../../domain/repositories/IInsightRepository";
 import { InsightApiDataSource } from "../dataSources/InsightApiDataSource";
-import { CauseMapper } from "../mappers/CauseMapper";
+import { CauseMapper } from "@/app/shared/mappers/CauseMapper";
 import { MoodLogMapper } from "../mappers/MoodLogMapper";
 
 export const InsightRepositoryImp: IInsightRepository = {

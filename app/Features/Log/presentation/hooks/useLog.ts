@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { standartMoods } from "@/app/share/moodType";
-import type { CauseEntity } from "../../domain/entities/CauseEntity";
+import { standartMoods } from "@/app/shared/moodType";
+import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { logUseCases } from "../../dependencyInjection";
 
 export const useLog = () => {

@@ -1,4 +1,4 @@
-import { apiClient } from "@/cors/lib/api-client";
+import { apiClient } from "@/cores/lib/api-client";
 import { OverViewResponseModel } from "../models/OverViewResponseModel";
 
 export const OverViewApiDataSource = {

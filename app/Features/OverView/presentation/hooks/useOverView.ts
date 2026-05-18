@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { OverViewEntity } from "../../domain/entities/OverViewEntity";
-import { handleAppError } from "@/cors/utils/errorHandler";
-import { inspectResponse } from "@/cors/utils/debugResponse";
-import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
+import { handleAppError } from "@/cores/utils/errorHandler";
+import { inspectResponse } from "@/cores/utils/debugResponse";
+import { convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 import { overViewUseCases } from "../../dependencyInjection";
 
 // Presentation layer เท่านั้น: เก็บ React/session/loading/error state ใน hook นี้.

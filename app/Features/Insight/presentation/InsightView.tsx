@@ -2,9 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { Calendar, X, Filter, RotateCcw } from "lucide-react";
-import { standartMoods, stadartCauses } from "@/app/share/moodType";
+import { standartMoods } from "@/app/shared/moodType";
+import { createCauseOptions } from "@/app/shared/causes";
 import { Input } from "@/components/ui/input";
-import { moodColors } from "@/app/share/moodColors";
+import { moodColors } from "@/app/shared/moodColors";
 
 import { useInsight } from "./hooks/useInsight";
 import MoodInsightList from "./components/MoodInsightList";
@@ -37,10 +38,7 @@ export default function InsightView() {
     toggleCause,
   } = useInsight();
 
-  const allCauses = [
-    ...stadartCauses.map((c) => ({ name: c.label })),
-    ...customCauses.map((c) => ({ name: c.name })),
-  ];
+  const allCauses = createCauseOptions(customCauses);
 
   if (isInitialLoading) {
     return (

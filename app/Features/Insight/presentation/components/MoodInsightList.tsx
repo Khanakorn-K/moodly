@@ -2,9 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { Edit2, Filter, MessageSquare, Trash2 } from "lucide-react";
-import { moodColors } from "@/app/share/moodColors";
-import { standartMoods } from "@/app/share/moodType";
-import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
+import { moodColors } from "@/app/shared/moodColors";
+import { standartMoods } from "@/app/shared/moodType";
+import { convertDateToThaiDateFormat } from "@/cores/utils/thaiDate";
 import type {
   MoodLogEntity,
   MoodLogPageEntity,

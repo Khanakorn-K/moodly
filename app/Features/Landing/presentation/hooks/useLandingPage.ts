@@ -1,12 +1,12 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import { moodColors } from "@/app/share/moodColors";
-import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
+import { moodColors } from "@/app/shared/moodColors";
+import { convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 import type { LandingEntity } from "../../domain/entities/LandingEntity";
-import { standartMoods } from "@/app/share/moodType";
+import { standartMoods } from "@/app/shared/moodType";
 import { landingUseCases } from "../../dependencyInjection";
-import { handleAppError } from "@/cors/utils/errorHandler";
+import { handleAppError } from "@/cores/utils/errorHandler";
 
 const useLandingPage = () => {
   const { data: session, status } = useSession();

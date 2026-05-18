@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
-import { cn } from "@/cors/lib/utils";
+import { cn } from "@/cores/lib/utils";
 
 const THEMES = { light: "", dark: ".dark" } as const;
 

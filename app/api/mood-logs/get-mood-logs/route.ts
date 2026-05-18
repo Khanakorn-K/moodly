@@ -4,7 +4,7 @@ import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
 import {
   convertYYMMDDToEndOfDayISO,
   convertYYMMDDToStartOfDayISO,
-} from "@/cors/utils/thaiDate";
+} from "@/cores/utils/thaiDate";
 
 export async function GET(req: NextRequest) {
   try {

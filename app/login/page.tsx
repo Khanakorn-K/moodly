@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { LoginView } from "../../cors/components/Login/loginView";
+import { LoginView } from "./components/Login/loginView";
 
 const Page = () => {
   return (

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
-import { isValidYYMMDDDate } from "@/cors/utils/thaiDate";
+import { isValidYYMMDDDate } from "@/cores/utils/thaiDate";
 
 export async function GET(req: NextRequest) {
   try {

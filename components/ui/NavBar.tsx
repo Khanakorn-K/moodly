@@ -15,13 +15,10 @@ import {
   Home,
   PenLine,
   BarChart2,
-  Lightbulb,
-  Flame,
   LogOut,
   User,
-  GitGraph
+  GitGraph,
 } from "lucide-react";
-import Image from "next/image";
 
 const navItems = [
   { href: "/", icon: Home, label: "หน้าแรก" },

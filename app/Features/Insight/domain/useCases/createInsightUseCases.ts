@@ -1,4 +1,4 @@
-import type { CauseEntity } from "../entities/CauseEntity";
+import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import type { MoodLogPageEntity } from "../entities/MoodLogEntity";
 import type { IInsightRepository } from "../repositories/IInsightRepository";
 

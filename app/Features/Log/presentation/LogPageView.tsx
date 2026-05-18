@@ -1,7 +1,8 @@
 "use client";
 
-import { standartMoods, stadartCauses } from "../../../share/moodType";
-import { moodColors } from "@/app/share/moodColors";
+import { standartMoods } from "@/app/shared/moodType";
+import { createCauseOptions } from "@/app/shared/causes";
+import { moodColors } from "@/app/shared/moodColors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, X, Loader2, MessageSquare, Heart } from "lucide-react";
@@ -13,7 +14,7 @@ import {
   AlertDialogTrigger,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
-import { displayGetCurrentThaiDate } from "@/cors/utils/thaiDate";
+import { displayGetCurrentThaiDate } from "@/cores/utils/thaiDate";
 import { useLog } from "./hooks/useLog";
 
 export default function LogPageView() {
@@ -37,10 +38,7 @@ export default function LogPageView() {
   } = useLog();
 
   const themeColor = activeMood ? moodColors[activeMood.value] : "#6366f1";
-  const allCauses = [
-    ...stadartCauses.map((c) => ({ name: c.label })),
-    ...myCustomCauses.map((c) => ({ name: c.name })),
-  ];
+  const allCauses = createCauseOptions(myCustomCauses);
 
   const today = displayGetCurrentThaiDate();
 

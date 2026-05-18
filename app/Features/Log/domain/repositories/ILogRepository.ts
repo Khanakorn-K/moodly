@@ -1,4 +1,4 @@
-import type { CauseEntity } from "../entities/CauseEntity";
+import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 
 export interface ILogRepository {
   addMoodLog: (data: {

@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
-import { standartMoods } from "@/app/share/moodType";
+import { standartMoods } from "@/app/shared/moodType";
 import {
   convertYYMMDDToEndOfDayISO,
   convertYYMMDDToStartOfDayISO,
   createYYMMDDDateRange,
   isValidYYMMDDDate,
-} from "@/cors/utils/thaiDate";
+} from "@/cores/utils/thaiDate";
 
 const moodValues = standartMoods.map((mood) => mood.value);
 

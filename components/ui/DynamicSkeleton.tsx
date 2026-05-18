@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/cors/lib/utils";
+import { cn } from "@/cores/lib/utils";
 
 interface DynamicSkeletonProps {
   width?: string | number;

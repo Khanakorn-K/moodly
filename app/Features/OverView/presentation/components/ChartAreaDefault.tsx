@@ -17,7 +17,8 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import type { OverViewDailyMoodEntity } from "../../domain/entities/OverViewEntity";
-import { convertDateToShortThaiDateFormat } from "@/cors/utils/thaiDate";
+import { convertDateToShortThaiDateFormat } from "@/cores/utils/thaiDate";
+import { moodColors } from "@/app/shared/moodColors";
 
 export const description = "A simple area chart";
 
@@ -36,17 +37,20 @@ type ChartAreaDefaultProps = {
   error?: string | null;
 };
 
-function getTrendText(data: OverViewDailyMoodEntity[]) {
-  const daysWithLogs = data.filter((item) => item.totalLogs > 0);
+function getCalculableMoodData(data: OverViewDailyMoodEntity[]) {
+  return data.filter((item) => item.averageMood > 0);
+}
 
-  if (daysWithLogs.length < 2) {
+function getTrendText(data: OverViewDailyMoodEntity[]) {
+  const calculableMoodData = getCalculableMoodData(data);
+
+  if (calculableMoodData.length < 2) {
     return "ยังไม่มีข้อมูลพอสำหรับดูแนวโน้ม";
   }
 
-  const firstMood = daysWithLogs[0].averageMood;
-  const lastMood = daysWithLogs[daysWithLogs.length - 1].averageMood;
+  const firstMood = calculableMoodData[0].averageMood;
+  const lastMood = calculableMoodData[calculableMoodData.length - 1].averageMood;
   const diff = Number((lastMood - firstMood).toFixed(1));
-
   if (diff === 0) return "แนวโน้มอารมณ์ยังคงที่";
   if (diff > 0) return `อารมณ์เฉลี่ยดีขึ้น ${diff} คะแนน`;
 
@@ -60,12 +64,21 @@ export function ChartAreaDefault({
   isLoading = false,
   error,
 }: ChartAreaDefaultProps) {
+  const calculableMoodData = getCalculableMoodData(data);
   const chartData = data.map((item) => ({
     date: item.date,
     averageMood: item.averageMood,
     totalLogs: item.totalLogs,
   }));
-  const hasLogs = data.some((item) => item.totalLogs > 0);
+  const overallAverage =
+    calculableMoodData.length > 0
+      ? calculableMoodData.reduce((sum, item) => sum + item.averageMood, 0) /
+        calculableMoodData.length
+      : 3;
+
+  const moodIndex = Math.round(overallAverage);
+  const graphColor = moodColors[moodIndex];
+  const hasLogs = calculableMoodData.length > 0;
   const rangeText =
     startDate && endDate
       ? `${convertDateToShortThaiDateFormat(startDate)} - ${convertDateToShortThaiDateFormat(endDate)}`
@@ -111,9 +124,9 @@ export function ChartAreaDefault({
               <Area
                 dataKey="averageMood"
                 type="natural"
-                fill="var(--color-averageMood)"
+                fill={graphColor}
                 fillOpacity={0.4}
-                stroke="var(--color-averageMood)"
+                stroke={graphColor}
               />
             </AreaChart>
           </ChartContainer>
@@ -130,7 +143,8 @@ export function ChartAreaDefault({
               {getTrendText(data)} <TrendingUp className="h-4 w-4" />
             </div>
             <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              จำนวนวันที่มีบันทึก {data.filter((item) => item.totalLogs > 0).length} วัน
+              จำนวนวันที่มีบันทึก{" "}
+              {calculableMoodData.length} วัน
             </div>
           </div>
         </div>

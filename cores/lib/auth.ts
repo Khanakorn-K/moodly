@@ -33,7 +33,7 @@ async function refreshAccessToken(token: any) {
       accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
     };
-  } catch (error) {
+  } catch {
     return {
       ...token,
       error: "RefreshAccessTokenError",

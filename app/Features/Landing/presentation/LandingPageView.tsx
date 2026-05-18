@@ -7,7 +7,7 @@ import { PenLine, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import useLandingPage from "./hooks/useLandingPage";
 import { Calendar } from "@/components/ui/calendar";
-import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
+import { convertDateToThaiDateFormat } from "@/cores/utils/thaiDate";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
 import Causes from "./components/Causes";
 import Chart from "./components/Chart";

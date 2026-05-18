@@ -1,8 +1,8 @@
 import type { ILogRepository } from "../../domain/repositories/ILogRepository";
 import type { AddMoodRequestModel } from "../models/AddMoodRequestModel";
-import type { CauseEntity } from "../../domain/entities/CauseEntity";
+import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { LogApiDataSource } from "../dataSources/LogApiDataSource";
-import { CauseMapper } from "../mappers/CauseMapper";
+import { CauseMapper } from "@/app/shared/mappers/CauseMapper";
 
 export const LogRepositoryImp: ILogRepository = {
   addMoodLog: async (data): Promise<void> => {

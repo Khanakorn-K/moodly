@@ -10,9 +10,9 @@ import {
 } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { MoreHorizontal, MessageSquare } from "lucide-react";
-import { MoodType, standartMoods } from "@/app/share/moodType";
-import { moodColors } from "@/app/share/moodColors";
-import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
+import { MoodType, standartMoods } from "@/app/shared/moodType";
+import { moodColors } from "@/app/shared/moodColors";
+import { convertDateToThaiDateFormat } from "@/cores/utils/thaiDate";
 import type {
   MoodLogEntity,
   MoodLogPageEntity,
