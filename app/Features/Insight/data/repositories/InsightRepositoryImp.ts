@@ -7,8 +7,6 @@ import { MoodLogMapper } from "../mappers/MoodLogMapper";
 
 export const InsightRepositoryImp: IInsightRepository = {
   getMoodLogs: async (data: {
-    page: number;
-    limit: number;
     mood?: string;
     startDate?: string;
     endDate?: string;

@@ -11,8 +11,6 @@ export async function GET(req: NextRequest) {
     const { user, errorResponse } = await getAuthenticatedUser();
     if (errorResponse) return errorResponse;
 
-    const page = parseInt(req.nextUrl.searchParams.get("page") ?? "1");
-    const limit = parseInt(req.nextUrl.searchParams.get("limit") ?? "10");
     const startDate = req.nextUrl.searchParams.get("startDate");
     const endDate = req.nextUrl.searchParams.get("endDate");
     const moodValue = req.nextUrl.searchParams.get("mood")
@@ -28,9 +26,7 @@ export async function GET(req: NextRequest) {
               ...(startDate
                 ? { gte: convertYYMMDDToStartOfDayISO(startDate) }
                 : {}),
-              ...(endDate
-                ? { lte: convertYYMMDDToEndOfDayISO(endDate) }
-                : {}),
+              ...(endDate ? { lte: convertYYMMDDToEndOfDayISO(endDate) } : {}),
             },
           }
         : {}),
@@ -40,13 +36,11 @@ export async function GET(req: NextRequest) {
       prisma.moodLog.findMany({
         where,
         orderBy: { createdAt: "desc" },
-        skip: (page - 1) * limit,
-        take: limit,
       }),
       prisma.moodLog.count({ where }),
     ]);
 
-    return NextResponse.json({ data, total, page }, { status: 200 });
+    return NextResponse.json({ data, total }, { status: 200 });
   } catch (error) {
     console.error("GET_MOOD_LOGS_ERROR:", error);
     return NextResponse.json(

@@ -3,8 +3,6 @@ import type { MoodLogPageEntity } from "../entities/MoodLogEntity";
 
 export interface IInsightRepository {
   getMoodLogs: (data: {
-    page: number;
-    limit: number;
     mood?: string;
     startDate?: string;
     endDate?: string;

@@ -33,8 +33,6 @@ export const useInsight = () => {
   const [customCauses, setCustomCauses] = useState<CauseEntity[]>([]);
   const [selectedCauses, setSelectedCauses] = useState<string[]>([]);
 
-  const page = Number(searchParams.get("page")) || 1;
-  const limit = Number(searchParams.get("limit")) || 10;
   const mood = searchParams.get("mood") || "";
   const startDate = searchParams.get("startDate") || "";
   const endDate = searchParams.get("endDate") || "";
@@ -51,32 +49,35 @@ export const useInsight = () => {
     [pathname, router, searchParams],
   );
 
-  const fetchMoodLogs = useCallback(async (isInitial: boolean = false) => {
-    if (status !== "authenticated") return;
-    if (isInitial) {
-      setIsInitialLoading(true);
-    } else {
-      setIsListLoading(true);
-    }
-    try {
-      const entity = await insightUseCases.getMoodLogs({
-        page,
-        limit,
-        mood,
-        startDate,
-        endDate,
-      });
-      setMoodLogPage(entity);
-      inspectResponse(entity, "mood logs");
-    } catch (error) {
-      handleAppError(
-        error instanceof Error ? error.message : "ไม่สามารถโหลดประวัติอารมณ์ได้",
-      );
-    } finally {
-      setIsInitialLoading(false);
-      setIsListLoading(false);
-    }
-  }, [endDate, limit, mood, page, startDate, status]);
+  const fetchMoodLogs = useCallback(
+    async (isInitial: boolean = false) => {
+      if (status !== "authenticated") return;
+      if (isInitial) {
+        setIsInitialLoading(true);
+      } else {
+        setIsListLoading(true);
+      }
+      try {
+        const entity = await insightUseCases.getMoodLogs({
+          mood,
+          startDate,
+          endDate,
+        });
+        setMoodLogPage(entity);
+        inspectResponse(entity, "mood logs");
+      } catch (error) {
+        handleAppError(
+          error instanceof Error
+            ? error.message
+            : "ไม่สามารถโหลดประวัติอารมณ์ได้",
+        );
+      } finally {
+        setIsInitialLoading(false);
+        setIsListLoading(false);
+      }
+    },
+    [endDate, mood, startDate, status],
+  );
 
   const fetchCauses = useCallback(async () => {
     if (status !== "authenticated") return;
@@ -90,16 +91,10 @@ export const useInsight = () => {
 
   const handleFilterChange = useCallback(
     (newParams: Record<string, string | null>) => {
-      updateQueryParams({ ...newParams, page: "1" });
+      updateQueryParams({ ...newParams });
     },
     [updateQueryParams],
   );
-
-  useEffect(() => {
-    if (!searchParams.get("page") || !searchParams.get("limit")) {
-      updateQueryParams({ page: "1", limit: "10" });
-    }
-  }, [searchParams, updateQueryParams]);
 
   useEffect(() => {
     fetchCauses();
@@ -177,12 +172,9 @@ export const useInsight = () => {
     editMood,
     setEditMood,
     editingMoodLog,
-    page,
-    limit,
     mood,
     startDate,
     endDate,
-    totalPages: moodLogPage?.total ? Math.ceil(moodLogPage.total / limit) : 1,
     updateQueryParams,
     handlePageChange: (p: number) => updateQueryParams({ page: String(p) }),
     handleDeleteMoodLog,

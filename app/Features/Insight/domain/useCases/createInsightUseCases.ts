@@ -3,15 +3,11 @@ import type { MoodLogPageEntity } from "../entities/MoodLogEntity";
 import type { IInsightRepository } from "../repositories/IInsightRepository";
 
 export const createInsightUseCases = (repository: IInsightRepository) => ({
-  getMoodLogs: async (
-    data: {
-      page: number;
-      limit: number;
-      mood?: string;
-      startDate?: string;
-      endDate?: string;
-    },
-  ): Promise<MoodLogPageEntity> => {
+  getMoodLogs: async (data: {
+    mood?: string;
+    startDate?: string;
+    endDate?: string;
+  }): Promise<MoodLogPageEntity> => {
     return await repository.getMoodLogs(data);
   },
   getCauses: async (): Promise<CauseEntity[]> => {

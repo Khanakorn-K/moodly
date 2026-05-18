@@ -56,9 +56,7 @@ export default function InsightView() {
             <h1 className="text-3xl font-black text-white tracking-tight font-outfit uppercase">
               Mood Insight
             </h1>
-            <p className="text-xs text-white/20 font-bold tracking-[0.2em] uppercase">
-              Total {moodLogPage?.total ?? 0} Records
-            </p>
+
           </div>
           <Button
             variant="ghost"

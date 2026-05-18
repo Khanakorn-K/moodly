@@ -5,8 +5,6 @@ import type { UpdateMoodLogRequestModel } from "../models/UpdateMoodLogRequestMo
 
 export const InsightApiDataSource = {
   getMoodLogs: async ({
-    page = 1,
-    limit = 10,
     mood,
     startDate,
     endDate,
@@ -21,8 +19,6 @@ export const InsightApiDataSource = {
       "/mood-logs/get-mood-logs",
       {
         params: {
-          page: page.toString(),
-          limit: limit.toString(),
           ...(mood ? { mood } : {}),
           ...(startDate ? { startDate } : {}),
           ...(endDate ? { endDate } : {}),
