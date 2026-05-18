@@ -124,6 +124,15 @@ export async function GET(req: NextRequest) {
       count: moodDistributionMap[mood] ?? 0,
     }));
 
+    const moodNotes = logs.map((log) => ({
+      id: log.id,
+      date: log.createdAt.split("T")[0],
+      mood: Number(log.mood),
+      note: log.note ?? "",
+      causes: log.causes,
+      createdAt: log.createdAt,
+    }));
+
     const causeSummaries = Object.entries(causeSummaryMap)
       .map(([cause, value]) => ({
         cause,
@@ -145,6 +154,7 @@ export async function GET(req: NextRequest) {
         averageMood,
         dailyMoodAverages,
         moodDistribution,
+        moodNotes,
         causeSummaries,
       },
       { status: 200 },

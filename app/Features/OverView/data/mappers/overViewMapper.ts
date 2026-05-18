@@ -10,6 +10,7 @@ export const OverViewMapper = {
       averageMood: dto.averageMood,
       dailyMoodAverages: dto.dailyMoodAverages,
       moodDistribution: dto.moodDistribution,
+      moodNotes: dto.moodNotes,
       causeSummaries: dto.causeSummaries,
     };
   },

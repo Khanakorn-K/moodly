@@ -9,6 +9,15 @@ export interface OverViewMoodDistributionEntity {
   count: number;
 }
 
+export interface OverViewMoodNoteEntity {
+  id: string;
+  date: string;
+  mood: number;
+  note: string;
+  causes: string[];
+  createdAt: string;
+}
+
 export interface OverViewMoodBreakdownEntity {
   mood: number;
   count: number;
@@ -27,5 +36,6 @@ export interface OverViewEntity {
   averageMood: number;
   dailyMoodAverages: OverViewDailyMoodEntity[];
   moodDistribution: OverViewMoodDistributionEntity[];
+  moodNotes: OverViewMoodNoteEntity[];
   causeSummaries: OverViewCauseSummaryEntity[];
 }

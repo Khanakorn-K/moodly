@@ -65,6 +65,7 @@ const OverViewView = () => {
 
         <ChartAreaDefault
           data={overViewData?.dailyMoodAverages ?? []}
+          moodNotes={overViewData?.moodNotes ?? []}
           startDate={startDate}
           endDate={endDate}
           isLoading={isLoading}

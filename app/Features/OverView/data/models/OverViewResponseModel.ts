@@ -9,6 +9,15 @@ export interface OverViewMoodDistributionResponseModel {
   count: number;
 }
 
+export interface OverViewMoodNoteResponseModel {
+  id: string;
+  date: string;
+  mood: number;
+  note: string;
+  causes: string[];
+  createdAt: string;
+}
+
 export interface OverViewMoodBreakdownResponseModel {
   mood: number;
   count: number;
@@ -27,5 +36,6 @@ export interface OverViewResponseModel {
   averageMood: number;
   dailyMoodAverages: OverViewDailyMoodResponseModel[];
   moodDistribution: OverViewMoodDistributionResponseModel[];
+  moodNotes: OverViewMoodNoteResponseModel[];
   causeSummaries: OverViewCauseSummaryResponseModel[];
 }

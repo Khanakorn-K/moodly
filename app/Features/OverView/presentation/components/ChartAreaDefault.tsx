@@ -13,10 +13,12 @@ import {
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import type { OverViewDailyMoodEntity } from "../../domain/entities/OverViewEntity";
+import type {
+  OverViewDailyMoodEntity,
+  OverViewMoodNoteEntity,
+} from "../../domain/entities/OverViewEntity";
 import { convertDateToShortThaiDateFormat } from "@/cores/utils/thaiDate";
 import { moodColors } from "@/app/shared/moodColors";
 
@@ -27,10 +29,15 @@ const chartConfig = {
     label: "อารมณ์เฉลี่ย",
     color: "var(--chart-1)",
   },
+  causes: {
+    label: "สาเหตุ",
+    color: "var(--chart-1)",
+  },
 } satisfies ChartConfig;
 
 type ChartAreaDefaultProps = {
   data: OverViewDailyMoodEntity[];
+  moodNotes: OverViewMoodNoteEntity[];
   startDate: string;
   endDate: string;
   isLoading?: boolean;
@@ -49,7 +56,8 @@ function getTrendText(data: OverViewDailyMoodEntity[]) {
   }
 
   const firstMood = calculableMoodData[0].averageMood;
-  const lastMood = calculableMoodData[calculableMoodData.length - 1].averageMood;
+  const lastMood =
+    calculableMoodData[calculableMoodData.length - 1].averageMood;
   const diff = Number((lastMood - firstMood).toFixed(1));
   if (diff === 0) return "แนวโน้มอารมณ์ยังคงที่";
   if (diff > 0) return `อารมณ์เฉลี่ยดีขึ้น ${diff} คะแนน`;
@@ -57,8 +65,80 @@ function getTrendText(data: OverViewDailyMoodEntity[]) {
   return `อารมณ์เฉลี่ยลดลง ${Math.abs(diff)} คะแนน`;
 }
 
+type TooltipPayloadItem = {
+  payload?: {
+    date?: string;
+    averageMood?: number;
+    totalLogs?: number;
+  };
+};
+
+function OverviewTooltip({
+  active,
+  payload,
+  moodNotes,
+  graphColor,
+}: {
+  active?: boolean;
+  payload?: TooltipPayloadItem[];
+  moodNotes: OverViewMoodNoteEntity[];
+  graphColor: string;
+}) {
+  const chartPayload = payload?.[0]?.payload;
+  const date = chartPayload?.date;
+
+  if (!active || !date || !chartPayload) return null;
+
+  const notes = moodNotes.filter((item) => item.date === date);
+
+  return (
+    <div className="grid max-w-72 gap-3 rounded-lg border border-white/10 bg-[#11111a] px-3 py-3 text-xs text-white shadow-xl">
+      <div className="grid gap-1">
+        <p className="font-medium">
+          {convertDateToShortThaiDateFormat(date)}
+        </p>
+        <div className="flex items-center justify-between gap-3 text-white/60">
+          <span>อารมณ์เฉลี่ย</span>
+          <span className="font-mono text-white">
+            {chartPayload.averageMood}
+          </span>
+        </div>
+        <div className="flex items-center justify-between gap-3 text-white/60">
+          <span>จำนวนบันทึก</span>
+          <span className="font-mono text-white">{chartPayload.totalLogs}</span>
+        </div>
+      </div>
+
+      {notes.length > 0 && (
+        <div className="grid gap-2 border-t border-white/10 pt-2">
+          {notes.map((item) => (
+            <div key={item.id} className="grid gap-1">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-white/60">Mood {item.mood}</span>
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: moodColors[item.mood] ?? graphColor }}
+                />
+              </div>
+              {item.causes.length > 0 && (
+                <p className="text-white/50">
+                  สาเหตุ: {item.causes.join(", ")}
+                </p>
+              )}
+              <p className="leading-relaxed text-white/80">
+                {item.note || "ไม่มีโน้ต"}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ChartAreaDefault({
   data,
+  moodNotes,
   startDate,
   endDate,
   isLoading = false,
@@ -119,7 +199,12 @@ export function ChartAreaDefault({
               />
               <ChartTooltip
                 cursor={false}
-                content={<ChartTooltipContent indicator="line" />}
+                content={
+                  <OverviewTooltip
+                    moodNotes={moodNotes}
+                    graphColor={graphColor}
+                  />
+                }
               />
               <Area
                 dataKey="averageMood"
@@ -143,8 +228,7 @@ export function ChartAreaDefault({
               {getTrendText(data)} <TrendingUp className="h-4 w-4" />
             </div>
             <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              จำนวนวันที่มีบันทึก{" "}
-              {calculableMoodData.length} วัน
+              จำนวนวันที่มีบันทึก {calculableMoodData.length} วัน
             </div>
           </div>
         </div>
