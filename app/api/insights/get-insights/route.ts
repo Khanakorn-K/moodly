@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
+import { isValidYYMMDDDate } from "@/cors/utils/thaiDate";
 
 export async function GET(req: NextRequest) {
   try {
@@ -11,8 +12,7 @@ export async function GET(req: NextRequest) {
     let dateFilter: any = {};
 
     if (selectedDate) {
-      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-      if (!dateRegex.test(selectedDate)) {
+      if (!isValidYYMMDDDate(selectedDate)) {
         return NextResponse.json(
           { error: "INVALID_DATE_FORMAT" },
           { status: 400 },

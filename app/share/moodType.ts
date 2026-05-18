@@ -4,6 +4,7 @@ export interface MoodType {
   label: string;
   color: MoodColor;
 }
+
 type MoodColor = "red" | "orange" | "yellow" | "green" | "cyan";
 
 type CauseKey =

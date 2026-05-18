@@ -115,7 +115,7 @@ export const useInsight = () => {
   const handleDeleteMoodLog = async (id: string) => {
     if (!confirm("ต้องการลบบันทึกนี้ใช่หรือไม่?")) return;
     await insightUseCases.deleteMoodLog(id);
-    fetchMoodLogs();
+    await fetchMoodLogs();
   };
 
   const handleDragEnd = async (event: DragEndEvent) => {
@@ -124,30 +124,21 @@ export const useInsight = () => {
 
     const logId = String(active.id);
     const newMoodValue = Number(over.id);
-    const previousMoodLogPage = moodLogPage;
+    const originalLog = moodLogPage?.items.find(
+      (item) => String(item.id) === logId,
+    );
 
-    setMoodLogPage((prev) => {
-      if (!prev) return prev;
-      return {
-        ...prev,
-        items: prev.items.map((item) =>
-          String(item.id) === logId ? { ...item, mood: newMoodValue } : item,
-        ),
-      };
-    });
+    if (!originalLog || Number.isNaN(newMoodValue)) return;
 
     try {
-      const originalLog = previousMoodLogPage?.items.find(
-        (item) => String(item.id) === logId,
-      );
       await insightUseCases.updateMoodLog(logId, {
         mood: newMoodValue,
-        note: originalLog?.note || "",
-        causes: originalLog?.causes || [],
+        note: originalLog.note,
+        causes: originalLog.causes,
       });
+      await fetchMoodLogs();
     } catch {
-      setMoodLogPage(previousMoodLogPage);
-      alert("การเชื่อมต่อขัดข้อง!");
+      handleAppError("การเชื่อมต่อขัดข้อง!");
     }
   };
 
@@ -159,7 +150,7 @@ export const useInsight = () => {
       causes: selectedCauses,
     });
     setIsModalOpen(false);
-    fetchMoodLogs();
+    await fetchMoodLogs();
   };
 
   const toggleCause = (name: string) => setSelectedCauses([name]);

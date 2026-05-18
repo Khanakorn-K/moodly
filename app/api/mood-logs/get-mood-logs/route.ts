@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
+import {
+  convertYYMMDDToEndOfDayISO,
+  convertYYMMDDToStartOfDayISO,
+} from "@/cors/utils/thaiDate";
 
 export async function GET(req: NextRequest) {
   try {
@@ -21,8 +25,12 @@ export async function GET(req: NextRequest) {
       ...(startDate || endDate
         ? {
             createdAt: {
-              ...(startDate ? { gte: `${startDate}T00:00:00.000Z` } : {}),
-              ...(endDate ? { lte: `${endDate}T23:59:59.999Z` } : {}),
+              ...(startDate
+                ? { gte: convertYYMMDDToStartOfDayISO(startDate) }
+                : {}),
+              ...(endDate
+                ? { lte: convertYYMMDDToEndOfDayISO(endDate) }
+                : {}),
             },
           }
         : {}),

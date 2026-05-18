@@ -1,6 +1,6 @@
 import type { ILandingRepository } from "../repositories/ILandingRepository";
-import { standartMoods } from "@/app/share/moodType";
 import type { LandingEntity } from "../entities/LandingEntity";
+import { findMoodLevelByDistributionKey } from "../constants/moodLevels";
 
 export const createLandingUseCases = (repository: ILandingRepository) => ({
   getInsights: async (data: {
@@ -12,12 +12,12 @@ export const createLandingUseCases = (repository: ILandingRepository) => ({
     let totalLogs = 0;
 
     Object.entries(entity?.moodDistribution ?? {}).forEach(([key, count]) => {
-      const moodConfig = standartMoods.find(
-        (m) => m.label === key || m.value.toString() === key,
-      );
-      if (moodConfig) {
-        totalPoints += moodConfig.value * (count as number);
-        totalLogs += count as number;
+      const moodLevel = findMoodLevelByDistributionKey(key);
+      const moodCount = Number(count);
+
+      if (moodLevel && Number.isFinite(moodCount)) {
+        totalPoints += moodLevel.value * moodCount;
+        totalLogs += moodCount;
       }
     });
 
