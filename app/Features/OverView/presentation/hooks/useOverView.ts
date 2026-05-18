@@ -10,7 +10,7 @@ import { overViewUseCases } from "../../dependencyInjection";
 // Business rules และ validation ต้องอยู่ที่ domain/useCases.
 function createDefaultStartDate() {
   const date = new Date();
-  date.setDate(date.getDate() - 6);
+  date.setDate(date.getDate() - 7);
   return convertDateToYYMMDD(date);
 }
 
