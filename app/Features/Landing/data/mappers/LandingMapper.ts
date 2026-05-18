@@ -1,5 +1,5 @@
-import { LandingEntity } from "../../domain/entity/LandingEntity";
-import { InsightsResponseModel } from "../models/InsightsResponseModel";
+import type { LandingEntity } from "../../domain/entities/LandingEntity";
+import type { InsightsResponseModel } from "../models/InsightsResponseModel";
 
 export const LandingMapper = {
   toEntity: (dto: InsightsResponseModel): LandingEntity => {

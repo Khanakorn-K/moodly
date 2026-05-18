@@ -1,5 +1,5 @@
-import { LandingEntity } from "../entity/LandingEntity";
+import type { LandingEntity } from "../entities/LandingEntity";
 
 export interface ILandingRepository {
-  fetchGetInsights: (date: string) => Promise<LandingEntity>;
+  getInsights: (data: { selectedDate: string }) => Promise<LandingEntity>;
 }

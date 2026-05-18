@@ -3,16 +3,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { TrendingUp, PenLine, ChevronRight } from "lucide-react";
+import { PenLine, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import useLandingPage from "./hooks/useLandingPage";
 import { Calendar } from "@/components/ui/calendar";
 import { convertDateToThaiDateFormat } from "@/cors/utils/thaiDate";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
-import Causes from "../components/Causes";
-import { LandingEntity } from "../domain/entity/LandingEntity";
-import Chart from "../components/Chart";
+import Causes from "./components/Causes";
+import Chart from "./components/Chart";
 
 export default function LandingPageView() {
   const {
@@ -51,7 +49,6 @@ export default function LandingPageView() {
             date={date}
             setDate={setDate}
             moodChartData={moodChartData}
-            data={data}
             averageMood={averageMood}
             calculateMoodColor={calculateMoodColor}
           />
@@ -156,7 +153,6 @@ interface MoodOverviewCardProps {
     causes: string[];
     date: Date | undefined;
   }[];
-  data: LandingEntity | null;
   averageMood: number;
   calculateMoodColor: (value: number | null) => string;
 }
@@ -166,7 +162,6 @@ function MoodOverviewCard({
   date,
   setDate,
   moodChartData,
-  data,
   averageMood,
   calculateMoodColor,
 }: MoodOverviewCardProps) {

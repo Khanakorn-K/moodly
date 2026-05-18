@@ -7,12 +7,12 @@ import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/share/moodColors";
 
 import { useInsight } from "./hooks/useInsight";
-import MoodInsightList from "../components/MoodInsightList";
-import TableMoodsAll from "../components/TableMoodsAll";
+import MoodInsightList from "./components/MoodInsightList";
+import MoodLogBoard from "./components/MoodLogBoard";
 
 export default function InsightView() {
   const {
-    insightList,
+    moodLogPage,
     isInitialLoading,
     isListLoading,
     isModalOpen,
@@ -21,28 +21,25 @@ export default function InsightView() {
     setEditNote,
     editMood,
     setEditMood,
-    editItem,
-    page,
+    editingMoodLog,
     mood,
     startDate,
     endDate,
     handleDragEnd,
-    totalPages,
-    handlePageChange,
-    handleDelete,
-    handleSave,
-    openEditModal,
+    handleDeleteMoodLog,
+    handleSaveMoodLog,
+    openEditMoodLogModal,
     router,
     handleFilterChange,
     pathname,
-    myCustomCauses,
+    customCauses,
     selectedCauses,
     toggleCause,
   } = useInsight();
 
   const allCauses = [
     ...stadartCauses.map((c) => ({ name: c.label })),
-    ...myCustomCauses.map((c) => ({ name: c.name })),
+    ...customCauses.map((c) => ({ name: c.name })),
   ];
 
   if (isInitialLoading) {
@@ -62,7 +59,7 @@ export default function InsightView() {
               Mood Insight
             </h1>
             <p className="text-xs text-white/20 font-bold tracking-[0.2em] uppercase">
-              Total {insightList?.total ?? 0} Records
+              Total {moodLogPage?.total ?? 0} Records
             </p>
           </div>
           <Button
@@ -115,14 +112,14 @@ export default function InsightView() {
               >
                 ทั้งหมด
               </Button>
-              {standartMoods.map((standartMoods) => {
-                const isActive = mood === String(standartMoods.value);
-                const mColor = moodColors[standartMoods.value as number];
+              {standartMoods.map((moodOption) => {
+                const isActive = mood === String(moodOption.value);
+                const mColor = moodColors[moodOption.value as number];
                 return (
                   <Button
-                    key={standartMoods.value}
+                    key={moodOption.value}
                     onClick={() =>
-                      handleFilterChange({ mood: String(standartMoods.value) })
+                      handleFilterChange({ mood: String(moodOption.value) })
                     }
                     style={
                       isActive
@@ -139,7 +136,7 @@ export default function InsightView() {
                         : "shadow-lg"
                     }`}
                   >
-                    {standartMoods.emoji} {standartMoods.label}
+                    {moodOption.emoji} {moodOption.label}
                   </Button>
                 );
               })}
@@ -149,53 +146,21 @@ export default function InsightView() {
 
         <div className="w-full min-h-[600px]">
           {!mood ? (
-            <TableMoodsAll
+            <MoodLogBoard
               handleDragEnd={handleDragEnd}
-              insightList={insightList}
+              moodLogPage={moodLogPage}
               isListLoading={isListLoading}
             />
           ) : (
             <MoodInsightList
-              insightList={insightList}
+              moodLogPage={moodLogPage}
               isListLoading={isListLoading}
-              openEditModal={openEditModal}
-              handleDelete={handleDelete}
+              openEditMoodLogModal={openEditMoodLogModal}
+              handleDeleteMoodLog={handleDeleteMoodLog}
             />
           )}
         </div>
 
-        {/* {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-6 pt-10">
-            <Button
-              variant="outline"
-              disabled={page === 1}
-              onClick={() => handlePageChange(page - 1)}
-              className="w-12 h-12 bg-white/5 border-white/10 text-white hover:bg-[#FFD166] hover:text-black transition-all rounded-2xl disabled:opacity-20"
-            >
-              <ChevronLeft size={20} />
-            </Button>
-            <div className="flex items-center gap-2 bg-white/5 px-6 py-3 rounded-2xl border border-white/5">
-              <span className="text-[10px] font-black text-white/20 uppercase tracking-widest">
-                Page
-              </span>
-              <span className="text-sm font-bold text-white">{page}</span>
-              <span className="text-[10px] font-black text-white/20 mx-1">
-                /
-              </span>
-              <span className="text-sm font-bold text-white/40">
-                {totalPages}
-              </span>
-            </div>
-            <Button
-              variant="outline"
-              disabled={page === totalPages}
-              onClick={() => handlePageChange(page + 1)}
-              className="w-12 h-12 bg-white/5 border-white/10 text-white hover:bg-[#FFD166] hover:text-black transition-all rounded-2xl disabled:opacity-20"
-            >
-              <ChevronRight size={20} />
-            </Button>
-          </div>
-        )} */}
       </div>
 
       {isModalOpen && (
@@ -204,7 +169,7 @@ export default function InsightView() {
             <div className="flex justify-between items-center">
               <div className="space-y-1">
                 <h3 className="text-xl font-black text-white uppercase tracking-tight">
-                  {editItem ? "ปรับปรุง" : ""}
+                  {editingMoodLog ? "ปรับปรุง" : ""}
                 </h3>
                 <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest">
                   ปรับปรุงสถานะ
@@ -218,13 +183,13 @@ export default function InsightView() {
               </button>
             </div>
             <div className="grid grid-cols-5 gap-3">
-              {standartMoods.map((standartMoods) => {
-                const isSelected = editMood === standartMoods.value;
-                const mColor = moodColors[standartMoods.value as number];
+              {standartMoods.map((moodOption) => {
+                const isSelected = editMood === moodOption.value;
+                const mColor = moodColors[moodOption.value as number];
                 return (
                   <button
-                    key={standartMoods.value}
-                    onClick={() => setEditMood(standartMoods.value)}
+                    key={moodOption.value}
+                    onClick={() => setEditMood(moodOption.value)}
                     style={
                       isSelected
                         ? { backgroundColor: mColor, color: "#000" }
@@ -236,7 +201,7 @@ export default function InsightView() {
                         : "font-black shadow-xl scale-110"
                     }`}
                   >
-                    {standartMoods.emoji}
+                    {moodOption.emoji}
                   </button>
                 );
               })}
@@ -266,11 +231,11 @@ export default function InsightView() {
               placeholder="What's on your mind"
             />
             <Button
-              onClick={handleSave}
+              onClick={handleSaveMoodLog}
               disabled={!editMood || selectedCauses.length !== 1}
               className="..."
             >
-              {editItem ? "Confirm Changes" : "Create Entry"}
+              {editingMoodLog ? "Confirm Changes" : "Create Entry"}
             </Button>
           </div>
         </div>

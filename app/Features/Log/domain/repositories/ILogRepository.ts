@@ -1,12 +1,12 @@
-import { CausesEntity } from "@/app/share/entities/causesEntity";
+import type { CauseEntity } from "../entities/CauseEntity";
 
 export interface ILogRepository {
-  fetchAddMood: (
-    selectedMood: number,
-    selectedCauses: string[],
-    note: string,
-  ) => Promise<any>;
-  fetchAddCauses: (name: string) => Promise<any>;
-  fetchGetMyCauses: () => Promise<CausesEntity[]>;
-  fetchDeleteMyCauses: (id: string) => Promise<any>;
+  addMoodLog: (data: {
+    selectedMood: number;
+    selectedCauses: string[];
+    note: string;
+  }) => Promise<void>;
+  addCause: (data: { name: string }) => Promise<void>;
+  getCauses: () => Promise<CauseEntity[]>;
+  deleteCause: (data: { id: string }) => Promise<void>;
 }
