@@ -1,15 +1,16 @@
-import { OverViewEntity } from "../../domain/entity/OverViewEntity";
-import { moodsLogModelResponse } from "../models/moodLogResponseModel";
+import { OverViewEntity } from "../../domain/entities/OverViewEntity";
+import { OverViewResponseModel } from "../models/OverViewResponseModel";
 
-export const overViewMapper = {
-  toEntity(dto: moodsLogModelResponse): OverViewEntity {
-    const data = dto.data;
-
+export const OverViewMapper = {
+  toEntity(dto: OverViewResponseModel): OverViewEntity {
     return {
-      moodDateAvg: [],
-      fromDate: data[data.length - 1].createdAt,
-      todate: data[0].createdAt,
-      totalDate: data.length,
+      startDate: dto.startDate,
+      endDate: dto.endDate,
+      totalLogs: dto.totalLogs,
+      averageMood: dto.averageMood,
+      dailyMoodAverages: dto.dailyMoodAverages,
+      moodDistribution: dto.moodDistribution,
+      causeSummaries: dto.causeSummaries,
     };
   },
 };

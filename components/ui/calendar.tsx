@@ -12,6 +12,10 @@ import { cn } from "@/cors/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
 
+type CalendarLocale = Partial<Locale> & {
+  code?: string
+}
+
 function Calendar({
   className,
   classNames,
@@ -26,6 +30,7 @@ function Calendar({
   buttonVariant?: React.ComponentProps<typeof Button>["variant"]
 }) {
   const defaultClassNames = getDefaultClassNames()
+  const localeCode = (locale as CalendarLocale | undefined)?.code
 
   return (
     <DayPicker
@@ -40,7 +45,7 @@ function Calendar({
       locale={locale}
       formatters={{
         formatMonthDropdown: (date) =>
-          date.toLocaleString(locale?.code, { month: "short" }),
+          date.toLocaleString(localeCode, { month: "short" }),
         ...formatters,
       }}
       classNames={{
@@ -186,7 +191,7 @@ function CalendarDayButton({
   modifiers,
   locale,
   ...props
-}: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> }) {
+}: React.ComponentProps<typeof DayButton> & { locale?: CalendarLocale }) {
   const defaultClassNames = getDefaultClassNames()
 
   const ref = React.useRef<HTMLButtonElement>(null)

@@ -1,8 +1,8 @@
-import { OverViewEntity } from "../entity/OverViewEntity";
+import { OverViewEntity } from "../entities/OverViewEntity";
 
 export interface IOverViewRepository {
-  fetchGetMoods: (
-    startDate: string,
-    endDate: string,
-  ) => Promise<OverViewEntity>;
+  getOverView: (data: {
+    startDate: string;
+    endDate: string;
+  }) => Promise<OverViewEntity>;
 }

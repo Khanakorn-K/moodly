@@ -24,6 +24,53 @@ export function convertDateToYYMMDD(date: Date): string {
 }
 
 /**
+ * ตรวจสอบวันที่รูปแบบ YYYY-MM-DD และกันวันที่ที่ไม่มีจริง เช่น 2026-02-31
+ */
+export function isValidYYMMDDDate(value: string): boolean {
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  const date = new Date(`${value}T00:00:00.000Z`);
+
+  return (
+    dateRegex.test(value) &&
+    !Number.isNaN(date.getTime()) &&
+    date.toISOString().startsWith(value)
+  );
+}
+
+/**
+ * แปลง YYYY-MM-DD เป็นเวลาเริ่มต้นของวันสำหรับ query database
+ */
+export function convertYYMMDDToStartOfDayISO(value: string): string {
+  return `${value}T00:00:00.000Z`;
+}
+
+/**
+ * แปลง YYYY-MM-DD เป็นเวลาสิ้นสุดของวันสำหรับ query database
+ */
+export function convertYYMMDDToEndOfDayISO(value: string): string {
+  return `${value}T23:59:59.999Z`;
+}
+
+/**
+ * สร้างรายการวันที่แบบ YYYY-MM-DD ตั้งแต่วันเริ่มต้นถึงวันสิ้นสุด
+ */
+export function createYYMMDDDateRange(
+  startDate: string,
+  endDate: string,
+): string[] {
+  const dates: string[] = [];
+  const currentDate = new Date(convertYYMMDDToStartOfDayISO(startDate));
+  const lastDate = new Date(convertYYMMDDToStartOfDayISO(endDate));
+
+  while (currentDate <= lastDate) {
+    dates.push(currentDate.toISOString().split("T")[0]);
+    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  }
+
+  return dates;
+}
+
+/**
  * ดึงวันที่ปัจจุบันมาแสดงผลเป็นภาษาไทยแบบไม่มีปี (เช่น วันจันทร์ที่ 1 มกราคม)
  */
 // display == ใช้บน view
@@ -63,5 +110,33 @@ export function convertDateToThaiDateFormat(
     month: "long",
     year: "numeric",
     // ไม่ต้องระบุ timeZone เพื่อให้อิงตามวันที่ที่เรา Set ไว้ตรงๆ
+  });
+}
+
+/**
+ * แปลงวันที่ให้เป็นรูปแบบสั้นสำหรับ label บนกราฟ เช่น 18 พ.ค.
+ */
+export function convertDateToShortThaiDateFormat(
+  date: Date | string | null | undefined,
+): string {
+  if (!date) return "";
+
+  let inputDate: Date;
+
+  if (typeof date === "string") {
+    const dateOnly = date.split("T")[0];
+    inputDate = new Date(`${dateOnly}T00:00:00.000Z`);
+  } else {
+    inputDate = date;
+  }
+
+  if (isNaN(inputDate.getTime())) {
+    return "";
+  }
+
+  return inputDate.toLocaleDateString("th-TH", {
+    day: "2-digit",
+    month: "short",
+    timeZone: "UTC",
   });
 }

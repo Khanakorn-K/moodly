@@ -1,4 +1,4 @@
-import { OverViewRepositoryImpl } from "./data/repositories/OverCiewRepositotyImpl";
-import { OverViewUsecase } from "./domain/usecase/OverViewUsecase";
+import { OverViewRepositoryImp } from "./data/repositories/OverViewRepositoryImp";
+import { createOverViewUseCases } from "./domain/useCases/createOverViewUseCases";
 
-export const makeOverViewUsecase = OverViewUsecase(OverViewRepositoryImpl);
+export const overViewUseCases = createOverViewUseCases(OverViewRepositoryImp);

@@ -10,6 +10,7 @@ import {
   ChartEvent,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { convertDateToYYMMDD } from "@/cors/utils/thaiDate";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
@@ -60,11 +61,7 @@ const Chart = ({ data }: ChartProps) => {
         let url = `/insight?mood=${moodValue}`;
 
         if (selectedDate) {
-          const dateString = new Date(
-            selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000,
-          )
-            .toISOString()
-            .split("T")[0];
+          const dateString = convertDateToYYMMDD(selectedDate);
 
           url += `&startDate=${dateString}&endDate=${dateString}`;
         }

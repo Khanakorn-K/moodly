@@ -19,6 +19,7 @@ import {
   Flame,
   LogOut,
   User,
+  GitGraph
 } from "lucide-react";
 import Image from "next/image";
 
@@ -26,7 +27,7 @@ const navItems = [
   { href: "/", icon: Home, label: "หน้าแรก" },
   { href: "/log", icon: PenLine, label: "บันทึก" },
   { href: "/insight", icon: BarChart2, label: "ข้อมูลเชิงลึก" },
-  // { href: "/suggestions", icon: Lightbulb, label: "แนะนำ" },
+  { href: "/overview", icon: GitGraph, label: "ภาพรวม" },
   // { href: "/streak", icon: Flame, label: "Streak" },
 ];
 
