@@ -3,13 +3,17 @@ import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
 import { isValidYYMMDDDate } from "@/cores/utils/thaiDate";
 
+function roundOneDecimal(value: number) {
+  return Number(value.toFixed(1));
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { user, errorResponse } = await getAuthenticatedUser();
     if (errorResponse) return errorResponse;
 
     const selectedDate = req.nextUrl.searchParams.get("selectedDate");
-    let dateFilter: any = {};
+    let dateFilter: { createdAt?: { startsWith: string } } = {};
 
     if (selectedDate) {
       if (!isValidYYMMDDDate(selectedDate)) {
@@ -61,9 +65,14 @@ export async function GET(req: NextRequest) {
       }
     });
 
+    const totalLogs = logs.length;
+    const totalMood = logs.reduce((sum, log) => sum + log.mood, 0);
+    const averageMood = totalLogs ? roundOneDecimal(totalMood / totalLogs) : 0;
+
     return NextResponse.json(
       {
-        totalLogs: logs.length,
+        totalLogs,
+        averageMood,
         moodDistribution,
         causesAnalysis,
       },

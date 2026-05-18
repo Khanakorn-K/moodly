@@ -10,6 +10,18 @@ export const createLogUseCases = (repository: ILogRepository) => ({
     }
     return await repository.addCause(data);
   },
+  updateCause: async (data: { id: string; name: string }) => {
+    if (!data.id) {
+      throw new Error("ไม่พบสาเหตุที่ต้องการแก้ไข");
+    }
+    if (!data.name.trim()) {
+      throw new Error("กรุณาระบุชื่อสาเหตุ");
+    }
+    return await repository.updateCause({
+      id: data.id,
+      name: data.name.trim(),
+    });
+  },
   deleteCause: async (data: { id: string }) => {
     return await repository.deleteCause(data);
   },

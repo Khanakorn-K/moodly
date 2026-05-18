@@ -1,5 +1,6 @@
 export interface InsightsResponseModel {
   totalLogs: number;
+  averageMood: number;
   moodDistribution: MoodDistributionModel;
   causesAnalysis: CausesAnalysisModel;
 }

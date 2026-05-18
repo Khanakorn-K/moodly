@@ -7,7 +7,7 @@ export const LandingMapper = {
       totalLogs: dto.totalLogs || 0,
       moodDistribution: dto.moodDistribution || {},
       causesAnalysis: dto.causesAnalysis || {},
-      averageMood: 0,
+      averageMood: dto.averageMood ?? 0,
     };
   },
 };

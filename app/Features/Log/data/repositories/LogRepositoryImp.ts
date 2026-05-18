@@ -14,6 +14,10 @@ export const LogRepositoryImp: ILogRepository = {
     await LogApiDataSource.addCause(data);
   },
 
+  updateCause: async (data: { id: string; name: string }): Promise<void> => {
+    await LogApiDataSource.updateCause(data.id, { name: data.name });
+  },
+
   getCauses: async (): Promise<CauseEntity[]> => {
     const response = await LogApiDataSource.getCauses();
     return response.map((item) => CauseMapper.toEntity(item));

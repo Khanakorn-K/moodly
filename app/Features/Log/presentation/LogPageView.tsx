@@ -5,7 +5,15 @@ import { createCauseOptions } from "@/app/shared/causes";
 import { moodColors } from "@/app/shared/moodColors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, X, Loader2, MessageSquare, Heart } from "lucide-react";
+import {
+  Check,
+  Heart,
+  Loader2,
+  MessageSquare,
+  Pencil,
+  Plus,
+  X,
+} from "lucide-react";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -30,9 +38,17 @@ export default function LogPageView() {
     newCauseName,
     setNewCauseName,
     isAddingCause,
+    editingCauseId,
+    editingCauseName,
+    setEditingCauseName,
+    updatingCauseId,
     activeMood,
+    errorMessage,
     handleAddCustomCause,
     handleDeleteCustomCause,
+    startEditCustomCause,
+    cancelEditCustomCause,
+    handleUpdateCustomCause,
     toggleCause,
     handleSubmit,
   } = useLog();
@@ -148,20 +164,68 @@ export default function LogPageView() {
                         {myCustomCauses.map((c) => (
                           <div
                             key={c.id}
-                            className="flex justify-between items-center p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]"
+                            className="flex items-center justify-between gap-2 rounded-2xl border border-white/[0.05] bg-white/[0.02] p-4"
                           >
-                            <span className="text-sm font-medium text-white/80">
-                              {c.name}
-                            </span>
-                            <Button
-                              onClick={() => handleDeleteCustomCause(c.id)}
-                              className="p-1 h-auto bg-transparent text-white/10 hover:text-red-400"
-                            >
-                              <X size={16} />
-                            </Button>
+                            {editingCauseId === c.id ? (
+                              <>
+                                <Input
+                                  value={editingCauseName}
+                                  onChange={(e) =>
+                                    setEditingCauseName(e.target.value)
+                                  }
+                                  className="h-9 rounded-xl border-white/10 bg-white/5 text-sm"
+                                />
+                                <Button
+                                  onClick={() => handleUpdateCustomCause(c.id)}
+                                  disabled={
+                                    updatingCauseId === c.id ||
+                                    !editingCauseName.trim()
+                                  }
+                                  className="h-9 w-9 rounded-xl bg-white p-0 text-black hover:bg-white/90"
+                                >
+                                  {updatingCauseId === c.id ? (
+                                    <Loader2
+                                      className="animate-spin"
+                                      size={16}
+                                    />
+                                  ) : (
+                                    <Check size={16} />
+                                  )}
+                                </Button>
+                                <Button
+                                  onClick={cancelEditCustomCause}
+                                  className="h-9 w-9 rounded-xl bg-transparent p-0 text-white/30 hover:text-white"
+                                >
+                                  <X size={16} />
+                                </Button>
+                              </>
+                            ) : (
+                              <>
+                                <span className="min-w-0 flex-1 truncate text-sm font-medium text-white/80">
+                                  {c.name}
+                                </span>
+                                <Button
+                                  onClick={() =>
+                                    startEditCustomCause(c.id, c.name)
+                                  }
+                                  className="h-8 w-8 rounded-xl bg-transparent p-0 text-white/20 hover:text-white"
+                                >
+                                  <Pencil size={15} />
+                                </Button>
+                                <Button
+                                  onClick={() => handleDeleteCustomCause(c.id,c.name)}
+                                  className="h-8 w-8 rounded-xl bg-transparent p-0 text-white/10 hover:text-red-400"
+                                >
+                                  <X size={16} />
+                                </Button>
+                              </>
+                            )}
                           </div>
                         ))}
                       </div>
+                      {errorMessage && (
+                        <p className="text-xs text-red-300">{errorMessage}</p>
+                      )}
                       <AlertDialogCancel className="w-full bg-white/5 border-white/10 rounded-2xl h-12">
                         ปิดหน้าต่าง
                       </AlertDialogCancel>

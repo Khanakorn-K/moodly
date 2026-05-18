@@ -22,6 +22,10 @@ export const LogApiDataSource = {
     });
   },
 
+  updateCause: async (id: string, body: { name: string }) => {
+    await apiClient.patch(`/custom-causes/update-custom-cause/${id}`, body);
+  },
+
   getCauses: async (): Promise<CauseResponseModel[]> => {
     return await apiClient.get<CauseResponseModel[]>(
       "/custom-causes/get-custom-causes",
