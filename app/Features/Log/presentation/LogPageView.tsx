@@ -59,14 +59,14 @@ export default function LogPageView() {
   const today = displayGetCurrentThaiDate();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4 md:p-8 lg:p-12 font-z overflow-x-hidden">
-      <div className="w-full max-w-6xl min-h-[85vh] bg-white/[0.02] border border-white/[0.05] my-7 rounded-[3rem] p-8 md:p-12 backdrop-blur-3xl relative shadow-2xl flex flex-col">
+    <div className="flex min-h-screen items-stretch justify-center overflow-x-hidden bg-[#0a0a0f] px-3 py-6 pb-28 font-z sm:px-4 md:p-8 md:pb-28 lg:p-12 lg:pt-28">
+      <div className="relative my-0 flex w-full max-w-6xl flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.05] bg-white/[0.02] p-4 shadow-2xl backdrop-blur-3xl sm:rounded-[2.25rem] sm:p-6 md:p-8 lg:my-7 lg:min-h-[85vh] lg:rounded-[3rem] lg:p-12">
         <div
-          className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-[120px] pointer-events-none transition-colors duration-700"
+          className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 rounded-full blur-[100px] transition-colors duration-700 sm:h-96 sm:w-96 sm:blur-[120px]"
           style={{ backgroundColor: `${themeColor}20` }}
         />
 
-        <header className="mb-10 flex justify-between items-start relative z-10">
+        <header className="relative z-10 mb-8 flex items-start justify-between sm:mb-10">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Heart
@@ -74,39 +74,39 @@ export default function LogPageView() {
                 style={{ color: themeColor }}
                 className="animate-pulse"
               />
-              <p className="text-xs uppercase tracking-[0.2em] text-white/40 font-medium">
+              <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-white/40 sm:text-xs sm:tracking-[0.2em]">
                 {today}
               </p>
             </div>
-            <h1 className="text-3xl md:text-5xl text-white font-bold tracking-tight">
+            <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-5xl">
               วันนี้เป็นยังไงบ้าง?
             </h1>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 flex-1 relative z-10">
-          <div className="space-y-12">
+        <div className="relative z-10 grid flex-1 grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+          <div className="space-y-8 lg:space-y-12">
             <section className="space-y-5">
               <p className="text-xs uppercase tracking-widest text-white/30 font-semibold ml-1">
                 ระดับอารมณ์
               </p>
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-5 gap-1.5 sm:gap-3">
                 {standardMoods.map((m) => {
                   const isActive = selectedMood === m.value;
                   return (
                     <button
                       key={m.value}
                       onClick={() => setSelectedMood(m.value)}
-                      className={`flex flex-col items-center gap-4 py-6 rounded-[2rem] border transition-all duration-300
+                      className={`flex min-w-0 flex-col items-center gap-2 rounded-2xl border px-1 py-4 transition-all duration-300 sm:gap-4 sm:rounded-[2rem] sm:py-6
                         ${isActive ? "bg-white/[0.08] border-white/20 scale-105" : "border-white/[0.05] bg-transparent opacity-40 hover:opacity-100"}`}
                     >
                       <span
-                        className={`text-4xl transition-transform ${isActive ? "animate-bounce" : ""}`}
+                        className={`text-2xl transition-transform sm:text-4xl ${isActive ? "animate-bounce" : ""}`}
                       >
                         {m.emoji}
                       </span>
                       <span
-                        className="text-[10px] font-bold"
+                        className="max-w-full truncate text-[9px] font-bold sm:text-[10px]"
                         style={{
                           color: isActive ? moodColors[m.value] : "#666",
                         }}
@@ -120,13 +120,13 @@ export default function LogPageView() {
             </section>
 
             <section className="space-y-5">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs uppercase tracking-widest text-white/30 font-semibold ml-1">
                   สาเหตุหลักที่ทำให้รู้สึกแบบนี้
                 </p>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button className="group flex items-center gap-1.5 px-4 py-2 h-auto rounded-full bg-white/[0.03] border border-white/[0.05] text-[10px] text-white/50 hover:text-white transition-all">
+                    <Button className="group flex h-auto w-fit items-center gap-1.5 rounded-full border border-white/[0.05] bg-white/[0.03] px-4 py-2 text-[10px] text-white/50 transition-all hover:text-white">
                       <Plus
                         size={14}
                         className="group-hover:rotate-90 transition-transform"
@@ -134,14 +134,14 @@ export default function LogPageView() {
                       จัดการสาเหตุ
                     </Button>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-[#12121a] border-white/10 text-white rounded-[2.5rem] max-w-[400px] p-8 shadow-3xl">
+                  <AlertDialogContent className="max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-[1.75rem] border-white/10 bg-[#12121a] p-5 text-white shadow-3xl sm:max-w-[400px] sm:rounded-[2.5rem] sm:p-8">
                     <AlertDialogHeader className="mb-4">
                       <AlertDialogTitle className="text-2xl font-bold">
                         จัดการสาเหตุ
                       </AlertDialogTitle>
                     </AlertDialogHeader>
                     <div className="space-y-6">
-                      <div className="flex gap-2">
+                      <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
                         <Input
                           placeholder="เช่น ออกกำลังกาย..."
                           value={newCauseName}
@@ -173,7 +173,7 @@ export default function LogPageView() {
                                   onChange={(e) =>
                                     setEditingCauseName(e.target.value)
                                   }
-                                  className="h-9 rounded-xl border-white/10 bg-white/5 text-sm"
+                                  className="min-w-0 rounded-xl border-white/10 bg-white/5 text-sm sm:h-9"
                                 />
                                 <Button
                                   onClick={() => handleUpdateCustomCause(c.id)}
@@ -181,7 +181,7 @@ export default function LogPageView() {
                                     updatingCauseId === c.id ||
                                     !editingCauseName.trim()
                                   }
-                                  className="h-9 w-9 rounded-xl bg-white p-0 text-black hover:bg-white/90"
+                                  className="h-9 w-9 shrink-0 rounded-xl bg-white p-0 text-black hover:bg-white/90"
                                 >
                                   {updatingCauseId === c.id ? (
                                     <Loader2
@@ -194,7 +194,7 @@ export default function LogPageView() {
                                 </Button>
                                 <Button
                                   onClick={cancelEditCustomCause}
-                                  className="h-9 w-9 rounded-xl bg-transparent p-0 text-white/30 hover:text-white"
+                                  className="h-9 w-9 shrink-0 rounded-xl bg-transparent p-0 text-white/30 hover:text-white"
                                 >
                                   <X size={16} />
                                 </Button>
@@ -213,7 +213,9 @@ export default function LogPageView() {
                                   <Pencil size={15} />
                                 </Button>
                                 <Button
-                                  onClick={() => handleDeleteCustomCause(c.id,c.name)}
+                                  onClick={() =>
+                                    handleDeleteCustomCause(c.id, c.name)
+                                  }
                                   className="h-8 w-8 rounded-xl bg-transparent p-0 text-white/10 hover:text-red-400"
                                 >
                                   <X size={16} />
@@ -233,14 +235,14 @@ export default function LogPageView() {
                   </AlertDialogContent>
                 </AlertDialog>
               </div>
-              <div className="flex flex-wrap gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+              <div className="flex max-h-[260px] flex-wrap gap-2 overflow-y-auto pr-2 custom-scrollbar sm:max-h-[300px] sm:gap-3">
                 {allCauses.map((c, index) => {
                   const isActive = selectedCause === c.name;
                   return (
                     <Button
                       key={index}
                       onClick={() => toggleCause(c.name)}
-                      className={`px-6 py-3 h-auto rounded-2xl border text-xs font-medium transition-all duration-300
+                      className={`h-auto rounded-2xl border px-4 py-2.5 text-xs font-medium transition-all duration-300 sm:px-6 sm:py-3
                       ${isActive ? "bg-white text-black border-white shadow-lg" : "border-white/[0.08] text-white/40 bg-transparent hover:border-white/20"}`}
                     >
                       {c.name}
@@ -251,11 +253,11 @@ export default function LogPageView() {
             </section>
           </div>
 
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col space-y-6 sm:space-y-8">
             <section className="flex-1 flex flex-col">
               <div className="flex items-center gap-2 mb-4 ml-1">
                 <MessageSquare size={16} className="text-white/20" />
-                <p className="text-xs uppercase tracking-widest text-white/30 font-semibold">
+                <p className="text-xs font-semibold uppercase tracking-widest text-white/30">
                   บันทึกเพิ่มเติม
                 </p>
               </div>
@@ -263,7 +265,7 @@ export default function LogPageView() {
                 placeholder="วันนี้เป็นยังไงบ้าง เขียนระบายไว้ตรงนี้ได้นะ..."
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                className="w-full flex-1 min-h-[250px] bg-white/[0.03] border border-white/[0.06] rounded-[2.5rem] px-8 py-6 text-white text-lg placeholder-white/10 resize-none outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all"
+                className="min-h-[180px] w-full flex-1 resize-none rounded-[1.75rem] border border-white/[0.06] bg-white/[0.03] px-5 py-5 text-base text-white outline-none transition-all placeholder-white/10 focus:border-white/20 focus:bg-white/[0.05] sm:min-h-[250px] sm:rounded-[2.5rem] sm:px-8 sm:py-6 sm:text-lg"
               />
             </section>
 
@@ -272,7 +274,7 @@ export default function LogPageView() {
               disabled={
                 !selectedMood || !selectedCause || isSubmitting || submitted
               }
-              className={`group w-full py-8 h-auto rounded-[2.5rem] text-lg font-bold transition-all duration-500
+              className={`group h-auto w-full rounded-[1.75rem] py-5 text-base font-bold transition-all duration-500 sm:rounded-[2.5rem] sm:py-8 sm:text-lg
                 ${submitted ? "bg-green-500 text-white" : selectedMood && selectedCause ? "bg-white text-black hover:scale-[1.02] shadow-xl" : "bg-white/[0.05] text-white/20"}`}
             >
               {submitted

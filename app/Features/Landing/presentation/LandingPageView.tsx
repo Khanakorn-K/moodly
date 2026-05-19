@@ -30,15 +30,15 @@ export default function LandingPageView() {
   const isDataLoading = status === "loading" || isLoading;
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] px-4 py-12 md:px-8 md:py-20 pb-28 md:pb-12">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#0A0A0F] px-3 py-8 pb-28 sm:px-4 md:px-8 lg:py-24 lg:pb-12">
+      <div className="mx-auto w-full max-w-4xl space-y-6 sm:space-y-8">
         <HeaderSection
           isLoading={isDataLoading}
           greeting={greeting}
           firstName={firstName}
         />
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           <TotalLogsCard
             isLoading={isDataLoading}
             totalLogs={data?.totalLogs}
@@ -81,7 +81,7 @@ function HeaderSection({
   firstName: string;
 }) {
   return (
-    <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <header className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
       <div className="space-y-1">
         {isLoading ? (
           <>
@@ -91,7 +91,7 @@ function HeaderSection({
         ) : (
           <>
             <p className="text-sm font-medium text-white/40">{greeting} 👋</p>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl md:text-4xl">
               สวัสดีครับ {firstName}
             </h1>
           </>
@@ -114,9 +114,9 @@ function TotalLogsCard({
   totalLogs?: number;
 }) {
   return (
-    <Card className="bg-gradient-to-br from-[#1E1E2E] to-[#2A2A3D] border-white/10 rounded-3xl shadow-2xl overflow-hidden relative md:col-span-3">
+    <Card className="relative overflow-hidden rounded-3xl border-white/10 bg-gradient-to-br from-[#1E1E2E] to-[#2A2A3D] shadow-2xl md:col-span-3">
       <div className="absolute top-0 right-0 w-48 h-48 bg-[#FFD166]/5 rounded-full blur-3xl -mr-16 -mt-16" />
-      <CardContent className="p-6 flex items-center justify-between relative z-10">
+      <CardContent className="relative z-10 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <div className="space-y-1">
           <p className="text-white/60 text-sm font-medium">
             บันทึกอารมณ์วันนี้
@@ -166,9 +166,9 @@ function MoodOverviewCard({
   calculateMoodColor,
 }: MoodOverviewCardProps) {
   return (
-    <Card className="bg-[#161622] border-white/5 rounded-3xl md:col-span-1 shadow-lg h-full flex flex-col">
-      <CardHeader className="pb-3 flex flex-row items-center justify-between">
-        <CardTitle className="text-sm font-bold text-white/90">
+    <Card className="flex h-full flex-col rounded-3xl border-white/5 bg-[#161622] shadow-lg md:col-span-1">
+      <CardHeader className="flex flex-row items-start justify-between gap-3 pb-3">
+        <CardTitle className="min-w-0 text-sm font-bold leading-relaxed text-white/90">
           {isLoading ? (
             <DynamicSkeleton width="150px" height="16px" />
           ) : (
@@ -179,7 +179,7 @@ function MoodOverviewCard({
           <ChevronRight size={16} className="text-[#FFD166]" />
         </Link>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col justify-between">
+      <CardContent className="flex flex-1 flex-col justify-between px-4 pb-5 sm:px-6">
         <div className="space-y-6">
           {isLoading ? (
             <DynamicSkeleton width="100%" height="180px" />
@@ -198,11 +198,11 @@ function MoodOverviewCard({
               selectedDate.setHours(0, 0, 0, 0);
               setDate(selectedDate);
             }}
-            className="w-full bg-transparent text-white border-none p-0"
+            className="mx-auto max-w-full bg-transparent p-0 text-white border-none [--cell-size:--spacing(6)] sm:[--cell-size:--spacing(7)]"
           />
 
-          <div className="flex items-center justify-between bg-white/5 p-4 rounded-2xl border border-white/5">
-            <span className="text-sm font-bold text-white/90">
+          <div className="flex flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-4 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-sm font-bold leading-relaxed text-white/90">
               {isLoading ? (
                 <DynamicSkeleton width="150px" height="16px" />
               ) : (

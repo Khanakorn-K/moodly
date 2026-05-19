@@ -59,7 +59,7 @@ const MoodInsightList = ({
               key={moodLog.id}
               className="group bg-[#16161E] border-white/5 overflow-hidden hover:border-[#FFD166]/20 transition-all duration-300 rounded-2xl"
             >
-              <CardContent className="p-4 flex gap-4">
+              <CardContent className="flex gap-3 p-4 sm:gap-4">
                 <div
                   className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 relative"
                   style={{
@@ -75,10 +75,10 @@ const MoodInsightList = ({
                   </span>
                 </div>
 
-                <div className="flex-1 space-y-2">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h5 className="text-sm font-bold text-white flex items-center gap-2">
+                <div className="min-w-0 flex-1 space-y-2">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                      <h5 className="flex min-w-0 flex-wrap items-center gap-2 text-sm font-bold text-white">
                         {moodConfig.label}
                         <span className="text-[10px] text-white/20 font-normal">
                           Level {moodConfig.value}
@@ -88,7 +88,7 @@ const MoodInsightList = ({
                         {convertDateToThaiDateFormat(moodLog.createdAt)}
                       </p>
                     </div>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-2 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
                       <button
                         onClick={() => openEditMoodLogModal(moodLog)}
                         className="p-1.5 text-white/20 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
@@ -125,7 +125,7 @@ const MoodInsightList = ({
                         size={12}
                         className="text-white/20 mt-0.5"
                       />
-                      <p className="text-[11px] text-white/60 leading-relaxed italic">
+                      <p className="min-w-0 break-words text-[11px] leading-relaxed text-white/60 italic">
                         {moodLog.note}
                       </p>
                     </div>

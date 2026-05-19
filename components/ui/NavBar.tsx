@@ -33,9 +33,9 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 md:top-0 md:bottom-auto">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 lg:top-0 lg:bottom-auto">
       {/* Desktop Navbar */}
-      <div className="hidden md:flex items-center justify-between px-8 py-3 bg-[#0E0E18]/90 backdrop-blur-xl border-b border-white/5">
+      <div className="hidden lg:flex items-center justify-between gap-6 px-8 py-3 bg-[#0E0E18]/90 backdrop-blur-xl border-b border-white/5">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl">🌙</span>
@@ -45,7 +45,7 @@ export default function Navbar() {
         </Link>
 
         {/* Nav Links */}
-        <div className="flex items-center gap-1">
+        <div className="flex min-w-0 items-center gap-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -70,14 +70,14 @@ export default function Navbar() {
         {/* User Avatar */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-white/5 transition-all duration-150 outline-none cursor-pointer">
+            <button className="flex max-w-48 items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-white/5 transition-all duration-150 outline-none cursor-pointer">
               <Avatar className="w-8 h-8">
                 <AvatarImage src={session?.user?.image ?? ""} />
                 <AvatarFallback className="bg-[#FFD166]/20 text-[#FFD166] text-xs font-semibold">
                   {session?.user?.name?.[0] ?? "M"}
                 </AvatarFallback>
               </Avatar>
-              <span className="text-sm text-white/70 font-medium">
+              <span className="truncate text-sm text-white/70 font-medium">
                 {session?.user?.name?.split(" ")[0] ?? "ลงชื่อเพื่อเข้าใช้งาน"}
                 {/* <Image
                   width={30}
@@ -134,14 +134,14 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Bottom Nav */}
-      <div className="flex md:hidden items-center justify-around px-3 py-3 pb-6 bg-[#0E0E18]/95 backdrop-blur-xl border-t border-white/5">
+      <div className="grid grid-cols-4 lg:hidden gap-1 px-2 py-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] bg-[#0E0E18]/95 backdrop-blur-xl border-t border-white/5">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
           return (
-            <Link key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href} className="min-w-0">
               <div
-                className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl border transition-all duration-150 ${
+                className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl border px-1.5 py-2 transition-all duration-150 ${
                   isActive
                     ? "bg-[#FFD166]/10 border-[#FFD166]/20"
                     : "border-transparent"
@@ -152,7 +152,7 @@ export default function Navbar() {
                   className={isActive ? "text-[#FFD166]" : "text-white/30"}
                 />
                 <span
-                  className={`text-[10px] font-medium ${isActive ? "text-[#FFD166]" : "text-white/30"}`}
+                  className={`max-w-full truncate text-[9px] font-medium sm:text-[10px] ${isActive ? "text-[#FFD166]" : "text-white/30"}`}
                 >
                   {item.label}
                 </span>

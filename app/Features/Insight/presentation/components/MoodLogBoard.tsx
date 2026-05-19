@@ -40,7 +40,7 @@ const MoodLogBoard = ({
       collisionDetection={closestCorners}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex gap-6 h-full overflow-x-auto pb-10 scrollbar-hide px-2">
+      <div className="flex h-full gap-4 overflow-x-auto px-1 pb-10 scrollbar-hide sm:gap-6 sm:px-2">
         {standardMoods.map((moodOption) => {
           const moodLogs =
             moodLogPage?.items.filter(
@@ -73,11 +73,11 @@ const Column = ({ column, moodLogs, isLoading }: ColumnProps) => {
     moodColors[column.value as keyof typeof moodColors] || "#FFFFFF";
 
   return (
-    <div className="flex flex-col w-[320px] shrink-0">
-      <div className="flex items-center justify-between mb-4 px-2">
+    <div className="flex w-[min(18rem,calc(100vw-2rem))] shrink-0 flex-col sm:w-[320px]">
+      <div className="mb-4 flex items-center justify-between px-2">
         <div className="flex items-center gap-2">
           <span className="text-lg">{column.emoji}</span>
-          <h3 className="text-sm font-black text-white uppercase tracking-tight">
+          <h3 className="text-sm font-black uppercase tracking-tight text-white">
             {column.label}
           </h3>
           <span className="text-[10px] px-2 py-0.5 rounded-lg bg-white/5 text-white/20 font-bold">
@@ -93,7 +93,7 @@ const Column = ({ column, moodLogs, isLoading }: ColumnProps) => {
 
       <div
         ref={setNodeRef}
-        className={`flex-1 space-y-4 min-h-[600px] rounded-[2rem] transition-all duration-300 p-3 border-2 border-transparent ${
+        className={`min-h-[420px] flex-1 space-y-4 rounded-[1.5rem] border-2 border-transparent p-3 transition-all duration-300 sm:min-h-[600px] sm:rounded-[2rem] ${
           isOver ? "bg-white/[0.04] border-white/5 shadow-2xl" : "bg-black/20"
         }`}
       >
@@ -148,7 +148,7 @@ const DraggableCard = ({
       style={style}
       {...listeners}
       {...attributes}
-      className={`bg-[#16161E] border border-white/[0.05] rounded-[1.5rem] p-5 shadow-xl transition-all group relative overflow-hidden ${
+      className={`group relative overflow-hidden rounded-[1.5rem] border border-white/[0.05] bg-[#16161E] p-4 shadow-xl transition-all sm:p-5 ${
         isDragging
           ? "opacity-30 cursor-grabbing scale-95"
           : "hover:border-white/20 cursor-grab active:cursor-grabbing"

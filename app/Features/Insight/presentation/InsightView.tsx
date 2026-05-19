@@ -42,38 +42,37 @@ export default function InsightView() {
 
   if (isInitialLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center text-white/40 font-medium">
+      <div className="flex min-h-screen items-center justify-center bg-[#0A0A0F] px-4 pb-28 text-center font-medium text-white/40 lg:pb-0">
         กำลังโหลดประวัติ
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] px-6 py-24 pb-24 relative">
-      <div className="max-w-[1600px] mx-auto w-full space-y-8">
-        <div className="flex justify-between items-end px-2">
+    <div className="relative min-h-screen bg-[#0A0A0F] px-3 py-8 pb-28 sm:px-6 lg:py-24 lg:pb-16">
+      <div className="mx-auto w-full max-w-[1600px] space-y-6 sm:space-y-8">
+        <div className="flex flex-col gap-4 px-1 sm:flex-row sm:items-end sm:justify-between sm:px-2">
           <div className="space-y-1">
-            <h1 className="text-3xl font-black text-white tracking-tight font-outfit uppercase">
+            <h1 className="font-outfit text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
               Mood Insight
             </h1>
-
           </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => router.push(pathname)}
-            className="text-white/30 hover:text-white hover:bg-white/5 text-[10px] font-bold uppercase tracking-wider"
+            className="w-fit text-[10px] font-bold uppercase tracking-wider text-white/30 hover:bg-white/5 hover:text-white"
           >
             <RotateCcw size={14} className="mr-2" /> ล้างค่า
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#16161E]/50 border border-white/5 rounded-[2.5rem] p-6 shadow-2xl backdrop-blur-md">
+        <div className="grid grid-cols-1 gap-5 rounded-[1.75rem] border border-white/5 bg-[#16161E]/50 p-4 shadow-2xl backdrop-blur-md sm:rounded-[2.5rem] sm:p-6 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-4 space-y-3">
             <div className="flex items-center gap-2 text-[10px] text-white/20 uppercase font-black tracking-widest ml-1">
               <Calendar size={12} className="text-[#FFD166]" /> เลือกวัน
             </div>
-            <div className="flex gap-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <Input
                 type="date"
                 value={startDate}
@@ -93,14 +92,14 @@ export default function InsightView() {
             </div>
           </div>
 
-          <div className="lg:col-span-8 space-y-3">
+          <div className="space-y-3 lg:col-span-8">
             <div className="flex items-center gap-2 text-[10px] text-white/20 uppercase font-black tracking-widest ml-1">
               <Filter size={12} className="text-[#FFD166]" /> Mood Filter
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
                 onClick={() => handleFilterChange({ mood: null })}
-                className={`px-6 py-2 h-11 rounded-2xl text-[11px] font-bold transition-all border ${
+                className={`h-10 rounded-2xl border px-4 py-2 text-[11px] font-bold transition-all sm:h-11 sm:px-6 ${
                   !mood
                     ? "bg-[#FFD166] text-black border-[#FFD166] shadow-lg shadow-[#FFD166]/10"
                     : "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
@@ -126,7 +125,7 @@ export default function InsightView() {
                           }
                         : {}
                     }
-                    className={`px-5 py-2 h-11 rounded-2xl text-[11px] font-bold border transition-all ${
+                    className={`h-10 rounded-2xl border px-3 py-2 text-[11px] font-bold transition-all sm:h-11 sm:px-5 ${
                       !isActive
                         ? "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
                         : "shadow-lg"
@@ -140,7 +139,7 @@ export default function InsightView() {
           </div>
         </div>
 
-        <div className="w-full min-h-[600px]">
+        <div className="w-full min-h-[420px] sm:min-h-[600px]">
           {!mood ? (
             <MoodLogBoard
               handleDragEnd={handleDragEnd}
@@ -160,8 +159,8 @@ export default function InsightView() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl px-4">
-          <div className="bg-[#16161E] border border-white/10 p-8 rounded-[3rem] w-full max-w-md space-y-6 shadow-[0_0_100px_rgba(0,0,0,0.5)]">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 px-3 py-4 backdrop-blur-xl sm:px-4">
+          <div className="max-h-[calc(100vh-2rem)] w-full max-w-md space-y-5 overflow-y-auto rounded-[1.75rem] border border-white/10 bg-[#16161E] p-5 shadow-[0_0_100px_rgba(0,0,0,0.5)] sm:space-y-6 sm:rounded-[3rem] sm:p-8">
             <div className="flex justify-between items-center">
               <div className="space-y-1">
                 <h3 className="text-xl font-black text-white uppercase tracking-tight">
@@ -178,7 +177,7 @@ export default function InsightView() {
                 <X size={20} />
               </button>
             </div>
-            <div className="grid grid-cols-5 gap-3">
+            <div className="grid grid-cols-5 gap-2 sm:gap-3">
               {standardMoods.map((moodOption) => {
                 const isSelected = editMood === moodOption.value;
                 const mColor = moodColors[moodOption.value as number];
@@ -191,7 +190,7 @@ export default function InsightView() {
                         ? { backgroundColor: mColor, color: "#000" }
                         : {}
                     }
-                    className={`aspect-square rounded-2xl flex items-center justify-center text-lg transition-all transform active:scale-95 ${
+                    className={`flex aspect-square items-center justify-center rounded-2xl text-base transition-all transform active:scale-95 sm:text-lg ${
                       !isSelected
                         ? "bg-white/5 text-white/20 hover:bg-white/10"
                         : "font-black shadow-xl scale-110"
@@ -202,7 +201,7 @@ export default function InsightView() {
                 );
               })}
             </div>
-            <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
+            <div className="flex max-h-48 flex-wrap gap-2 overflow-y-auto pr-2 scrollbar-hide">
               {allCauses.map((c, index) => {
                 const isActive = selectedCauses.includes(c.name);
 
@@ -221,7 +220,7 @@ export default function InsightView() {
               })}
             </div>
             <textarea
-              className="w-full bg-black/40 border border-white/5 rounded-[2rem] p-5 text-sm text-white h-36 resize-none focus:outline-none focus:ring-2 focus:ring-white/10 placeholder:text-white/10"
+              className="h-32 w-full resize-none rounded-[1.5rem] border border-white/5 bg-black/40 p-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-2 focus:ring-white/10 sm:h-36 sm:rounded-[2rem] sm:p-5"
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
               placeholder="What's on your mind"
@@ -229,7 +228,7 @@ export default function InsightView() {
             <Button
               onClick={handleSaveMoodLog}
               disabled={!editMood || selectedCauses.length !== 1}
-              className="..."
+              className="h-12 w-full rounded-2xl bg-white font-bold text-black hover:bg-white/90 disabled:bg-white/5 disabled:text-white/20"
             >
               {editingMoodLog ? "Confirm Changes" : "Create Entry"}
             </Button>

@@ -14,17 +14,17 @@ const moods = ["😄", "🙂", "😐", "😟", "😭"];
 
 export default function SectionLogin() {
   return (
-    <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center p-5 relative overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0A0A0F] px-3 py-8 pb-28 sm:p-5 lg:pb-5">
       {/* Background glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#FFD166]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="pointer-events-none absolute top-1/3 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FFD166]/5 blur-[100px] sm:h-[400px] sm:w-[400px] sm:blur-[120px]" />
 
-      <Card className="w-full max-w-[380px] bg-[#12121A] border-white/5 shadow-2xl rounded-[28px] overflow-hidden">
+      <Card className="w-full max-w-[380px] overflow-hidden rounded-[28px] border-white/5 bg-[#12121A] shadow-2xl">
         {/* Top accent bar */}
         <div className="h-1 w-full bg-gradient-to-r from-[#FFD166] via-[#FF6B6B] to-[#FF6B6B]/0" />
 
-        <CardHeader className="text-center pt-8 pb-4 px-8">
-          <div className="text-5xl mb-3">🌙</div>
-          <CardTitle className="text-2xl font-bold text-white tracking-tight">
+        <CardHeader className="px-5 pt-8 pb-4 text-center sm:px-8">
+          <div className="mb-3 text-5xl">🌙</div>
+          <CardTitle className="text-2xl font-bold tracking-tight text-white">
             Moodly
           </CardTitle>
           <CardDescription className="text-white/40 text-xs mt-1">
@@ -32,13 +32,13 @@ export default function SectionLogin() {
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="px-8 pb-8 flex flex-col gap-5">
+        <CardContent className="flex flex-col gap-5 px-5 pb-8 sm:px-8">
           {/* Mood preview */}
           <div className="bg-[#1A1A28] rounded-2xl p-4 border border-white/5 text-center">
             <p className="text-[11px] text-white/30 mb-3">
               บันทึกอารมณ์ทุกวัน แล้วดูว่าชีวิตดีขึ้นยังไง
             </p>
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-2 sm:gap-3">
               {moods.map((m) => (
                 <span
                   key={m}

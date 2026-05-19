@@ -92,7 +92,7 @@ function OverviewTooltip({
   const notes = moodNotes.filter((item) => item.date === date);
 
   return (
-    <div className="grid max-w-72 gap-3 rounded-lg border border-white/10 bg-[#11111a] px-3 py-3 text-xs text-white shadow-xl">
+    <div className="grid max-w-[min(18rem,calc(100vw-2rem))] gap-3 rounded-lg border border-white/10 bg-[#11111a] px-3 py-3 text-xs text-white shadow-xl">
       <div className="grid gap-1">
         <p className="font-medium">
           {convertDateToShortThaiDateFormat(date)}
@@ -165,12 +165,12 @@ export function ChartAreaDefault({
       : "เลือกช่วงวันที่";
 
   return (
-    <Card className="border-white/10 bg-white/[0.04] text-white">
-      <CardHeader>
+    <Card className="overflow-hidden border-white/10 bg-white/[0.04] text-white">
+      <CardHeader className="px-4 sm:px-6">
         <CardTitle>ภาพรวมอารมณ์</CardTitle>
-        <CardDescription>{rangeText}</CardDescription>
+        <CardDescription className="break-words">{rangeText}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 sm:px-6">
         {isLoading ? (
           <div className="flex h-[280px] items-center justify-center rounded-lg border border-white/10 text-sm text-white/50">
             กำลังโหลด...
@@ -180,7 +180,7 @@ export function ChartAreaDefault({
             {error}
           </div>
         ) : hasLogs ? (
-          <ChartContainer config={chartConfig} className="h-[280px] w-full">
+          <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[280px]">
             <AreaChart
               accessibilityLayer
               data={chartData}
@@ -221,13 +221,13 @@ export function ChartAreaDefault({
           </div>
         )}
       </CardContent>
-      <CardFooter className="border-white/10 bg-white/[0.03]">
+      <CardFooter className="border-white/10 bg-white/[0.03] px-4 sm:px-6">
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
-            <div className="flex items-center gap-2 leading-none font-medium">
+            <div className="flex flex-wrap items-center gap-2 leading-snug font-medium">
               {getTrendText(data)} <TrendingUp className="h-4 w-4" />
             </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
+            <div className="flex items-center gap-2 leading-snug text-muted-foreground">
               จำนวนวันที่มีบันทึก {calculableMoodData.length} วัน
             </div>
           </div>
