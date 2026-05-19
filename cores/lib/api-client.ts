@@ -1,10 +1,38 @@
-import { handleAppError } from "../utils/errorHandler";
+import type { apiResponseBase } from "../utils/apiResponseBase";
 
 type RequestConfig = RequestInit & {
   params?: Record<string, string>;
 };
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
+
+function isApiResponseBase<T>(payload: unknown): payload is apiResponseBase<T> {
+  return (
+    typeof payload === "object" &&
+    payload !== null &&
+    "status" in payload &&
+    "data" in payload &&
+    "code" in payload
+  );
+}
+
+function getErrorMessage(payload: unknown) {
+  if (isApiResponseBase<{ error?: string; message?: string }>(payload)) {
+    return payload.data.error || payload.data.message || "An error occurred";
+  }
+
+  if (typeof payload === "object" && payload !== null) {
+    if ("error" in payload && typeof payload.error === "string") {
+      return payload.error;
+    }
+
+    if ("message" in payload && typeof payload.message === "string") {
+      return payload.message;
+    }
+  }
+
+  return "An error occurred";
+}
 
 async function fetchWrapper<T>(
   endpoint: string,
@@ -31,8 +59,7 @@ async function fetchWrapper<T>(
     const error = await response
       .json()
       .catch(() => ({ message: "An error occurred" }));
-    const msgError = handleAppError(error);
-    throw msgError;
+    throw new Error(getErrorMessage(error));
   }
 
   return response.json();

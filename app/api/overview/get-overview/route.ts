@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
 import { standartMoods } from "@/app/shared/moodType";
@@ -8,6 +8,10 @@ import {
   createYYMMDDDateRange,
   isValidYYMMDDDate,
 } from "@/cores/utils/thaiDate";
+import {
+  createApiErrorResponse,
+  createApiResponse,
+} from "@/cores/utils/apiResponse";
 
 const moodValues = standartMoods.map((mood) => mood.value);
 
@@ -24,24 +28,15 @@ export async function GET(req: NextRequest) {
     const endDate = req.nextUrl.searchParams.get("endDate");
 
     if (!startDate || !endDate) {
-      return NextResponse.json(
-        { error: "DATE_RANGE_REQUIRED" },
-        { status: 400 },
-      );
+      return createApiErrorResponse("DATE_RANGE_REQUIRED", { status: 400 });
     }
 
     if (!isValidYYMMDDDate(startDate) || !isValidYYMMDDDate(endDate)) {
-      return NextResponse.json(
-        { error: "INVALID_DATE_FORMAT" },
-        { status: 400 },
-      );
+      return createApiErrorResponse("INVALID_DATE_FORMAT", { status: 400 });
     }
 
     if (startDate > endDate) {
-      return NextResponse.json(
-        { error: "INVALID_DATE_RANGE" },
-        { status: 400 },
-      );
+      return createApiErrorResponse("INVALID_DATE_RANGE", { status: 400 });
     }
 
     const logs = await prisma.moodLog.findMany({
@@ -146,7 +141,7 @@ export async function GET(req: NextRequest) {
         return secondCause.totalCount - firstCause.totalCount;
       });
 
-    return NextResponse.json(
+    return createApiResponse(
       {
         startDate,
         endDate,
@@ -161,9 +156,6 @@ export async function GET(req: NextRequest) {
     );
   } catch (error) {
     console.error("GET_OVERVIEW_ERROR:", error);
-    return NextResponse.json(
-      { error: "INTERNAL_SERVER_ERROR" },
-      { status: 500 },
-    );
+    return createApiErrorResponse("INTERNAL_SERVER_ERROR", { status: 500 });
   }
 }

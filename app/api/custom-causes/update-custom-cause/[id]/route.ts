@@ -1,6 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../../_lib/getAuthenticatedUser";
+import {
+  createApiErrorResponse,
+  createApiResponse,
+} from "@/cores/utils/apiResponse";
 
 export async function PATCH(
   req: NextRequest,
@@ -13,16 +17,16 @@ export async function PATCH(
     const { id } = await params;
     const { name } = await req.json();
     if (!name) {
-      return NextResponse.json({ error: "MISSING_NAME" }, { status: 400 });
+      return createApiErrorResponse("MISSING_NAME", { status: 400 });
     }
     const nextName = String(name).trim();
     if (!nextName) {
-      return NextResponse.json({ error: "MISSING_NAME" }, { status: 400 });
+      return createApiErrorResponse("MISSING_NAME", { status: 400 });
     }
 
     const existing = await prisma.customCause.findUnique({ where: { id } });
     if (!existing || existing.userId !== user.id) {
-      return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
+      return createApiErrorResponse("NOT_FOUND", { status: 404 });
     }
 
     const relatedMoodLogs = await prisma.moodLog.findMany({
@@ -51,15 +55,12 @@ export async function PATCH(
       ),
     ]);
 
-    return NextResponse.json(updated, { status: 200 });
+    return createApiResponse(updated, { status: 200 });
   } catch (error: any) {
     if (error.code === "P2002") {
-      return NextResponse.json({ error: "ALREADY_EXISTS" }, { status: 400 });
+      return createApiErrorResponse("ALREADY_EXISTS", { status: 400 });
     }
     console.error("UPDATE_CUSTOM_CAUSE_ERROR:", error);
-    return NextResponse.json(
-      { error: "INTERNAL_SERVER_ERROR" },
-      { status: 500 },
-    );
+    return createApiErrorResponse("INTERNAL_SERVER_ERROR", { status: 500 });
   }
 }

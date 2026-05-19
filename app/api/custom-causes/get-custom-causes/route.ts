@@ -1,6 +1,9 @@
-import { NextResponse } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
+import {
+  createApiErrorResponse,
+  createApiResponse,
+} from "@/cores/utils/apiResponse";
 
 export async function GET() {
   try {
@@ -12,12 +15,9 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(causes, { status: 200 });
+    return createApiResponse(causes, { status: 200 });
   } catch (error) {
     console.error("GET_CUSTOM_CAUSES_ERROR:", error);
-    return NextResponse.json(
-      { error: "INTERNAL_SERVER_ERROR" },
-      { status: 500 },
-    );
+    return createApiErrorResponse("INTERNAL_SERVER_ERROR", { status: 500 });
   }
 }

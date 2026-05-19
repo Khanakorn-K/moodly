@@ -1,16 +1,13 @@
-import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/cores/lib/auth";
 import { prisma } from "@/prisma.config";
+import { createApiErrorResponse } from "@/cores/utils/apiResponse";
 
 export async function getAuthenticatedUser() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return {
-      errorResponse: NextResponse.json(
-        { error: "UNAUTHORIZED" },
-        { status: 401 },
-      ),
+      errorResponse: createApiErrorResponse("UNAUTHORIZED", { status: 401 }),
     };
   }
 
@@ -19,10 +16,7 @@ export async function getAuthenticatedUser() {
   });
   if (!user) {
     return {
-      errorResponse: NextResponse.json(
-        { error: "USER_NOT_FOUND" },
-        { status: 404 },
-      ),
+      errorResponse: createApiErrorResponse("USER_NOT_FOUND", { status: 404 }),
     };
   }
 

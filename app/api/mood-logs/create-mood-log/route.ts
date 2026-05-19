@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
 import { updateMoodStreak } from "../../_lib/updateMoodStreak";
+import {
+  createApiErrorResponse,
+  createApiResponse,
+} from "@/cores/utils/apiResponse";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,12 +25,9 @@ export async function POST(req: NextRequest) {
     });
 
     await updateMoodStreak(user.id, createdAt);
-    return NextResponse.json(moodLog, { status: 201 });
+    return createApiResponse(moodLog, { status: 201 });
   } catch (error) {
     console.error("CREATE_MOOD_LOG_ERROR:", error);
-    return NextResponse.json(
-      { error: "INTERNAL_SERVER_ERROR" },
-      { status: 500 },
-    );
+    return createApiErrorResponse("INTERNAL_SERVER_ERROR", { status: 500 });
   }
 }

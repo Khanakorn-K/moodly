@@ -113,6 +113,34 @@ export const useInsight = () => {
     await fetchMoodLogs();
   };
 
+  const updateMoodLogMoodInPage = useCallback(
+    (logId: string, nextMood: number, expectedCurrentMood?: number) => {
+      setMoodLogPage((currentPage) => {
+        if (!currentPage) return currentPage;
+
+        let didUpdate = false;
+        const nextItems = currentPage.items.map((item) => {
+          if (String(item.id) !== logId) return item;
+
+          if (
+            expectedCurrentMood !== undefined &&
+            Number(item.mood) !== expectedCurrentMood
+          ) {
+            return item;
+          }
+
+          if (Number(item.mood) === nextMood) return item;
+
+          didUpdate = true;
+          return { ...item, mood: nextMood };
+        });
+
+        return didUpdate ? { ...currentPage, items: nextItems } : currentPage;
+      });
+    },
+    [],
+  );
+
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -125,14 +153,19 @@ export const useInsight = () => {
 
     if (!originalLog || Number.isNaN(newMoodValue)) return;
 
+    const previousMoodValue = Number(originalLog.mood);
+    if (previousMoodValue === newMoodValue) return;
+
+    updateMoodLogMoodInPage(logId, newMoodValue, previousMoodValue);
+
     try {
       await insightUseCases.updateMoodLog(logId, {
         mood: newMoodValue,
         note: originalLog.note,
         causes: originalLog.causes,
       });
-      await fetchMoodLogs();
     } catch {
+      updateMoodLogMoodInPage(logId, previousMoodValue, newMoodValue);
       handleAppError("การเชื่อมต่อขัดข้อง!");
     }
   };

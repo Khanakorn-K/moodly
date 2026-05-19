@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
 import { isValidYYMMDDDate } from "@/cores/utils/thaiDate";
+import {
+  createApiErrorResponse,
+  createApiResponse,
+} from "@/cores/utils/apiResponse";
 
 function roundOneDecimal(value: number) {
   return Number(value.toFixed(1));
@@ -17,10 +21,7 @@ export async function GET(req: NextRequest) {
 
     if (selectedDate) {
       if (!isValidYYMMDDDate(selectedDate)) {
-        return NextResponse.json(
-          { error: "INVALID_DATE_FORMAT" },
-          { status: 400 },
-        );
+        return createApiErrorResponse("INVALID_DATE_FORMAT", { status: 400 });
       }
 
       dateFilter = {
@@ -69,7 +70,7 @@ export async function GET(req: NextRequest) {
     const totalMood = logs.reduce((sum, log) => sum + log.mood, 0);
     const averageMood = totalLogs ? roundOneDecimal(totalMood / totalLogs) : 0;
 
-    return NextResponse.json(
+    return createApiResponse(
       {
         totalLogs,
         averageMood,
@@ -80,9 +81,6 @@ export async function GET(req: NextRequest) {
     );
   } catch (error) {
     console.error("GET_INSIGHTS_ERROR:", error);
-    return NextResponse.json(
-      { error: "INTERNAL_SERVER_ERROR" },
-      { status: 500 },
-    );
+    return createApiErrorResponse("INTERNAL_SERVER_ERROR", { status: 500 });
   }
 }
