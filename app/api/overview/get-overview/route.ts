@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/prisma.config";
 import { getAuthenticatedUser } from "../../_lib/getAuthenticatedUser";
-import { standartMoods } from "@/app/shared/moodType";
 import {
   convertYYMMDDToEndOfDayISO,
   convertYYMMDDToStartOfDayISO,
@@ -9,15 +8,16 @@ import {
   isValidYYMMDDDate,
 } from "@/cores/utils/thaiDate";
 import {
+  calculateAverageMood,
+  calculateCauseSummaries,
+  calculateDailyMoodAverages,
+  calculateMoodDistribution,
+  createMoodNotes,
+} from "@/app/shared/moodAnalytics";
+import {
   createApiErrorResponse,
   createApiResponse,
 } from "@/cores/utils/apiResponse";
-
-const moodValues = standartMoods.map((mood) => mood.value);
-
-function roundOneDecimal(value: number) {
-  return Number(value.toFixed(1));
-}
 
 export async function GET(req: NextRequest) {
   try {
@@ -50,96 +50,15 @@ export async function GET(req: NextRequest) {
       orderBy: { createdAt: "asc" },
     });
 
-    const dailyMoodMap: Record<string, { totalMood: number; totalLogs: number }> =
-      {};
-    const moodDistributionMap: Record<number, number> = {};
-    const causeSummaryMap: Record<
-      string,
-      { totalCount: number; moodBreakdown: Record<number, number> }
-    > = {};
-
-    moodValues.forEach((mood) => {
-      moodDistributionMap[mood] = 0;
-    });
-
-    logs.forEach((log) => {
-      const date = log.createdAt.split("T")[0];
-      const mood = Number(log.mood);
-
-      if (!dailyMoodMap[date]) {
-        dailyMoodMap[date] = { totalMood: 0, totalLogs: 0 };
-      }
-
-      dailyMoodMap[date].totalMood += mood;
-      dailyMoodMap[date].totalLogs += 1;
-      moodDistributionMap[mood] = (moodDistributionMap[mood] ?? 0) + 1;
-
-      log.causes.forEach((cause) => {
-        if (!cause) return;
-
-        if (!causeSummaryMap[cause]) {
-          causeSummaryMap[cause] = {
-            totalCount: 0,
-            moodBreakdown: {},
-          };
-        }
-
-        causeSummaryMap[cause].totalCount += 1;
-        causeSummaryMap[cause].moodBreakdown[mood] =
-          (causeSummaryMap[cause].moodBreakdown[mood] ?? 0) + 1;
-      });
-    });
-
     const totalLogs = logs.length;
-    const totalMood = logs.reduce((sum, log) => sum + Number(log.mood), 0);
-    const averageMood = totalLogs ? roundOneDecimal(totalMood / totalLogs) : 0;
-
-    const dailyMoodAverages = createYYMMDDDateRange(startDate, endDate).map(
-      (date) => {
-        const value = dailyMoodMap[date];
-
-        if (!value) {
-          return {
-            date,
-            averageMood: 0,
-            totalLogs: 0,
-          };
-        }
-
-        return {
-          date,
-          averageMood: roundOneDecimal(value.totalMood / value.totalLogs),
-          totalLogs: value.totalLogs,
-        };
-      },
+    const averageMood = calculateAverageMood(logs);
+    const dailyMoodAverages = calculateDailyMoodAverages(
+      logs,
+      createYYMMDDDateRange(startDate, endDate),
     );
-
-    const moodDistribution = moodValues.map((mood) => ({
-      mood,
-      count: moodDistributionMap[mood] ?? 0,
-    }));
-
-    const moodNotes = logs.map((log) => ({
-      id: log.id,
-      date: log.createdAt.split("T")[0],
-      mood: Number(log.mood),
-      note: log.note ?? "",
-      causes: log.causes,
-      createdAt: log.createdAt,
-    }));
-
-    const causeSummaries = Object.entries(causeSummaryMap)
-      .map(([cause, value]) => ({
-        cause,
-        totalCount: value.totalCount,
-        moodBreakdown: moodValues.map((mood) => ({
-          mood,
-          count: value.moodBreakdown[mood] ?? 0,
-        })),
-      }))
-      .sort((firstCause, secondCause) => {
-        return secondCause.totalCount - firstCause.totalCount;
-      });
+    const moodDistribution = calculateMoodDistribution(logs);
+    const moodNotes = createMoodNotes(logs);
+    const causeSummaries = calculateCauseSummaries(logs);
 
     return createApiResponse(
       {

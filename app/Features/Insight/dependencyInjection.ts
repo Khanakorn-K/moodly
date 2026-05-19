@@ -1,4 +1,4 @@
-import { InsightRepositoryImp } from "./data/repositories/InsightRepositoryImp";
+import { InsightRepositoryImpl } from "./data/repositories/InsightRepositoryImpl";
 import { createInsightUseCases } from "./domain/useCases/createInsightUseCases";
 
-export const insightUseCases = createInsightUseCases(InsightRepositoryImp);
+export const insightUseCases = createInsightUseCases(InsightRepositoryImpl);

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Calendar, X, Filter, RotateCcw } from "lucide-react";
-import { standartMoods } from "@/app/shared/moodType";
+import { standardMoods } from "@/app/shared/moodType";
 import { createCauseOptions } from "@/app/shared/causes";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/shared/moodColors";
@@ -108,7 +108,7 @@ export default function InsightView() {
               >
                 ทั้งหมด
               </Button>
-              {standartMoods.map((moodOption) => {
+              {standardMoods.map((moodOption) => {
                 const isActive = mood === String(moodOption.value);
                 const mColor = moodColors[moodOption.value as number];
                 return (
@@ -179,7 +179,7 @@ export default function InsightView() {
               </button>
             </div>
             <div className="grid grid-cols-5 gap-3">
-              {standartMoods.map((moodOption) => {
+              {standardMoods.map((moodOption) => {
                 const isSelected = editMood === moodOption.value;
                 const mColor = moodColors[moodOption.value as number];
                 return (

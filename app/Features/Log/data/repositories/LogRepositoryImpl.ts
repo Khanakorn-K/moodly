@@ -4,7 +4,7 @@ import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { LogApiDataSource } from "../dataSources/LogApiDataSource";
 import { CauseMapper } from "@/app/shared/mappers/CauseMapper";
 
-export const LogRepositoryImp: ILogRepository = {
+export const LogRepositoryImpl: ILogRepository = {
   addMoodLog: async (data): Promise<void> => {
     const body: AddMoodRequestModel = data;
     await LogApiDataSource.addMoodLog(body);

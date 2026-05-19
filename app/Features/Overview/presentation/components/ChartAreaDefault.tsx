@@ -16,9 +16,9 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import type {
-  OverViewDailyMoodEntity,
-  OverViewMoodNoteEntity,
-} from "../../domain/entities/OverViewEntity";
+  OverviewDailyMoodEntity,
+  OverviewMoodNoteEntity,
+} from "../../domain/entities/OverviewEntity";
 import { convertDateToShortThaiDateFormat } from "@/cores/utils/thaiDate";
 import { moodColors } from "@/app/shared/moodColors";
 
@@ -36,19 +36,19 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 type ChartAreaDefaultProps = {
-  data: OverViewDailyMoodEntity[];
-  moodNotes: OverViewMoodNoteEntity[];
+  data: OverviewDailyMoodEntity[];
+  moodNotes: OverviewMoodNoteEntity[];
   startDate: string;
   endDate: string;
   isLoading?: boolean;
   error?: string | null;
 };
 
-function getCalculableMoodData(data: OverViewDailyMoodEntity[]) {
+function getCalculableMoodData(data: OverviewDailyMoodEntity[]) {
   return data.filter((item) => item.averageMood > 0);
 }
 
-function getTrendText(data: OverViewDailyMoodEntity[]) {
+function getTrendText(data: OverviewDailyMoodEntity[]) {
   const calculableMoodData = getCalculableMoodData(data);
 
   if (calculableMoodData.length < 2) {
@@ -81,7 +81,7 @@ function OverviewTooltip({
 }: {
   active?: boolean;
   payload?: TooltipPayloadItem[];
-  moodNotes: OverViewMoodNoteEntity[];
+  moodNotes: OverviewMoodNoteEntity[];
   graphColor: string;
 }) {
   const chartPayload = payload?.[0]?.payload;

@@ -1,5 +1,5 @@
 import type { CauseEntity } from "./entities/CauseEntity";
-import { stadartCauses } from "./moodType";
+import { standardCauses } from "./moodType";
 
 export type CauseOption = {
   name: string;
@@ -7,7 +7,7 @@ export type CauseOption = {
 
 export function createCauseOptions(customCauses: Pick<CauseEntity, "name">[]) {
   return [
-    ...stadartCauses.map((cause) => ({ name: cause.label })),
+    ...standardCauses.map((cause) => ({ name: cause.label })),
     ...customCauses.map((cause) => ({ name: cause.name })),
   ];
 }

@@ -3,12 +3,12 @@ import React from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useOverView } from "./hooks/useOverView";
+import { useOverview } from "./hooks/useOverview";
 import { ChartAreaDefault } from "./components/ChartAreaDefault";
 
-const OverViewView = () => {
+const OverviewView = () => {
   const {
-    overViewData,
+    overviewData,
     isLoading,
     error,
     startDate,
@@ -16,7 +16,7 @@ const OverViewView = () => {
     setStartDate,
     setEndDate,
     refresh,
-  } = useOverView();
+  } = useOverview();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ const OverViewView = () => {
           <div className="grid gap-1">
             <h1 className="text-2xl font-semibold">ภาพรวม</h1>
             <p className="text-sm text-white/50">
-              ทั้งหมด {overViewData?.totalLogs ?? 0} บันทึก
+              ทั้งหมด {overviewData?.totalLogs ?? 0} บันทึก
             </p>
           </div>
 
@@ -64,8 +64,8 @@ const OverViewView = () => {
         </section>
 
         <ChartAreaDefault
-          data={overViewData?.dailyMoodAverages ?? []}
-          moodNotes={overViewData?.moodNotes ?? []}
+          data={overviewData?.dailyMoodAverages ?? []}
+          moodNotes={overviewData?.moodNotes ?? []}
           startDate={startDate}
           endDate={endDate}
           isLoading={isLoading}
@@ -76,4 +76,4 @@ const OverViewView = () => {
   );
 };
 
-export default OverViewView;
+export default OverviewView;

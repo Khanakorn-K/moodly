@@ -5,7 +5,7 @@ import { InsightApiDataSource } from "../dataSources/InsightApiDataSource";
 import { CauseMapper } from "@/app/shared/mappers/CauseMapper";
 import { MoodLogMapper } from "../mappers/MoodLogMapper";
 
-export const InsightRepositoryImp: IInsightRepository = {
+export const InsightRepositoryImpl: IInsightRepository = {
   getMoodLogs: async (data: {
     mood?: string;
     startDate?: string;

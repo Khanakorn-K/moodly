@@ -3,7 +3,7 @@ import type { ILandingRepository } from "../../domain/repositories/ILandingRepos
 import { LandingApiDataSource } from "../dataSources/LandingApiDataSource";
 import { LandingMapper } from "../mappers/LandingMapper";
 
-export const LandingRepositoryImp: ILandingRepository = {
+export const LandingRepositoryImpl: ILandingRepository = {
   getInsights: async (data: {
     selectedDate: string;
   }): Promise<LandingEntity> => {

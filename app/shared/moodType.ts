@@ -21,14 +21,14 @@ export interface CauseType {
   label: string;
 }
 
-export const standartMoods: MoodType[] = [
+export const standardMoods: MoodType[] = [
   { value: 1, emoji: "😞", label: "แย่มาก", color: "red" },
   { value: 2, emoji: "😕", label: "แย่", color: "orange" },
   { value: 3, emoji: "😐", label: "ปานกลาง", color: "yellow" },
   { value: 4, emoji: "🙂", label: "ดี", color: "green" },
   { value: 5, emoji: "😄", label: "ดีมาก", color: "cyan" },
 ];
-export const stadartCauses: CauseType[] = [
+export const standardCauses: CauseType[] = [
   { key: "WORK", label: "งาน" },
   { key: "STOCK", label: "การเงิน" },
   { key: "FRIEND", label: "เพื่อน" },

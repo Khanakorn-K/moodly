@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { standartMoods } from "@/app/shared/moodType";
+import { standardMoods } from "@/app/shared/moodType";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { logUseCases } from "../../dependencyInjection";
 import { handleAppError } from "@/cores/utils/errorHandler";
@@ -20,7 +20,7 @@ export const useLog = () => {
   const [updatingCauseId, setUpdatingCauseId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const activeMood = standartMoods.find((m) => m.value === selectedMood);
+  const activeMood = standardMoods.find((m) => m.value === selectedMood);
 
   const fetchMyCustomCauses = useCallback(async () => {
     try {

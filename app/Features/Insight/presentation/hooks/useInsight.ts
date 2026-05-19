@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { standartMoods } from "@/app/shared/moodType";
+import { standardMoods } from "@/app/shared/moodType";
 import { handleAppError } from "@/cores/utils/errorHandler";
 import { inspectResponse } from "@/cores/utils/debugResponse";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
@@ -186,7 +186,7 @@ export const useInsight = () => {
   const openEditMoodLogModal = (moodLog: MoodLogEntity) => {
     setEditingMoodLog(moodLog);
     setEditNote(moodLog.note);
-    const moodConfig = standartMoods.find(
+    const moodConfig = standardMoods.find(
       (m) => String(m.value) === String(moodLog.mood),
     );
     setEditMood(moodConfig ? Number(moodConfig.value) : 0);

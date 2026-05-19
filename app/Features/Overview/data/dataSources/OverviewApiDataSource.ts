@@ -1,13 +1,13 @@
 import { apiClient } from "@/cores/lib/api-client";
 import type { apiResponseBase } from "@/cores/utils/apiResponseBase";
-import { OverViewResponseModel } from "../models/OverViewResponseModel";
+import { OverviewResponseModel } from "../models/OverviewResponseModel";
 
-export const OverViewApiDataSource = {
-  getOverView: async function (data: {
+export const OverviewApiDataSource = {
+  getOverview: async function (data: {
     startDate: string;
     endDate: string;
-  }): Promise<OverViewResponseModel> {
-    const response = await apiClient.get<apiResponseBase<OverViewResponseModel>>(
+  }): Promise<OverviewResponseModel> {
+    const response = await apiClient.get<apiResponseBase<OverviewResponseModel>>(
       "/overview/get-overview",
       {
         params: {

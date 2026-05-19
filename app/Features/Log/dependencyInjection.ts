@@ -1,4 +1,4 @@
-import { LogRepositoryImp } from "./data/repositories/LogRepositoryImp";
+import { LogRepositoryImpl } from "./data/repositories/LogRepositoryImpl";
 import { createLogUseCases } from "./domain/useCases/createLogUseCases";
 
-export const logUseCases = createLogUseCases(LogRepositoryImp);
+export const logUseCases = createLogUseCases(LogRepositoryImpl);

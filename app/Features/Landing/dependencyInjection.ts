@@ -1,4 +1,4 @@
-import { LandingRepositoryImp } from "./data/repositories/LandingRepositoryImp";
+import { LandingRepositoryImpl } from "./data/repositories/LandingRepositoryImpl";
 import { createLandingUseCases } from "./domain/useCases/createLandingUseCases";
 
-export const landingUseCases = createLandingUseCases(LandingRepositoryImp);
+export const landingUseCases = createLandingUseCases(LandingRepositoryImpl);

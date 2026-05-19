@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import OverViewIndex from "../Features/OverView/presentation/OverViewView";
+import OverviewIndex from "../Features/Overview/presentation/OverviewView";
 
 const Page = () => {
   return (
@@ -10,7 +10,7 @@ const Page = () => {
         </div>
       }
     >
-      <OverViewIndex />
+      <OverviewIndex />
     </Suspense>
   );
 };

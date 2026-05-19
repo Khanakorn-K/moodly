@@ -1,6 +1,6 @@
 "use client";
 
-import { standartMoods } from "@/app/shared/moodType";
+import { standardMoods } from "@/app/shared/moodType";
 import { createCauseOptions } from "@/app/shared/causes";
 import { moodColors } from "@/app/shared/moodColors";
 import { Button } from "@/components/ui/button";
@@ -91,7 +91,7 @@ export default function LogPageView() {
                 ระดับอารมณ์
               </p>
               <div className="grid grid-cols-5 gap-3">
-                {standartMoods.map((m) => {
+                {standardMoods.map((m) => {
                   const isActive = selectedMood === m.value;
                   return (
                     <button

@@ -10,7 +10,7 @@ import {
 } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { MoreHorizontal, MessageSquare } from "lucide-react";
-import { MoodType, standartMoods } from "@/app/shared/moodType";
+import { MoodType, standardMoods } from "@/app/shared/moodType";
 import { moodColors } from "@/app/shared/moodColors";
 import { convertDateToThaiDateFormat } from "@/cores/utils/thaiDate";
 import type {
@@ -41,7 +41,7 @@ const MoodLogBoard = ({
       onDragEnd={handleDragEnd}
     >
       <div className="flex gap-6 h-full overflow-x-auto pb-10 scrollbar-hide px-2">
-        {standartMoods.map((moodOption) => {
+        {standardMoods.map((moodOption) => {
           const moodLogs =
             moodLogPage?.items.filter(
               (moodLog) => String(moodLog.mood) === String(moodOption.value),

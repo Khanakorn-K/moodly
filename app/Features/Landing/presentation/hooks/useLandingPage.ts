@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { moodColors } from "@/app/shared/moodColors";
 import { convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 import type { LandingEntity } from "../../domain/entities/LandingEntity";
-import { standartMoods } from "@/app/shared/moodType";
+import { standardMoods } from "@/app/shared/moodType";
 import { landingUseCases } from "../../dependencyInjection";
 import { handleAppError } from "@/cores/utils/errorHandler";
 
@@ -47,7 +47,7 @@ const useLandingPage = () => {
   const normalizedDist: Record<string, number> = {};
 
   Object.entries(data?.moodDistribution ?? {}).forEach(([k, v]) => {
-    const moodConfig = standartMoods.find(
+    const moodConfig = standardMoods.find(
       (m) => m.label === k || m.value.toString() === k,
     );
     const key = moodConfig ? moodConfig.value.toString() : k;
@@ -56,7 +56,7 @@ const useLandingPage = () => {
 
   const maxCount = Math.max(...Object.values(normalizedDist), 1);
 
-  const moodChartData = standartMoods.map((moodItem) => {
+  const moodChartData = standardMoods.map((moodItem) => {
     const levelStr = moodItem.value.toString();
     const count = normalizedDist[levelStr] ?? 0;
 
@@ -89,7 +89,7 @@ const useLandingPage = () => {
         0,
       );
 
-      const moodBreakdown = standartMoods
+      const moodBreakdown = standardMoods
         .map((m) => {
           const count = (moodsAnal[m.value.toString()] ||
             moodsAnal[m.label] ||

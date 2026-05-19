@@ -3,7 +3,7 @@ import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { Edit2, Filter, MessageSquare, Trash2 } from "lucide-react";
 import { moodColors } from "@/app/shared/moodColors";
-import { standartMoods } from "@/app/shared/moodType";
+import { standardMoods } from "@/app/shared/moodType";
 import { convertDateToThaiDateFormat } from "@/cores/utils/thaiDate";
 import type {
   MoodLogEntity,
@@ -48,10 +48,10 @@ const MoodInsightList = ({
       ) : moodLogPage?.items && moodLogPage.items.length > 0 ? (
         moodLogPage.items.map((moodLog) => {
           const moodConfig =
-            standartMoods.find(
+            standardMoods.find(
               (moodOption) =>
                 String(moodOption.value) === String(moodLog.mood),
-            ) || standartMoods[2];
+            ) || standardMoods[2];
           const themeColor = moodColors[Number(moodConfig.value)] || "#D1D5DB";
 
           return (

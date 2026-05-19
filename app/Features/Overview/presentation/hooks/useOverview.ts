@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { OverViewEntity } from "../../domain/entities/OverViewEntity";
+import { OverviewEntity } from "../../domain/entities/OverviewEntity";
 import { handleAppError } from "@/cores/utils/errorHandler";
 import { inspectResponse } from "@/cores/utils/debugResponse";
 import { convertDateToYYMMDD } from "@/cores/utils/thaiDate";
-import { overViewUseCases } from "../../dependencyInjection";
+import { overviewUseCases } from "../../dependencyInjection";
 
 // Presentation layer เท่านั้น: เก็บ React/session/loading/error state ใน hook นี้.
 // Business rules และ validation ต้องอยู่ที่ domain/useCases.
@@ -14,10 +14,10 @@ function createDefaultStartDate() {
   return convertDateToYYMMDD(date);
 }
 
-export const useOverView = () => {
+export const useOverview = () => {
   const { status } = useSession();
   const hasLoaded = useRef(false);
-  const [overViewData, setOverViewData] = useState<OverViewEntity | null>(null);
+  const [overviewData, setOverviewData] = useState<OverviewEntity | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [startDate, setStartDate] = useState<string>(createDefaultStartDate);
@@ -25,7 +25,7 @@ export const useOverView = () => {
     convertDateToYYMMDD(new Date()),
   );
 
-  const loadOverView = useCallback(async (
+  const loadOverview = useCallback(async (
     data: { startDate: string; endDate: string } = { startDate, endDate },
   ) => {
     if (status !== "authenticated") return;
@@ -33,8 +33,8 @@ export const useOverView = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const entity = await overViewUseCases.getOverView(data);
-      setOverViewData(entity);
+      const entity = await overviewUseCases.getOverview(data);
+      setOverviewData(entity);
       inspectResponse(entity);
     } catch (err) {
       const message =
@@ -50,17 +50,17 @@ export const useOverView = () => {
     if (status !== "authenticated" || hasLoaded.current) return;
 
     hasLoaded.current = true;
-    loadOverView({ startDate, endDate });
-  }, [endDate, loadOverView, startDate, status]);
+    loadOverview({ startDate, endDate });
+  }, [endDate, loadOverview, startDate, status]);
 
   return {
-    overViewData,
+    overviewData,
     isLoading,
     error,
     startDate,
     endDate,
     setStartDate,
     setEndDate,
-    refresh: loadOverView,
+    refresh: loadOverview,
   };
 };

@@ -6,10 +6,11 @@ import {
   createApiErrorResponse,
   createApiResponse,
 } from "@/cores/utils/apiResponse";
-
-function roundOneDecimal(value: number) {
-  return Number(value.toFixed(1));
-}
+import {
+  calculateAverageMood,
+  calculateCauseAnalysis,
+  calculateMoodDistributionRecord,
+} from "@/app/shared/moodAnalytics";
 
 export async function GET(req: NextRequest) {
   try {
@@ -38,37 +39,10 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const moodDistribution = logs.reduce(
-      (acc, log) => {
-        const moodKey = String(log.mood);
-        acc[moodKey] = (acc[moodKey] || 0) + 1;
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-
-    const causesAnalysis: Record<string, Record<string, number>> = {};
-
-    logs.forEach((log) => {
-      if (log.causes && Array.isArray(log.causes)) {
-        log.causes.forEach((cause) => {
-          if (!cause) return;
-
-          const moodKey = String(log.mood);
-
-          if (!causesAnalysis[cause]) {
-            causesAnalysis[cause] = {};
-          }
-
-          causesAnalysis[cause][moodKey] =
-            (causesAnalysis[cause][moodKey] || 0) + 1;
-        });
-      }
-    });
-
     const totalLogs = logs.length;
-    const totalMood = logs.reduce((sum, log) => sum + log.mood, 0);
-    const averageMood = totalLogs ? roundOneDecimal(totalMood / totalLogs) : 0;
+    const averageMood = calculateAverageMood(logs);
+    const moodDistribution = calculateMoodDistributionRecord(logs);
+    const causesAnalysis = calculateCauseAnalysis(logs);
 
     return createApiResponse(
       {

@@ -1,8 +1,8 @@
-import { OverViewEntity } from "../../domain/entities/OverViewEntity";
-import { OverViewResponseModel } from "../models/OverViewResponseModel";
+import { OverviewEntity } from "../../domain/entities/OverviewEntity";
+import { OverviewResponseModel } from "../models/OverviewResponseModel";
 
-export const OverViewMapper = {
-  toEntity(dto: OverViewResponseModel): OverViewEntity {
+export const OverviewMapper = {
+  toEntity(dto: OverviewResponseModel): OverviewEntity {
     return {
       startDate: dto.startDate,
       endDate: dto.endDate,
