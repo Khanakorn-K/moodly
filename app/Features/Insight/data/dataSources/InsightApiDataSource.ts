@@ -9,8 +9,6 @@ export const InsightApiDataSource = {
     startDate,
     endDate,
   }: {
-    page?: number;
-    limit?: number;
     mood?: string;
     startDate?: string;
     endDate?: string;
