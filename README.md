@@ -242,6 +242,52 @@ export interface ItemResponseModel {}
 - API response model เป็นของ data layer
 - entity ต้องเป็นรูปข้อมูลที่ domain ใช้จริง
 
+### Entity Value Constraint Rule
+
+Entity สามารถกำหนดกฎของค่าที่ domain ยอมรับได้ เช่น field บางตัวต้องมีค่าอยู่ในชุดที่กำหนดเท่านั้น
+
+ตัวอย่าง:
+
+```ts
+export type UserRole = "admin" | "user" | "owner";
+
+export interface UserEntity {
+  id: string;
+  name: string;
+  role: UserRole;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+ความหมาย:
+
+```txt
+role ของ UserEntity ต้องเป็นได้แค่ "admin", "user" หรือ "owner"
+ค่าอื่นนอกเหนือจากนี้ไม่ใช่ข้อมูลที่ domain ยอมรับ
+```
+หมายเหตุ:
+
+ResponseModel คือข้อมูลดิบจาก API, database หรือ external source  
+ดังนั้นค่าที่มากับ ResponseModel อาจกว้างหรือไม่น่าเชื่อถือ เช่น `role: string`
+ตัวอย่าง ResponseModel:
+
+```ts
+export interface UserResponseModel {
+  id: string;
+  name: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+UserResponseModel.role จะเป็นอะไรก็ได้ในฐานะข้อมูลดิบจาก API/database
+แต่ `UserEntity.role` คือค่าที่ domain เชื่อถือและยอมรับแล้ว  
+ถ้า domain กำหนดว่า `UserRole` เป็นได้แค่ `"admin" | "user" | "owner"`  
+ค่าอื่นนอกเหนือจากนี้ห้ามกลายเป็น `UserEntity` แบบเงียบ ๆ
+
+```ts
+export type UserRole = "admin" | "user" | "owner";
+```
 ---
 
 ## 6. Repository Interface
