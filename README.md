@@ -142,6 +142,70 @@ import type { IFeatureRepository } from "../repositories/IFeatureRepository";
 - แปลง entity เป็น view state ได้ถ้าจำเป็น
 - ห้ามเรียก API, data source, repository implementation, database, หรือ ORM ตรง ๆ
 
+### Presentation View Mapping Rule
+
+Presentation layer รวมถึง hook สามารถแปลง Entity เป็นข้อมูลสำหรับแสดงผลได้
+แต่ห้ามเปลี่ยนความหมายของค่า domain ใน Entity
+
+อนุญาต:
+
+- แปลง `role: "admin"` เป็น label สำหรับ UI เช่น `"Admin"` หรือ `"ผู้ดูแล"`
+- แปลง `role: "admin"` เป็น badge color เช่น `"yellow"`
+- แปลง entity เป็น view state / view model สำหรับ render
+- format date, currency, status label สำหรับแสดงผล
+- filter, sort, group, หรือ derive ค่าใหม่เพื่อการแสดงผล โดยไม่แก้ entity ต้นฉบับ
+
+ห้าม:
+
+- เปลี่ยน `role: "admin"` เป็น `"user"` หรือ `"owner"`
+- mutate entity โดยตรง
+- แก้ค่าที่เป็น business meaning ใน hook/component
+- ทำให้ค่า domain เพี้ยนเพื่อให้ UI แสดงง่ายขึ้น
+- เอา display value กลับไปแทน domain value เช่น เก็บ `"ผู้ดูแล"` ทับ `role: "admin"`
+
+Entity ต้องยังคงเป็น source of truth ของ domain value
+ถ้าต้องการข้อมูลเพื่อแสดงผล ให้สร้างค่าใหม่ใน presentation แทน
+
+ตัวอย่างที่ถูก:
+
+```ts
+const roleBadgeMap = {
+  admin: { label: "ผู้ดูแล", color: "yellow" },
+  user: { label: "ผู้ใช้", color: "blue" },
+  owner: { label: "เจ้าของ", color: "purple" },
+} satisfies Record<UserRole, { label: string; color: string }>;
+
+const roleBadge = roleBadgeMap[user.role];
+```
+
+ตัวอย่างที่ถูก:
+
+```ts
+const userViewModel = {
+  id: user.id,
+  name: user.name,
+  role: user.role,
+  roleLabel: roleBadgeMap[user.role].label,
+  roleColor: roleBadgeMap[user.role].color,
+  createdAtText: formatDate(user.createdAt),
+};
+```
+
+ตัวอย่างที่ผิด:
+
+```ts
+user.role = "owner";
+```
+
+ตัวอย่างที่ผิด:
+
+```ts
+const normalizedUser = {
+  ...user,
+  role: user.role === "admin" ? "owner" : user.role,
+};
+```
+
 ตัวอย่างไฟล์:
 
 ```txt
@@ -259,15 +323,17 @@ export interface UserEntity {
   updatedAt: string;
 }
 ```
+
 ความหมาย:
 
 ```txt
 role ของ UserEntity ต้องเป็นได้แค่ "admin", "user" หรือ "owner"
 ค่าอื่นนอกเหนือจากนี้ไม่ใช่ข้อมูลที่ domain ยอมรับ
 ```
+
 หมายเหตุ:
 
-ResponseModel คือข้อมูลดิบจาก API, database หรือ external source  
+ResponseModel คือข้อมูลดิบจาก API, database หรือ external source
 ดังนั้นค่าที่มากับ ResponseModel อาจกว้างหรือไม่น่าเชื่อถือ เช่น `role: string`
 ตัวอย่าง ResponseModel:
 
@@ -280,14 +346,16 @@ export interface UserResponseModel {
   updatedAt: string;
 }
 ```
+
 UserResponseModel.role จะเป็นอะไรก็ได้ในฐานะข้อมูลดิบจาก API/database
-แต่ `UserEntity.role` คือค่าที่ domain เชื่อถือและยอมรับแล้ว  
-ถ้า domain กำหนดว่า `UserRole` เป็นได้แค่ `"admin" | "user" | "owner"`  
+แต่ `UserEntity.role` คือค่าที่ domain เชื่อถือและยอมรับแล้ว
+ถ้า domain กำหนดว่า `UserRole` เป็นได้แค่ `"admin" | "user" | "owner"`
 ค่าอื่นนอกเหนือจากนี้ห้ามกลายเป็น `UserEntity` แบบเงียบ ๆ
 
 ```ts
 export type UserRole = "admin" | "user" | "owner";
 ```
+
 ---
 
 ## 6. Repository Interface
@@ -848,6 +916,9 @@ data/dataSource
 - `presentation` เรียก use case
 - `presentation` ไม่เรียก data source ตรง
 - `presentation` ไม่เรียก repository implementation ตรง
+- `presentation` / hook ไม่ mutate entity โดยตรง
+- `presentation` / hook สร้าง display value หรือ view model ใหม่แทนการเปลี่ยน domain value
+- `presentation` / hook ไม่เปลี่ยน business meaning ของ entity เพื่อให้ UI แสดงง่ายขึ้น
 - interface repository ขึ้นต้นด้วย `I`
 - entity ลงท้ายด้วย `Entity`
 - ไฟล์ใน `domain/entities` มีแต่ entity
@@ -872,6 +943,7 @@ data/dataSource
 presentation
 = UI, hook, component, controller-facing code
 = เรียก use case
+= แปลง entity เป็น display/view model ได้ แต่ห้ามเปลี่ยนความหมายของ entity
 
 domain
 = entity, interface, use case, business rule
@@ -895,6 +967,7 @@ entities = ลงท้าย Entity
 repository implementation = ลงท้าย Imp
 API route / handler = ทำงานเดียว ชื่อ action ชัด
 helper กลาง = ใช้ซ้ำ อย่าเขียนซ้ำ
+presentation display value = สร้างค่าใหม่ ห้าม mutate entity
 ```
 
 ---
