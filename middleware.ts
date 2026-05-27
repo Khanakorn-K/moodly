@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const protectedPaths = ["/insights", "/log", ""];
+  const protectedPaths = ["/insights", "/log", "", "/overview"];
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
 
   if (isProtected && !token) {

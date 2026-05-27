@@ -1,0 +1,15 @@
+# ไม่เอาโฟลเดอร์ node_modules (สำหรับ Node.js)
+node_modules/
+
+# ไม่เอาไฟล์ Git
+.git/
+.gitignore
+
+# ไม่เอาไฟล์ที่มีข้อมูลสำคัญ
+.env
+config/secrets.yml
+
+# ไม่เอาโฟลเดอร์และไฟล์ temp
+tmp/
+temp/
+*.tmp
