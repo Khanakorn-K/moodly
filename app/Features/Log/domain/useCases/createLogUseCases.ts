@@ -29,14 +29,20 @@ export const createLogUseCases = (repository: ILogRepository) => ({
     selectedMood: number | null;
     selectedCause: string | null;
     note: string;
+    createdAt: string;
   }) => {
     if (!data.selectedMood || !data.selectedCause) {
       throw new Error("กรุณาเลือกอารมณ์และสาเหตุให้ครบถ้วน");
     }
-    return await repository.addMoodLog({
+
+    if (!data.createdAt) {
+      throw new Error("กรุณาเลือกวันที่");
+    }
+    await repository.addMoodLog({
       selectedMood: data.selectedMood,
       selectedCauses: [data.selectedCause],
       note: data.note,
+      createdAt: data.createdAt,
     });
   },
 });

@@ -1,4 +1,5 @@
 "use client";
+import { convertDateToLocalISO } from "@/cores/utils/thaiDate";
 
 import { useCallback, useEffect, useState } from "react";
 import { standardMoods } from "@/app/shared/moodType";
@@ -19,6 +20,7 @@ export const useLog = () => {
   const [editingCauseName, setEditingCauseName] = useState("");
   const [updatingCauseId, setUpdatingCauseId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [date, setDate] = useState<Date>(new Date());
 
   const activeMood = standardMoods.find((m) => m.value === selectedMood);
 
@@ -117,6 +119,7 @@ export const useLog = () => {
         selectedMood,
         selectedCause,
         note,
+        createdAt: convertDateToLocalISO(date),
       });
       setSubmitted(true);
     } catch (error) {
@@ -155,5 +158,7 @@ export const useLog = () => {
     handleUpdateCustomCause,
     toggleCause,
     handleSubmit,
+    date,
+    setDate,
   };
 };
