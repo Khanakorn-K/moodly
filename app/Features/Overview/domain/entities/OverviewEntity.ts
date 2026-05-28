@@ -39,3 +39,12 @@ export interface OverviewEntity {
   moodNotes: OverviewMoodNoteEntity[];
   causeSummaries: OverviewCauseSummaryEntity[];
 }
+
+export interface MonthlyAverageMoodEntity {
+  month: string;
+  startDate: string;
+  endDate: string;
+  totalLogs: number;
+  averageMood: number;
+  dailyMoodAverages: OverviewDailyMoodEntity[];
+}

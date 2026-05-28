@@ -13,6 +13,8 @@ const useLandingPage = () => {
   const [data, setData] = useState<LandingEntity | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [startMonth, setStartMonth] = useState<Date>(new Date());
+  const [endMonth, setEndMonth] = useState<Date>(new Date());
 
   useEffect(() => {
     async function fetchData() {
@@ -130,6 +132,10 @@ const useLandingPage = () => {
     setDate,
     averageMood: data?.averageMood ?? 0,
     calculateMoodColor,
+    standardMoods,
+    setStartMonth,
+    endMonth,
+    setEndMonth,
   };
 };
 

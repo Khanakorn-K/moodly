@@ -25,6 +25,10 @@ export default function LandingPageView() {
     topCausesList,
     averageMood,
     calculateMoodColor,
+    standardMoods,
+    setStartMonth,
+    endMonth,
+    setEndMonth,
   } = useLandingPage();
 
   const isDataLoading = status === "loading" || isLoading;
@@ -48,6 +52,8 @@ export default function LandingPageView() {
             isLoading={isDataLoading}
             date={date}
             setDate={setDate}
+            setStartMonth={setStartMonth}
+            setEndMonth={setEndMonth}
             moodChartData={moodChartData}
             averageMood={averageMood}
             calculateMoodColor={calculateMoodColor}
@@ -145,6 +151,8 @@ interface MoodOverviewCardProps {
   isLoading: boolean;
   date: Date | undefined;
   setDate: (date: Date | undefined) => void;
+  setStartMonth: (date: Date) => void;
+  setEndMonth: (date: Date) => void;
   moodChartData: {
     label: string;
     heightPercentage: number;
@@ -161,6 +169,8 @@ function MoodOverviewCard({
   isLoading,
   date,
   setDate,
+  setStartMonth,
+  setEndMonth,
   moodChartData,
   averageMood,
   calculateMoodColor,
@@ -190,6 +200,22 @@ function MoodOverviewCard({
           <Calendar
             mode="single"
             selected={date}
+            onMonthChange={(month) => {
+              const startOfMonth = new Date(
+                month.getFullYear(),
+                month.getMonth(),
+                1,
+              );
+
+              const endOfMonth = new Date(
+                month.getFullYear(),
+                month.getMonth() + 1,
+                0,
+              );
+
+              setStartMonth(startOfMonth);
+              setEndMonth(endOfMonth);
+            }}
             onSelect={(newDate) => {
               if (!newDate || newDate.getTime() === date?.getTime()) {
                 return;

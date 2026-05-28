@@ -24,6 +24,15 @@ export function convertDateToYYMMDD(date: Date): string {
 }
 
 /**
+ * แปลงออบเจกต์ Date ให้อยู่ในรูปแบบ YYYY-MM
+ */
+export function convertDateToYYMM(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return `${year}-${month}`;
+}
+
+/**
  * ตรวจสอบวันที่รูปแบบ YYYY-MM-DD และกันวันที่ที่ไม่มีจริง เช่น 2026-02-31
  */
 export function isValidYYMMDDDate(value: string): boolean {
@@ -35,6 +44,35 @@ export function isValidYYMMDDDate(value: string): boolean {
     !Number.isNaN(date.getTime()) &&
     date.toISOString().startsWith(value)
   );
+}
+
+/**
+ * ตรวจสอบเดือนรูปแบบ YYYY-MM และกันเดือนที่ไม่มีจริง เช่น 2026-13
+ */
+export function isValidYYMMMonth(value: string): boolean {
+  const monthRegex = /^\d{4}-\d{2}$/;
+  if (!monthRegex.test(value)) return false;
+
+  const month = Number(value.split("-")[1]);
+  return month >= 1 && month <= 12;
+}
+
+/**
+ * แปลง YYYY-MM เป็นช่วงวันแรกและวันสุดท้ายของเดือนในรูปแบบ YYYY-MM-DD
+ */
+export function createYYMMMonthDateRange(value: string): {
+  startDate: string;
+  endDate: string;
+} {
+  const [yearValue, monthValue] = value.split("-");
+  const year = Number(yearValue);
+  const monthIndex = Number(monthValue) - 1;
+  const lastDate = new Date(Date.UTC(year, monthIndex + 1, 0));
+
+  return {
+    startDate: `${value}-01`,
+    endDate: lastDate.toISOString().split("T")[0],
+  };
 }
 
 /**

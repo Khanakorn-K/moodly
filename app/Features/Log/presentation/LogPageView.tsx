@@ -58,7 +58,6 @@ export default function LogPageView() {
 
   const themeColor = activeMood ? moodColors[activeMood.value] : "#6366f1";
   const allCauses = createCauseOptions(myCustomCauses);
-  const today = displayGetCurrentThaiDate();
 
   return (
     <div className="flex min-h-screen items-stretch justify-center overflow-x-hidden bg-[#0a0a0f] px-3 py-6 pb-28 font-z sm:px-4 md:p-8 md:pb-28 lg:p-12 lg:pt-28">
@@ -70,16 +69,6 @@ export default function LogPageView() {
 
         <header className="relative z-10 mb-8 flex items-start justify-between sm:mb-10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <Heart
-                size={16}
-                style={{ color: themeColor }}
-                className="animate-pulse"
-              />
-              <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-white/40 sm:text-xs sm:tracking-[0.2em]">
-                {today}
-              </p>
-            </div>
 
             <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-5xl">
               วันนี้เป็นยังไงบ้าง?
