@@ -5,6 +5,7 @@ export interface ILogRepository {
     selectedMood: number;
     selectedCauses: string[];
     note: string;
+    createdAt: string;
   }) => Promise<void>;
   addCause: (data: { name: string }) => Promise<void>;
   updateCause: (data: { id: string; name: string }) => Promise<void>;
