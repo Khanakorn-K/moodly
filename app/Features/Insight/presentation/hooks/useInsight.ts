@@ -64,7 +64,6 @@ export const useInsight = () => {
           endDate,
         });
         setMoodLogPage(entity);
-        inspectResponse(entity, "mood logs");
       } catch (error) {
         handleAppError(
           error instanceof Error
@@ -144,9 +143,11 @@ export const useInsight = () => {
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
-
     const logId = String(active.id);
     const newMoodValue = Number(over.id);
+    console.log("active", active);
+    console.log("over", over);
+
     const originalLog = moodLogPage?.items.find(
       (item) => String(item.id) === logId,
     );

@@ -35,48 +35,53 @@ export const useOverview = () => {
     convertDateToYYMM(new Date()),
   );
 
-  const loadOverview = useCallback(async (
-    data: { startDate: string; endDate: string } = { startDate, endDate },
-  ) => {
-    if (status !== "authenticated") return;
+  const loadOverview = useCallback(
+    async (
+      data: { startDate: string; endDate: string } = { startDate, endDate },
+    ) => {
+      if (status !== "authenticated") return;
 
-    setIsLoading(true);
-    setError(null);
-    try {
-      const entity = await overviewUseCases.getOverview(data);
-      setOverviewData(entity);
-      inspectResponse(entity);
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "ไม่สามารถโหลดข้อมูลภาพรวมได้";
-      setError(message);
-      handleAppError(message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [endDate, startDate, status]);
+      setIsLoading(true);
+      setError(null);
+      try {
+        const entity = await overviewUseCases.getOverview(data);
+        setOverviewData(entity);
+        inspectResponse(entity);
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "ไม่สามารถโหลดข้อมูลภาพรวมได้";
+        setError(message);
+        handleAppError(message);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [endDate, startDate, status],
+  );
 
-  const loadMonthlyAverageMood = useCallback(async (
-    data: { month: string } = { month: selectedMonth },
-  ) => {
-    if (status !== "authenticated") return;
+  const loadMonthlyAverageMood = useCallback(
+    async (data: { month: string } = { month: selectedMonth }) => {
+      if (status !== "authenticated") return;
 
-    setIsMonthlyLoading(true);
-    setMonthlyError(null);
-    try {
-      const entity = await overviewUseCases.getMonthlyAverageMood(data);
-      setMonthlyAverageMood(entity);
-    } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : "ไม่สามารถโหลดข้อมูลอารมณ์รายเดือนได้";
-      setMonthlyError(message);
-      handleAppError(message);
-    } finally {
-      setIsMonthlyLoading(false);
-    }
-  }, [selectedMonth, status]);
+      setIsMonthlyLoading(true);
+      setMonthlyError(null);
+      try {
+        const entity = await overviewUseCases.getMonthlyAverageMood(data);
+        inspectResponse(entity, "setMonthlyAverageMood");
+        setMonthlyAverageMood(entity);
+      } catch (err) {
+        const message =
+          err instanceof Error
+            ? err.message
+            : "ไม่สามารถโหลดข้อมูลอารมณ์รายเดือนได้";
+        setMonthlyError(message);
+        handleAppError(message);
+      } finally {
+        setIsMonthlyLoading(false);
+      }
+    },
+    [selectedMonth, status],
+  );
 
   useEffect(() => {
     if (status !== "authenticated" || hasLoaded.current) return;

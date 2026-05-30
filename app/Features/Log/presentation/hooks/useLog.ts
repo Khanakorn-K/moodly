@@ -127,7 +127,9 @@ export const useLog = () => {
         error instanceof Error ? error.message : "เกิดข้อผิดพลาด",
       );
     } finally {
+      setNote("");
       setSubmitted(false);
+      setIsSubmitting(false);
       setSelectedMood(null);
       setSelectedCause(null);
     }

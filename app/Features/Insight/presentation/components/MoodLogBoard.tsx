@@ -39,6 +39,7 @@ const MoodLogBoard = ({
       sensors={sensors}
       collisionDetection={closestCorners}
       onDragEnd={handleDragEnd}
+      
     >
       <div className="flex h-full gap-4 overflow-x-auto px-1 pb-10 scrollbar-hide sm:gap-6 sm:px-2">
         {standardMoods.map((moodOption) => {
