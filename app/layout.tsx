@@ -3,6 +3,7 @@ import "./globals.css";
 import { Outfit, Kanit } from "next/font/google";
 import Navbar from "@/components/ui/NavBar";
 import AuthProvider from "@/components/ui/providers";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Moodly",
@@ -39,6 +40,7 @@ export default function RootLayout({
         <AuthProvider>
           <Navbar />
           {children}
+          <Toaster />
         </AuthProvider>
       </body>
     </html>

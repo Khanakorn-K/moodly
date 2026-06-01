@@ -130,7 +130,7 @@ export function MonthlyMoodCalendar({
                   >
                     <div
                       key={cell.key}
-                      className="grid aspect-square min-h-10 place-items-center rounded-md border border-white/10 text-xs shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-colors sm:min-h-14"
+                      className="grid aspect-square min-h-10 hover:opacity-50 place-items-center rounded-md border border-white/10 text-xs shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-colors sm:min-h-14"
                       style={
                         hasDate
                           ? {

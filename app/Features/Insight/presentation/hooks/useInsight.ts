@@ -9,6 +9,7 @@ import type {
   MoodLogPageEntity,
 } from "../../domain/entities/MoodLogEntity";
 import { insightUseCases } from "../../dependencyInjection";
+import { toastManager } from "@/cores/utils/toastManager";
 
 export const useInsight = () => {
   const { status } = useSession();
@@ -30,7 +31,6 @@ export const useInsight = () => {
   const [editMood, setEditMood] = useState<number>();
   const [customCauses, setCustomCauses] = useState<CauseEntity[]>([]);
   const [selectedCauses, setSelectedCauses] = useState<string[]>([]);
-  const [error, seterror] = useState<string>();
 
   const mood = searchParams.get("mood") || "";
   const startDate = searchParams.get("startDate") || "";
@@ -63,8 +63,8 @@ export const useInsight = () => {
           endDate,
         });
         setMoodLogPage(entity);
-      } catch (error: any) {
-        seterror(error.message);
+      } catch (error: unknown) {
+        toastManager.fromError(error);
       } finally {
         setIsInitialLoading(false);
         setIsListLoading(false);
@@ -78,8 +78,8 @@ export const useInsight = () => {
     try {
       const entity = await insightUseCases.getCauses();
       setCustomCauses(entity);
-    } catch (error) {
-      console.error(error);
+    } catch (error: unknown) {
+      toastManager.fromError(error);
     }
   }, [status]);
 
@@ -103,8 +103,13 @@ export const useInsight = () => {
 
   const handleDeleteMoodLog = async (id: string) => {
     if (!confirm("ต้องการลบบันทึกนี้ใช่หรือไม่?")) return;
-    await insightUseCases.deleteMoodLog(id);
-    await fetchMoodLogs();
+    try {
+      await insightUseCases.deleteMoodLog(id);
+      toastManager.success("ลบบันทึกอารมณ์สำเร็จ");
+      await fetchMoodLogs();
+    } catch (error: unknown) {
+      toastManager.fromError(error);
+    }
   };
 
   const updateMoodLogMoodInPage = useCallback(
@@ -160,20 +165,26 @@ export const useInsight = () => {
         note: originalLog.note,
         causes: originalLog.causes,
       });
-    } catch {
+    } catch (error: unknown) {
+      toastManager.fromError(error);
       updateMoodLogMoodInPage(logId, previousMoodValue, newMoodValue);
     }
   };
 
-  const handleSaveMoodLog = async () => {
+  const handleUpdateMoodLog = async () => {
     if (!editingMoodLog || editMood === undefined) return;
-    await insightUseCases.updateMoodLog(editingMoodLog.id, {
-      mood: editMood,
-      note: editNote,
-      causes: selectedCauses,
-    });
-    setIsModalOpen(false);
-    await fetchMoodLogs();
+    try {
+      await insightUseCases.updateMoodLog(editingMoodLog.id, {
+        mood: editMood,
+        note: editNote,
+        causes: selectedCauses,
+      });
+      setIsModalOpen(false);
+      toastManager.success("แก้ไขบันทึกอารมณ์สำเร็จ");
+      await fetchMoodLogs();
+    } catch (error: unknown) {
+      toastManager.fromError(error);
+    }
   };
 
   const toggleCause = (name: string) => setSelectedCauses([name]);
@@ -206,7 +217,7 @@ export const useInsight = () => {
     updateQueryParams,
     handlePageChange: (p: number) => updateQueryParams({ page: String(p) }),
     handleDeleteMoodLog,
-    handleSaveMoodLog,
+    handleUpdateMoodLog,
     openEditMoodLogModal,
     router,
     pathname,

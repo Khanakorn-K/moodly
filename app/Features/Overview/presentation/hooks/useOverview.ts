@@ -6,6 +6,9 @@ import {
 } from "../../domain/entities/OverviewEntity";
 import { convertDateToYYMM, convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 import { overviewUseCases } from "../../dependencyInjection";
+import { toast } from "sonner";
+import { toastManager } from "@/cores/utils/toastManager";
+import { getErrorMessage } from "@/cores/utils/getErrorMessage";
 
 // Presentation layer เท่านั้น: เก็บ React/session/loading/error state ใน hook นี้.
 // Business rules และ validation ต้องอยู่ที่ domain/useCases.
@@ -33,6 +36,11 @@ export const useOverview = () => {
     convertDateToYYMM(new Date()),
   );
 
+  useEffect(() => {
+    loadMonthlyAverageMood();
+    loadOverview();
+  }, [selectedMonth, startDate, endDate]);
+
   const loadOverview = useCallback(
     async (
       data: { startDate: string; endDate: string } = { startDate, endDate },
@@ -44,10 +52,8 @@ export const useOverview = () => {
       try {
         const entity = await overviewUseCases.getOverview(data);
         setOverviewData(entity);
-      } catch (err) {
-        const message =
-          err instanceof Error ? err.message : "ไม่สามารถโหลดข้อมูลภาพรวมได้";
-        setError(message);
+      } catch (error: unknown) {
+        toastManager.fromError(error);
       } finally {
         setIsLoading(false);
       }
@@ -64,12 +70,8 @@ export const useOverview = () => {
       try {
         const entity = await overviewUseCases.getMonthlyAverageMood(data);
         setMonthlyAverageMood(entity);
-      } catch (err) {
-        const message =
-          err instanceof Error
-            ? err.message
-            : "ไม่สามารถโหลดข้อมูลอารมณ์รายเดือนได้";
-        setMonthlyError(message);
+      } catch (error: unknown) {
+        toastManager.fromError(error);
       } finally {
         setIsMonthlyLoading(false);
       }
@@ -105,7 +107,5 @@ export const useOverview = () => {
     setStartDate,
     setEndDate,
     setSelectedMonth,
-    refresh: loadOverview,
-    refreshMonthlyAverageMood: loadMonthlyAverageMood,
   };
 };

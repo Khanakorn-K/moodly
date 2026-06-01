@@ -3,6 +3,8 @@ import { useCallback, useEffect, useState } from "react";
 import { standardMoods } from "@/app/shared/moodType";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { logUseCases } from "../../dependencyInjection";
+import { toastManager } from "@/cores/utils/toastManager";
+import { getErrorMessage } from "@/cores/utils/getErrorMessage";
 
 export const useLog = () => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
@@ -25,7 +27,8 @@ export const useLog = () => {
     try {
       const data = await logUseCases.getCauses();
       setMyCustomCauses(Array.isArray(data) ? data : []);
-    } catch {
+    } catch (error: unknown) {
+      toastManager.error(getErrorMessage(error));
       setMyCustomCauses([]);
     }
   }, []);
@@ -41,10 +44,9 @@ export const useLog = () => {
       await logUseCases.addCause({ name: newCauseName });
       setNewCauseName("");
       await fetchMyCustomCauses();
-    } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "เกิดข้อผิดพลาด",
-      );
+      toastManager.success("เพิ่มสาเหตุสำเร็จ");
+    } catch (error: unknown) {
+      toastManager.fromError(error);
     } finally {
       setIsAddingCause(false);
     }
@@ -65,8 +67,9 @@ export const useLog = () => {
       if (targetCause && selectedCause === targetCause.name) {
         setSelectedCause(null);
       }
-    } catch (err) {
-      console.error(err);
+      toastManager.success("ลบสาเหตุสำเร็จ");
+    } catch (error: unknown) {
+      toastManager.error(getErrorMessage(error));
     }
   };
 
@@ -94,9 +97,10 @@ export const useLog = () => {
       }
       cancelEditCustomCause();
       await fetchMyCustomCauses();
-    } catch (error: any) {
+      toastManager.success("แก้ไขสาเหตุสำเร็จ");
+    } catch (error: unknown) {
       setErrorMessage(
-        error instanceof Error ? error.message : "เกิดข้อผิดพลาด",
+        error instanceof Error ? getErrorMessage(error) : "เกิดข้อผิดพลาด",
       );
     } finally {
       setUpdatingCauseId(null);
@@ -118,10 +122,9 @@ export const useLog = () => {
         createdAt: date,
       });
       setSubmitted(true);
-    } catch (error: any) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "เกิดข้อผิดพลาด",
-      );
+      toastManager.success("บันทึกอารมณ์สำเร็จ");
+    } catch (error: unknown) {
+      toastManager.fromError(error);
     } finally {
       setNote("");
       setSubmitted(false);

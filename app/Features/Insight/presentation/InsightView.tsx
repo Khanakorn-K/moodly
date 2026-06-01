@@ -28,7 +28,7 @@ export default function InsightView() {
     endDate,
     handleDragEnd,
     handleDeleteMoodLog,
-    handleSaveMoodLog,
+    handleUpdateMoodLog,
     openEditMoodLogModal,
     router,
     handleFilterChange,
@@ -155,7 +155,6 @@ export default function InsightView() {
             />
           )}
         </div>
-
       </div>
 
       {isModalOpen && (
@@ -226,11 +225,11 @@ export default function InsightView() {
               placeholder="What's on your mind"
             />
             <Button
-              onClick={handleSaveMoodLog}
+              onClick={handleUpdateMoodLog}
               disabled={!editMood || selectedCauses.length !== 1}
               className="h-12 w-full rounded-2xl bg-white font-bold text-black hover:bg-white/90 disabled:bg-white/5 disabled:text-white/20"
             >
-              {editingMoodLog ? "Confirm Changes" : "Create Entry"}
+              {editingMoodLog ? `บันทึกการเปลี่ยน` : ""}
             </Button>
           </div>
         </div>

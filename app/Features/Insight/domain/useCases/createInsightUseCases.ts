@@ -28,9 +28,33 @@ export const createInsightUseCases = (repository: IInsightRepository) => ({
       causes: string[];
     },
   ) => {
-    return await repository.updateMoodLog(id, data);
+    if (!id.trim()) {
+      throw new Error("ไม่พบบันทึกอารมณ์ที่ต้องการแก้ไข");
+    }
+
+    if (!Number.isInteger(data.mood) || data.mood < 1 || data.mood > 5) {
+      throw new Error("กรุณาเลือกอารมณ์ให้ถูกต้อง");
+    }
+
+    if (typeof data.note !== "string") {
+      throw new Error("รูปแบบบันทึกเพิ่มเติมไม่ถูกต้อง");
+    }
+
+    if (
+      !Array.isArray(data.causes) ||
+      data.causes.length !== 1 ||
+      !data.causes[0]?.trim()
+    ) {
+      throw new Error("กรุณาเลือกสาเหตุให้ครบถ้วน");
+    }
+
+    return await repository.updateMoodLog(id, {
+      ...data,
+      causes: [data.causes[0].trim()],
+    });
   },
   deleteMoodLog: async (id: string) => {
+    if (!id) throw new Error("ไม่พบข้อมูล");
     return await repository.deleteMoodLog(id);
   },
 });
