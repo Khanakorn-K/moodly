@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { standardMoods } from "@/app/shared/moodType";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { logUseCases } from "../../dependencyInjection";
-import { handleAppError } from "@/cores/utils/errorHandler";
 
 export const useLog = () => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
@@ -96,7 +95,6 @@ export const useLog = () => {
       cancelEditCustomCause();
       await fetchMyCustomCauses();
     } catch (error: any) {
-      handleAppError(error);
       setErrorMessage(
         error instanceof Error ? error.message : "เกิดข้อผิดพลาด",
       );

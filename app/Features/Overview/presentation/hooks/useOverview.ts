@@ -4,8 +4,6 @@ import {
   MonthlyAverageMoodEntity,
   OverviewEntity,
 } from "../../domain/entities/OverviewEntity";
-import { handleAppError } from "@/cores/utils/errorHandler";
-import { inspectResponse } from "@/cores/utils/debugResponse";
 import { convertDateToYYMM, convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 import { overviewUseCases } from "../../dependencyInjection";
 
@@ -46,12 +44,10 @@ export const useOverview = () => {
       try {
         const entity = await overviewUseCases.getOverview(data);
         setOverviewData(entity);
-        inspectResponse(entity);
       } catch (err) {
         const message =
           err instanceof Error ? err.message : "ไม่สามารถโหลดข้อมูลภาพรวมได้";
         setError(message);
-        handleAppError(message);
       } finally {
         setIsLoading(false);
       }
@@ -67,7 +63,6 @@ export const useOverview = () => {
       setMonthlyError(null);
       try {
         const entity = await overviewUseCases.getMonthlyAverageMood(data);
-        inspectResponse(entity, "setMonthlyAverageMood");
         setMonthlyAverageMood(entity);
       } catch (err) {
         const message =
@@ -75,7 +70,6 @@ export const useOverview = () => {
             ? err.message
             : "ไม่สามารถโหลดข้อมูลอารมณ์รายเดือนได้";
         setMonthlyError(message);
-        handleAppError(message);
       } finally {
         setIsMonthlyLoading(false);
       }

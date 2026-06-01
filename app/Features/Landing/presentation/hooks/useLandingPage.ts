@@ -5,7 +5,6 @@ import { moodColors } from "@/app/shared/moodColors";
 import type { LandingEntity } from "../../domain/entities/LandingEntity";
 import { standardMoods } from "@/app/shared/moodType";
 import { landingUseCases } from "../../dependencyInjection";
-import { handleAppError } from "@/cores/utils/errorHandler";
 
 const useLandingPage = () => {
   const { data: session, status } = useSession();
@@ -14,6 +13,7 @@ const useLandingPage = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [startMonth, setStartMonth] = useState<Date>(new Date());
   const [endMonth, setEndMonth] = useState<Date>(new Date());
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
     async function fetchData() {
@@ -27,10 +27,8 @@ const useLandingPage = () => {
           selectedDate: date,
         });
         setData(entity);
-      } catch (error) {
-        handleAppError(
-          error instanceof Error ? error.message : "ไม่สามารถโหลดข้อมูลได้",
-        );
+      } catch (error: any) {
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }

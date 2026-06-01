@@ -3,7 +3,6 @@ import type { DragEndEvent } from "@dnd-kit/core";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { standardMoods } from "@/app/shared/moodType";
-import { handleAppError } from "@/cores/utils/errorHandler";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import type {
   MoodLogEntity,
@@ -31,6 +30,7 @@ export const useInsight = () => {
   const [editMood, setEditMood] = useState<number>();
   const [customCauses, setCustomCauses] = useState<CauseEntity[]>([]);
   const [selectedCauses, setSelectedCauses] = useState<string[]>([]);
+  const [error, seterror] = useState<string>();
 
   const mood = searchParams.get("mood") || "";
   const startDate = searchParams.get("startDate") || "";
@@ -63,12 +63,8 @@ export const useInsight = () => {
           endDate,
         });
         setMoodLogPage(entity);
-      } catch (error) {
-        handleAppError(
-          error instanceof Error
-            ? error.message
-            : "ไม่สามารถโหลดประวัติอารมณ์ได้",
-        );
+      } catch (error: any) {
+        seterror(error.message);
       } finally {
         setIsInitialLoading(false);
         setIsListLoading(false);
@@ -166,7 +162,6 @@ export const useInsight = () => {
       });
     } catch {
       updateMoodLogMoodInPage(logId, previousMoodValue, newMoodValue);
-      handleAppError("การเชื่อมต่อขัดข้อง!");
     }
   };
 
