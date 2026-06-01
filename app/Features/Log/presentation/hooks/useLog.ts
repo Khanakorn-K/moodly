@@ -53,7 +53,9 @@ export const useLog = () => {
   };
 
   const handleDeleteCustomCause = async (id: string, name: string) => {
-    const isConfirmed = confirm(`ต้องการลบ ${name} ?`);
+    const isConfirmed = confirm(
+      `ต้องการลบ ${name} ? \nถ้าลบไปแล้วข้อมูลที่เคยถูกบันทึกด้วย ${name} จะหายทั้งหมด`,
+    );
 
     if (!isConfirmed) return;
 
