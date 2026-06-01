@@ -43,11 +43,11 @@ export async function PATCH(
         where: { id },
         data: { name: nextName },
       }),
-      ...relatedMoodLogs.map((moodLog) =>
+      ...relatedMoodLogs.map((moodLog: any) =>
         prisma.moodLog.update({
           where: { id: moodLog.id },
           data: {
-            causes: moodLog.causes.map((cause) =>
+            causes: moodLog.causes.map((cause: any) =>
               cause === existing.name ? nextName : cause,
             ),
           },
