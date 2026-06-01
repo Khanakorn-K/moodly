@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import { moodColors } from "@/app/shared/moodColors";
-import { convertDateToYYMMDD } from "@/cores/utils/thaiDate";
 import type { LandingEntity } from "../../domain/entities/LandingEntity";
 import { standardMoods } from "@/app/shared/moodType";
 import { landingUseCases } from "../../dependencyInjection";
@@ -24,9 +23,8 @@ const useLandingPage = () => {
       setIsLoading(true);
 
       try {
-        const dateString = convertDateToYYMMDD(date);
         const entity = await landingUseCases.getInsights({
-          selectedDate: dateString,
+          selectedDate: date,
         });
         setData(entity);
       } catch (error) {

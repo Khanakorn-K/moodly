@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { standardMoods } from "@/app/shared/moodType";
 import { handleAppError } from "@/cores/utils/errorHandler";
-import { inspectResponse } from "@/cores/utils/debugResponse";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import type {
   MoodLogEntity,
@@ -59,7 +58,7 @@ export const useInsight = () => {
       }
       try {
         const entity = await insightUseCases.getMoodLogs({
-          mood,
+          mood: mood ? Number(mood) : undefined,
           startDate,
           endDate,
         });

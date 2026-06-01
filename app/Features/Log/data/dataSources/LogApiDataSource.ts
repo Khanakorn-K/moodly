@@ -6,7 +6,6 @@ import { convertDateToLocalISO } from "@/cores/utils/thaiDate";
 
 export const LogApiDataSource = {
   addMoodLog: async (body: AddMoodRequestModel): Promise<void> => {
-    // const createdAt = convertDateToLocalISO(new Date());
     await apiClient.post<apiResponseBase<unknown>>(
       "/mood-logs/create-mood-log",
       {

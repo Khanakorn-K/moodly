@@ -1,6 +1,4 @@
 "use client";
-import { convertDateToLocalISO } from "@/cores/utils/thaiDate";
-
 import { useCallback, useEffect, useState } from "react";
 import { standardMoods } from "@/app/shared/moodType";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
@@ -119,10 +117,10 @@ export const useLog = () => {
         selectedMood,
         selectedCause,
         note,
-        createdAt: convertDateToLocalISO(date),
+        createdAt: date,
       });
       setSubmitted(true);
-    } catch (error) {
+    } catch (error: any) {
       setErrorMessage(
         error instanceof Error ? error.message : "เกิดข้อผิดพลาด",
       );

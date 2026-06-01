@@ -7,11 +7,15 @@ import { MoodLogMapper } from "../mappers/MoodLogMapper";
 
 export const InsightRepositoryImpl: IInsightRepository = {
   getMoodLogs: async (data: {
-    mood?: string;
+    mood?: number;
     startDate?: string;
     endDate?: string;
   }): Promise<MoodLogPageEntity> => {
-    const response = await InsightApiDataSource.getMoodLogs(data);
+    const response = await InsightApiDataSource.getMoodLogs({
+      startDate: data.startDate,
+      endDate: data.endDate,
+      ...(data.mood !== undefined ? { mood: String(data.mood) } : {}),
+    });
     return MoodLogMapper.toPageEntity(response);
   },
 

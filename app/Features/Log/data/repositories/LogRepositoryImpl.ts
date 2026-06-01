@@ -3,10 +3,14 @@ import type { AddMoodRequestModel } from "../models/AddMoodRequestModel";
 import type { CauseEntity } from "@/app/shared/entities/CauseEntity";
 import { LogApiDataSource } from "../dataSources/LogApiDataSource";
 import { CauseMapper } from "@/app/shared/mappers/CauseMapper";
+import { convertDateToLocalISO } from "@/cores/utils/thaiDate";
 
 export const LogRepositoryImpl: ILogRepository = {
   addMoodLog: async (data): Promise<void> => {
-    const body: AddMoodRequestModel = data;
+    const body: AddMoodRequestModel = {
+      ...data,
+      createdAt: convertDateToLocalISO(data.createdAt),
+    };
     await LogApiDataSource.addMoodLog(body);
   },
 

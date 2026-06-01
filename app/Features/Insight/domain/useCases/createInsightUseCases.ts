@@ -4,10 +4,17 @@ import type { IInsightRepository } from "../repositories/IInsightRepository";
 
 export const createInsightUseCases = (repository: IInsightRepository) => ({
   getMoodLogs: async (data: {
-    mood?: string;
+    mood?: number;
     startDate?: string;
     endDate?: string;
   }): Promise<MoodLogPageEntity> => {
+    if (
+      data.mood !== undefined &&
+      (!Number.isInteger(data.mood) || data.mood < 1 || data.mood > 5)
+    ) {
+      throw new Error("รูปแบบอารมณ์ไม่ถูกต้อง");
+    }
+
     return await repository.getMoodLogs(data);
   },
   getCauses: async (): Promise<CauseEntity[]> => {

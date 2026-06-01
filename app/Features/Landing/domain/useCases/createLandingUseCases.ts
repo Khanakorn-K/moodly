@@ -3,8 +3,12 @@ import type { LandingEntity } from "../entities/LandingEntity";
 
 export const createLandingUseCases = (repository: ILandingRepository) => ({
   getInsights: async (data: {
-    selectedDate: string;
+    selectedDate: Date;
   }): Promise<LandingEntity> => {
+    if (Number.isNaN(data.selectedDate.getTime())) {
+      throw new Error("รูปแบบวันที่ไม่ถูกต้อง");
+    }
+
     const entity = await repository.getInsights(data);
 
     return {

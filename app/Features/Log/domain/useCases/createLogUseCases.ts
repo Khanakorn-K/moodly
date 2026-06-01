@@ -29,15 +29,26 @@ export const createLogUseCases = (repository: ILogRepository) => ({
     selectedMood: number | null;
     selectedCause: string | null;
     note: string;
-    createdAt: string;
+    createdAt: Date;
   }) => {
-    if (!data.selectedMood || !data.selectedCause) {
+    if (data.selectedMood === null || !data.selectedCause) {
       throw new Error("กรุณาเลือกอารมณ์และสาเหตุให้ครบถ้วน");
     }
 
     if (!data.createdAt) {
       throw new Error("กรุณาเลือกวันที่");
     }
+
+    const createdAtTimestamp = data.createdAt.getTime();
+
+    if (Number.isNaN(createdAtTimestamp)) {
+      throw new Error("รูปแบบวันที่ไม่ถูกต้อง");
+    }
+
+    if (createdAtTimestamp > Date.now()) {
+      throw new Error("ไม่สามารถเลือกวันที่ที่มากกว่าปัจจุบันได้");
+    }
+
     await repository.addMoodLog({
       selectedMood: data.selectedMood,
       selectedCauses: [data.selectedCause],
