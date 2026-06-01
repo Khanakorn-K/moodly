@@ -8,6 +8,10 @@ export const createLogUseCases = (repository: ILogRepository) => ({
     if (!data.name.trim()) {
       throw new Error("กรุณาระบุชื่อสาเหตุ");
     }
+
+    if (data.name.length > 50) {
+      throw new Error("สาเหตุยาวเกินที่ระบบต้องการ 50 ตัวอักษร");
+    }
     return await repository.addCause(data);
   },
   updateCause: async (data: { id: string; name: string }) => {
@@ -31,13 +35,13 @@ export const createLogUseCases = (repository: ILogRepository) => ({
     note: string;
     createdAt: Date;
   }) => {
-    if (data.selectedMood === null || !data.selectedCause) {
+    if (data.selectedMood === null || !data.selectedCause)
       throw new Error("กรุณาเลือกอารมณ์และสาเหตุให้ครบถ้วน");
-    }
 
-    if (!data.createdAt) {
-      throw new Error("กรุณาเลือกวันที่");
-    }
+    if (data.note.length > 500)
+      throw new Error("บันทึกไม่ควรยาวเกิน 500 ตัวอักษร");
+
+    if (!data.createdAt) throw new Error("กรุณาเลือกวันที่");
 
     const createdAtTimestamp = data.createdAt.getTime();
 

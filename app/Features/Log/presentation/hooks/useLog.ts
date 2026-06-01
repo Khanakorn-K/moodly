@@ -125,14 +125,14 @@ export const useLog = () => {
       });
       setSubmitted(true);
       toastManager.success("บันทึกอารมณ์สำเร็จ");
+      setNote("");
+      setSelectedMood(null);
+      setSelectedCause(null);
     } catch (error: unknown) {
       toastManager.fromError(error);
     } finally {
-      setNote("");
       setSubmitted(false);
       setIsSubmitting(false);
-      setSelectedMood(null);
-      setSelectedCause(null);
     }
   };
 
