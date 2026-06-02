@@ -36,6 +36,7 @@ export default function InsightView() {
     pathname,
     customCauses,
     selectedCauses,
+    isUpdating,
     toggleCause,
   } = useInsight();
 
@@ -228,10 +229,14 @@ export default function InsightView() {
             <Tiptap setText={setEditNote} oldValue={editNote} />
             <Button
               onClick={handleUpdateMoodLog}
-              disabled={!editMood || selectedCauses.length !== 1}
+              disabled={!editMood || selectedCauses.length !== 1 || isUpdating}
               className="h-12 w-full rounded-2xl bg-white font-bold text-black hover:bg-white/90 disabled:bg-white/5 disabled:text-white/20"
             >
-              {editingMoodLog ? `บันทึกการเปลี่ยน` : ""}
+              {editingMoodLog
+                ? `บันทึกการเปลี่ยน`
+                : isUpdating
+                  ? "กำลังบันทึก"
+                  : ""}
             </Button>
           </div>
         </div>

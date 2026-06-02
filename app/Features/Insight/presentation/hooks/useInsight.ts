@@ -22,6 +22,8 @@ export const useInsight = () => {
     null,
   );
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+
   const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingMoodLog, setEditingMoodLog] = useState<MoodLogEntity | null>(
@@ -173,6 +175,7 @@ export const useInsight = () => {
 
   const handleUpdateMoodLog = async () => {
     if (!editingMoodLog || editMood === undefined) return;
+    setIsUpdating(true);
     try {
       await insightUseCases.updateMoodLog(editingMoodLog.id, {
         mood: editMood,
@@ -180,10 +183,14 @@ export const useInsight = () => {
         causes: selectedCauses,
       });
       setIsModalOpen(false);
+      setIsUpdating(false);
       toastManager.success("แก้ไขบันทึกอารมณ์สำเร็จ");
       await fetchMoodLogs();
     } catch (error: unknown) {
       toastManager.fromError(error);
+    } finally {
+      setIsModalOpen(false);
+      setIsUpdating(false);
     }
   };
 
@@ -227,5 +234,6 @@ export const useInsight = () => {
     selectedCauses,
     setSelectedCauses,
     handleDragEnd,
+    isUpdating,
   };
 };
