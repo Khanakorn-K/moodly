@@ -44,6 +44,7 @@ export async function GET(req: NextRequest) {
       },
       select: {
         mood: true,
+        causes: true,
         createdAt: true,
       },
       orderBy: { createdAt: "asc" },

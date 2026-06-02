@@ -12,10 +12,16 @@ export type DailyMoodAverage = {
   date: string;
   averageMood: number;
   totalLogs: number;
+  causeDistribution: DailyCauseDistributionItem[];
 };
 
 export type MoodDistributionItem = {
   mood: number;
+  count: number;
+};
+
+export type DailyCauseDistributionItem = {
+  cause: string;
   count: number;
 };
 
@@ -57,19 +63,34 @@ export function calculateDailyMoodAverages(
   logs: MoodAnalyticsLog[],
   dateRange: string[],
 ): DailyMoodAverage[] {
-  const dailyMoodMap: Record<string, { totalMood: number; totalLogs: number }> =
-    {};
+  const dailyMoodMap: Record<
+    string,
+    {
+      totalMood: number;
+      totalLogs: number;
+      causeCounts: Record<string, number>;
+    }
+  > = {};
 
   logs.forEach((log) => {
     const date = getMoodLogDate(log);
     const mood = Number(log.mood);
 
     if (!dailyMoodMap[date]) {
-      dailyMoodMap[date] = { totalMood: 0, totalLogs: 0 };
+      dailyMoodMap[date] = {
+        totalMood: 0,
+        totalLogs: 0,
+        causeCounts: {},
+      };
     }
 
     dailyMoodMap[date].totalMood += mood;
     dailyMoodMap[date].totalLogs += 1;
+    log.causes?.forEach((cause) => {
+      if (!cause) return;
+      dailyMoodMap[date].causeCounts[cause] =
+        (dailyMoodMap[date].causeCounts[cause] ?? 0) + 1;
+    });
   });
 
   return dateRange.map((date) => {
@@ -80,6 +101,7 @@ export function calculateDailyMoodAverages(
         date,
         averageMood: 0,
         totalLogs: 0,
+        causeDistribution: [],
       };
     }
 
@@ -87,6 +109,9 @@ export function calculateDailyMoodAverages(
       date,
       averageMood: roundOneDecimal(value.totalMood / value.totalLogs),
       totalLogs: value.totalLogs,
+      causeDistribution: Object.entries(value.causeCounts)
+        .map(([cause, count]) => ({ cause, count }))
+        .sort((firstCause, secondCause) => secondCause.count - firstCause.count),
     };
   });
 }

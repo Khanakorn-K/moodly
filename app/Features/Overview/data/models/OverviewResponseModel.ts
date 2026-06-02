@@ -2,6 +2,12 @@ export interface OverviewDailyMoodResponseModel {
   date: string;
   averageMood: number;
   totalLogs: number;
+  causeDistribution: OverviewDailyCauseDistributionResponseModel[];
+}
+
+export interface OverviewDailyCauseDistributionResponseModel {
+  cause: string;
+  count: number;
 }
 
 export interface OverviewMoodDistributionResponseModel {

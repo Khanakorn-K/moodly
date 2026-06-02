@@ -2,6 +2,12 @@ export interface OverviewDailyMoodEntity {
   date: string;
   averageMood: number;
   totalLogs: number;
+  causeDistribution: OverviewDailyCauseDistributionEntity[];
+}
+
+export interface OverviewDailyCauseDistributionEntity {
+  cause: string;
+  count: number;
 }
 
 export interface OverviewMoodDistributionEntity {

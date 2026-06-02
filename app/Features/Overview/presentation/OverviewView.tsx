@@ -94,7 +94,7 @@ const OverviewView = () => {
               วิเคราะห์รายเดือน
             </TabsTrigger>
           </TabsList>
-
+          {/* ภาพรวม */}
           <TabsContent value="overview" className="mt-5 space-y-5">
             <section className="flex gap-1.5 justify-between rounded-lg border border-white/10 bg-white/[0.03] p-4">
               <div className="flex flex-col gap-1">
@@ -134,7 +134,7 @@ const OverviewView = () => {
               error={error}
             />
           </TabsContent>
-
+          {/* วิเคราะห์รายเดือน */}
           <TabsContent value="analytics" className="mt-5 space-y-5">
             <section className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-4 md:grid-cols-[1fr_auto] md:items-end">
               <div className="grid gap-1">
