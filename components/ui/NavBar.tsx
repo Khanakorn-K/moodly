@@ -11,14 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Home,
-  PenLine,
-  BarChart2,
-  LogOut,
-  User,
-  GitGraph,
-} from "lucide-react";
+import { Home, PenLine, BarChart2, LogOut, User, GitGraph } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { href: "/", icon: Home, label: "หน้าแรก" },
@@ -38,7 +32,7 @@ export default function Navbar() {
       <div className="hidden lg:flex items-center justify-between gap-6 px-8 py-3 bg-[#0E0E18]/90 backdrop-blur-xl border-b border-white/5">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl">🌙</span>
+          <Image src={"/Logo.png"} width={30} height={30} alt="Moodly" />
           <span className="text-white font-bold text-lg tracking-tight">
             Moodly
           </span>
