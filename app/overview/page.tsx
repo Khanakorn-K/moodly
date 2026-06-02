@@ -1,5 +1,14 @@
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
 import OverviewIndex from "../Features/Overview/presentation/OverviewView";
+
+export const metadata: Metadata = {
+  title: "ภาพรวมอารมณ์",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const Page = () => {
   return (

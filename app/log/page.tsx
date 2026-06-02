@@ -1,5 +1,14 @@
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
 import LogPageView from "../Features/Log/presentation/LogPageView";
+
+export const metadata: Metadata = {
+  title: "บันทึกอารมณ์",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const page = () => {
   return (

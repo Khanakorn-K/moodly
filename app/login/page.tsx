@@ -1,5 +1,14 @@
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
 import { LoginView } from "./components/Login/loginView";
+
+export const metadata: Metadata = {
+  title: "เข้าสู่ระบบ",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const Page = () => {
   return (

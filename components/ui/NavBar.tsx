@@ -25,6 +25,7 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  if (!session) return;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 lg:top-0 lg:bottom-auto">

@@ -1,5 +1,14 @@
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
 import InsightView from "../Features/Insight/presentation/InsightView";
+
+export const metadata: Metadata = {
+  title: "ข้อมูลเชิงลึก",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const page = () => {
   return (
