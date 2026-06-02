@@ -10,6 +10,7 @@ import { moodColors } from "@/app/shared/moodColors";
 import { useInsight } from "./hooks/useInsight";
 import MoodInsightList from "./components/MoodInsightList";
 import MoodLogBoard from "./components/MoodLogBoard";
+import Tiptap from "@/components/ui/Tiptap";
 
 export default function InsightView() {
   const {
@@ -218,12 +219,13 @@ export default function InsightView() {
                 );
               })}
             </div>
-            <textarea
+            {/* <textarea
               className="h-32 w-full resize-none rounded-[1.5rem] border border-white/5 bg-black/40 p-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-2 focus:ring-white/10 sm:h-36 sm:rounded-[2rem] sm:p-5"
               value={editNote}
               onChange={(e) => setEditNote(e.target.value)}
               placeholder="What's on your mind"
-            />
+            /> */}
+            <Tiptap setText={setEditNote} oldValue={editNote} />
             <Button
               onClick={handleUpdateMoodLog}
               disabled={!editMood || selectedCauses.length !== 1}

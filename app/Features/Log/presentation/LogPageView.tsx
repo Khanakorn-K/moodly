@@ -25,6 +25,7 @@ import {
 import { displayGetCurrentThaiDate } from "@/cores/utils/thaiDate";
 import { useLog } from "./hooks/useLog";
 import { Calendar } from "@/components/ui/calendar";
+import Tiptap from "@/components/ui/Tiptap";
 
 export default function LogPageView() {
   const {
@@ -69,7 +70,6 @@ export default function LogPageView() {
 
         <header className="relative z-10 mb-8 flex items-start justify-between sm:mb-10">
           <div className="space-y-2">
-
             <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-5xl">
               วันนี้เป็นยังไงบ้าง?
             </h1>
@@ -298,12 +298,13 @@ export default function LogPageView() {
               </p>
             </div>
 
-            <textarea
+            {/* <textarea
               placeholder="วันนี้เป็นยังไงบ้าง เขียนระบายไว้ตรงนี้ได้นะ..."
               value={note}
               onChange={(e) => setNote(e.target.value)}
               className="min-h-[220px] w-full resize-none rounded-[1.75rem] border border-white/[0.06] bg-white/[0.03] px-5 py-5 text-base text-white outline-none transition-all placeholder-white/10 focus:border-white/20 focus:bg-white/[0.05] sm:rounded-[2.5rem] sm:px-8 sm:py-6 sm:text-lg"
-            />
+            /> */}
+            <Tiptap setText={setNote} />
           </section>
 
           <Button

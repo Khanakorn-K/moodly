@@ -39,7 +39,6 @@ const MoodLogBoard = ({
       sensors={sensors}
       collisionDetection={closestCorners}
       onDragEnd={handleDragEnd}
-      
     >
       <div className="flex h-full gap-4 overflow-x-auto px-1 pb-10 scrollbar-hide sm:gap-6 sm:px-2">
         {standardMoods.map((moodOption) => {
@@ -125,11 +124,7 @@ interface DraggableCardProps {
   emoji: string;
 }
 
-const DraggableCard = ({
-  moodLog,
-  themeColor,
-  emoji,
-}: DraggableCardProps) => {
+const DraggableCard = ({ moodLog, themeColor, emoji }: DraggableCardProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: String(moodLog.id),
@@ -169,8 +164,11 @@ const DraggableCard = ({
                 {convertDateToThaiDateFormat(moodLog.createdAt)}
               </span>
             </div>
-            <p className="text-[11px] text-white/60 leading-relaxed line-clamp-3 italic">
-              {moodLog.note || ""}
+            <p
+              className="text-[11px] text-white/60 leading-relaxed line-clamp-3 italic"
+              dangerouslySetInnerHTML={{ __html: moodLog.note }}
+            >
+              {/* {moodLog.note || ""} */}
             </p>
           </div>
         </div>

@@ -49,8 +49,7 @@ const MoodInsightList = ({
         moodLogPage.items.map((moodLog) => {
           const moodConfig =
             standardMoods.find(
-              (moodOption) =>
-                String(moodOption.value) === String(moodLog.mood),
+              (moodOption) => String(moodOption.value) === String(moodLog.mood),
             ) || standardMoods[2];
           const themeColor = moodColors[Number(moodConfig.value)] || "#D1D5DB";
 
@@ -125,8 +124,11 @@ const MoodInsightList = ({
                         size={12}
                         className="text-white/20 mt-0.5"
                       />
-                      <p className="min-w-0 break-words text-[11px] leading-relaxed text-white/60 italic">
-                        {moodLog.note}
+                      <p
+                        className="min-w-0 break-words text-[11px] leading-relaxed text-white/60 italic"
+                        dangerouslySetInnerHTML={{ __html: moodLog.note }}
+                      >
+                        {/* {moodLog.note} */}
                       </p>
                     </div>
                   )}
