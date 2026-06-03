@@ -56,7 +56,7 @@ export default function PublicLandingPageView() {
           className="mb-6 h-20 w-auto"
         />
 
-        <p className="mb-4 rounded-full border border-[#FFD166]/20 bg-[#FFD166]/10 px-4 py-2 text-sm font-medium text-[#FFD166]">
+        <p className="mb-4 rounded-full border border-moodly-primary/25 bg-moodly-primary/10 px-4 py-2 text-sm font-medium text-moodly-primary-soft">
           สมุดบันทึกอารมณ์สำหรับทุกวัน
         </p>
 
@@ -72,7 +72,7 @@ export default function PublicLandingPageView() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button
             asChild
-            className="h-12 rounded-xl bg-[#FFD166] px-7 font-bold text-[#0A0A0F] hover:bg-[#FFD166]/90"
+            className="h-12 rounded-xl bg-moodly-primary px-7 font-bold text-[#0A0A0F] hover:bg-moodly-primary-soft"
           >
             <Link href="/login">เริ่มบันทึกอารมณ์</Link>
           </Button>
@@ -108,7 +108,7 @@ export default function PublicLandingPageView() {
               key={title}
               className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
             >
-              <Icon className="h-6 w-6 text-[#FFD166]" aria-hidden="true" />
+              <Icon className="h-6 w-6 text-moodly-calm" aria-hidden="true" />
               <h3 className="mt-5 text-lg font-bold">{title}</h3>
               <p className="mt-3 text-sm leading-7 text-white/55">
                 {description}

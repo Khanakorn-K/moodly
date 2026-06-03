@@ -72,7 +72,7 @@ export default function InsightView() {
         <div className="grid grid-cols-1 gap-5 rounded-[1.75rem] border border-white/5 bg-[#16161E]/50 p-4 shadow-2xl backdrop-blur-md sm:rounded-[2.5rem] sm:p-6 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-4 space-y-3">
             <div className="flex items-center gap-2 text-[10px] text-white/20 uppercase font-black tracking-widest ml-1">
-              <Calendar size={12} className="text-[#FFD166]" /> เลือกวัน
+              <Calendar size={12} className="text-moodly-calm" /> เลือกวัน
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <Input
@@ -81,7 +81,7 @@ export default function InsightView() {
                 onChange={(e) =>
                   handleFilterChange({ startDate: e.target.value })
                 }
-                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-[#FFD166]/30 [color-scheme:dark]"
+                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-moodly-primary/30 [color-scheme:dark]"
               />
               <Input
                 type="date"
@@ -89,21 +89,21 @@ export default function InsightView() {
                 onChange={(e) =>
                   handleFilterChange({ endDate: e.target.value })
                 }
-                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-[#FFD166]/30 [color-scheme:dark]"
+                className="bg-black/40 border-white/5 text-white text-xs font-bold rounded-2xl h-11 focus:ring-1 focus:ring-moodly-primary/30 [color-scheme:dark]"
               />
             </div>
           </div>
 
           <div className="space-y-3 lg:col-span-8">
             <div className="flex items-center gap-2 text-[10px] text-white/20 uppercase font-black tracking-widest ml-1">
-              <Filter size={12} className="text-[#FFD166]" /> Mood Filter
+              <Filter size={12} className="text-moodly-calm" /> Mood Filter
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
                 onClick={() => handleFilterChange({ mood: null })}
                 className={`h-10 rounded-2xl border px-4 py-2 text-[11px] font-bold transition-all sm:h-11 sm:px-6 ${
                   !mood
-                    ? "bg-[#FFD166] text-black border-[#FFD166] shadow-lg shadow-[#FFD166]/10"
+                    ? "border-moodly-primary bg-moodly-primary text-black shadow-lg shadow-moodly-primary/10"
                     : "bg-black/20 border-white/5 text-white/40 hover:border-white/20 hover:text-white"
                 }`}
               >

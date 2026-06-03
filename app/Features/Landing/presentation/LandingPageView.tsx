@@ -104,7 +104,7 @@ function HeaderSection({
         )}
       </div>
       <Link href="/log" className="w-full md:w-auto">
-        <Button className="w-full md:px-8 bg-[#FFD166] hover:bg-[#FFD166]/80 text-[#0A0A0F] font-bold rounded-2xl h-12 transition-all shadow-lg">
+        <Button className="w-full md:px-8 bg-moodly-primary hover:bg-moodly-primary-soft text-[#0A0A0F] font-bold rounded-2xl h-12 transition-all shadow-lg">
           <PenLine size={18} className="mr-2" /> บันทึกตอนนี้
         </Button>
       </Link>
@@ -121,7 +121,7 @@ function TotalLogsCard({
 }) {
   return (
     <Card className="relative overflow-hidden rounded-3xl border-white/10 bg-gradient-to-br from-[#1E1E2E] to-[#2A2A3D] shadow-2xl md:col-span-3">
-      <div className="absolute top-0 right-0 w-48 h-48 bg-[#FFD166]/5 rounded-full blur-3xl -mr-16 -mt-16" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-moodly-calm/10 rounded-full blur-3xl -mr-16 -mt-16" />
       <CardContent className="relative z-10 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <div className="space-y-1">
           <p className="text-white/60 text-sm font-medium">
@@ -138,7 +138,7 @@ function TotalLogsCard({
         </div>
         <Badge
           variant="outline"
-          className="border-[#FFD166]/20 text-[#FFD166] bg-[#FFD166]/5 px-4 py-2 rounded-xl"
+          className="border-moodly-primary/25 bg-moodly-primary/10 text-moodly-primary-soft px-4 py-2 rounded-xl"
         >
           Keep going! ⚡️
         </Badge>
@@ -186,7 +186,7 @@ function MoodOverviewCard({
           )}
         </CardTitle>
         <Link href="/insight">
-          <ChevronRight size={16} className="text-[#FFD166]" />
+          <ChevronRight size={16} className="text-moodly-calm" />
         </Link>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col justify-between px-4 pb-5 sm:px-6">

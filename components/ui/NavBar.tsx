@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,18 +44,16 @@ export default function Navbar() {
             const Icon = item.icon;
             const isActive = pathname === item.href;
             return (
-              <Link key={item.href} href={item.href}>
-                <Button
-                  variant="ghost"
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-150 ${
-                    isActive
-                      ? "bg-[#FFD166]/10 text-[#FFD166] border border-[#FFD166]/20"
-                      : "text-white/40 hover:text-white hover:bg-white/5"
-                  }`}
-                >
-                  <Icon size={15} />
-                  {item.label}
-                </Button>
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`moodly-nav-link ${
+                  isActive ? "moodly-nav-link-active" : ""
+                }`}
+              >
+                <Icon size={15} />
+                {item.label}
               </Link>
             );
           })}
@@ -68,7 +65,7 @@ export default function Navbar() {
             <button className="flex max-w-48 items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-white/5 transition-all duration-150 outline-none cursor-pointer">
               <Avatar className="w-8 h-8">
                 <AvatarImage src={session?.user?.image ?? ""} />
-                <AvatarFallback className="bg-[#FFD166]/20 text-[#FFD166] text-xs font-semibold">
+                <AvatarFallback className="bg-moodly-primary/20 text-moodly-primary-soft text-xs font-semibold">
                   {session?.user?.name?.[0] ?? "M"}
                 </AvatarFallback>
               </Avatar>
@@ -136,18 +133,18 @@ export default function Navbar() {
           return (
             <Link key={item.href} href={item.href} className="min-w-0">
               <div
-                className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl border px-1.5 py-2 transition-all duration-150 ${
-                  isActive
-                    ? "bg-[#FFD166]/10 border-[#FFD166]/20"
-                    : "border-transparent"
+                className={`moodly-mobile-nav-link ${
+                  isActive ? "moodly-mobile-nav-link-active" : ""
                 }`}
               >
                 <Icon
                   size={20}
-                  className={isActive ? "text-[#FFD166]" : "text-white/30"}
+                  className={
+                    isActive ? "text-moodly-primary-soft" : "text-white/30"
+                  }
                 />
                 <span
-                  className={`max-w-full truncate text-[9px] font-medium sm:text-[10px] ${isActive ? "text-[#FFD166]" : "text-white/30"}`}
+                  className={`max-w-full truncate text-[9px] font-medium sm:text-[10px] ${isActive ? "text-moodly-primary-soft" : "text-white/30"}`}
                 >
                   {item.label}
                 </span>

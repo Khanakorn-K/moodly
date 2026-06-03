@@ -56,7 +56,7 @@ const MoodInsightList = ({
           return (
             <Card
               key={moodLog.id}
-              className="group bg-[#16161E] border-white/5 overflow-hidden hover:border-[#FFD166]/20 transition-all duration-300 rounded-2xl"
+              className="group bg-[#16161E] border-white/5 overflow-hidden hover:border-moodly-primary/25 transition-all duration-300 rounded-2xl"
             >
               <CardContent className="flex gap-3 p-4 sm:gap-4">
                 <div

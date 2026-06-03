@@ -16,11 +16,11 @@ export default function SectionLogin() {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0A0A0F] px-3 py-8 pb-28 sm:p-5 lg:pb-5">
       {/* Background glow */}
-      <div className="pointer-events-none absolute top-1/3 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FFD166]/5 blur-[100px] sm:h-[400px] sm:w-[400px] sm:blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/3 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-moodly-primary/10 blur-[100px] sm:h-[400px] sm:w-[400px] sm:blur-[120px]" />
 
       <Card className="w-full max-w-[380px] overflow-hidden rounded-[28px] border-white/5 bg-[#12121A] shadow-2xl">
         {/* Top accent bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-[#FFD166] via-[#FF6B6B] to-[#FF6B6B]/0" />
+        <div className="h-1 w-full bg-gradient-to-r from-moodly-primary via-moodly-calm to-moodly-positive" />
 
         <CardHeader className="px-5 pt-8 pb-4 text-center sm:px-8">
           <div className="mb-3 text-5xl">🌙</div>

@@ -5,6 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+    --moodly-primary: #9fa1ff;
+    --moodly-primary-soft: #b5baff;
+    --moodly-calm: #aee2ff;
+    --moodly-positive: #d9f9df;
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
@@ -75,6 +79,10 @@
 
 @theme inline {
     --font-sans: var(--font-sans);
+    --color-moodly-primary: var(--moodly-primary);
+    --color-moodly-primary-soft: var(--moodly-primary-soft);
+    --color-moodly-calm: var(--moodly-calm);
+    --color-moodly-positive: var(--moodly-positive);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -126,4 +134,68 @@
   html {
     @apply font-sans;
     }
+}
+
+@layer components {
+  .moodly-nav-link {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-xl);
+    color: rgb(255 255 255 / 40%);
+    display: inline-flex;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition:
+      background-color 150ms,
+      border-color 150ms,
+      color 150ms;
+  }
+
+  .moodly-nav-link:hover {
+    background-color: rgb(255 255 255 / 5%);
+    color: rgb(255 255 255);
+  }
+
+  .moodly-nav-link-active,
+  .moodly-nav-link-active:hover {
+    background-color: color-mix(in oklab, var(--moodly-primary) 10%, transparent);
+    border-color: color-mix(in oklab, var(--moodly-primary) 25%, transparent);
+    color: var(--moodly-primary-soft) !important;
+  }
+
+  .moodly-nav-link-active:hover {
+    background-color: color-mix(in oklab, var(--moodly-primary) 15%, transparent);
+  }
+
+  .moodly-nav-link-active svg {
+    color: var(--moodly-primary-soft) !important;
+  }
+
+  .moodly-mobile-nav-link {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+    justify-content: center;
+    min-height: calc(var(--spacing) * 14);
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 1.5);
+    transition:
+      background-color 150ms,
+      border-color 150ms,
+      color 150ms;
+  }
+
+  .moodly-mobile-nav-link-active {
+    background-color: color-mix(in oklab, var(--moodly-primary) 10%, transparent);
+    border-color: color-mix(in oklab, var(--moodly-primary) 25%, transparent);
+  }
+
+  .moodly-mobile-nav-link-active svg,
+  .moodly-mobile-nav-link-active span {
+    color: var(--moodly-primary-soft) !important;
+  }
 }
