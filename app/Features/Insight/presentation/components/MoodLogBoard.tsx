@@ -4,11 +4,14 @@ import {
   useDroppable,
   closestCorners,
   KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
+  pointerWithin,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import type { DragEndEvent } from "@dnd-kit/core";
+import type { CollisionDetection, DragEndEvent } from "@dnd-kit/core";
+import type { CSSProperties } from "react";
 import { MoreHorizontal, MessageSquare } from "lucide-react";
 import { MoodType, standardMoods } from "@/app/shared/moodType";
 import { moodColors } from "@/app/shared/moodColors";
@@ -24,23 +27,36 @@ interface MoodLogBoardProps {
   handleDragEnd: (event: DragEndEvent) => void;
 }
 
+function mobileFriendlyCollisionDetection(
+  args: Parameters<CollisionDetection>[0],
+) {
+  const pointerCollisions = pointerWithin(args);
+
+  return pointerCollisions.length > 0
+    ? pointerCollisions
+    : closestCorners(args);
+}
+
 const MoodLogBoard = ({
   moodLogPage,
   isListLoading,
   handleDragEnd,
 }: MoodLogBoardProps) => {
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 150, tolerance: 8 },
+    }),
     useSensor(KeyboardSensor),
   );
 
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCorners}
+      collisionDetection={mobileFriendlyCollisionDetection}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex h-full gap-4 overflow-x-auto px-1 pb-10 scrollbar-hide sm:gap-6 sm:px-2">
+      <div className="flex h-full touch-pan-x gap-4 overflow-x-auto px-1 pb-10 scrollbar-hide sm:gap-6 sm:px-2">
         {standardMoods.map((moodOption) => {
           const moodLogs =
             moodLogPage?.items.filter(
@@ -131,12 +147,15 @@ const DraggableCard = ({ moodLog, themeColor, emoji }: DraggableCardProps) => {
       data: { moodLog },
     });
 
-  const style = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        zIndex: isDragging ? 50 : 1,
-      }
-    : undefined;
+  const style: CSSProperties = {
+    touchAction: "none",
+    ...(transform
+      ? {
+          transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+          zIndex: isDragging ? 50 : 1,
+        }
+      : {}),
+  };
 
   return (
     <div
@@ -144,7 +163,7 @@ const DraggableCard = ({ moodLog, themeColor, emoji }: DraggableCardProps) => {
       style={style}
       {...listeners}
       {...attributes}
-      className={`group relative overflow-hidden rounded-[1.5rem] border border-white/[0.05] bg-[#16161E] p-4 shadow-xl transition-all sm:p-5 ${
+      className={`group relative select-none overflow-hidden rounded-[1.5rem] border border-white/[0.05] bg-[#16161E] p-4 shadow-xl transition-all sm:p-5 ${
         isDragging
           ? "opacity-30 cursor-grabbing scale-95"
           : "hover:border-white/20 cursor-grab active:cursor-grabbing"

@@ -161,8 +161,6 @@ export const useInsight = () => {
     if (!over || active.id === over.id) return;
     const logId = String(active.id);
     const newMoodValue = Number(over.id);
-    console.log("active", active);
-    console.log("over", over);
 
     const originalLog = moodLogPage?.items.find(
       (item) => String(item.id) === logId,
@@ -196,9 +194,10 @@ export const useInsight = () => {
         note: editNote,
         causes: selectedCauses,
       });
+
+      toastManager.success("แก้ไขบันทึกอารมณ์สำเร็จ");
       setIsModalOpen(false);
       setIsUpdating(false);
-      toastManager.success("แก้ไขบันทึกอารมณ์สำเร็จ");
       await fetchMoodLogs();
     } catch (error: unknown) {
       toastManager.fromError(error);
