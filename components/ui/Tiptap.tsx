@@ -31,7 +31,7 @@ import {
   Underline,
   Undo2,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { cn } from "@/cores/lib/utils";
 
 type TiptapProps = {
@@ -303,6 +303,19 @@ const Tiptap = ({ setText, oldValue }: TiptapProps) => {
       setText(editor.getHTML());
     },
   });
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const nextContent = oldValue ?? "";
+    const currentContent = editor.getHTML();
+    const normalizedCurrentContent =
+      currentContent === "<p></p>" ? "" : currentContent;
+
+    if (normalizedCurrentContent === nextContent) return;
+
+    editor.commands.setContent(nextContent, { emitUpdate: false });
+  }, [editor, oldValue]);
 
   return (
     <div

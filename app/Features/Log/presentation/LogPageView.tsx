@@ -304,7 +304,7 @@ export default function LogPageView() {
               onChange={(e) => setNote(e.target.value)}
               className="min-h-[220px] w-full resize-none rounded-[1.75rem] border border-white/[0.06] bg-white/[0.03] px-5 py-5 text-base text-white outline-none transition-all placeholder-white/10 focus:border-white/20 focus:bg-white/[0.05] sm:rounded-[2.5rem] sm:px-8 sm:py-6 sm:text-lg"
             /> */}
-            <Tiptap setText={setNote} />
+            <Tiptap setText={setNote} oldValue={note} />
           </section>
 
           <Button
