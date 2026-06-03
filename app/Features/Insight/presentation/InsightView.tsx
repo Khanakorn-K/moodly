@@ -1,16 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Calendar, X, Filter, RotateCcw } from "lucide-react";
+import { Calendar, Filter, RotateCcw } from "lucide-react";
 import { standardMoods } from "@/app/shared/moodType";
-import { createCauseOptions } from "@/app/shared/causes";
 import { Input } from "@/components/ui/input";
 import { moodColors } from "@/app/shared/moodColors";
 
 import { useInsight } from "./hooks/useInsight";
 import MoodInsightList from "./components/MoodInsightList";
 import MoodLogBoard from "./components/MoodLogBoard";
-import Tiptap from "@/components/ui/Tiptap";
+import MoodLogDetailSidebar from "./components/MoodLogDetailSidebar";
 
 export default function InsightView() {
   const {
@@ -39,8 +38,6 @@ export default function InsightView() {
     isUpdating,
     toggleCause,
   } = useInsight();
-
-  const allCauses = createCauseOptions(customCauses);
 
   if (isInitialLoading) {
     return (
@@ -147,100 +144,35 @@ export default function InsightView() {
               handleDragEnd={handleDragEnd}
               moodLogPage={moodLogPage}
               isListLoading={isListLoading}
+              openEditMoodLogModal={openEditMoodLogModal}
+              selectedMoodLogId={isModalOpen ? editingMoodLog?.id : undefined}
             />
           ) : (
             <MoodInsightList
               moodLogPage={moodLogPage}
               isListLoading={isListLoading}
               openEditMoodLogModal={openEditMoodLogModal}
-              handleDeleteMoodLog={handleDeleteMoodLog}
+              isDetailOpen={isModalOpen}
+              editingMoodLog={editingMoodLog}
             />
           )}
         </div>
       </div>
-
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 px-3 py-4 backdrop-blur-xl sm:px-4">
-          <div className="max-h-[calc(100vh-2rem)] w-full max-w-md space-y-5 overflow-y-auto rounded-[1.75rem] border border-white/10 bg-[#16161E] p-5 shadow-[0_0_100px_rgba(0,0,0,0.5)] sm:space-y-6 sm:rounded-[3rem] sm:p-8">
-            <div className="flex justify-between items-center">
-              <div className="space-y-1">
-                <h3 className="text-xl font-black text-white uppercase tracking-tight">
-                  {editingMoodLog ? "ปรับปรุง" : ""}
-                </h3>
-                <p className="text-[10px] text-white/20 font-bold uppercase tracking-widest">
-                  ปรับปรุงสถานะ
-                </p>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-white transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="grid grid-cols-5 gap-2 sm:gap-3">
-              {standardMoods.map((moodOption) => {
-                const isSelected = editMood === moodOption.value;
-                const mColor = moodColors[moodOption.value as number];
-                return (
-                  <button
-                    key={moodOption.value}
-                    onClick={() => setEditMood(moodOption.value)}
-                    style={
-                      isSelected
-                        ? { backgroundColor: mColor, color: "#000" }
-                        : {}
-                    }
-                    className={`flex aspect-square items-center justify-center rounded-2xl text-base transition-all transform active:scale-95 sm:text-lg ${
-                      !isSelected
-                        ? "bg-white/5 text-white/20 hover:bg-white/10"
-                        : "font-black shadow-xl scale-110"
-                    }`}
-                  >
-                    {moodOption.emoji}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="flex max-h-48 flex-wrap gap-2 overflow-y-auto pr-2 scrollbar-hide">
-              {allCauses.map((c, index) => {
-                const isActive = selectedCauses.includes(c.name);
-
-                return (
-                  <Button
-                    key={index}
-                    onClick={() => {
-                      toggleCause(c.name);
-                    }}
-                    className={`px-4 py-2 h-auto rounded-xl border text-[10px] font-bold uppercase tracking-wider transition-all duration-300
-        ${isActive ? "bg-white text-black border-white shadow-xl" : "border-white/5 text-white/30 bg-white/5 hover:border-white/20 hover:text-white"}`}
-                  >
-                    {c.name}
-                  </Button>
-                );
-              })}
-            </div>
-            {/* <textarea
-              className="h-32 w-full resize-none rounded-[1.5rem] border border-white/5 bg-black/40 p-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:ring-2 focus:ring-white/10 sm:h-36 sm:rounded-[2rem] sm:p-5"
-              value={editNote}
-              onChange={(e) => setEditNote(e.target.value)}
-              placeholder="What's on your mind"
-            /> */}
-            <Tiptap setText={setEditNote} oldValue={editNote} />
-            <Button
-              onClick={handleUpdateMoodLog}
-              disabled={!editMood || selectedCauses.length !== 1 || isUpdating}
-              className="h-12 w-full rounded-2xl bg-white font-bold text-black hover:bg-white/90 disabled:bg-white/5 disabled:text-white/20"
-            >
-              {editingMoodLog
-                ? `บันทึกการเปลี่ยน`
-                : isUpdating
-                  ? "กำลังบันทึก"
-                  : ""}
-            </Button>
-          </div>
-        </div>
-      )}
+      <MoodLogDetailSidebar
+        customCauses={customCauses}
+        isOpen={isModalOpen}
+        setIsDetailOpen={setIsModalOpen}
+        moodLog={editingMoodLog}
+        editNote={editNote}
+        setEditNote={setEditNote}
+        editMood={editMood}
+        setEditMood={setEditMood}
+        selectedCauses={selectedCauses}
+        toggleCause={toggleCause}
+        handleUpdateMoodLog={handleUpdateMoodLog}
+        handleDeleteMoodLog={handleDeleteMoodLog}
+        isUpdating={isUpdating}
+      />
     </div>
   );
 }

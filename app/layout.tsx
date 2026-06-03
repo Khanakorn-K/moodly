@@ -72,7 +72,7 @@ export default function RootLayout({
     <html lang="th">
       <meta
         name="google-site-verification"
-        content="TcywSLjr0baKqRMX6CwZ0gMBsHeIUfnXTQmEFrkqN8g"
+        content="BuAl9-qsrGYBwazYThurRCj1RZtIBOxUWwlcZiOdIL8"
       />
       <body
         className={`${outfit.variable} ${kanit.variable} ${kanit.className}  antialiased`}

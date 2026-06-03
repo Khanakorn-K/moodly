@@ -1,7 +1,8 @@
+import type { KeyboardEvent } from "react";
+import { ChevronRight, Filter, MessageSquare } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { DynamicSkeleton } from "@/components/ui/DynamicSkeleton";
 import { Badge } from "@/components/ui/badge";
-import { Edit2, Filter, MessageSquare, Trash2 } from "lucide-react";
 import { moodColors } from "@/app/shared/moodColors";
 import { standardMoods } from "@/app/shared/moodType";
 import { convertDateToThaiDateFormat } from "@/cores/utils/thaiDate";
@@ -13,16 +14,39 @@ import type {
 interface MoodInsightListProps {
   isListLoading: boolean;
   moodLogPage: MoodLogPageEntity | null;
+  isDetailOpen: boolean;
+  editingMoodLog: MoodLogEntity | null;
   openEditMoodLogModal: (moodLog: MoodLogEntity) => void;
-  handleDeleteMoodLog: (id: string) => void;
 }
 
-const MoodInsightList = ({
+function getMoodConfig(mood: number) {
+  return (
+    standardMoods.find(
+      (moodOption) => String(moodOption.value) === String(mood),
+    ) || standardMoods[2]
+  );
+}
+
+function MoodInsightList({
   isListLoading,
   moodLogPage,
+  isDetailOpen,
+  editingMoodLog,
   openEditMoodLogModal,
-  handleDeleteMoodLog,
-}: MoodInsightListProps) => {
+}: MoodInsightListProps) {
+  function handleOpenDetail(moodLog: MoodLogEntity) {
+    openEditMoodLogModal(moodLog);
+  }
+
+  function handleCardKeyDown(
+    event: KeyboardEvent<HTMLDivElement>,
+    moodLog: MoodLogEntity,
+  ) {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    handleOpenDetail(moodLog);
+  }
+
   return (
     <div className="space-y-3">
       {isListLoading ? (
@@ -47,16 +71,22 @@ const MoodInsightList = ({
         </div>
       ) : moodLogPage?.items && moodLogPage.items.length > 0 ? (
         moodLogPage.items.map((moodLog) => {
-          const moodConfig =
-            standardMoods.find(
-              (moodOption) => String(moodOption.value) === String(moodLog.mood),
-            ) || standardMoods[2];
+          const moodConfig = getMoodConfig(moodLog.mood);
           const themeColor = moodColors[Number(moodConfig.value)] || "#D1D5DB";
+          const isSelected = isDetailOpen && editingMoodLog?.id === moodLog.id;
 
           return (
             <Card
               key={moodLog.id}
-              className="group bg-[#16161E] border-white/5 overflow-hidden hover:border-moodly-primary/25 transition-all duration-300 rounded-2xl"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleOpenDetail(moodLog)}
+              onKeyDown={(event) => handleCardKeyDown(event, moodLog)}
+              className={`group cursor-pointer bg-[#16161E] border-white/5 overflow-hidden transition-all duration-300 rounded-2xl outline-none hover:border-moodly-primary/25 focus-visible:border-moodly-primary/50 focus-visible:ring-2 focus-visible:ring-moodly-primary/20 ${
+                isSelected
+                  ? "border-moodly-primary/40 ring-2 ring-moodly-primary/15"
+                  : ""
+              }`}
             >
               <CardContent className="flex gap-3 p-4 sm:gap-4">
                 <div
@@ -75,7 +105,7 @@ const MoodInsightList = ({
                 </div>
 
                 <div className="min-w-0 flex-1 space-y-2">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <h5 className="flex min-w-0 flex-wrap items-center gap-2 text-sm font-bold text-white">
                         {moodConfig.label}
@@ -87,20 +117,10 @@ const MoodInsightList = ({
                         {convertDateToThaiDateFormat(moodLog.createdAt)}
                       </p>
                     </div>
-                    <div className="flex gap-2 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
-                      <button
-                        onClick={() => openEditMoodLogModal(moodLog)}
-                        className="p-1.5 text-white/20 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                      >
-                        <Edit2 size={14} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteMoodLog(moodLog.id)}
-                        className="p-1.5 text-white/20 hover:text-[#EF476F] hover:bg-[#EF476F]/10 rounded-lg transition-colors"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
+                    <ChevronRight
+                      size={16}
+                      className="mt-1 shrink-0 text-white/20 transition-colors group-hover:text-white/60"
+                    />
                   </div>
 
                   {moodLog.causes && moodLog.causes.length > 0 && (
@@ -124,12 +144,10 @@ const MoodInsightList = ({
                         size={12}
                         className="text-white/20 mt-0.5"
                       />
-                      <p
+                      <div
                         className="min-w-0 break-words text-[11px] leading-relaxed text-white/60 italic"
                         dangerouslySetInnerHTML={{ __html: moodLog.note }}
-                      >
-                        {/* {moodLog.note} */}
-                      </p>
+                      />
                     </div>
                   )}
                 </div>
@@ -149,6 +167,6 @@ const MoodInsightList = ({
       )}
     </div>
   );
-};
+}
 
 export default MoodInsightList;

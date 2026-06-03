@@ -31,7 +31,9 @@ export const createInsightUseCases = (repository: IInsightRepository) => ({
     if (!id.trim()) {
       throw new Error("ไม่พบบันทึกอารมณ์ที่ต้องการแก้ไข");
     }
-
+    if (data.note.length > 500) {
+      throw new Error("ไม่สามารถอัปเดทให้มีมากกว่า 500 ตัวอักษรได้");
+    }
     if (!Number.isInteger(data.mood) || data.mood < 1 || data.mood > 5) {
       throw new Error("กรุณาเลือกอารมณ์ให้ถูกต้อง");
     }

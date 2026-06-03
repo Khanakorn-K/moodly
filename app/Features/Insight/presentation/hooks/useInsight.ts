@@ -103,17 +103,23 @@ export const useInsight = () => {
     fetchMoodLogs(shouldShowInitialLoader);
   }, [fetchMoodLogs, status]);
 
-  const handleDeleteMoodLog = async (id: string) => {
-    if (!confirm("ต้องการลบบันทึกนี้ใช่หรือไม่?")) return;
+  async function handleDeleteMoodLog(id: string) {
+    if (!confirm("ต้องการลบบันทึกนี้ใช่หรือไม่?")) return false;
     try {
       await insightUseCases.deleteMoodLog(id);
       toastManager.success("ลบบันทึกอารมณ์สำเร็จ");
       handleDeleteLocalMoodlog(id);
+      if (editingMoodLog?.id === id) {
+        setIsModalOpen(false);
+        setEditingMoodLog(null);
+      }
       // await fetchMoodLogs();
+      return true;
     } catch (error: unknown) {
       toastManager.fromError(error);
+      return false;
     }
-  };
+  }
 
   const handleDeleteLocalMoodlog = (id: string) => {
     if (!moodLogPage) return;
@@ -185,8 +191,8 @@ export const useInsight = () => {
     }
   };
 
-  const handleUpdateMoodLog = async () => {
-    if (!editingMoodLog || editMood === undefined) return;
+  async function handleUpdateMoodLog() {
+    if (!editingMoodLog || editMood === undefined) return false;
     setIsUpdating(true);
     try {
       await insightUseCases.updateMoodLog(editingMoodLog.id, {
@@ -197,19 +203,21 @@ export const useInsight = () => {
 
       toastManager.success("แก้ไขบันทึกอารมณ์สำเร็จ");
       setIsModalOpen(false);
-      setIsUpdating(false);
       await fetchMoodLogs();
+      return true;
     } catch (error: unknown) {
       toastManager.fromError(error);
+      return false;
     } finally {
-      setIsModalOpen(false);
       setIsUpdating(false);
     }
-  };
+  }
 
-  const toggleCause = (name: string) => setSelectedCauses([name]);
+  function toggleCause(name: string) {
+    setSelectedCauses([name]);
+  }
 
-  const openEditMoodLogModal = (moodLog: MoodLogEntity) => {
+  function openEditMoodLogModal(moodLog: MoodLogEntity) {
     setEditingMoodLog(moodLog);
     setEditNote(moodLog.note);
     const moodConfig = standardMoods.find(
@@ -218,7 +226,7 @@ export const useInsight = () => {
     setEditMood(moodConfig ? Number(moodConfig.value) : 0);
     setSelectedCauses(moodLog.causes || []);
     setIsModalOpen(true);
-  };
+  }
 
   return {
     moodLogPage,

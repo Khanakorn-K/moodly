@@ -25,6 +25,8 @@ interface MoodLogBoardProps {
   moodLogPage: MoodLogPageEntity | null;
   isListLoading: boolean;
   handleDragEnd: (event: DragEndEvent) => void;
+  openEditMoodLogModal: (moodLog: MoodLogEntity) => void;
+  selectedMoodLogId?: string;
 }
 
 function mobileFriendlyCollisionDetection(
@@ -41,6 +43,8 @@ const MoodLogBoard = ({
   moodLogPage,
   isListLoading,
   handleDragEnd,
+  openEditMoodLogModal,
+  selectedMoodLogId,
 }: MoodLogBoardProps) => {
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 5 } }),
@@ -69,6 +73,8 @@ const MoodLogBoard = ({
               column={moodOption}
               moodLogs={moodLogs}
               isLoading={isListLoading}
+              openEditMoodLogModal={openEditMoodLogModal}
+              selectedMoodLogId={selectedMoodLogId}
             />
           );
         })}
@@ -81,9 +87,17 @@ interface ColumnProps {
   column: MoodType;
   moodLogs: MoodLogEntity[];
   isLoading: boolean;
+  openEditMoodLogModal: (moodLog: MoodLogEntity) => void;
+  selectedMoodLogId?: string;
 }
 
-const Column = ({ column, moodLogs, isLoading }: ColumnProps) => {
+const Column = ({
+  column,
+  moodLogs,
+  isLoading,
+  openEditMoodLogModal,
+  selectedMoodLogId,
+}: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id: String(column.value) });
   const themeColor =
     moodColors[column.value as keyof typeof moodColors] || "#FFFFFF";
@@ -119,6 +133,8 @@ const Column = ({ column, moodLogs, isLoading }: ColumnProps) => {
             moodLog={moodLog}
             themeColor={themeColor}
             emoji={column.emoji}
+            isSelected={selectedMoodLogId === moodLog.id}
+            openEditMoodLogModal={openEditMoodLogModal}
           />
         ))}
 
@@ -138,9 +154,17 @@ interface DraggableCardProps {
   moodLog: MoodLogEntity;
   themeColor: string;
   emoji: string;
+  isSelected: boolean;
+  openEditMoodLogModal: (moodLog: MoodLogEntity) => void;
 }
 
-const DraggableCard = ({ moodLog, themeColor, emoji }: DraggableCardProps) => {
+const DraggableCard = ({
+  moodLog,
+  themeColor,
+  emoji,
+  isSelected,
+  openEditMoodLogModal,
+}: DraggableCardProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: String(moodLog.id),
@@ -157,13 +181,23 @@ const DraggableCard = ({ moodLog, themeColor, emoji }: DraggableCardProps) => {
       : {}),
   };
 
+  function handleOpenDetail() {
+    if (isDragging) return;
+    openEditMoodLogModal(moodLog);
+  }
+
   return (
     <div
       ref={setNodeRef}
       style={style}
       {...listeners}
       {...attributes}
-      className={`group relative select-none overflow-hidden rounded-[1.5rem] border border-white/[0.05] bg-[#16161E] p-4 shadow-xl transition-all sm:p-5 ${
+      onClick={handleOpenDetail}
+      className={`group relative select-none overflow-hidden rounded-[1.5rem] border bg-[#16161E] p-4 shadow-xl transition-all sm:p-5 ${
+        isSelected
+          ? "border-moodly-primary/40 ring-2 ring-moodly-primary/15"
+          : "border-white/[0.05]"
+      } ${
         isDragging
           ? "opacity-30 cursor-grabbing scale-95"
           : "hover:border-white/20 cursor-grab active:cursor-grabbing"

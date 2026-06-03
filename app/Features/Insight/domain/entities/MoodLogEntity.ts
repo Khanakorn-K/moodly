@@ -1,3 +1,8 @@
+export interface MoodLogPageEntity {
+  items: MoodLogEntity[];
+  total: number;
+  page: number;
+}
 export interface MoodLogEntity {
   id: string;
   userId: string;
@@ -6,10 +11,4 @@ export interface MoodLogEntity {
   createdAt: string;
   updatedAt: string;
   causes: string[];
-}
-
-export interface MoodLogPageEntity {
-  items: MoodLogEntity[];
-  total: number;
-  page: number;
 }
