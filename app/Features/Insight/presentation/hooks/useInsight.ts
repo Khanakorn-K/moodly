@@ -108,10 +108,24 @@ export const useInsight = () => {
     try {
       await insightUseCases.deleteMoodLog(id);
       toastManager.success("ลบบันทึกอารมณ์สำเร็จ");
-      await fetchMoodLogs();
+      handleDeleteLocalMoodlog(id);
+      // await fetchMoodLogs();
     } catch (error: unknown) {
       toastManager.fromError(error);
     }
+  };
+
+  const handleDeleteLocalMoodlog = (id: string) => {
+    if (!moodLogPage) return;
+
+    const nextItems = moodLogPage.items.filter((item) => {
+      return item.id !== id;
+    });
+
+    setMoodLogPage({
+      ...moodLogPage,
+      items: nextItems,
+    });
   };
 
   const updateMoodLogMoodInPage = useCallback(
