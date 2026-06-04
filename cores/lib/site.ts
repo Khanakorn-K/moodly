@@ -1,9 +1,6 @@
-const rawSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  process.env.NEXTAUTH_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+export const canonicalSiteUrl = "https://moodlyjournal.com";
+
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? canonicalSiteUrl;
 
 export const siteConfig = {
   name: "Moodly",
